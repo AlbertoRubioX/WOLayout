@@ -284,6 +284,96 @@ namespace WOLayout
             return Convert.ToInt32(dTam);
         }
 
-        
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        public PictureBox[] getmesas()
+        {
+            PictureBox[] mesas = new PictureBox[14];
+            mesas[0] = E1;
+            mesas[1] = E2;
+            mesas[2] = E3;
+            mesas[3] = E4;
+            mesas[4] = E5;
+            mesas[5] = E6;
+            mesas[6] = E7;
+            mesas[7] = E8;
+            mesas[8] = W1;
+            mesas[9] = W2;
+            mesas[10] = W3;
+            mesas[11] = W4;
+            mesas[12] = W5;
+            mesas[13] = W6;
+
+            return mesas;
+        }
+
+        public PictureBox[] getoperadores()
+        {
+            PictureBox[] operadores = new PictureBox[28];
+            operadores[0] = O1;
+            operadores[1] = O2;
+            operadores[2] = O3;
+            operadores[3] = O4;
+            operadores[4] = O5;
+            operadores[5] = O6;
+            operadores[6] = O7;
+            operadores[7] = O8;
+            operadores[8] = O9;
+            operadores[9] = O10;
+            operadores[10] = O11;
+            operadores[11] = O12;
+            operadores[12] = O13;
+            operadores[13] = O14;
+            operadores[14] = O15;
+            operadores[15] = O16;
+            operadores[16] = O17;
+            operadores[17] = O18;
+            operadores[18] = O19;
+            operadores[19] = O20;
+            operadores[20] = O21;
+            operadores[21] = O22;
+            operadores[22] = O23;
+            operadores[23] = O24;
+            operadores[24] = O25;
+            operadores[25] = O26;
+            operadores[26] = O27;
+            operadores[27] = O28;
+
+            return operadores;
+        }
+
+        public void LimpiarEnsamble()
+        {
+            PictureBox[] mesas = getmesas();
+            PictureBox[] operadores = getoperadores();
+
+            for (int i = 0; i <= 7; i++)
+            {
+                mesas[i].Visible = false;
+            }
+
+            for (int i = 0; i <= 15; i++)
+            {
+                operadores[i].Visible = false;
+            }
+        }
+
+        public void LimpiarWrap()
+        {
+            PictureBox[] mesas = getmesas();
+            PictureBox[] operadores = getoperadores();
+
+            for (int i = 8; i <= 13; i++)
+            {
+                mesas[i].Visible = false;
+            }
+            for (int i = 16; i <= 27; i++)
+            {
+                operadores[i].Visible = false;
+            }
+        }
     }
 }
