@@ -103,6 +103,16 @@ namespace WOLayout.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lineav21 {
+            get {
+                object obj = ResourceManager.GetObject("lineav21", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap operador {
             get {
                 object obj = ResourceManager.GetObject("operador", resourceCulture);
