@@ -37,20 +37,33 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lblOper = new System.Windows.Forms.Label();
-            this.lblMesas = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dgwTables = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgwWO = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dgwItem = new System.Windows.Forms.DataGridView();
-            this.txtItem = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.O28 = new System.Windows.Forms.PictureBox();
+            this.O27 = new System.Windows.Forms.PictureBox();
+            this.O22 = new System.Windows.Forms.PictureBox();
+            this.O21 = new System.Windows.Forms.PictureBox();
+            this.O26 = new System.Windows.Forms.PictureBox();
+            this.O25 = new System.Windows.Forms.PictureBox();
+            this.O20 = new System.Windows.Forms.PictureBox();
+            this.O19 = new System.Windows.Forms.PictureBox();
+            this.O24 = new System.Windows.Forms.PictureBox();
+            this.O23 = new System.Windows.Forms.PictureBox();
+            this.O18 = new System.Windows.Forms.PictureBox();
+            this.O17 = new System.Windows.Forms.PictureBox();
+            this.O16 = new System.Windows.Forms.PictureBox();
+            this.O15 = new System.Windows.Forms.PictureBox();
+            this.O8 = new System.Windows.Forms.PictureBox();
+            this.O7 = new System.Windows.Forms.PictureBox();
+            this.O6 = new System.Windows.Forms.PictureBox();
+            this.O5 = new System.Windows.Forms.PictureBox();
+            this.O14 = new System.Windows.Forms.PictureBox();
+            this.O13 = new System.Windows.Forms.PictureBox();
+            this.O12 = new System.Windows.Forms.PictureBox();
+            this.O11 = new System.Windows.Forms.PictureBox();
+            this.O4 = new System.Windows.Forms.PictureBox();
+            this.O3 = new System.Windows.Forms.PictureBox();
+            this.O10 = new System.Windows.Forms.PictureBox();
+            this.O9 = new System.Windows.Forms.PictureBox();
+            this.O2 = new System.Windows.Forms.PictureBox();
             this.O1 = new System.Windows.Forms.PictureBox();
             this.W6 = new System.Windows.Forms.PictureBox();
             this.W3 = new System.Windows.Forms.PictureBox();
@@ -67,42 +80,50 @@
             this.E5 = new System.Windows.Forms.PictureBox();
             this.E1 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.O2 = new System.Windows.Forms.PictureBox();
-            this.O10 = new System.Windows.Forms.PictureBox();
-            this.O9 = new System.Windows.Forms.PictureBox();
-            this.O4 = new System.Windows.Forms.PictureBox();
-            this.O3 = new System.Windows.Forms.PictureBox();
-            this.O12 = new System.Windows.Forms.PictureBox();
-            this.O11 = new System.Windows.Forms.PictureBox();
-            this.O14 = new System.Windows.Forms.PictureBox();
-            this.O13 = new System.Windows.Forms.PictureBox();
-            this.O6 = new System.Windows.Forms.PictureBox();
-            this.O5 = new System.Windows.Forms.PictureBox();
-            this.O8 = new System.Windows.Forms.PictureBox();
-            this.O7 = new System.Windows.Forms.PictureBox();
-            this.O16 = new System.Windows.Forms.PictureBox();
-            this.O15 = new System.Windows.Forms.PictureBox();
-            this.O18 = new System.Windows.Forms.PictureBox();
-            this.O17 = new System.Windows.Forms.PictureBox();
-            this.O24 = new System.Windows.Forms.PictureBox();
-            this.O23 = new System.Windows.Forms.PictureBox();
-            this.O20 = new System.Windows.Forms.PictureBox();
-            this.O19 = new System.Windows.Forms.PictureBox();
-            this.O26 = new System.Windows.Forms.PictureBox();
-            this.O25 = new System.Windows.Forms.PictureBox();
-            this.O22 = new System.Windows.Forms.PictureBox();
-            this.O21 = new System.Windows.Forms.PictureBox();
-            this.O28 = new System.Windows.Forms.PictureBox();
-            this.O27 = new System.Windows.Forms.PictureBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblOper = new System.Windows.Forms.Label();
+            this.lblMesas = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dgwTables = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgwWO = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgwItem = new System.Windows.Forms.DataGridView();
+            this.txtItem = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwTables)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwWO)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O28)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O27)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O26)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O23)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.O1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.W6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.W3)).BeginInit();
@@ -119,40 +140,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.E5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.E1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O17)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O24)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O23)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O26)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O25)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O22)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O21)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O28)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O27)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwTables)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwWO)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwItem)).BeginInit();
             this.SuspendLayout();
             // 
             // txtWO
             // 
             this.txtWO.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtWO.Location = new System.Drawing.Point(105, 36);
-            this.txtWO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWO.Margin = new System.Windows.Forms.Padding(4);
             this.txtWO.MaxLength = 20;
             this.txtWO.Name = "txtWO";
             this.txtWO.Size = new System.Drawing.Size(168, 30);
@@ -170,7 +170,7 @@
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Location = new System.Drawing.Point(16, 15);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1566, 898);
             this.panel1.TabIndex = 0;
@@ -181,7 +181,7 @@
             this.panel2.BackColor = System.Drawing.Color.SteelBlue;
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(881, 25);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(659, 818);
             this.panel2.TabIndex = 7;
@@ -234,233 +234,253 @@
             this.panel3.Controls.Add(this.E1);
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Location = new System.Drawing.Point(20, 20);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(619, 778);
             this.panel3.TabIndex = 0;
             // 
-            // groupBox3
+            // O28
             // 
-            this.groupBox3.Controls.Add(this.lblOper);
-            this.groupBox3.Controls.Add(this.lblMesas);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.dgwTables);
-            this.groupBox3.Location = new System.Drawing.Point(28, 453);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(829, 390);
-            this.groupBox3.TabIndex = 6;
-            this.groupBox3.TabStop = false;
+            this.O28.Image = global::WOLayout.Properties.Resources.operador;
+            this.O28.Location = new System.Drawing.Point(376, 10);
+            this.O28.Name = "O28";
+            this.O28.Size = new System.Drawing.Size(27, 27);
+            this.O28.TabIndex = 38;
+            this.O28.TabStop = false;
             // 
-            // lblOper
+            // O27
             // 
-            this.lblOper.AutoSize = true;
-            this.lblOper.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOper.Location = new System.Drawing.Point(733, 116);
-            this.lblOper.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOper.Name = "lblOper";
-            this.lblOper.Size = new System.Drawing.Size(26, 29);
-            this.lblOper.TabIndex = 7;
-            this.lblOper.Text = "0";
+            this.O27.Image = global::WOLayout.Properties.Resources.operador;
+            this.O27.Location = new System.Drawing.Point(338, 10);
+            this.O27.Name = "O27";
+            this.O27.Size = new System.Drawing.Size(27, 27);
+            this.O27.TabIndex = 37;
+            this.O27.TabStop = false;
             // 
-            // lblMesas
+            // O22
             // 
-            this.lblMesas.AutoSize = true;
-            this.lblMesas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMesas.Location = new System.Drawing.Point(733, 71);
-            this.lblMesas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblMesas.Name = "lblMesas";
-            this.lblMesas.Size = new System.Drawing.Size(26, 29);
-            this.lblMesas.TabIndex = 6;
-            this.lblMesas.Text = "0";
+            this.O22.Image = global::WOLayout.Properties.Resources.operador;
+            this.O22.Location = new System.Drawing.Point(255, 10);
+            this.O22.Name = "O22";
+            this.O22.Size = new System.Drawing.Size(27, 27);
+            this.O22.TabIndex = 16;
+            this.O22.TabStop = false;
             // 
-            // label4
+            // O21
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(551, 116);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(159, 25);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "OPERATORS :";
+            this.O21.Image = global::WOLayout.Properties.Resources.operador;
+            this.O21.Location = new System.Drawing.Point(217, 10);
+            this.O21.Name = "O21";
+            this.O21.Size = new System.Drawing.Size(27, 27);
+            this.O21.TabIndex = 15;
+            this.O21.TabStop = false;
             // 
-            // label3
+            // O26
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(525, 71);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(187, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "TOTAL TABLES :";
+            this.O26.Image = global::WOLayout.Properties.Resources.operador;
+            this.O26.Location = new System.Drawing.Point(376, 76);
+            this.O26.Name = "O26";
+            this.O26.Size = new System.Drawing.Size(27, 27);
+            this.O26.TabIndex = 36;
+            this.O26.TabStop = false;
             // 
-            // dgwTables
+            // O25
             // 
-            this.dgwTables.AllowUserToAddRows = false;
-            this.dgwTables.AllowUserToDeleteRows = false;
-            this.dgwTables.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwTables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgwTables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwTables.Location = new System.Drawing.Point(25, 37);
-            this.dgwTables.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgwTables.Name = "dgwTables";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwTables.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.dgwTables.RowHeadersVisible = false;
-            this.dgwTables.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgwTables.RowTemplate.Height = 26;
-            this.dgwTables.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgwTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgwTables.Size = new System.Drawing.Size(479, 325);
-            this.dgwTables.TabIndex = 4;
+            this.O25.Image = global::WOLayout.Properties.Resources.operador;
+            this.O25.Location = new System.Drawing.Point(338, 76);
+            this.O25.Name = "O25";
+            this.O25.Size = new System.Drawing.Size(27, 27);
+            this.O25.TabIndex = 35;
+            this.O25.TabStop = false;
             // 
-            // groupBox1
+            // O20
             // 
-            this.groupBox1.Controls.Add(this.dgwWO);
-            this.groupBox1.Controls.Add(this.txtWO);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(28, 25);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(829, 190);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
+            this.O20.Image = global::WOLayout.Properties.Resources.operador;
+            this.O20.Location = new System.Drawing.Point(255, 75);
+            this.O20.Name = "O20";
+            this.O20.Size = new System.Drawing.Size(27, 27);
+            this.O20.TabIndex = 34;
+            this.O20.TabStop = false;
             // 
-            // dgwWO
+            // O19
             // 
-            this.dgwWO.AllowUserToAddRows = false;
-            this.dgwWO.AllowUserToDeleteRows = false;
-            this.dgwWO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgwWO.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwWO.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgwWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwWO.Location = new System.Drawing.Point(25, 86);
-            this.dgwWO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgwWO.Name = "dgwWO";
-            this.dgwWO.RowHeadersVisible = false;
-            this.dgwWO.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgwWO.RowTemplate.Height = 26;
-            this.dgwWO.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgwWO.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgwWO.Size = new System.Drawing.Size(780, 59);
-            this.dgwWO.TabIndex = 2;
+            this.O19.Image = global::WOLayout.Properties.Resources.operador;
+            this.O19.Location = new System.Drawing.Point(217, 75);
+            this.O19.Name = "O19";
+            this.O19.Size = new System.Drawing.Size(27, 27);
+            this.O19.TabIndex = 33;
+            this.O19.TabStop = false;
             // 
-            // label1
+            // O24
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 43);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "WO #:";
+            this.O24.Image = global::WOLayout.Properties.Resources.operador;
+            this.O24.Location = new System.Drawing.Point(376, 145);
+            this.O24.Name = "O24";
+            this.O24.Size = new System.Drawing.Size(27, 27);
+            this.O24.TabIndex = 32;
+            this.O24.TabStop = false;
             // 
-            // groupBox2
+            // O23
             // 
-            this.groupBox2.Controls.Add(this.dgwItem);
-            this.groupBox2.Controls.Add(this.txtItem);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(28, 235);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(829, 210);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
+            this.O23.Image = global::WOLayout.Properties.Resources.operador;
+            this.O23.Location = new System.Drawing.Point(338, 145);
+            this.O23.Name = "O23";
+            this.O23.Size = new System.Drawing.Size(27, 27);
+            this.O23.TabIndex = 31;
+            this.O23.TabStop = false;
             // 
-            // dgwItem
+            // O18
             // 
-            this.dgwItem.AllowUserToAddRows = false;
-            this.dgwItem.AllowUserToDeleteRows = false;
-            this.dgwItem.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgwItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwItem.Location = new System.Drawing.Point(25, 105);
-            this.dgwItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgwItem.Name = "dgwItem";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwItem.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.dgwItem.RowHeadersVisible = false;
-            this.dgwItem.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgwItem.RowTemplate.Height = 26;
-            this.dgwItem.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgwItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgwItem.Size = new System.Drawing.Size(780, 59);
-            this.dgwItem.TabIndex = 3;
+            this.O18.Image = global::WOLayout.Properties.Resources.operador;
+            this.O18.Location = new System.Drawing.Point(255, 145);
+            this.O18.Name = "O18";
+            this.O18.Size = new System.Drawing.Size(27, 27);
+            this.O18.TabIndex = 30;
+            this.O18.TabStop = false;
             // 
-            // txtItem
+            // O17
             // 
-            this.txtItem.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtItem.Enabled = false;
-            this.txtItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtItem.Location = new System.Drawing.Point(105, 31);
-            this.txtItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtItem.MaxLength = 20;
-            this.txtItem.Name = "txtItem";
-            this.txtItem.ReadOnly = true;
-            this.txtItem.Size = new System.Drawing.Size(168, 30);
-            this.txtItem.TabIndex = 2;
-            this.txtItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.O17.Image = global::WOLayout.Properties.Resources.operador;
+            this.O17.Location = new System.Drawing.Point(217, 145);
+            this.O17.Name = "O17";
+            this.O17.Size = new System.Drawing.Size(27, 27);
+            this.O17.TabIndex = 29;
+            this.O17.TabStop = false;
             // 
-            // label2
+            // O16
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(27, 34);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "JOB :";
+            this.O16.Image = global::WOLayout.Properties.Resources.operador;
+            this.O16.Location = new System.Drawing.Point(376, 308);
+            this.O16.Name = "O16";
+            this.O16.Size = new System.Drawing.Size(27, 27);
+            this.O16.TabIndex = 28;
+            this.O16.TabStop = false;
             // 
-            // statusStrip1
+            // O15
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 922);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1599, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
+            this.O15.Image = global::WOLayout.Properties.Resources.operador;
+            this.O15.Location = new System.Drawing.Point(338, 308);
+            this.O15.Name = "O15";
+            this.O15.Size = new System.Drawing.Size(27, 27);
+            this.O15.TabIndex = 27;
+            this.O15.TabStop = false;
+            // 
+            // O8
+            // 
+            this.O8.Image = global::WOLayout.Properties.Resources.operador;
+            this.O8.Location = new System.Drawing.Point(255, 305);
+            this.O8.Name = "O8";
+            this.O8.Size = new System.Drawing.Size(27, 27);
+            this.O8.TabIndex = 26;
+            this.O8.TabStop = false;
+            // 
+            // O7
+            // 
+            this.O7.Image = global::WOLayout.Properties.Resources.operador;
+            this.O7.Location = new System.Drawing.Point(217, 305);
+            this.O7.Name = "O7";
+            this.O7.Size = new System.Drawing.Size(27, 27);
+            this.O7.TabIndex = 25;
+            this.O7.TabStop = false;
+            // 
+            // O6
+            // 
+            this.O6.Image = global::WOLayout.Properties.Resources.operador;
+            this.O6.Location = new System.Drawing.Point(255, 398);
+            this.O6.Name = "O6";
+            this.O6.Size = new System.Drawing.Size(27, 27);
+            this.O6.TabIndex = 24;
+            this.O6.TabStop = false;
+            // 
+            // O5
+            // 
+            this.O5.Image = global::WOLayout.Properties.Resources.operador;
+            this.O5.Location = new System.Drawing.Point(217, 398);
+            this.O5.Name = "O5";
+            this.O5.Size = new System.Drawing.Size(27, 27);
+            this.O5.TabIndex = 23;
+            this.O5.TabStop = false;
+            // 
+            // O14
+            // 
+            this.O14.Image = global::WOLayout.Properties.Resources.operador;
+            this.O14.Location = new System.Drawing.Point(376, 397);
+            this.O14.Name = "O14";
+            this.O14.Size = new System.Drawing.Size(27, 27);
+            this.O14.TabIndex = 22;
+            this.O14.TabStop = false;
+            // 
+            // O13
+            // 
+            this.O13.Image = global::WOLayout.Properties.Resources.operador;
+            this.O13.Location = new System.Drawing.Point(338, 397);
+            this.O13.Name = "O13";
+            this.O13.Size = new System.Drawing.Size(27, 27);
+            this.O13.TabIndex = 21;
+            this.O13.TabStop = false;
+            // 
+            // O12
+            // 
+            this.O12.Image = global::WOLayout.Properties.Resources.operador;
+            this.O12.Location = new System.Drawing.Point(376, 490);
+            this.O12.Name = "O12";
+            this.O12.Size = new System.Drawing.Size(27, 27);
+            this.O12.TabIndex = 20;
+            this.O12.TabStop = false;
+            // 
+            // O11
+            // 
+            this.O11.Image = global::WOLayout.Properties.Resources.operador;
+            this.O11.Location = new System.Drawing.Point(338, 490);
+            this.O11.Name = "O11";
+            this.O11.Size = new System.Drawing.Size(27, 27);
+            this.O11.TabIndex = 19;
+            this.O11.TabStop = false;
+            // 
+            // O4
+            // 
+            this.O4.Image = global::WOLayout.Properties.Resources.operador;
+            this.O4.Location = new System.Drawing.Point(255, 490);
+            this.O4.Name = "O4";
+            this.O4.Size = new System.Drawing.Size(27, 27);
+            this.O4.TabIndex = 18;
+            this.O4.TabStop = false;
+            // 
+            // O3
+            // 
+            this.O3.Image = global::WOLayout.Properties.Resources.operador;
+            this.O3.Location = new System.Drawing.Point(217, 490);
+            this.O3.Name = "O3";
+            this.O3.Size = new System.Drawing.Size(27, 27);
+            this.O3.TabIndex = 17;
+            this.O3.TabStop = false;
+            // 
+            // O10
+            // 
+            this.O10.Image = global::WOLayout.Properties.Resources.operador;
+            this.O10.Location = new System.Drawing.Point(376, 581);
+            this.O10.Name = "O10";
+            this.O10.Size = new System.Drawing.Size(27, 27);
+            this.O10.TabIndex = 16;
+            this.O10.TabStop = false;
+            // 
+            // O9
+            // 
+            this.O9.Image = global::WOLayout.Properties.Resources.operador;
+            this.O9.Location = new System.Drawing.Point(338, 581);
+            this.O9.Name = "O9";
+            this.O9.Size = new System.Drawing.Size(27, 27);
+            this.O9.TabIndex = 15;
+            this.O9.TabStop = false;
+            // 
+            // O2
+            // 
+            this.O2.Image = global::WOLayout.Properties.Resources.operador;
+            this.O2.Location = new System.Drawing.Point(255, 581);
+            this.O2.Name = "O2";
+            this.O2.Size = new System.Drawing.Size(27, 27);
+            this.O2.TabIndex = 14;
+            this.O2.TabStop = false;
             // 
             // O1
             // 
@@ -606,248 +626,228 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // O2
+            // groupBox3
             // 
-            this.O2.Image = global::WOLayout.Properties.Resources.operador;
-            this.O2.Location = new System.Drawing.Point(255, 581);
-            this.O2.Name = "O2";
-            this.O2.Size = new System.Drawing.Size(27, 27);
-            this.O2.TabIndex = 14;
-            this.O2.TabStop = false;
+            this.groupBox3.Controls.Add(this.lblOper);
+            this.groupBox3.Controls.Add(this.lblMesas);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.dgwTables);
+            this.groupBox3.Location = new System.Drawing.Point(28, 453);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(829, 390);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
             // 
-            // O10
+            // lblOper
             // 
-            this.O10.Image = global::WOLayout.Properties.Resources.operador;
-            this.O10.Location = new System.Drawing.Point(376, 581);
-            this.O10.Name = "O10";
-            this.O10.Size = new System.Drawing.Size(27, 27);
-            this.O10.TabIndex = 16;
-            this.O10.TabStop = false;
+            this.lblOper.AutoSize = true;
+            this.lblOper.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOper.Location = new System.Drawing.Point(733, 116);
+            this.lblOper.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOper.Name = "lblOper";
+            this.lblOper.Size = new System.Drawing.Size(26, 29);
+            this.lblOper.TabIndex = 7;
+            this.lblOper.Text = "0";
             // 
-            // O9
+            // lblMesas
             // 
-            this.O9.Image = global::WOLayout.Properties.Resources.operador;
-            this.O9.Location = new System.Drawing.Point(338, 581);
-            this.O9.Name = "O9";
-            this.O9.Size = new System.Drawing.Size(27, 27);
-            this.O9.TabIndex = 15;
-            this.O9.TabStop = false;
+            this.lblMesas.AutoSize = true;
+            this.lblMesas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMesas.Location = new System.Drawing.Point(733, 71);
+            this.lblMesas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMesas.Name = "lblMesas";
+            this.lblMesas.Size = new System.Drawing.Size(26, 29);
+            this.lblMesas.TabIndex = 6;
+            this.lblMesas.Text = "0";
             // 
-            // O4
+            // label4
             // 
-            this.O4.Image = global::WOLayout.Properties.Resources.operador;
-            this.O4.Location = new System.Drawing.Point(255, 490);
-            this.O4.Name = "O4";
-            this.O4.Size = new System.Drawing.Size(27, 27);
-            this.O4.TabIndex = 18;
-            this.O4.TabStop = false;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(551, 116);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(159, 25);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "OPERATORS :";
             // 
-            // O3
+            // label3
             // 
-            this.O3.Image = global::WOLayout.Properties.Resources.operador;
-            this.O3.Location = new System.Drawing.Point(217, 490);
-            this.O3.Name = "O3";
-            this.O3.Size = new System.Drawing.Size(27, 27);
-            this.O3.TabIndex = 17;
-            this.O3.TabStop = false;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(525, 71);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(187, 25);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "TOTAL TABLES :";
             // 
-            // O12
+            // dgwTables
             // 
-            this.O12.Image = global::WOLayout.Properties.Resources.operador;
-            this.O12.Location = new System.Drawing.Point(376, 490);
-            this.O12.Name = "O12";
-            this.O12.Size = new System.Drawing.Size(27, 27);
-            this.O12.TabIndex = 20;
-            this.O12.TabStop = false;
+            this.dgwTables.AllowUserToAddRows = false;
+            this.dgwTables.AllowUserToDeleteRows = false;
+            this.dgwTables.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwTables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgwTables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwTables.Location = new System.Drawing.Point(25, 37);
+            this.dgwTables.Margin = new System.Windows.Forms.Padding(4);
+            this.dgwTables.Name = "dgwTables";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwTables.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgwTables.RowHeadersVisible = false;
+            this.dgwTables.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgwTables.RowTemplate.Height = 26;
+            this.dgwTables.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgwTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgwTables.Size = new System.Drawing.Size(479, 325);
+            this.dgwTables.TabIndex = 4;
             // 
-            // O11
+            // groupBox1
             // 
-            this.O11.Image = global::WOLayout.Properties.Resources.operador;
-            this.O11.Location = new System.Drawing.Point(338, 490);
-            this.O11.Name = "O11";
-            this.O11.Size = new System.Drawing.Size(27, 27);
-            this.O11.TabIndex = 19;
-            this.O11.TabStop = false;
+            this.groupBox1.Controls.Add(this.dgwWO);
+            this.groupBox1.Controls.Add(this.txtWO);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(28, 25);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(829, 190);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
             // 
-            // O14
+            // dgwWO
             // 
-            this.O14.Image = global::WOLayout.Properties.Resources.operador;
-            this.O14.Location = new System.Drawing.Point(376, 397);
-            this.O14.Name = "O14";
-            this.O14.Size = new System.Drawing.Size(27, 27);
-            this.O14.TabIndex = 22;
-            this.O14.TabStop = false;
+            this.dgwWO.AllowUserToAddRows = false;
+            this.dgwWO.AllowUserToDeleteRows = false;
+            this.dgwWO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgwWO.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwWO.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgwWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwWO.Location = new System.Drawing.Point(25, 86);
+            this.dgwWO.Margin = new System.Windows.Forms.Padding(4);
+            this.dgwWO.Name = "dgwWO";
+            this.dgwWO.RowHeadersVisible = false;
+            this.dgwWO.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgwWO.RowTemplate.Height = 26;
+            this.dgwWO.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgwWO.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgwWO.Size = new System.Drawing.Size(780, 59);
+            this.dgwWO.TabIndex = 2;
             // 
-            // O13
+            // label1
             // 
-            this.O13.Image = global::WOLayout.Properties.Resources.operador;
-            this.O13.Location = new System.Drawing.Point(338, 397);
-            this.O13.Name = "O13";
-            this.O13.Size = new System.Drawing.Size(27, 27);
-            this.O13.TabIndex = 21;
-            this.O13.TabStop = false;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 43);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 25);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "WO #:";
             // 
-            // O6
+            // groupBox2
             // 
-            this.O6.Image = global::WOLayout.Properties.Resources.operador;
-            this.O6.Location = new System.Drawing.Point(255, 398);
-            this.O6.Name = "O6";
-            this.O6.Size = new System.Drawing.Size(27, 27);
-            this.O6.TabIndex = 24;
-            this.O6.TabStop = false;
+            this.groupBox2.Controls.Add(this.dgwItem);
+            this.groupBox2.Controls.Add(this.txtItem);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(28, 235);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(829, 210);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
             // 
-            // O5
+            // dgwItem
             // 
-            this.O5.Image = global::WOLayout.Properties.Resources.operador;
-            this.O5.Location = new System.Drawing.Point(217, 398);
-            this.O5.Name = "O5";
-            this.O5.Size = new System.Drawing.Size(27, 27);
-            this.O5.TabIndex = 23;
-            this.O5.TabStop = false;
+            this.dgwItem.AllowUserToAddRows = false;
+            this.dgwItem.AllowUserToDeleteRows = false;
+            this.dgwItem.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgwItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwItem.Location = new System.Drawing.Point(25, 105);
+            this.dgwItem.Margin = new System.Windows.Forms.Padding(4);
+            this.dgwItem.Name = "dgwItem";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwItem.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgwItem.RowHeadersVisible = false;
+            this.dgwItem.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgwItem.RowTemplate.Height = 26;
+            this.dgwItem.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgwItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgwItem.Size = new System.Drawing.Size(780, 59);
+            this.dgwItem.TabIndex = 3;
             // 
-            // O8
+            // txtItem
             // 
-            this.O8.Image = global::WOLayout.Properties.Resources.operador;
-            this.O8.Location = new System.Drawing.Point(255, 305);
-            this.O8.Name = "O8";
-            this.O8.Size = new System.Drawing.Size(27, 27);
-            this.O8.TabIndex = 26;
-            this.O8.TabStop = false;
+            this.txtItem.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtItem.Enabled = false;
+            this.txtItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtItem.Location = new System.Drawing.Point(105, 31);
+            this.txtItem.Margin = new System.Windows.Forms.Padding(4);
+            this.txtItem.MaxLength = 20;
+            this.txtItem.Name = "txtItem";
+            this.txtItem.ReadOnly = true;
+            this.txtItem.Size = new System.Drawing.Size(168, 30);
+            this.txtItem.TabIndex = 2;
+            this.txtItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // O7
+            // label2
             // 
-            this.O7.Image = global::WOLayout.Properties.Resources.operador;
-            this.O7.Location = new System.Drawing.Point(217, 305);
-            this.O7.Name = "O7";
-            this.O7.Size = new System.Drawing.Size(27, 27);
-            this.O7.TabIndex = 25;
-            this.O7.TabStop = false;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(27, 34);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 25);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "JOB :";
             // 
-            // O16
+            // statusStrip1
             // 
-            this.O16.Image = global::WOLayout.Properties.Resources.operador;
-            this.O16.Location = new System.Drawing.Point(376, 308);
-            this.O16.Name = "O16";
-            this.O16.Size = new System.Drawing.Size(27, 27);
-            this.O16.TabIndex = 28;
-            this.O16.TabStop = false;
-            // 
-            // O15
-            // 
-            this.O15.Image = global::WOLayout.Properties.Resources.operador;
-            this.O15.Location = new System.Drawing.Point(338, 308);
-            this.O15.Name = "O15";
-            this.O15.Size = new System.Drawing.Size(27, 27);
-            this.O15.TabIndex = 27;
-            this.O15.TabStop = false;
-            // 
-            // O18
-            // 
-            this.O18.Image = global::WOLayout.Properties.Resources.operador;
-            this.O18.Location = new System.Drawing.Point(255, 145);
-            this.O18.Name = "O18";
-            this.O18.Size = new System.Drawing.Size(27, 27);
-            this.O18.TabIndex = 30;
-            this.O18.TabStop = false;
-            // 
-            // O17
-            // 
-            this.O17.Image = global::WOLayout.Properties.Resources.operador;
-            this.O17.Location = new System.Drawing.Point(217, 145);
-            this.O17.Name = "O17";
-            this.O17.Size = new System.Drawing.Size(27, 27);
-            this.O17.TabIndex = 29;
-            this.O17.TabStop = false;
-            // 
-            // O24
-            // 
-            this.O24.Image = global::WOLayout.Properties.Resources.operador;
-            this.O24.Location = new System.Drawing.Point(376, 145);
-            this.O24.Name = "O24";
-            this.O24.Size = new System.Drawing.Size(27, 27);
-            this.O24.TabIndex = 32;
-            this.O24.TabStop = false;
-            // 
-            // O23
-            // 
-            this.O23.Image = global::WOLayout.Properties.Resources.operador;
-            this.O23.Location = new System.Drawing.Point(338, 145);
-            this.O23.Name = "O23";
-            this.O23.Size = new System.Drawing.Size(27, 27);
-            this.O23.TabIndex = 31;
-            this.O23.TabStop = false;
-            // 
-            // O20
-            // 
-            this.O20.Image = global::WOLayout.Properties.Resources.operador;
-            this.O20.Location = new System.Drawing.Point(255, 75);
-            this.O20.Name = "O20";
-            this.O20.Size = new System.Drawing.Size(27, 27);
-            this.O20.TabIndex = 34;
-            this.O20.TabStop = false;
-            // 
-            // O19
-            // 
-            this.O19.Image = global::WOLayout.Properties.Resources.operador;
-            this.O19.Location = new System.Drawing.Point(217, 75);
-            this.O19.Name = "O19";
-            this.O19.Size = new System.Drawing.Size(27, 27);
-            this.O19.TabIndex = 33;
-            this.O19.TabStop = false;
-            // 
-            // O26
-            // 
-            this.O26.Image = global::WOLayout.Properties.Resources.operador;
-            this.O26.Location = new System.Drawing.Point(376, 76);
-            this.O26.Name = "O26";
-            this.O26.Size = new System.Drawing.Size(27, 27);
-            this.O26.TabIndex = 36;
-            this.O26.TabStop = false;
-            // 
-            // O25
-            // 
-            this.O25.Image = global::WOLayout.Properties.Resources.operador;
-            this.O25.Location = new System.Drawing.Point(338, 76);
-            this.O25.Name = "O25";
-            this.O25.Size = new System.Drawing.Size(27, 27);
-            this.O25.TabIndex = 35;
-            this.O25.TabStop = false;
-            // 
-            // O22
-            // 
-            this.O22.Image = global::WOLayout.Properties.Resources.operador;
-            this.O22.Location = new System.Drawing.Point(255, 10);
-            this.O22.Name = "O22";
-            this.O22.Size = new System.Drawing.Size(27, 27);
-            this.O22.TabIndex = 16;
-            this.O22.TabStop = false;
-            // 
-            // O21
-            // 
-            this.O21.Image = global::WOLayout.Properties.Resources.operador;
-            this.O21.Location = new System.Drawing.Point(217, 10);
-            this.O21.Name = "O21";
-            this.O21.Size = new System.Drawing.Size(27, 27);
-            this.O21.TabIndex = 15;
-            this.O21.TabStop = false;
-            // 
-            // O28
-            // 
-            this.O28.Image = global::WOLayout.Properties.Resources.operador;
-            this.O28.Location = new System.Drawing.Point(376, 10);
-            this.O28.Name = "O28";
-            this.O28.Size = new System.Drawing.Size(27, 27);
-            this.O28.TabIndex = 38;
-            this.O28.TabStop = false;
-            // 
-            // O27
-            // 
-            this.O27.Image = global::WOLayout.Properties.Resources.operador;
-            this.O27.Location = new System.Drawing.Point(338, 10);
-            this.O27.Name = "O27";
-            this.O27.Size = new System.Drawing.Size(27, 27);
-            this.O27.TabIndex = 37;
-            this.O27.TabStop = false;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 922);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1599, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // wfLayout
             // 
@@ -856,7 +856,7 @@
             this.ClientSize = new System.Drawing.Size(1599, 944);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "wfLayout";
             this.Text = "Work Order Layout";
             this.Activated += new System.EventHandler(this.wfLayout_Activated);
@@ -864,15 +864,33 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwTables)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwWO)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O28)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O27)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O26)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O19)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.O1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.W6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.W3)).EndInit();
@@ -889,33 +907,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.E5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.E1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O17)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O24)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O23)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O19)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O26)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O25)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O22)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O21)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O28)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.O27)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwTables)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwWO)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
