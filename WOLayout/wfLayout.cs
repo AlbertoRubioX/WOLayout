@@ -64,7 +64,6 @@ namespace WOLayout
         {
             try
             {
-                LimpiarLayout();
 
                 _bNumber = false;
 
@@ -224,6 +223,8 @@ namespace WOLayout
                             lblOper.Text = iTotalOps.ToString();
 
                             dgwTables.ClearSelection();
+
+                            LimpiarLayout();
 
                             if (outfolderm + subassym + assym + wrap1m + wrap2m > 14)
                                 MessageBox.Show("Capacidad de mesas excedida");
