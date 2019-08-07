@@ -26,13 +26,27 @@ namespace WOLayout
         private int _iInspSell;
         private int _iSellador;
         private int _iInspeccion;
+
+        FormWindowState _WindowStateAnt;
+        private int _iWidthAnt;
+        private int _iHeightAnt;
         public wfLayout()
         {
             InitializeComponent();
+
+            _iWidthAnt = Width;
+            _iHeightAnt = Height;
+            _WindowStateAnt = WindowState;
         }
 
         private void wfLayout_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
+
+            string sUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            sUser = sUser.Substring(sUser.IndexOf("\\") + 1).ToUpper();
+            tssUserName.Text = sUser;
+            tssVersion.Text = "V 1.0.0.0";
             //Tack Data
             _dWrapTime = 84.5;
             _dTackIdeal = 25;
@@ -53,6 +67,21 @@ namespace WOLayout
             CargarColumnas();
         }
 
+        private void Inicio()
+        {
+            txtWO.Clear();
+            txtItem.Clear();
+            dgwItem.DataSource = null;
+            dgwWO.DataSource = null;
+            dgwTables.DataSource = null;
+            CargarColumnas();
+            lblMesas.Text = "0";
+            lblOper.Text = "0";
+
+            txtWO.Focus();
+        }
+
+
         private void wfLayout_Activated(object sender, EventArgs e)
         {
             txtWO.Focus();
@@ -62,21 +91,6 @@ namespace WOLayout
         {
             try
             {
-                _bNumber = false;
-
-                if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
-                {
-                    if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                    {
-                        if (e.KeyCode != Keys.Back)
-                            _bNumber = true;
-                    }
-                }
-                
-                if (Control.ModifierKeys == Keys.Shift)
-                    _bNumber = true;
-                
-
                 if (e.KeyCode != Keys.Enter)
                     return;
 
@@ -86,6 +100,9 @@ namespace WOLayout
                     sValue = sValue.PadLeft(7, '0');
                     txtWO.Text = sValue;
                 }
+
+                Inicio();
+                txtWO.Text = sValue;
 
                 AS4Logica AS4 = new AS4Logica();
                 AS4.WO = sValue;
@@ -113,7 +130,7 @@ namespace WOLayout
                         string sWrap1 = dt2.Rows[1][1].ToString();
                         string sWrapDesc = string.Empty;
                         if (sWrap1 == "1")
-                            sWrapDesc = "Sobre";
+                            sWrapDesc = "Envelope";
                         if (sWrap1 == "2")
                             sWrapDesc = "Vertical";
                         if (sWrap1 == "3")
@@ -217,14 +234,7 @@ namespace WOLayout
             }
         }
 
-        private void txtWO_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (_bNumber == true)
-            {
-                // Stop the character from being entered into the control since it is non-numerical.
-                e.Handled = true;
-            }
-        }
+        
 
         private void CargarColumnas()
         {
@@ -283,6 +293,72 @@ namespace WOLayout
 
             return Convert.ToInt32(dTam);
         }
+
+        
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            Inicio();
+        }
+        
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            wfConfig Config = new wfConfig();
+            Config.Show();
+        }
+
+        private void txtWO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+        #region regRes
+        private void wfLayout_Resize(object sender, EventArgs e)
+        {
+            if (WindowState != _WindowStateAnt && WindowState != FormWindowState.Minimized)
+            {
+                _WindowStateAnt = WindowState;
+                ResizeControl(panel1, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
+                ResizeControl(panel2, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
+                ResizeControl(panel3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
+                ResizeControl(groupBox3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
+                ResizeControl(dgwTables, 1, ref _iWidthAnt, ref _iHeightAnt, 1);
+            }
+        }
+
+
+        public void ResizeControl(Control ac_Control, int ai_Hor, ref int ai_WidthAnt, ref int ai_HegihtAnt, int ai_Retorna)
+        {
+            if (ai_WidthAnt == 0)
+                ai_WidthAnt = ac_Control.Width;
+            if (ai_WidthAnt == ac_Control.Width)
+                return;
+
+            int _dif = ai_WidthAnt - ac_Control.Width;
+            int _difh = ai_HegihtAnt - ac_Control.Height;
+
+            if (ai_Hor == 1)
+                ac_Control.Height = this.Height - _difh;
+            if (ai_Hor == 2)
+                ac_Control.Width = this.Width - _dif;
+            if (ai_Hor == 3)
+            {
+                ac_Control.Width = this.Width - _dif;
+                ac_Control.Height = this.Height - _difh;
+            }
+            if (ai_Retorna == 1)
+            {
+                ai_WidthAnt = this.Width;
+                ai_HegihtAnt = this.Height;
+            }
+        }
+
+       
+        #endregion
 
         
     }
