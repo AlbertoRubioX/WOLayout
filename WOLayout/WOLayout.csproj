@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -84,6 +85,18 @@
       <Project>{81aff085-e739-4b02-8bf4-18507a41aa72}</Project>
       <Name>Logica</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lineav21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\operador.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wrap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ensamble.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
