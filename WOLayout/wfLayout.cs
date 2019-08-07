@@ -51,6 +51,7 @@ namespace WOLayout
 
             txtWO.Focus();
             CargarColumnas();
+            LimpiarLayout();
         }
 
         private void wfLayout_Activated(object sender, EventArgs e)
@@ -163,6 +164,9 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
+                            int outfolderm = iMesas;
+                            int outfoldero = iOper;
+
                             decimal cM = Math.Ceiling((decimal)iSub / (decimal)_iMaxTable);
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
@@ -171,11 +175,17 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
+                            int subassym = iMesas;
+                            int subassyo = iOper;
+
                             iMesas = (int)Math.Ceiling((decimal)iMain / (decimal)_iMaxTable);
                             iOper = iMesas;
                             dtN.Rows.Add("Assy", "Conveyor Assy", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
+
+                            int assym = iMesas;
+                            int assyo = iOper;
 
                             double dMax = (double)_iMaxTable;
                             double dW = Math.Ceiling(_dWrapTime / (dMax * _dAssyTime));
@@ -189,11 +199,17 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
+                            int wrap1m= iMesas;
+                            int wrap1o = iOper;
+
                             iMesas = 0;
                             iOper = 0;
                             dtN.Rows.Add("Wrap", "Wrap 2", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
+
+                            int wrap2m = iMesas;
+                            int wrap2o = iOper;
 
                             dtN.Rows.Add("Other", "Supplier", 0, _iSurtidor);
                             dtN.Rows.Add("Other", "Sealer Inspection", 0, _iInspSell);
@@ -205,6 +221,20 @@ namespace WOLayout
                             lblOper.Text = iTotalOps.ToString();
 
                             dgwTables.ClearSelection();
+
+                            LimpiarLayout();
+
+                            if (outfolderm + subassym + assym > 8 || wrap1m + wrap2m > 6)
+                                MessageBox.Show("Capacidad de mesas excedida");
+                            else
+                            {
+                                llenarmesa(outfolderm, outfoldero, true);
+                                llenarmesa(subassym, subassyo, true);
+                                llenarmesa(assym, assyo, true);
+                                llenarmesa(wrap1m, wrap1o, false);
+                                llenarmesa(wrap2m, wrap2o, false);
+
+                            }
                         }
                         
                         dgwItem.ClearSelection();
