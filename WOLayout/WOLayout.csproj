@@ -103,6 +103,18 @@
     <None Include="Resources\bt_save.png" />
     <None Include="Resources\bt_exit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lineav21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\operador.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wrap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ensamble.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

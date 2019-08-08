@@ -121,6 +121,7 @@ namespace WOLayout
             
             txtWO.Focus();
             CargarColumnas();
+            LimpiarLayout();
         }
 
 
@@ -270,6 +271,9 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
+                            int outfolderm = iMesas;
+                            int outfoldero = iOper;
+
                             decimal cM = Math.Ceiling((decimal)iSub / (decimal)_iMaxTable);
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
@@ -278,11 +282,17 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
+                            int subassym = iMesas;
+                            int subassyo = iOper;
+
                             iMesas = (int)Math.Ceiling((decimal)iMain / (decimal)_iMaxTable);
                             iOper = iMesas;
                             dtN.Rows.Add("Assy", "Conveyor Assy", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
+
+                            int assym = iMesas;
+                            int assyo = iOper;
 
                             double dMax = (double)_iMaxTable;
                             double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
@@ -296,11 +306,17 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
+                            int wrap1m= iMesas;
+                            int wrap1o = iOper;
+
                             iMesas = 0;
                             iOper = 0;
                             dtN.Rows.Add("Wrap", "Wrap 2", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
+
+                            int wrap2m = iMesas;
+                            int wrap2o = iOper;
 
                             dtN.Rows.Add("Other", "Supplier", 0, _iSurtidor);
                             dtN.Rows.Add("Other", "Sealer Inspection", 0, _iInspSell);
@@ -312,6 +328,20 @@ namespace WOLayout
                             lblOper.Text = iTotalOps.ToString();
 
                             dgwTables.ClearSelection();
+
+                            LimpiarLayout();
+
+                            if (outfolderm + subassym + assym > 8 || wrap1m + wrap2m > 6)
+                                MessageBox.Show("Capacidad de mesas excedida");
+                            else
+                            {
+                                llenarmesa(outfolderm, outfoldero, true);
+                                llenarmesa(subassym, subassyo, true);
+                                llenarmesa(assym, assyo, true);
+                                llenarmesa(wrap1m, wrap1o, false);
+                                llenarmesa(wrap2m, wrap2o, false);
+
+                            }
                         }
                         
                         dgwItem.ClearSelection();
@@ -463,9 +493,112 @@ namespace WOLayout
             }
         }
 
-       
-        #endregion
+        public PictureBox[] getmesas()
+        {
+            PictureBox[] mesas = new PictureBox[14];
+            mesas[0] = E1;
+            mesas[1] = E2;
+            mesas[2] = E3;
+            mesas[3] = E4;
+            mesas[4] = E5;
+            mesas[5] = E6;
+            mesas[6] = E7;
+            mesas[7] = E8;
+            mesas[8] = W1;
+            mesas[9] = W2;
+            mesas[10] = W3;
+            mesas[11] = W4;
+            mesas[12] = W5;
+            mesas[13] = W6;
 
-        
+            return mesas;
+        }
+
+        public PictureBox[] getoperadores()
+        {
+            PictureBox[] operadores = new PictureBox[28];
+            operadores[0] = O1;
+            operadores[1] = O2;
+            operadores[2] = O3;
+            operadores[3] = O4;
+            operadores[4] = O5;
+            operadores[5] = O6;
+            operadores[6] = O7;
+            operadores[7] = O8;
+            operadores[8] = O9;
+            operadores[9] = O10;
+            operadores[10] = O11;
+            operadores[11] = O12;
+            operadores[12] = O13;
+            operadores[13] = O14;
+            operadores[14] = O15;
+            operadores[15] = O16;
+            operadores[16] = O17;
+            operadores[17] = O18;
+            operadores[18] = O19;
+            operadores[19] = O20;
+            operadores[20] = O21;
+            operadores[21] = O22;
+            operadores[22] = O23;
+            operadores[23] = O24;
+            operadores[24] = O25;
+            operadores[25] = O26;
+            operadores[26] = O27;
+            operadores[27] = O28;
+
+            return operadores;
+        }
+
+        public void LimpiarLayout()
+        {
+            PictureBox[] mesas = getmesas();
+            PictureBox[] operadores = getoperadores();
+
+            for (int i = 0; i <= 13; i++)
+            {
+                mesas[i].Visible = false;
+            }
+
+            for (int i = 0; i <= 27; i++)
+            {
+                operadores[i].Visible = false;
+            }
+        }
+
+        public void llenarmesa(int nummesas, int nummoperadores, bool ensamable)
+        {
+            PictureBox[] mesas = getmesas();
+            PictureBox[] operadores = getoperadores();
+
+            Boolean libre = true;
+            int posicionlibre;
+
+            if (ensamable)
+                posicionlibre = 0;
+            else
+                posicionlibre = 8;
+
+            do
+            {
+                if (mesas[posicionlibre].Visible)
+                {
+                    posicionlibre++;
+                }
+                else libre = false;
+            }
+            while (libre);
+
+
+            for (int i = posicionlibre; i < posicionlibre + nummesas; i++)
+            {
+                mesas[i].Visible = true;
+                operadores[i * 2].Visible = true;
+                if (nummoperadores == nummesas * 2)
+                    operadores[(i * 2) + 1].Visible = true;
+            }
+
+        }
+
+
     }
 }
