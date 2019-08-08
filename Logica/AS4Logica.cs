@@ -48,7 +48,7 @@ namespace Logica
                         "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +
                         "WHERE DMRID = '" + con.Item + "') AND LEVEL_CODE > '' AND ( SUBSTR(NODE,1,2) != 'S0' AND SUBSTR(NODE,1,2) != 'B0' ) " +
                         "UNION "+
-                        "SELECT  CASE WHEN FOLD = 1 THEN '86' WHEN FOLD = 2 THEN '70' WHEN FOLD = 3 THEN '84.5' WHEN FOLD = 8 THEN '86' ELSE '0' END AS DURATION, FOLD "+
+                        "SELECT SUBSTR(LEVEL_CODE,1, 1) AS LEVEL, FOLD "+
                         "FROM KBM400SQL.PACKDETAIL " +
                         "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +
                         "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +

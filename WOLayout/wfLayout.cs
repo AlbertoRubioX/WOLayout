@@ -14,7 +14,6 @@ namespace WOLayout
     public partial class wfLayout : Form
     {
         private bool _bNumber = false;
-        private double _dWrapTime;  //14
         private double _dAssyTime;  //14
         private double _dTackIdeal;
         private double _dTackTime;
@@ -25,11 +24,21 @@ namespace WOLayout
         private int _iSurtidor;
         private int _iInspSell;
         private int _iSellador;
+        private decimal _dHori;
+        private decimal _dVertical;
+        private decimal _dTape;
+        private decimal _dEnvelope;
+        private decimal _dHrsDisp;
+        private decimal _dSegDisp;
+        private decimal _dKits;
+        private decimal _dCajas;
+        private decimal _dKitCaja;
         private int _iInspeccion;
 
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
         private int _iHeightAnt;
+        DataTable _dtConf = new DataTable();
         public wfLayout()
         {
             InitializeComponent();
@@ -43,32 +52,16 @@ namespace WOLayout
         {
             WindowState = FormWindowState.Maximized;
 
-            string sUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            sUser = sUser.Substring(sUser.IndexOf("\\") + 1).ToUpper();
-            tssUserName.Text = sUser;
-            tssVersion.Text = "V 1.0.0.0";
-            //Tack Data
-            _dWrapTime = 84.5;
-            _dTackIdeal = 25;
-            _dTackTime = _dTackIdeal * 0.8;
-
-            _dAssyTime = 2.8;
-            _iMaxTable = 7;
-            _iMesaEns = 5;
-            _iMesaWrap = 6;
-            _iEstSub = 2;
-            //No assy
-            _iSurtidor = 1;
-            _iInspeccion = 1;
-            _iInspSell = 1;
-            _iSellador = 1;
-
-            txtWO.Focus();
-            CargarColumnas();
+            Inicio();
         }
 
         private void Inicio()
         {
+            string sUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            sUser = sUser.Substring(sUser.IndexOf("\\") + 1).ToUpper();
+            tssUserName.Text = sUser;
+            tssVersion.Text = "V 1.0.0.0";
+
             txtWO.Clear();
             txtItem.Clear();
             dgwItem.DataSource = null;
@@ -78,13 +71,84 @@ namespace WOLayout
             lblMesas.Text = "0";
             lblOper.Text = "0";
 
+            ConfigLogica conf = new ConfigLogica();
+            _dtConf = ConfigLogica.Consultar();
+          
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][2].ToString()))
+                _dHrsDisp = decimal.Parse(_dtConf.Rows[0][2].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][3].ToString()))
+                _dSegDisp = decimal.Parse(_dtConf.Rows[0][3].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][4].ToString()))
+                _dCajas = decimal.Parse(_dtConf.Rows[0][4].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][5].ToString()))
+                _dKitCaja = decimal.Parse(_dtConf.Rows[0][5].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][6].ToString()))
+                _dKits= decimal.Parse(_dtConf.Rows[0][6].ToString());
+
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][7].ToString()))
+                _dTackIdeal = double.Parse(_dtConf.Rows[0][7].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][8].ToString()))
+                _dTackTime = double.Parse(_dtConf.Rows[0][8].ToString());
+
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][9].ToString()))
+                _dAssyTime = double.Parse(_dtConf.Rows[0][9].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][10].ToString()))
+                _iMaxTable = int.Parse(_dtConf.Rows[0][10].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][11].ToString()))
+                _iMesaEns = int.Parse(_dtConf.Rows[0][11].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][12].ToString()))
+                _iMesaWrap = int.Parse(_dtConf.Rows[0][12].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][13].ToString()))
+                _iEstSub = int.Parse(_dtConf.Rows[0][13].ToString());
+
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][15].ToString()))
+                _iSurtidor = int.Parse(_dtConf.Rows[0][15].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][16].ToString()))
+                _iInspSell = int.Parse(_dtConf.Rows[0][16].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][17].ToString()))
+                _iSellador = int.Parse(_dtConf.Rows[0][17].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][18].ToString()))
+                _iInspeccion = int.Parse(_dtConf.Rows[0][18].ToString());
+
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][21].ToString()))
+                _dHori = decimal.Parse(_dtConf.Rows[0][21].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][22].ToString()))
+                _dVertical = decimal.Parse(_dtConf.Rows[0][22].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][23].ToString()))
+                _dEnvelope = decimal.Parse(_dtConf.Rows[0][23].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][25].ToString()))
+                _dTape = decimal.Parse(_dtConf.Rows[0][25].ToString());
+            
             txtWO.Focus();
+            CargarColumnas();
         }
 
 
         private void wfLayout_Activated(object sender, EventArgs e)
         {
             txtWO.Focus();
+        }
+        private string getWrapDesc(string _asWrap)
+        {
+            string sWrapDesc = string.Empty;
+            if (_asWrap == "1") sWrapDesc = "Envelope";
+            if (_asWrap == "2") sWrapDesc = "Vertical";
+            if (_asWrap == "3") sWrapDesc = "Horizontal";
+            if (_asWrap == "4") sWrapDesc = "Detroit";
+            if (_asWrap == "8") sWrapDesc = "Truck and Tape";
+
+            return sWrapDesc;
+        }
+
+        private double getWrapTime(string _asWrap)
+        {
+            double dWrapTime = 0;
+            if (_asWrap == "1") dWrapTime = (double)_dEnvelope;
+            if (_asWrap == "2") dWrapTime = (double)_dVertical;
+            if (_asWrap == "3") dWrapTime = (double)_dHori;
+            if (_asWrap == "8") dWrapTime = (double)_dTape;
+
+            return dWrapTime;
         }
 
         private void txtWO_KeyDown(object sender, KeyEventArgs e)
@@ -112,7 +176,6 @@ namespace WOLayout
                     txtItem.Clear();
                     dgwWO.DataSource = dt;
                     dgwWO.CurrentCell = null;
-                    dgwWO.Columns[0].Visible = false;
 
                     string sItem = dt.Rows[0][0].ToString();
                     AS4.Item = sItem;
@@ -123,25 +186,52 @@ namespace WOLayout
                     CargarColumnas();
                     if(dt2.Rows.Count > 0)
                     {
+
                         string sPre = dt2.Rows[0][0].ToString();
                         int iComp = int.Parse(dt2.Rows[0][1].ToString());
                         
-                        string sDuraW1 = dt2.Rows[1][0].ToString();
+                        string sLevel1 = dt2.Rows[1][0].ToString();
                         string sWrap1 = dt2.Rows[1][1].ToString();
-                        string sWrapDesc = string.Empty;
-                        if (sWrap1 == "1")
-                            sWrapDesc = "Envelope";
-                        if (sWrap1 == "2")
-                            sWrapDesc = "Vertical";
-                        if (sWrap1 == "3")
-                            sWrapDesc = "Horizontal";
-                        if (sWrap1 == "4")
-                            sWrapDesc = "Detroit";
-                        if (sWrap1 == "8")
-                            sWrapDesc = "Truck and Tape";
+                        string sDuraW1 = string.Empty;
+                        string sDuraW2 = string.Empty;
+                        string sWrap2 = string.Empty;
+                        string sLevel2 = string.Empty;
+
+                        if(dt2.Rows.Count > 2)
+                        {
+                            sLevel2 = dt2.Rows[2][0].ToString();
+                            sWrap2 = dt2.Rows[2][1].ToString();
+                        }
+
+                        string sWrapMain = string.Empty;
+                        string sWrapSub = string.Empty;
+                        double dWrapTime = 0;
+                        double dWrapTime2 = 0;
+
+                        if (sLevel1=="W")
+                        {
+                            sWrapMain = getWrapDesc(sWrap1);
+                            dWrapTime = getWrapTime(sWrap1);
+                            if(!string.IsNullOrEmpty(sLevel2))
+                            {
+                                sWrapSub = getWrapDesc(sWrap2);
+                                dWrapTime2 = getWrapTime(sWrap2);
+                            }
+                        }
+                        else
+                        {
+                            sWrapMain = getWrapDesc(sWrap2);
+                            dWrapTime = getWrapTime(sWrap2);
+
+                            sWrapSub = getWrapDesc(sWrap1);
+                            dWrapTime2 = getWrapTime(sWrap1);
+                        }
+
+                        sDuraW1 = dWrapTime.ToString();
+                        sDuraW2 = dWrapTime2.ToString();
 
                         DataTable dt3 = dgwItem.DataSource as DataTable;
-                        dt3.Rows.Add(iComp,sPre,sWrapDesc,sDuraW1,null,null);
+                        dt3.Rows.Add(iComp,sPre,sWrapMain,sDuraW1, sWrapSub, sDuraW2);
 
                         //mesas / operadores
                         DataTable dt4 = AS4Logica.LineLayout(AS4);
@@ -195,7 +285,7 @@ namespace WOLayout
                             iTotalOps += iOper;
 
                             double dMax = (double)_iMaxTable;
-                            double dW = Math.Ceiling(_dWrapTime / (dMax * _dAssyTime));
+                            double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
                             iMesas = (int)dW;
                             if (sWrap1 == "1" || sWrap1 == "8")
                                 iOper = iMesas;
@@ -238,23 +328,39 @@ namespace WOLayout
 
         private void CargarColumnas()
         {
+            if (dgwWO.Rows.Count == 0)
+            {
+                DataTable dtNew = new DataTable("WO");
+                dtNew.Columns.Add("JOB", typeof(string));
+                dtNew.Columns.Add("BOXES", typeof(int));
+                dtNew.Columns.Add("KITS", typeof(int));
+                dtNew.Columns.Add("TOTAL KITS", typeof(int));
+                dtNew.Columns.Add("DURATION", typeof(decimal));
+                dgwWO.DataSource = dtNew;
+            }
+            dgwWO.Columns[0].Visible = false;
+            dgwWO.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgwWO.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgwWO.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgwWO.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             if (dgwItem.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Item");
                 dtNew.Columns.Add("COMPONENTS", typeof(int));
                 dtNew.Columns.Add("PRE-ASSY", typeof(string));
-                dtNew.Columns.Add("WRAP 1", typeof(string));
+                dtNew.Columns.Add("WRAP MAIN", typeof(string));
                 dtNew.Columns.Add("DURATION", typeof(string));
-                dtNew.Columns.Add("WRAP 2", typeof(string));
+                dtNew.Columns.Add("WRAP SUB", typeof(string));
                 dtNew.Columns.Add("DURATION 2", typeof(string));
                 dgwItem.DataSource = dtNew;
             }
 
             dgwItem.Columns[0].Width = ColumnWith(dgwItem, 18);
             dgwItem.Columns[1].Width = ColumnWith(dgwItem, 15);
-            dgwItem.Columns[2].Width = ColumnWith(dgwItem, 15);
-            dgwItem.Columns[3].Width = ColumnWith(dgwItem, 20);
-            dgwItem.Columns[4].Width = ColumnWith(dgwItem, 15);
+            dgwItem.Columns[2].Width = ColumnWith(dgwItem, 18);
+            dgwItem.Columns[3].Width = ColumnWith(dgwItem, 13);
+            dgwItem.Columns[4].Width = ColumnWith(dgwItem, 18);
             dgwItem.Columns[5].Width = ColumnWith(dgwItem, 20);
 
             dgwItem.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
