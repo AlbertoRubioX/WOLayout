@@ -14,6 +14,9 @@ namespace WOLayout
     public partial class wfConfig : Form
     {
         private string _lsUsuario;
+        private decimal _ldHrsDisp;
+        private string _lsCajas;
+        private string _lsKitCaja;
         public wfConfig()
         {
             InitializeComponent();
@@ -231,25 +234,39 @@ namespace WOLayout
         }
         private void txtHrDisp_TextChanged(object sender, EventArgs e)
         {
-            double dVal = double.Parse(txtHrDisp.Text.ToString());
-            double dSeg = dVal * 60 * 60;
-            txtSegDisp.Text = dSeg.ToString();
+            decimal dVal = decimal.Parse(txtHrDisp.Text.ToString());
+            if(dVal != _ldHrsDisp)
+            {
+                decimal dSeg = dVal * 60 * 60;
+                txtSegDisp.Text = dSeg.ToString();
+            }
+
+            _ldHrsDisp = dVal;
         }
 
         private void txtCajas_TextChanged(object sender, EventArgs e)
         {
-            double dVal = double.Parse(txtCajas.Text.ToString());
-            double dVal2 = double.Parse(txtKitCaja.Text.ToString());
-            double dRes = dVal * dVal2;
-            txtKits.Text = dRes.ToString();
+            if(!string.IsNullOrEmpty(_lsCajas) && _lsCajas != txtCajas.Text.ToString())
+            {
+                decimal dVal = decimal.Parse(txtCajas.Text.ToString());
+                decimal dVal2 = decimal.Parse(txtKitCaja.Text.ToString());
+                decimal dRes = dVal * dVal2;
+                txtKits.Text = dRes.ToString();
+            }
+            _lsCajas = txtCajas.Text.ToString();
+
         }
 
         private void txtKitCaja_TextChanged(object sender, EventArgs e)
         {
-            double dVal = double.Parse(txtCajas.Text.ToString());
-            double dVal2 = double.Parse(txtKitCaja.Text.ToString());
-            double dRes = dVal * dVal2;
-            txtKits.Text = dRes.ToString();
+            if(!string.IsNullOrEmpty(_lsKitCaja) && _lsKitCaja != txtKitCaja.Text.ToString())
+            {
+                decimal dVal = decimal.Parse(txtCajas.Text.ToString());
+                decimal dVal2 = decimal.Parse(txtKitCaja.Text.ToString());
+                decimal dRes = dVal * dVal2;
+                txtKits.Text = dRes.ToString();
+            }
+            _lsKitCaja = txtKitCaja.Text.ToString();
         }
         #endregion
 

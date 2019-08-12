@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AS4Logica.cs" />
     <Compile Include="ComunicaLogica.cs" />
+    <Compile Include="SetupLogica.cs" />
     <Compile Include="ConfigLogica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

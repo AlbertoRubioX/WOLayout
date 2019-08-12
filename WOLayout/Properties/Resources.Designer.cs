@@ -83,6 +83,16 @@ namespace WOLayout.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ensamble {
+            get {
+                object obj = ResourceManager.GetObject("ensamble", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap file {
             get {
                 object obj = ResourceManager.GetObject("file", resourceCulture);
@@ -103,9 +113,9 @@ namespace WOLayout.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ensamble {
+        internal static System.Drawing.Bitmap lineav21 {
             get {
-                object obj = ResourceManager.GetObject("ensamble", resourceCulture);
+                object obj = ResourceManager.GetObject("lineav21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +123,19 @@ namespace WOLayout.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap lineav21 {
+        internal static System.Drawing.Bitmap LOG_Medline {
             get {
-                object obj = ResourceManager.GetObject("lineav21", resourceCulture);
+                object obj = ResourceManager.GetObject("LOG_Medline", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap medline_dynacor_logo {
+            get {
+                object obj = ResourceManager.GetObject("medline-dynacor-logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

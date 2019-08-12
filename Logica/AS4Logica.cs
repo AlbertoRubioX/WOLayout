@@ -19,7 +19,7 @@ namespace Logica
             try
             {
                 string sSql = "SELECT DISTINCT "+
-                "FMWOSUM.WOPN AS JOB, FMWOSUM.WOQTY AS BOXES, " +
+                "FMWOSUM.WOPN AS JOB,'' as NAME, FMWOSUM.WOQTY AS BOXES, " +
                 "FKITMSTR.IMSTCK AS KITS,  " +
                 "FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS TOTAL_KITS, " +
                 "ROUND(20*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS DURATION " +
@@ -41,7 +41,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT CASE WHEN COUNT( DMRID) > 7 THEN 'SI' ELSE 'NO' END AS SUBASSY,"+
+                string sSql = "SELECT CASE WHEN COUNT( DMRID) > 7 THEN 'YES' ELSE 'NO' END AS SUBASSY,"+
                         "COUNT(DMRID) AS COMPONENTS  "+
                         "FROM KBM400SQL.PACKDETAIL " +
                         "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +

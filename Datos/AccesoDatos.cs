@@ -80,6 +80,13 @@ namespace Datos
             return MetodosDatos.EjecutaComandoSelectOdbc(_comando);
         }
 
+        public static DataTable ConsultarSetup(string as_query)
+        {
+            SqlCommand _comando = MetodosDatos.CrearComandoSetup();
+            _comando.CommandText = as_query;
+            return MetodosDatos.EjecutaComandoSelect(_comando);
+        }
+
         public static int Borrar(string as_query)
         {
             SqlCommand _comando = MetodosDatos.CrearComando();

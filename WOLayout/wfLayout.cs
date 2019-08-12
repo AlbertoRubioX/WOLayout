@@ -53,6 +53,9 @@ namespace WOLayout
             WindowState = FormWindowState.Maximized;
 
             Inicio();
+
+            txtWO.Text = "0000000";
+            txtWO.SelectAll();
         }
 
         private void Inicio()
@@ -60,10 +63,11 @@ namespace WOLayout
             string sUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             sUser = sUser.Substring(sUser.IndexOf("\\") + 1).ToUpper();
             tssUserName.Text = sUser;
-            tssVersion.Text = "V 1.0.0.0";
+            tssVersion.Text = "V 1.0.0.1";
 
             txtWO.Clear();
-            txtItem.Clear();
+
+            lblProduct.Text = "";
             dgwItem.DataSource = null;
             dgwWO.DataSource = null;
             dgwTables.DataSource = null;
@@ -128,6 +132,7 @@ namespace WOLayout
         private void wfLayout_Activated(object sender, EventArgs e)
         {
             txtWO.Focus();
+            txtWO.SelectAll();
         }
         private string getWrapDesc(string _asWrap)
         {
@@ -171,26 +176,31 @@ namespace WOLayout
 
                 AS4Logica AS4 = new AS4Logica();
                 AS4.WO = sValue;
-                DataTable dt = AS4Logica.WorkOrder(AS4);
-                if(dt.Rows.Count > 0)
+                //DataTable dt = AS4Logica.WorkOrder(AS4);
+
+                SetupLogica set = new SetupLogica();
+                set.WorkOrder = sValue;
+                DataTable dt = SetupLogica.ConsultarWO(set);
+                if (dt.Rows.Count > 0)
                 {
-                    txtItem.Clear();
+                    lblProduct.Text = string.Empty;
                     dgwWO.DataSource = dt;
                     dgwWO.CurrentCell = null;
 
                     string sItem = dt.Rows[0][0].ToString();
+                    string sName = dt.Rows[0][1].ToString();
                     AS4.Item = sItem;
-                    txtItem.Text = sItem;
+                    lblProduct.Text = sItem + "    " + sName.ToUpper();
 
                     DataTable dt2 = AS4Logica.ComponentsLayer(AS4);
                     dgwItem.DataSource = null;
                     CargarColumnas();
-                    if(dt2.Rows.Count > 0)
+                    if (dt2.Rows.Count > 0)
                     {
 
                         string sPre = dt2.Rows[0][0].ToString();
                         int iComp = int.Parse(dt2.Rows[0][1].ToString());
-                        
+
                         string sLevel1 = dt2.Rows[1][0].ToString();
                         string sWrap1 = dt2.Rows[1][1].ToString();
                         string sDuraW1 = string.Empty;
@@ -198,7 +208,7 @@ namespace WOLayout
                         string sWrap2 = string.Empty;
                         string sLevel2 = string.Empty;
 
-                        if(dt2.Rows.Count > 2)
+                        if (dt2.Rows.Count > 2)
                         {
                             sLevel2 = dt2.Rows[2][0].ToString();
                             sWrap2 = dt2.Rows[2][1].ToString();
@@ -206,18 +216,22 @@ namespace WOLayout
 
                         string sWrapMain = string.Empty;
                         string sWrapSub = string.Empty;
+                        string sWCodeM = string.Empty;
+                        string sWCodeS = string.Empty;
                         double dWrapTime = 0;
                         double dWrapTime2 = 0;
 
-                        if (sLevel1=="W")
+                        if (sLevel1 == "W")
                         {
                             sWrapMain = getWrapDesc(sWrap1);
                             dWrapTime = getWrapTime(sWrap1);
-                            if(!string.IsNullOrEmpty(sLevel2))
+                            if (!string.IsNullOrEmpty(sLevel2))
                             {
                                 sWrapSub = getWrapDesc(sWrap2);
                                 dWrapTime2 = getWrapTime(sWrap2);
                             }
+                            sWCodeM = sWrap1;
+                            sWCodeS = sWrap2;
                         }
                         else
                         {
@@ -226,13 +240,16 @@ namespace WOLayout
 
                             sWrapSub = getWrapDesc(sWrap1);
                             dWrapTime2 = getWrapTime(sWrap1);
+
+                            sWCodeM = sWrap2;
+                            sWCodeS = sWrap1;
                         }
 
                         sDuraW1 = dWrapTime.ToString();
                         sDuraW2 = dWrapTime2.ToString();
 
                         DataTable dt3 = dgwItem.DataSource as DataTable;
-                        dt3.Rows.Add(iComp,sPre,sWrapMain,sDuraW1, sWrapSub, sDuraW2);
+                        dt3.Rows.Add(iComp, sPre, sWCodeM, sWrapMain, sDuraW1, sWCodeS, sWrapSub, sDuraW2);
 
                         //mesas / operadores
                         DataTable dt4 = AS4Logica.LineLayout(AS4);
@@ -243,7 +260,7 @@ namespace WOLayout
                             int iOut = 0;
                             int iSub = 0;
                             int iMain = 0;
-                            
+
                             int iO = _iSurtidor + _iInspeccion + _iInspSell + _iSellador;
                             int iTotalOps = 0;
                             int iTotalMes = 0;
@@ -255,9 +272,9 @@ namespace WOLayout
                                 if (sLevel == "S") iSub = iCompx;
                                 if (sLevel == "B") iBasin = iCompx;
                                 if (sLevel == "F") iOut = iCompx;
-                                if (sLevel == "M") iMain = iCompx;
+                                if (sLevel == "M" || sLevel == "L") iMain = iCompx;
                                 if (sLevel == "Y") iPiggy = iCompx;
-                                
+
                             }
 
                             int iOper = 0;
@@ -265,7 +282,7 @@ namespace WOLayout
                             DataTable dtN = dgwTables.DataSource as DataTable;
 
                             iMesas = iOut + iBasin + iPiggy;
-                            iMesas =(int)Math.Ceiling((decimal)iMesas / (decimal)_iMaxTable);
+                            iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iMaxTable);
                             iOper = iMesas;
                             dtN.Rows.Add("Assy", "OutFolder/Basin", iMesas, iOper);
                             iTotalMes += iMesas;
@@ -297,7 +314,7 @@ namespace WOLayout
                             double dMax = (double)_iMaxTable;
                             double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
                             iMesas = (int)dW;
-                            if (sWrap1 == "1" || sWrap1 == "8")
+                            if (sWCodeM == "1" || sWCodeM == "8")
                                 iOper = iMesas;
                             else
                                 iOper = (iMesas * 2);
@@ -306,12 +323,23 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
-                            int wrap1m= iMesas;
+                            int wrap1m = iMesas;
                             int wrap1o = iOper;
 
                             iMesas = 0;
                             iOper = 0;
-                            dtN.Rows.Add("Wrap", "Wrap 2", iMesas, iOper);
+                            if (sLevel1 == "W") /******Validar con Ingenieria******/
+                            {
+                                dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
+                                iMesas = (int)dW;
+                                if (sWCodeS == "1" || sWCodeS == "8")
+                                    iOper = iMesas;
+                                else
+                                    iOper = (iMesas * 2);
+                                dtN.Rows.Add("Wrap", "Wrap 2", iMesas, iOper);
+                            }
+                            /****************************************************/
+
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -330,9 +358,15 @@ namespace WOLayout
                             dgwTables.ClearSelection();
 
                             LimpiarLayout();
+                            if (wrap1m + wrap2m > 6)
+                            {
+                                wrap2m = 6 - wrap1m;
+                                MessageBox.Show("Capacidad de Mesas Excedida en Estación de Empaque", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
 
-                            if (outfolderm + subassym + assym > 8 || wrap1m + wrap2m > 6)
-                                MessageBox.Show("Capacidad de mesas excedida");
+
+                            if (outfolderm + subassym + assym > 8)
+                                MessageBox.Show("Capacidad de Operadores Excedida", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             else
                             {
                                 llenarmesa(outfolderm, outfoldero, true);
@@ -343,10 +377,13 @@ namespace WOLayout
 
                             }
                         }
-                        
+
                         dgwItem.ClearSelection();
+                        txtWO.SelectAll();
                     }
                 }
+                else
+                    MessageBox.Show("Work Order Not Fund!", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -361,7 +398,8 @@ namespace WOLayout
             if (dgwWO.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("WO");
-                dtNew.Columns.Add("JOB", typeof(string));
+                dtNew.Columns.Add("PRODUCT", typeof(string));
+                dtNew.Columns.Add("NAME", typeof(string));
                 dtNew.Columns.Add("BOXES", typeof(int));
                 dtNew.Columns.Add("KITS", typeof(int));
                 dtNew.Columns.Add("TOTAL KITS", typeof(int));
@@ -369,36 +407,31 @@ namespace WOLayout
                 dgwWO.DataSource = dtNew;
             }
             dgwWO.Columns[0].Visible = false;
-            dgwWO.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwWO.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwWO.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwWO.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgwWO.Columns[1].Visible = false;
+           
 
             if (dgwItem.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Item");
                 dtNew.Columns.Add("COMPONENTS", typeof(int));
                 dtNew.Columns.Add("PRE-ASSY", typeof(string));
+                dtNew.Columns.Add("wrap_code", typeof(string));
                 dtNew.Columns.Add("WRAP MAIN", typeof(string));
                 dtNew.Columns.Add("DURATION", typeof(string));
+                dtNew.Columns.Add("wrap_code2", typeof(string));
                 dtNew.Columns.Add("WRAP SUB", typeof(string));
                 dtNew.Columns.Add("DURATION 2", typeof(string));
                 dgwItem.DataSource = dtNew;
             }
 
-            dgwItem.Columns[0].Width = ColumnWith(dgwItem, 18);
+            dgwItem.Columns[0].Width = ColumnWith(dgwItem, 20);
             dgwItem.Columns[1].Width = ColumnWith(dgwItem, 15);
-            dgwItem.Columns[2].Width = ColumnWith(dgwItem, 18);
-            dgwItem.Columns[3].Width = ColumnWith(dgwItem, 13);
-            dgwItem.Columns[4].Width = ColumnWith(dgwItem, 18);
-            dgwItem.Columns[5].Width = ColumnWith(dgwItem, 20);
-
-            dgwItem.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwItem.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwItem.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwItem.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwItem.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwItem.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgwItem.Columns[2].Visible = false;
+            dgwItem.Columns[3].Width = ColumnWith(dgwItem, 15);
+            dgwItem.Columns[4].Width = ColumnWith(dgwItem, 17);
+            dgwItem.Columns[5].Visible = false;
+            dgwItem.Columns[6].Width = ColumnWith(dgwItem, 15);
+            dgwItem.Columns[7].Width = ColumnWith(dgwItem, 20);
 
             if (dgwTables.Rows.Count == 0)
             {
@@ -406,14 +439,14 @@ namespace WOLayout
                 dtNew.Columns.Add("TYPE", typeof(string));
                 dtNew.Columns.Add("DESCRIPTION", typeof(string));
                 dtNew.Columns.Add("TABLES", typeof(int));
-                dtNew.Columns.Add("OPERATORS", typeof(int));
+                dtNew.Columns.Add("H.C.", typeof(int));
                 dgwTables.DataSource = dtNew;
             }
 
-            dgwTables.Columns[0].Width = ColumnWith(dgwTables, 15);
-            dgwTables.Columns[1].Width = ColumnWith(dgwTables, 43);
+            dgwTables.Columns[0].Width = ColumnWith(dgwTables, 18);
+            dgwTables.Columns[1].Width = ColumnWith(dgwTables, 45);
             dgwTables.Columns[2].Width = ColumnWith(dgwTables, 20);
-            dgwTables.Columns[3].Width = ColumnWith(dgwTables, 25);
+            dgwTables.Columns[3].Width = ColumnWith(dgwTables, 20);
             dgwTables.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwTables.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwTables.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -430,7 +463,7 @@ namespace WOLayout
             return Convert.ToInt32(dTam);
         }
 
-        
+        #region regBottons
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -447,6 +480,7 @@ namespace WOLayout
             wfConfig Config = new wfConfig();
             Config.Show();
         }
+        #endregion
 
         private void txtWO_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -492,6 +526,7 @@ namespace WOLayout
                 ai_HegihtAnt = this.Height;
             }
         }
+        #endregion
 
         public PictureBox[] getmesas()
         {
@@ -599,6 +634,13 @@ namespace WOLayout
 
         }
 
-
+        private void dgwTables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            int iRow = e.RowIndex;
+            if ((iRow % 2) == 0)
+                e.CellStyle.BackColor = Color.LightSkyBlue;
+            else
+                e.CellStyle.BackColor = Color.White;
+        }
     }
 }

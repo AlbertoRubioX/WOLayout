@@ -44,6 +44,7 @@
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="ConexionAS400.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="ConexionSetup.cs" />
     <Compile Include="ConexionCRH.cs" />
     <Compile Include="MetodosDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

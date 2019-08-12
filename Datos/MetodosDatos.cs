@@ -37,11 +37,21 @@ namespace Datos
             string cadenaConexion = Conexion.CadenaConexion();
             SqlConnection _conn = new SqlConnection(cadenaConexion);
             SqlCommand _comando = new SqlCommand(as_storeProc, _conn);
-            _comando.CommandType = System.Data.CommandType.StoredProcedure;
+            _comando.CommandType = CommandType.StoredProcedure;
+            return _comando;
+        }
+        //SetupScanning
+        public static SqlCommand CrearComandoSetup()
+        {
+            string cadenaConexion = ConexionSetup.CadenaConexion();
+            SqlConnection _conn = new SqlConnection(cadenaConexion);
+            _conn.ConnectionString = cadenaConexion;
+            SqlCommand _comando = new SqlCommand();
+            _comando = _conn.CreateCommand();
+            _comando.CommandType = CommandType.Text;
             return _comando;
         }
 
-        
         public static int EjecutaComando(SqlCommand comando)
         {
             try
