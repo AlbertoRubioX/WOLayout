@@ -374,19 +374,20 @@ namespace WOLayout
                             if (wrap1m + wrap2m > 6)
                             {
                                 wrap2m = 6 - wrap1m;
-                                MessageBox.Show("Capacidad de Mesas Excedida en Estación de Empaque", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Capacidad de Mesas Excedida en Estación de Wrapping", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-
-
-                            if (outfolderm + subassym + assym > 8)
-                                MessageBox.Show("Capacidad de Operadores Excedida", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             else
                             {
-                                llenarmesa(outfolderm, outfoldero, true);
-                                llenarmesa(subassym, subassyo, true);
-                                llenarmesa(assym, assyo, true);
                                 llenarmesa(wrap1m, wrap1o, false);
                                 llenarmesa(wrap2m, wrap2o, false);
+                            }
+
+                            if (subassym + assym > 9 || assym > 5)
+                                MessageBox.Show("Capacidad de Mesas Excedida en Estación de Empaque", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            else
+                            {
+                                llenarof(outfolderm, outfoldero);
+                                llenarensamble(assym, assyo, subassym, subassyo);
 
                             }
                         }
@@ -591,7 +592,7 @@ namespace WOLayout
         #region regDraw
         public PictureBox[] getmesas()
         {
-            PictureBox[] mesas = new PictureBox[14];
+            PictureBox[] mesas = new PictureBox[20];
             mesas[0] = E1;
             mesas[1] = E2;
             mesas[2] = E3;
@@ -600,47 +601,66 @@ namespace WOLayout
             mesas[5] = E6;
             mesas[6] = E7;
             mesas[7] = E8;
-            mesas[8] = W1;
-            mesas[9] = W2;
-            mesas[10] = W3;
-            mesas[11] = W4;
-            mesas[12] = W5;
-            mesas[13] = W6;
+            mesas[8] = E9;
+            mesas[9] = W1;
+            mesas[10] = W2;
+            mesas[11] = W3;
+            mesas[12] = W4;
+            mesas[13] = W5;
+            mesas[14] = W6;
+            mesas[15] = OF1;
+            mesas[16] = OF2;
+            mesas[17] = OF3;
+            mesas[18] = OF4;
+            mesas[19] = OF5;
+
 
             return mesas;
         }
 
         public PictureBox[] getoperadores()
         {
-            PictureBox[] operadores = new PictureBox[28];
-            operadores[0] = O1;
-            operadores[1] = O2;
-            operadores[2] = O3;
-            operadores[3] = O4;
-            operadores[4] = O5;
-            operadores[5] = O6;
-            operadores[6] = O7;
-            operadores[7] = O8;
-            operadores[8] = O9;
-            operadores[9] = O10;
-            operadores[10] = O11;
-            operadores[11] = O12;
-            operadores[12] = O13;
-            operadores[13] = O14;
-            operadores[14] = O15;
-            operadores[15] = O16;
-            operadores[16] = O17;
-            operadores[17] = O18;
-            operadores[18] = O19;
-            operadores[19] = O20;
-            operadores[20] = O21;
-            operadores[21] = O22;
-            operadores[22] = O23;
-            operadores[23] = O24;
-            operadores[24] = O25;
-            operadores[25] = O26;
-            operadores[26] = O27;
-            operadores[27] = O28;
+            PictureBox[] operadores = new PictureBox[40];
+            operadores[0] = EO1;
+            operadores[1] = EO2;
+            operadores[2] = EO3;
+            operadores[3] = EO4;
+            operadores[4] = EO5;
+            operadores[5] = EO6;
+            operadores[6] = EO7;
+            operadores[7] = EO8;
+            operadores[8] = EO9;
+            operadores[9] = EO10;
+            operadores[10] = EO11;
+            operadores[11] = EO12;
+            operadores[12] = EO13;
+            operadores[13] = EO14;
+            operadores[14] = EO15;
+            operadores[15] = EO16;
+            operadores[16] = EO17;
+            operadores[17] = EO18;
+            operadores[18] = WO1;
+            operadores[19] = WO2;
+            operadores[20] = WO3;
+            operadores[21] = WO4;
+            operadores[22] = WO5;
+            operadores[23] = WO6;
+            operadores[24] = WO7;
+            operadores[25] = WO8;
+            operadores[26] = WO9;
+            operadores[27] = WO10;
+            operadores[28] = WO11;
+            operadores[29] = WO12;
+            operadores[30] = OFO1;
+            operadores[31] = OFO2;
+            operadores[32] = OFO3;
+            operadores[33] = OFO4;
+            operadores[34] = OFO5;
+            operadores[35] = OFO6;
+            operadores[36] = OFO7;
+            operadores[37] = OFO8;
+            operadores[38] = OFO9;
+            operadores[39] = OFO10;
 
             return operadores;
         }
@@ -650,12 +670,12 @@ namespace WOLayout
             PictureBox[] mesas = getmesas();
             PictureBox[] operadores = getoperadores();
 
-            for (int i = 0; i <= 13; i++)
+            for (int i = 0; i <= 19; i++)
             {
                 mesas[i].Visible = false;
             }
 
-            for (int i = 0; i <= 27; i++)
+            for (int i = 0; i <= 39; i++)
             {
                 operadores[i].Visible = false;
             }
@@ -672,7 +692,7 @@ namespace WOLayout
             if (ensamable)
                 posicionlibre = 0;
             else
-                posicionlibre = 8;
+                posicionlibre = 9;
 
             do
             {
@@ -695,7 +715,85 @@ namespace WOLayout
 
         }
 
+        public void llenarensamble(int emesas, int eoperadores, int smesas, int soperadores)
+        {
+            PictureBox[] mesas = getmesas();
+            PictureBox[] operadores = getoperadores();
+            //si cabe de un lado
+            if (emesas + smesas <= 5)
+            {
+                for (int i = 0; i < smesas; i++)
+                {
+                    mesas[i].Image = Properties.Resources.sub;
+                    mesas[i].Visible = true;
+                    operadores[i * 2].Visible = true;
+                    if (soperadores == smesas * 2)
+                        operadores[(i * 2) + 1].Visible = true;
+                }
+
+                for (int i = smesas; i < smesas + emesas; i++)
+                {
+                    mesas[i].Image = Properties.Resources.ensamble;
+                    mesas[i].Visible = true;
+                    operadores[i * 2].Visible = true;
+                    if (eoperadores == emesas * 2)
+                        operadores[(i * 2) + 1].Visible = true;
+                }
+            }
+            else
+            // si no cabe de un lado
+            {//LADO A
+                for (int i = 4; i > 4 - emesas; i--)
+                {
+                    mesas[i].Image = Properties.Resources.ensamble;
+                    mesas[i].Visible = true;
+                    operadores[i * 2].Visible = true;
+                    if (eoperadores == emesas * 2)
+                        operadores[(i * 2) + 1].Visible = true;
+                }
+                for (int i = 4 - emesas; i >= 0; i--)
+                {
+                    mesas[i].Image = Properties.Resources.sub;
+                    mesas[i].Visible = true;
+                    operadores[i * 2].Visible = true;
+                    if (soperadores == smesas * 2)
+                        operadores[(i * 2) + 1].Visible = true;
+                }
+
+                //LADO B
+                for (int i = 5; i < 5 + smesas - (5 - emesas); i++)
+                {
+                    mesas[i].Image = Properties.Resources.sub;
+                    mesas[i].Visible = true;
+                    operadores[i * 2].Visible = true;
+                    if (soperadores == smesas * 2)
+                        operadores[(i * 2) + 1].Visible = true;
+                }
+
+            }
+
+        }
+
+        public void llenarof(int nummesas, int nummoperadores)
+        {
+            PictureBox[] mesas = getmesas();
+            PictureBox[] operadores = getoperadores();
+
+            for (int i = 15; i < 15 + nummesas; i++)
+            {
+                mesas[i].Visible = true;
+                operadores[i * 2].Visible = true;
+                if (nummoperadores == nummesas * 2)
+                    operadores[(i * 2) + 1].Visible = true;
+            }
+
+        }
+
         #endregion
 
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
