@@ -14,7 +14,7 @@ namespace WOLayout
     public partial class wfLayout : Form
     {
         private bool _bNumber = false;
-        private double _dAssyTime;  //14
+        private double _dAssyTime; 
         private double _dTackIdeal;
         private double _dTackTime;
         private int _iMaxTable;     //15
