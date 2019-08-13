@@ -33,74 +33,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(wfLayout));
             this.txtWO = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.PANEL3 = new System.Windows.Forms.Panel();
-            this.WO8 = new System.Windows.Forms.PictureBox();
-            this.WO7 = new System.Windows.Forms.PictureBox();
-            this.WO10 = new System.Windows.Forms.PictureBox();
-            this.WO9 = new System.Windows.Forms.PictureBox();
-            this.WO12 = new System.Windows.Forms.PictureBox();
-            this.WO11 = new System.Windows.Forms.PictureBox();
-            this.WO2 = new System.Windows.Forms.PictureBox();
-            this.WO1 = new System.Windows.Forms.PictureBox();
-            this.WO4 = new System.Windows.Forms.PictureBox();
-            this.WO3 = new System.Windows.Forms.PictureBox();
-            this.WO6 = new System.Windows.Forms.PictureBox();
-            this.WO5 = new System.Windows.Forms.PictureBox();
-            this.W4 = new System.Windows.Forms.PictureBox();
-            this.W5 = new System.Windows.Forms.PictureBox();
-            this.W6 = new System.Windows.Forms.PictureBox();
-            this.W1 = new System.Windows.Forms.PictureBox();
-            this.W2 = new System.Windows.Forms.PictureBox();
-            this.W3 = new System.Windows.Forms.PictureBox();
-            this.EO12 = new System.Windows.Forms.PictureBox();
-            this.EO11 = new System.Windows.Forms.PictureBox();
-            this.EO14 = new System.Windows.Forms.PictureBox();
-            this.EO13 = new System.Windows.Forms.PictureBox();
-            this.EO16 = new System.Windows.Forms.PictureBox();
-            this.EO15 = new System.Windows.Forms.PictureBox();
-            this.EO18 = new System.Windows.Forms.PictureBox();
-            this.EO17 = new System.Windows.Forms.PictureBox();
-            this.EO2 = new System.Windows.Forms.PictureBox();
-            this.EO1 = new System.Windows.Forms.PictureBox();
-            this.EO4 = new System.Windows.Forms.PictureBox();
-            this.EO3 = new System.Windows.Forms.PictureBox();
-            this.EO6 = new System.Windows.Forms.PictureBox();
-            this.EO5 = new System.Windows.Forms.PictureBox();
-            this.EO8 = new System.Windows.Forms.PictureBox();
-            this.EO7 = new System.Windows.Forms.PictureBox();
-            this.EO10 = new System.Windows.Forms.PictureBox();
-            this.EO9 = new System.Windows.Forms.PictureBox();
-            this.OFO10 = new System.Windows.Forms.PictureBox();
-            this.OFO9 = new System.Windows.Forms.PictureBox();
-            this.OF5 = new System.Windows.Forms.PictureBox();
-            this.OFO8 = new System.Windows.Forms.PictureBox();
-            this.OFO7 = new System.Windows.Forms.PictureBox();
-            this.OFO6 = new System.Windows.Forms.PictureBox();
-            this.OFO5 = new System.Windows.Forms.PictureBox();
-            this.OFO4 = new System.Windows.Forms.PictureBox();
-            this.OFO3 = new System.Windows.Forms.PictureBox();
-            this.OFO2 = new System.Windows.Forms.PictureBox();
-            this.OFO1 = new System.Windows.Forms.PictureBox();
-            this.OF4 = new System.Windows.Forms.PictureBox();
-            this.OF3 = new System.Windows.Forms.PictureBox();
-            this.OF2 = new System.Windows.Forms.PictureBox();
-            this.OF1 = new System.Windows.Forms.PictureBox();
-            this.E5 = new System.Windows.Forms.PictureBox();
-            this.E9 = new System.Windows.Forms.PictureBox();
-            this.E4 = new System.Windows.Forms.PictureBox();
-            this.E8 = new System.Windows.Forms.PictureBox();
-            this.E3 = new System.Windows.Forms.PictureBox();
-            this.E7 = new System.Windows.Forms.PictureBox();
-            this.E2 = new System.Windows.Forms.PictureBox();
-            this.E6 = new System.Windows.Forms.PictureBox();
-            this.E1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.linea = new System.Windows.Forms.PictureBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.lblOper = new System.Windows.Forms.Label();
@@ -109,6 +46,53 @@
             this.lblMesas = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.O28 = new System.Windows.Forms.PictureBox();
+            this.O27 = new System.Windows.Forms.PictureBox();
+            this.O22 = new System.Windows.Forms.PictureBox();
+            this.O21 = new System.Windows.Forms.PictureBox();
+            this.O26 = new System.Windows.Forms.PictureBox();
+            this.O25 = new System.Windows.Forms.PictureBox();
+            this.O20 = new System.Windows.Forms.PictureBox();
+            this.O19 = new System.Windows.Forms.PictureBox();
+            this.O24 = new System.Windows.Forms.PictureBox();
+            this.O23 = new System.Windows.Forms.PictureBox();
+            this.O18 = new System.Windows.Forms.PictureBox();
+            this.O17 = new System.Windows.Forms.PictureBox();
+            this.O16 = new System.Windows.Forms.PictureBox();
+            this.O15 = new System.Windows.Forms.PictureBox();
+            this.O8 = new System.Windows.Forms.PictureBox();
+            this.O7 = new System.Windows.Forms.PictureBox();
+            this.O6 = new System.Windows.Forms.PictureBox();
+            this.O5 = new System.Windows.Forms.PictureBox();
+            this.O14 = new System.Windows.Forms.PictureBox();
+            this.O13 = new System.Windows.Forms.PictureBox();
+            this.O12 = new System.Windows.Forms.PictureBox();
+            this.O11 = new System.Windows.Forms.PictureBox();
+            this.O4 = new System.Windows.Forms.PictureBox();
+            this.O3 = new System.Windows.Forms.PictureBox();
+            this.O10 = new System.Windows.Forms.PictureBox();
+            this.O9 = new System.Windows.Forms.PictureBox();
+            this.O2 = new System.Windows.Forms.PictureBox();
+            this.O1 = new System.Windows.Forms.PictureBox();
+            this.W6 = new System.Windows.Forms.PictureBox();
+            this.W3 = new System.Windows.Forms.PictureBox();
+            this.W5 = new System.Windows.Forms.PictureBox();
+            this.W2 = new System.Windows.Forms.PictureBox();
+            this.W1 = new System.Windows.Forms.PictureBox();
+            this.W4 = new System.Windows.Forms.PictureBox();
+            this.E8 = new System.Windows.Forms.PictureBox();
+            this.E4 = new System.Windows.Forms.PictureBox();
+            this.E7 = new System.Windows.Forms.PictureBox();
+            this.E3 = new System.Windows.Forms.PictureBox();
+            this.E6 = new System.Windows.Forms.PictureBox();
+            this.E2 = new System.Windows.Forms.PictureBox();
+            this.E5 = new System.Windows.Forms.PictureBox();
+            this.E1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgwTables = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgwWO = new System.Windows.Forms.DataGridView();
@@ -128,75 +112,58 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.PANEL3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WO8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO17)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.linea)).BeginInit();
-            this.groupBox3.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O28)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O27)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O26)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O23)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTables)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwWO)).BeginInit();
@@ -225,6 +192,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.panel8);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox1);
@@ -232,658 +200,20 @@
             this.panel1.Location = new System.Drawing.Point(16, 34);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1523, 842);
+            this.panel1.Size = new System.Drawing.Size(1615, 941);
             this.panel1.TabIndex = 0;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel2.Controls.Add(this.PANEL3);
-            this.panel2.Location = new System.Drawing.Point(881, 25);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(621, 1014);
-            this.panel2.TabIndex = 7;
-            // 
-            // PANEL3
-            // 
-            this.PANEL3.BackColor = System.Drawing.Color.White;
-            this.PANEL3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PANEL3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PANEL3.Controls.Add(this.WO8);
-            this.PANEL3.Controls.Add(this.WO7);
-            this.PANEL3.Controls.Add(this.WO10);
-            this.PANEL3.Controls.Add(this.WO9);
-            this.PANEL3.Controls.Add(this.WO12);
-            this.PANEL3.Controls.Add(this.WO11);
-            this.PANEL3.Controls.Add(this.WO2);
-            this.PANEL3.Controls.Add(this.WO1);
-            this.PANEL3.Controls.Add(this.WO4);
-            this.PANEL3.Controls.Add(this.WO3);
-            this.PANEL3.Controls.Add(this.WO6);
-            this.PANEL3.Controls.Add(this.WO5);
-            this.PANEL3.Controls.Add(this.W4);
-            this.PANEL3.Controls.Add(this.W5);
-            this.PANEL3.Controls.Add(this.W6);
-            this.PANEL3.Controls.Add(this.W1);
-            this.PANEL3.Controls.Add(this.W2);
-            this.PANEL3.Controls.Add(this.W3);
-            this.PANEL3.Controls.Add(this.EO12);
-            this.PANEL3.Controls.Add(this.EO11);
-            this.PANEL3.Controls.Add(this.EO14);
-            this.PANEL3.Controls.Add(this.EO13);
-            this.PANEL3.Controls.Add(this.EO16);
-            this.PANEL3.Controls.Add(this.EO15);
-            this.PANEL3.Controls.Add(this.EO18);
-            this.PANEL3.Controls.Add(this.EO17);
-            this.PANEL3.Controls.Add(this.EO2);
-            this.PANEL3.Controls.Add(this.EO1);
-            this.PANEL3.Controls.Add(this.EO4);
-            this.PANEL3.Controls.Add(this.EO3);
-            this.PANEL3.Controls.Add(this.EO6);
-            this.PANEL3.Controls.Add(this.EO5);
-            this.PANEL3.Controls.Add(this.EO8);
-            this.PANEL3.Controls.Add(this.EO7);
-            this.PANEL3.Controls.Add(this.EO10);
-            this.PANEL3.Controls.Add(this.EO9);
-            this.PANEL3.Controls.Add(this.OFO10);
-            this.PANEL3.Controls.Add(this.OFO9);
-            this.PANEL3.Controls.Add(this.OF5);
-            this.PANEL3.Controls.Add(this.OFO8);
-            this.PANEL3.Controls.Add(this.OFO7);
-            this.PANEL3.Controls.Add(this.OFO6);
-            this.PANEL3.Controls.Add(this.OFO5);
-            this.PANEL3.Controls.Add(this.OFO4);
-            this.PANEL3.Controls.Add(this.OFO3);
-            this.PANEL3.Controls.Add(this.OFO2);
-            this.PANEL3.Controls.Add(this.OFO1);
-            this.PANEL3.Controls.Add(this.OF4);
-            this.PANEL3.Controls.Add(this.OF3);
-            this.PANEL3.Controls.Add(this.OF2);
-            this.PANEL3.Controls.Add(this.OF1);
-            this.PANEL3.Controls.Add(this.E5);
-            this.PANEL3.Controls.Add(this.E9);
-            this.PANEL3.Controls.Add(this.E4);
-            this.PANEL3.Controls.Add(this.E8);
-            this.PANEL3.Controls.Add(this.E3);
-            this.PANEL3.Controls.Add(this.E7);
-            this.PANEL3.Controls.Add(this.E2);
-            this.PANEL3.Controls.Add(this.E6);
-            this.PANEL3.Controls.Add(this.E1);
-            this.PANEL3.Controls.Add(this.pictureBox2);
-            this.PANEL3.Controls.Add(this.linea);
-            this.PANEL3.Location = new System.Drawing.Point(9, 8);
-            this.PANEL3.Margin = new System.Windows.Forms.Padding(4);
-            this.PANEL3.Name = "PANEL3";
-            this.PANEL3.Size = new System.Drawing.Size(604, 800);
-            this.PANEL3.TabIndex = 0;
-            this.PANEL3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
-            // 
-            // WO8
-            // 
-            this.WO8.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO8.Location = new System.Drawing.Point(247, 171);
-            this.WO8.Name = "WO8";
-            this.WO8.Size = new System.Drawing.Size(28, 27);
-            this.WO8.TabIndex = 82;
-            this.WO8.TabStop = false;
-            // 
-            // WO7
-            // 
-            this.WO7.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO7.Location = new System.Drawing.Point(204, 171);
-            this.WO7.Name = "WO7";
-            this.WO7.Size = new System.Drawing.Size(28, 27);
-            this.WO7.TabIndex = 81;
-            this.WO7.TabStop = false;
-            // 
-            // WO10
-            // 
-            this.WO10.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO10.Location = new System.Drawing.Point(247, 109);
-            this.WO10.Name = "WO10";
-            this.WO10.Size = new System.Drawing.Size(28, 27);
-            this.WO10.TabIndex = 80;
-            this.WO10.TabStop = false;
-            // 
-            // WO9
-            // 
-            this.WO9.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO9.Location = new System.Drawing.Point(204, 109);
-            this.WO9.Name = "WO9";
-            this.WO9.Size = new System.Drawing.Size(28, 27);
-            this.WO9.TabIndex = 79;
-            this.WO9.TabStop = false;
-            // 
-            // WO12
-            // 
-            this.WO12.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO12.Location = new System.Drawing.Point(247, 44);
-            this.WO12.Name = "WO12";
-            this.WO12.Size = new System.Drawing.Size(28, 27);
-            this.WO12.TabIndex = 78;
-            this.WO12.TabStop = false;
-            // 
-            // WO11
-            // 
-            this.WO11.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO11.Location = new System.Drawing.Point(204, 44);
-            this.WO11.Name = "WO11";
-            this.WO11.Size = new System.Drawing.Size(28, 27);
-            this.WO11.TabIndex = 77;
-            this.WO11.TabStop = false;
-            // 
-            // WO2
-            // 
-            this.WO2.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO2.Location = new System.Drawing.Point(125, 170);
-            this.WO2.Name = "WO2";
-            this.WO2.Size = new System.Drawing.Size(28, 27);
-            this.WO2.TabIndex = 68;
-            this.WO2.TabStop = false;
-            // 
-            // WO1
-            // 
-            this.WO1.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO1.Location = new System.Drawing.Point(82, 170);
-            this.WO1.Name = "WO1";
-            this.WO1.Size = new System.Drawing.Size(28, 27);
-            this.WO1.TabIndex = 67;
-            this.WO1.TabStop = false;
-            // 
-            // WO4
-            // 
-            this.WO4.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO4.Location = new System.Drawing.Point(125, 109);
-            this.WO4.Name = "WO4";
-            this.WO4.Size = new System.Drawing.Size(28, 27);
-            this.WO4.TabIndex = 66;
-            this.WO4.TabStop = false;
-            // 
-            // WO3
-            // 
-            this.WO3.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO3.Location = new System.Drawing.Point(82, 109);
-            this.WO3.Name = "WO3";
-            this.WO3.Size = new System.Drawing.Size(28, 27);
-            this.WO3.TabIndex = 65;
-            this.WO3.TabStop = false;
-            // 
-            // WO6
-            // 
-            this.WO6.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO6.Location = new System.Drawing.Point(125, 42);
-            this.WO6.Name = "WO6";
-            this.WO6.Size = new System.Drawing.Size(28, 27);
-            this.WO6.TabIndex = 64;
-            this.WO6.TabStop = false;
-            // 
-            // WO5
-            // 
-            this.WO5.Image = global::WOLayout.Properties.Resources.operador;
-            this.WO5.Location = new System.Drawing.Point(82, 44);
-            this.WO5.Name = "WO5";
-            this.WO5.Size = new System.Drawing.Size(28, 27);
-            this.WO5.TabIndex = 63;
-            this.WO5.TabStop = false;
-            // 
-            // W4
-            // 
-            this.W4.Image = global::WOLayout.Properties.Resources.W;
-            this.W4.Location = new System.Drawing.Point(196, 198);
-            this.W4.Name = "W4";
-            this.W4.Size = new System.Drawing.Size(90, 28);
-            this.W4.TabIndex = 96;
-            this.W4.TabStop = false;
-            // 
-            // W5
-            // 
-            this.W5.Image = global::WOLayout.Properties.Resources.W;
-            this.W5.Location = new System.Drawing.Point(194, 135);
-            this.W5.Name = "W5";
-            this.W5.Size = new System.Drawing.Size(90, 28);
-            this.W5.TabIndex = 95;
-            this.W5.TabStop = false;
-            // 
-            // W6
-            // 
-            this.W6.Image = global::WOLayout.Properties.Resources.W;
-            this.W6.Location = new System.Drawing.Point(194, 70);
-            this.W6.Name = "W6";
-            this.W6.Size = new System.Drawing.Size(90, 28);
-            this.W6.TabIndex = 94;
-            this.W6.TabStop = false;
-            // 
-            // W1
-            // 
-            this.W1.Image = global::WOLayout.Properties.Resources.W;
-            this.W1.Location = new System.Drawing.Point(74, 195);
-            this.W1.Name = "W1";
-            this.W1.Size = new System.Drawing.Size(90, 28);
-            this.W1.TabIndex = 93;
-            this.W1.TabStop = false;
-            // 
-            // W2
-            // 
-            this.W2.Image = global::WOLayout.Properties.Resources.W;
-            this.W2.Location = new System.Drawing.Point(73, 134);
-            this.W2.Name = "W2";
-            this.W2.Size = new System.Drawing.Size(90, 28);
-            this.W2.TabIndex = 92;
-            this.W2.TabStop = false;
-            // 
-            // W3
-            // 
-            this.W3.Image = global::WOLayout.Properties.Resources.W;
-            this.W3.Location = new System.Drawing.Point(73, 68);
-            this.W3.Name = "W3";
-            this.W3.Size = new System.Drawing.Size(90, 28);
-            this.W3.TabIndex = 91;
-            this.W3.TabStop = false;
-            // 
-            // EO12
-            // 
-            this.EO12.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO12.Location = new System.Drawing.Point(247, 587);
-            this.EO12.Name = "EO12";
-            this.EO12.Size = new System.Drawing.Size(28, 27);
-            this.EO12.TabIndex = 90;
-            this.EO12.TabStop = false;
-            // 
-            // EO11
-            // 
-            this.EO11.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO11.Location = new System.Drawing.Point(204, 587);
-            this.EO11.Name = "EO11";
-            this.EO11.Size = new System.Drawing.Size(28, 27);
-            this.EO11.TabIndex = 89;
-            this.EO11.TabStop = false;
-            // 
-            // EO14
-            // 
-            this.EO14.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO14.Location = new System.Drawing.Point(247, 497);
-            this.EO14.Name = "EO14";
-            this.EO14.Size = new System.Drawing.Size(28, 27);
-            this.EO14.TabIndex = 88;
-            this.EO14.TabStop = false;
-            // 
-            // EO13
-            // 
-            this.EO13.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO13.Location = new System.Drawing.Point(204, 497);
-            this.EO13.Name = "EO13";
-            this.EO13.Size = new System.Drawing.Size(28, 27);
-            this.EO13.TabIndex = 87;
-            this.EO13.TabStop = false;
-            // 
-            // EO16
-            // 
-            this.EO16.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO16.Location = new System.Drawing.Point(247, 405);
-            this.EO16.Name = "EO16";
-            this.EO16.Size = new System.Drawing.Size(28, 27);
-            this.EO16.TabIndex = 86;
-            this.EO16.TabStop = false;
-            // 
-            // EO15
-            // 
-            this.EO15.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO15.Location = new System.Drawing.Point(204, 405);
-            this.EO15.Name = "EO15";
-            this.EO15.Size = new System.Drawing.Size(28, 27);
-            this.EO15.TabIndex = 85;
-            this.EO15.TabStop = false;
-            // 
-            // EO18
-            // 
-            this.EO18.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO18.Location = new System.Drawing.Point(247, 315);
-            this.EO18.Name = "EO18";
-            this.EO18.Size = new System.Drawing.Size(28, 27);
-            this.EO18.TabIndex = 84;
-            this.EO18.TabStop = false;
-            // 
-            // EO17
-            // 
-            this.EO17.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO17.Location = new System.Drawing.Point(204, 315);
-            this.EO17.Name = "EO17";
-            this.EO17.Size = new System.Drawing.Size(28, 27);
-            this.EO17.TabIndex = 83;
-            this.EO17.TabStop = false;
-            // 
-            // EO2
-            // 
-            this.EO2.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO2.Location = new System.Drawing.Point(125, 587);
-            this.EO2.Name = "EO2";
-            this.EO2.Size = new System.Drawing.Size(28, 27);
-            this.EO2.TabIndex = 76;
-            this.EO2.TabStop = false;
-            // 
-            // EO1
-            // 
-            this.EO1.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO1.Location = new System.Drawing.Point(82, 587);
-            this.EO1.Name = "EO1";
-            this.EO1.Size = new System.Drawing.Size(28, 27);
-            this.EO1.TabIndex = 75;
-            this.EO1.TabStop = false;
-            // 
-            // EO4
-            // 
-            this.EO4.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO4.Location = new System.Drawing.Point(125, 497);
-            this.EO4.Name = "EO4";
-            this.EO4.Size = new System.Drawing.Size(28, 27);
-            this.EO4.TabIndex = 74;
-            this.EO4.TabStop = false;
-            // 
-            // EO3
-            // 
-            this.EO3.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO3.Location = new System.Drawing.Point(82, 497);
-            this.EO3.Name = "EO3";
-            this.EO3.Size = new System.Drawing.Size(28, 27);
-            this.EO3.TabIndex = 73;
-            this.EO3.TabStop = false;
-            // 
-            // EO6
-            // 
-            this.EO6.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO6.Location = new System.Drawing.Point(125, 405);
-            this.EO6.Name = "EO6";
-            this.EO6.Size = new System.Drawing.Size(28, 27);
-            this.EO6.TabIndex = 68;
-            this.EO6.TabStop = false;
-            // 
-            // EO5
-            // 
-            this.EO5.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO5.Location = new System.Drawing.Point(82, 405);
-            this.EO5.Name = "EO5";
-            this.EO5.Size = new System.Drawing.Size(28, 27);
-            this.EO5.TabIndex = 67;
-            this.EO5.TabStop = false;
-            // 
-            // EO8
-            // 
-            this.EO8.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO8.Location = new System.Drawing.Point(125, 312);
-            this.EO8.Name = "EO8";
-            this.EO8.Size = new System.Drawing.Size(28, 27);
-            this.EO8.TabIndex = 72;
-            this.EO8.TabStop = false;
-            // 
-            // EO7
-            // 
-            this.EO7.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO7.Location = new System.Drawing.Point(82, 312);
-            this.EO7.Name = "EO7";
-            this.EO7.Size = new System.Drawing.Size(28, 27);
-            this.EO7.TabIndex = 71;
-            this.EO7.TabStop = false;
-            // 
-            // EO10
-            // 
-            this.EO10.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO10.Location = new System.Drawing.Point(125, 234);
-            this.EO10.Name = "EO10";
-            this.EO10.Size = new System.Drawing.Size(28, 27);
-            this.EO10.TabIndex = 70;
-            this.EO10.TabStop = false;
-            // 
-            // EO9
-            // 
-            this.EO9.Image = global::WOLayout.Properties.Resources.operador;
-            this.EO9.Location = new System.Drawing.Point(82, 234);
-            this.EO9.Name = "EO9";
-            this.EO9.Size = new System.Drawing.Size(28, 27);
-            this.EO9.TabIndex = 69;
-            this.EO9.TabStop = false;
-            // 
-            // OFO10
-            // 
-            this.OFO10.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO10.Location = new System.Drawing.Point(407, 392);
-            this.OFO10.Name = "OFO10";
-            this.OFO10.Size = new System.Drawing.Size(28, 27);
-            this.OFO10.TabIndex = 62;
-            this.OFO10.TabStop = false;
-            // 
-            // OFO9
-            // 
-            this.OFO9.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO9.Location = new System.Drawing.Point(364, 392);
-            this.OFO9.Name = "OFO9";
-            this.OFO9.Size = new System.Drawing.Size(28, 27);
-            this.OFO9.TabIndex = 61;
-            this.OFO9.TabStop = false;
-            // 
-            // OF5
-            // 
-            this.OF5.Image = global::WOLayout.Properties.Resources.of;
-            this.OF5.Location = new System.Drawing.Point(356, 417);
-            this.OF5.Name = "OF5";
-            this.OF5.Size = new System.Drawing.Size(92, 47);
-            this.OF5.TabIndex = 60;
-            this.OF5.TabStop = false;
-            // 
-            // OFO8
-            // 
-            this.OFO8.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO8.Location = new System.Drawing.Point(407, 300);
-            this.OFO8.Name = "OFO8";
-            this.OFO8.Size = new System.Drawing.Size(28, 27);
-            this.OFO8.TabIndex = 59;
-            this.OFO8.TabStop = false;
-            // 
-            // OFO7
-            // 
-            this.OFO7.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO7.Location = new System.Drawing.Point(364, 300);
-            this.OFO7.Name = "OFO7";
-            this.OFO7.Size = new System.Drawing.Size(28, 27);
-            this.OFO7.TabIndex = 58;
-            this.OFO7.TabStop = false;
-            // 
-            // OFO6
-            // 
-            this.OFO6.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO6.Location = new System.Drawing.Point(407, 209);
-            this.OFO6.Name = "OFO6";
-            this.OFO6.Size = new System.Drawing.Size(28, 27);
-            this.OFO6.TabIndex = 57;
-            this.OFO6.TabStop = false;
-            // 
-            // OFO5
-            // 
-            this.OFO5.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO5.Location = new System.Drawing.Point(364, 209);
-            this.OFO5.Name = "OFO5";
-            this.OFO5.Size = new System.Drawing.Size(28, 27);
-            this.OFO5.TabIndex = 56;
-            this.OFO5.TabStop = false;
-            // 
-            // OFO4
-            // 
-            this.OFO4.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO4.Location = new System.Drawing.Point(407, 118);
-            this.OFO4.Name = "OFO4";
-            this.OFO4.Size = new System.Drawing.Size(28, 27);
-            this.OFO4.TabIndex = 55;
-            this.OFO4.TabStop = false;
-            // 
-            // OFO3
-            // 
-            this.OFO3.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO3.Location = new System.Drawing.Point(364, 118);
-            this.OFO3.Name = "OFO3";
-            this.OFO3.Size = new System.Drawing.Size(28, 27);
-            this.OFO3.TabIndex = 54;
-            this.OFO3.TabStop = false;
-            // 
-            // OFO2
-            // 
-            this.OFO2.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO2.Location = new System.Drawing.Point(407, 35);
-            this.OFO2.Name = "OFO2";
-            this.OFO2.Size = new System.Drawing.Size(28, 27);
-            this.OFO2.TabIndex = 53;
-            this.OFO2.TabStop = false;
-            // 
-            // OFO1
-            // 
-            this.OFO1.Image = global::WOLayout.Properties.Resources.operador;
-            this.OFO1.Location = new System.Drawing.Point(364, 35);
-            this.OFO1.Name = "OFO1";
-            this.OFO1.Size = new System.Drawing.Size(28, 27);
-            this.OFO1.TabIndex = 52;
-            this.OFO1.TabStop = false;
-            // 
-            // OF4
-            // 
-            this.OF4.Image = global::WOLayout.Properties.Resources.of;
-            this.OF4.Location = new System.Drawing.Point(356, 325);
-            this.OF4.Name = "OF4";
-            this.OF4.Size = new System.Drawing.Size(92, 47);
-            this.OF4.TabIndex = 51;
-            this.OF4.TabStop = false;
-            // 
-            // OF3
-            // 
-            this.OF3.Image = global::WOLayout.Properties.Resources.of;
-            this.OF3.Location = new System.Drawing.Point(356, 234);
-            this.OF3.Name = "OF3";
-            this.OF3.Size = new System.Drawing.Size(92, 47);
-            this.OF3.TabIndex = 50;
-            this.OF3.TabStop = false;
-            // 
-            // OF2
-            // 
-            this.OF2.Image = global::WOLayout.Properties.Resources.of;
-            this.OF2.Location = new System.Drawing.Point(356, 143);
-            this.OF2.Name = "OF2";
-            this.OF2.Size = new System.Drawing.Size(92, 47);
-            this.OF2.TabIndex = 49;
-            this.OF2.TabStop = false;
-            // 
-            // OF1
-            // 
-            this.OF1.Image = global::WOLayout.Properties.Resources.of;
-            this.OF1.Location = new System.Drawing.Point(356, 60);
-            this.OF1.Name = "OF1";
-            this.OF1.Size = new System.Drawing.Size(92, 47);
-            this.OF1.TabIndex = 48;
-            this.OF1.TabStop = false;
-            // 
-            // E5
-            // 
-            this.E5.Location = new System.Drawing.Point(71, 258);
-            this.E5.Name = "E5";
-            this.E5.Size = new System.Drawing.Size(92, 47);
-            this.E5.TabIndex = 41;
-            this.E5.TabStop = false;
-            // 
-            // E9
-            // 
-            this.E9.Location = new System.Drawing.Point(194, 340);
-            this.E9.Name = "E9";
-            this.E9.Size = new System.Drawing.Size(92, 47);
-            this.E9.TabIndex = 47;
-            this.E9.TabStop = false;
-            // 
-            // E4
-            // 
-            this.E4.Location = new System.Drawing.Point(71, 337);
-            this.E4.Name = "E4";
-            this.E4.Size = new System.Drawing.Size(92, 47);
-            this.E4.TabIndex = 46;
-            this.E4.TabStop = false;
-            // 
-            // E8
-            // 
-            this.E8.Location = new System.Drawing.Point(194, 429);
-            this.E8.Name = "E8";
-            this.E8.Size = new System.Drawing.Size(92, 47);
-            this.E8.TabIndex = 45;
-            this.E8.TabStop = false;
-            // 
-            // E3
-            // 
-            this.E3.Location = new System.Drawing.Point(72, 430);
-            this.E3.Name = "E3";
-            this.E3.Size = new System.Drawing.Size(92, 47);
-            this.E3.TabIndex = 44;
-            this.E3.TabStop = false;
-            // 
-            // E7
-            // 
-            this.E7.Location = new System.Drawing.Point(194, 522);
-            this.E7.Name = "E7";
-            this.E7.Size = new System.Drawing.Size(92, 47);
-            this.E7.TabIndex = 43;
-            this.E7.TabStop = false;
-            // 
-            // E2
-            // 
-            this.E2.Location = new System.Drawing.Point(72, 522);
-            this.E2.Name = "E2";
-            this.E2.Size = new System.Drawing.Size(92, 47);
-            this.E2.TabIndex = 42;
-            this.E2.TabStop = false;
-            // 
-            // E6
-            // 
-            this.E6.Location = new System.Drawing.Point(194, 612);
-            this.E6.Name = "E6";
-            this.E6.Size = new System.Drawing.Size(92, 47);
-            this.E6.TabIndex = 41;
-            this.E6.TabStop = false;
-            // 
-            // E1
-            // 
-            this.E1.Location = new System.Drawing.Point(73, 612);
-            this.E1.Name = "E1";
-            this.E1.Size = new System.Drawing.Size(92, 47);
-            this.E1.TabIndex = 40;
-            this.E1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::WOLayout.Properties.Resources.LOG_Medline;
-            this.pictureBox2.Location = new System.Drawing.Point(519, 4);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(75, 62);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 39;
-            this.pictureBox2.TabStop = false;
-            // 
-            // linea
-            // 
-            this.linea.Image = global::WOLayout.Properties.Resources.linea;
-            this.linea.Location = new System.Drawing.Point(73, -9);
-            this.linea.Margin = new System.Windows.Forms.Padding(4);
-            this.linea.Name = "linea";
-            this.linea.Size = new System.Drawing.Size(213, 801);
-            this.linea.TabIndex = 0;
-            this.linea.TabStop = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.panel6);
-            this.groupBox3.Controls.Add(this.panel5);
-            this.groupBox3.Controls.Add(this.panel4);
-            this.groupBox3.Controls.Add(this.dgwTables);
-            this.groupBox3.Location = new System.Drawing.Point(28, 421);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(829, 400);
-            this.groupBox3.TabIndex = 6;
-            this.groupBox3.TabStop = false;
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel8.Controls.Add(this.panel6);
+            this.panel8.Controls.Add(this.panel5);
+            this.panel8.Controls.Add(this.panel4);
+            this.panel8.Location = new System.Drawing.Point(1307, 25);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(290, 116);
+            this.panel8.TabIndex = 10;
             // 
             // panel6
             // 
@@ -891,10 +221,10 @@
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.label4);
-            this.panel6.Location = new System.Drawing.Point(517, 91);
+            this.panel6.Location = new System.Drawing.Point(4, 58);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(287, 54);
+            this.panel6.Size = new System.Drawing.Size(282, 54);
             this.panel6.TabIndex = 9;
             // 
             // panel7
@@ -905,7 +235,7 @@
             this.panel7.Location = new System.Drawing.Point(211, -2);
             this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(75, 54);
+            this.panel7.Size = new System.Drawing.Size(70, 54);
             this.panel7.TabIndex = 10;
             // 
             // lblOper
@@ -913,7 +243,7 @@
             this.lblOper.AutoSize = true;
             this.lblOper.BackColor = System.Drawing.Color.Transparent;
             this.lblOper.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOper.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblOper.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.lblOper.Location = new System.Drawing.Point(15, 9);
             this.lblOper.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOper.Name = "lblOper";
@@ -924,23 +254,25 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label4.Location = new System.Drawing.Point(11, 14);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(154, 25);
+            this.label4.Size = new System.Drawing.Size(161, 25);
             this.label4.TabIndex = 5;
-            this.label4.Text = "HEAD COUNT";
+            this.label4.Text = "OPERADORES";
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.lblMesas);
-            this.panel5.Location = new System.Drawing.Point(729, 37);
+            this.panel5.Location = new System.Drawing.Point(216, 4);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(75, 54);
+            this.panel5.Size = new System.Drawing.Size(70, 54);
             this.panel5.TabIndex = 9;
             // 
             // lblMesas
@@ -957,13 +289,13 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel4.BackColor = System.Drawing.Color.DarkGray;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(517, 37);
+            this.panel4.Location = new System.Drawing.Point(4, 4);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(287, 54);
+            this.panel4.Size = new System.Drawing.Size(282, 54);
             this.panel4.TabIndex = 8;
             // 
             // label3
@@ -971,19 +303,536 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.label3.Location = new System.Drawing.Point(11, 16);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 25);
+            this.label3.Size = new System.Drawing.Size(167, 25);
             this.label3.TabIndex = 4;
-            this.label3.Text = "TOTAL TABLES";
+            this.label3.Text = "TOTAL MESAS";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Location = new System.Drawing.Point(881, 25);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(418, 897);
+            this.panel2.TabIndex = 7;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.O28);
+            this.panel3.Controls.Add(this.O27);
+            this.panel3.Controls.Add(this.O22);
+            this.panel3.Controls.Add(this.O21);
+            this.panel3.Controls.Add(this.O26);
+            this.panel3.Controls.Add(this.O25);
+            this.panel3.Controls.Add(this.O20);
+            this.panel3.Controls.Add(this.O19);
+            this.panel3.Controls.Add(this.O24);
+            this.panel3.Controls.Add(this.O23);
+            this.panel3.Controls.Add(this.O18);
+            this.panel3.Controls.Add(this.O17);
+            this.panel3.Controls.Add(this.O16);
+            this.panel3.Controls.Add(this.O15);
+            this.panel3.Controls.Add(this.O8);
+            this.panel3.Controls.Add(this.O7);
+            this.panel3.Controls.Add(this.O6);
+            this.panel3.Controls.Add(this.O5);
+            this.panel3.Controls.Add(this.O14);
+            this.panel3.Controls.Add(this.O13);
+            this.panel3.Controls.Add(this.O12);
+            this.panel3.Controls.Add(this.O11);
+            this.panel3.Controls.Add(this.O4);
+            this.panel3.Controls.Add(this.O3);
+            this.panel3.Controls.Add(this.O10);
+            this.panel3.Controls.Add(this.O9);
+            this.panel3.Controls.Add(this.O2);
+            this.panel3.Controls.Add(this.O1);
+            this.panel3.Controls.Add(this.W6);
+            this.panel3.Controls.Add(this.W3);
+            this.panel3.Controls.Add(this.W5);
+            this.panel3.Controls.Add(this.W2);
+            this.panel3.Controls.Add(this.W1);
+            this.panel3.Controls.Add(this.W4);
+            this.panel3.Controls.Add(this.E8);
+            this.panel3.Controls.Add(this.E4);
+            this.panel3.Controls.Add(this.E7);
+            this.panel3.Controls.Add(this.E3);
+            this.panel3.Controls.Add(this.E6);
+            this.panel3.Controls.Add(this.E2);
+            this.panel3.Controls.Add(this.E5);
+            this.panel3.Controls.Add(this.E1);
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Location = new System.Drawing.Point(7, 7);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(404, 880);
+            this.panel3.TabIndex = 0;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::WOLayout.Properties.Resources.LOG_Medline;
+            this.pictureBox2.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(75, 62);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 39;
+            this.pictureBox2.TabStop = false;
+            // 
+            // O28
+            // 
+            this.O28.Image = global::WOLayout.Properties.Resources.operador;
+            this.O28.Location = new System.Drawing.Point(256, 42);
+            this.O28.Margin = new System.Windows.Forms.Padding(4);
+            this.O28.Name = "O28";
+            this.O28.Size = new System.Drawing.Size(36, 33);
+            this.O28.TabIndex = 38;
+            this.O28.TabStop = false;
+            // 
+            // O27
+            // 
+            this.O27.Image = global::WOLayout.Properties.Resources.operador;
+            this.O27.Location = new System.Drawing.Point(223, 42);
+            this.O27.Margin = new System.Windows.Forms.Padding(4);
+            this.O27.Name = "O27";
+            this.O27.Size = new System.Drawing.Size(36, 33);
+            this.O27.TabIndex = 37;
+            this.O27.TabStop = false;
+            // 
+            // O22
+            // 
+            this.O22.Image = global::WOLayout.Properties.Resources.operador;
+            this.O22.Location = new System.Drawing.Point(136, 41);
+            this.O22.Margin = new System.Windows.Forms.Padding(4);
+            this.O22.Name = "O22";
+            this.O22.Size = new System.Drawing.Size(36, 33);
+            this.O22.TabIndex = 16;
+            this.O22.TabStop = false;
+            // 
+            // O21
+            // 
+            this.O21.Image = global::WOLayout.Properties.Resources.operador;
+            this.O21.Location = new System.Drawing.Point(102, 41);
+            this.O21.Margin = new System.Windows.Forms.Padding(4);
+            this.O21.Name = "O21";
+            this.O21.Size = new System.Drawing.Size(36, 33);
+            this.O21.TabIndex = 15;
+            this.O21.TabStop = false;
+            // 
+            // O26
+            // 
+            this.O26.Image = global::WOLayout.Properties.Resources.operador;
+            this.O26.Location = new System.Drawing.Point(256, 108);
+            this.O26.Margin = new System.Windows.Forms.Padding(4);
+            this.O26.Name = "O26";
+            this.O26.Size = new System.Drawing.Size(36, 33);
+            this.O26.TabIndex = 36;
+            this.O26.TabStop = false;
+            // 
+            // O25
+            // 
+            this.O25.Image = global::WOLayout.Properties.Resources.operador;
+            this.O25.Location = new System.Drawing.Point(223, 108);
+            this.O25.Margin = new System.Windows.Forms.Padding(4);
+            this.O25.Name = "O25";
+            this.O25.Size = new System.Drawing.Size(36, 33);
+            this.O25.TabIndex = 35;
+            this.O25.TabStop = false;
+            // 
+            // O20
+            // 
+            this.O20.Image = global::WOLayout.Properties.Resources.operador;
+            this.O20.Location = new System.Drawing.Point(136, 107);
+            this.O20.Margin = new System.Windows.Forms.Padding(4);
+            this.O20.Name = "O20";
+            this.O20.Size = new System.Drawing.Size(36, 33);
+            this.O20.TabIndex = 34;
+            this.O20.TabStop = false;
+            // 
+            // O19
+            // 
+            this.O19.Image = global::WOLayout.Properties.Resources.operador;
+            this.O19.Location = new System.Drawing.Point(102, 107);
+            this.O19.Margin = new System.Windows.Forms.Padding(4);
+            this.O19.Name = "O19";
+            this.O19.Size = new System.Drawing.Size(36, 33);
+            this.O19.TabIndex = 33;
+            this.O19.TabStop = false;
+            // 
+            // O24
+            // 
+            this.O24.Image = global::WOLayout.Properties.Resources.operador;
+            this.O24.Location = new System.Drawing.Point(256, 171);
+            this.O24.Margin = new System.Windows.Forms.Padding(4);
+            this.O24.Name = "O24";
+            this.O24.Size = new System.Drawing.Size(36, 33);
+            this.O24.TabIndex = 32;
+            this.O24.TabStop = false;
+            // 
+            // O23
+            // 
+            this.O23.Image = global::WOLayout.Properties.Resources.operador;
+            this.O23.Location = new System.Drawing.Point(223, 171);
+            this.O23.Margin = new System.Windows.Forms.Padding(4);
+            this.O23.Name = "O23";
+            this.O23.Size = new System.Drawing.Size(36, 33);
+            this.O23.TabIndex = 31;
+            this.O23.TabStop = false;
+            // 
+            // O18
+            // 
+            this.O18.Image = global::WOLayout.Properties.Resources.operador;
+            this.O18.Location = new System.Drawing.Point(136, 170);
+            this.O18.Margin = new System.Windows.Forms.Padding(4);
+            this.O18.Name = "O18";
+            this.O18.Size = new System.Drawing.Size(36, 33);
+            this.O18.TabIndex = 30;
+            this.O18.TabStop = false;
+            // 
+            // O17
+            // 
+            this.O17.Image = global::WOLayout.Properties.Resources.operador;
+            this.O17.Location = new System.Drawing.Point(102, 170);
+            this.O17.Margin = new System.Windows.Forms.Padding(4);
+            this.O17.Name = "O17";
+            this.O17.Size = new System.Drawing.Size(36, 33);
+            this.O17.TabIndex = 29;
+            this.O17.TabStop = false;
+            // 
+            // O16
+            // 
+            this.O16.Image = global::WOLayout.Properties.Resources.operador;
+            this.O16.Location = new System.Drawing.Point(261, 314);
+            this.O16.Margin = new System.Windows.Forms.Padding(4);
+            this.O16.Name = "O16";
+            this.O16.Size = new System.Drawing.Size(36, 33);
+            this.O16.TabIndex = 28;
+            this.O16.TabStop = false;
+            // 
+            // O15
+            // 
+            this.O15.Image = global::WOLayout.Properties.Resources.operador;
+            this.O15.Location = new System.Drawing.Point(225, 314);
+            this.O15.Margin = new System.Windows.Forms.Padding(4);
+            this.O15.Name = "O15";
+            this.O15.Size = new System.Drawing.Size(36, 33);
+            this.O15.TabIndex = 27;
+            this.O15.TabStop = false;
+            // 
+            // O8
+            // 
+            this.O8.Image = global::WOLayout.Properties.Resources.operador;
+            this.O8.Location = new System.Drawing.Point(136, 312);
+            this.O8.Margin = new System.Windows.Forms.Padding(4);
+            this.O8.Name = "O8";
+            this.O8.Size = new System.Drawing.Size(36, 33);
+            this.O8.TabIndex = 26;
+            this.O8.TabStop = false;
+            // 
+            // O7
+            // 
+            this.O7.Image = global::WOLayout.Properties.Resources.operador;
+            this.O7.Location = new System.Drawing.Point(102, 312);
+            this.O7.Margin = new System.Windows.Forms.Padding(4);
+            this.O7.Name = "O7";
+            this.O7.Size = new System.Drawing.Size(36, 33);
+            this.O7.TabIndex = 25;
+            this.O7.TabStop = false;
+            // 
+            // O6
+            // 
+            this.O6.Image = global::WOLayout.Properties.Resources.operador;
+            this.O6.Location = new System.Drawing.Point(136, 404);
+            this.O6.Margin = new System.Windows.Forms.Padding(4);
+            this.O6.Name = "O6";
+            this.O6.Size = new System.Drawing.Size(36, 33);
+            this.O6.TabIndex = 24;
+            this.O6.TabStop = false;
+            // 
+            // O5
+            // 
+            this.O5.Image = global::WOLayout.Properties.Resources.operador;
+            this.O5.Location = new System.Drawing.Point(102, 404);
+            this.O5.Margin = new System.Windows.Forms.Padding(4);
+            this.O5.Name = "O5";
+            this.O5.Size = new System.Drawing.Size(36, 33);
+            this.O5.TabIndex = 23;
+            this.O5.TabStop = false;
+            // 
+            // O14
+            // 
+            this.O14.Image = global::WOLayout.Properties.Resources.operador;
+            this.O14.Location = new System.Drawing.Point(261, 404);
+            this.O14.Margin = new System.Windows.Forms.Padding(4);
+            this.O14.Name = "O14";
+            this.O14.Size = new System.Drawing.Size(36, 33);
+            this.O14.TabIndex = 22;
+            this.O14.TabStop = false;
+            // 
+            // O13
+            // 
+            this.O13.Image = global::WOLayout.Properties.Resources.operador;
+            this.O13.Location = new System.Drawing.Point(225, 404);
+            this.O13.Margin = new System.Windows.Forms.Padding(4);
+            this.O13.Name = "O13";
+            this.O13.Size = new System.Drawing.Size(36, 33);
+            this.O13.TabIndex = 21;
+            this.O13.TabStop = false;
+            // 
+            // O12
+            // 
+            this.O12.Image = global::WOLayout.Properties.Resources.operador;
+            this.O12.Location = new System.Drawing.Point(261, 496);
+            this.O12.Margin = new System.Windows.Forms.Padding(4);
+            this.O12.Name = "O12";
+            this.O12.Size = new System.Drawing.Size(36, 33);
+            this.O12.TabIndex = 20;
+            this.O12.TabStop = false;
+            // 
+            // O11
+            // 
+            this.O11.Image = global::WOLayout.Properties.Resources.operador;
+            this.O11.Location = new System.Drawing.Point(225, 496);
+            this.O11.Margin = new System.Windows.Forms.Padding(4);
+            this.O11.Name = "O11";
+            this.O11.Size = new System.Drawing.Size(36, 33);
+            this.O11.TabIndex = 19;
+            this.O11.TabStop = false;
+            // 
+            // O4
+            // 
+            this.O4.Image = global::WOLayout.Properties.Resources.operador;
+            this.O4.Location = new System.Drawing.Point(136, 496);
+            this.O4.Margin = new System.Windows.Forms.Padding(4);
+            this.O4.Name = "O4";
+            this.O4.Size = new System.Drawing.Size(36, 33);
+            this.O4.TabIndex = 18;
+            this.O4.TabStop = false;
+            // 
+            // O3
+            // 
+            this.O3.Image = global::WOLayout.Properties.Resources.operador;
+            this.O3.Location = new System.Drawing.Point(102, 496);
+            this.O3.Margin = new System.Windows.Forms.Padding(4);
+            this.O3.Name = "O3";
+            this.O3.Size = new System.Drawing.Size(36, 33);
+            this.O3.TabIndex = 17;
+            this.O3.TabStop = false;
+            // 
+            // O10
+            // 
+            this.O10.Image = global::WOLayout.Properties.Resources.operador;
+            this.O10.Location = new System.Drawing.Point(261, 586);
+            this.O10.Margin = new System.Windows.Forms.Padding(4);
+            this.O10.Name = "O10";
+            this.O10.Size = new System.Drawing.Size(36, 33);
+            this.O10.TabIndex = 16;
+            this.O10.TabStop = false;
+            // 
+            // O9
+            // 
+            this.O9.Image = global::WOLayout.Properties.Resources.operador;
+            this.O9.Location = new System.Drawing.Point(225, 586);
+            this.O9.Margin = new System.Windows.Forms.Padding(4);
+            this.O9.Name = "O9";
+            this.O9.Size = new System.Drawing.Size(36, 33);
+            this.O9.TabIndex = 15;
+            this.O9.TabStop = false;
+            // 
+            // O2
+            // 
+            this.O2.Image = global::WOLayout.Properties.Resources.operador;
+            this.O2.Location = new System.Drawing.Point(136, 586);
+            this.O2.Margin = new System.Windows.Forms.Padding(4);
+            this.O2.Name = "O2";
+            this.O2.Size = new System.Drawing.Size(36, 33);
+            this.O2.TabIndex = 14;
+            this.O2.TabStop = false;
+            // 
+            // O1
+            // 
+            this.O1.Image = global::WOLayout.Properties.Resources.operador;
+            this.O1.Location = new System.Drawing.Point(102, 586);
+            this.O1.Margin = new System.Windows.Forms.Padding(4);
+            this.O1.Name = "O1";
+            this.O1.Size = new System.Drawing.Size(36, 33);
+            this.O1.TabIndex = 13;
+            this.O1.TabStop = false;
+            // 
+            // W6
+            // 
+            this.W6.Image = global::WOLayout.Properties.Resources.wrap;
+            this.W6.Location = new System.Drawing.Point(214, 74);
+            this.W6.Margin = new System.Windows.Forms.Padding(4);
+            this.W6.Name = "W6";
+            this.W6.Size = new System.Drawing.Size(87, 29);
+            this.W6.TabIndex = 9;
+            this.W6.TabStop = false;
+            // 
+            // W3
+            // 
+            this.W3.Image = global::WOLayout.Properties.Resources.wrap;
+            this.W3.Location = new System.Drawing.Point(92, 74);
+            this.W3.Margin = new System.Windows.Forms.Padding(4);
+            this.W3.Name = "W3";
+            this.W3.Size = new System.Drawing.Size(87, 29);
+            this.W3.TabIndex = 12;
+            this.W3.TabStop = false;
+            // 
+            // W5
+            // 
+            this.W5.Image = global::WOLayout.Properties.Resources.wrap;
+            this.W5.Location = new System.Drawing.Point(214, 140);
+            this.W5.Margin = new System.Windows.Forms.Padding(4);
+            this.W5.Name = "W5";
+            this.W5.Size = new System.Drawing.Size(87, 29);
+            this.W5.TabIndex = 11;
+            this.W5.TabStop = false;
+            // 
+            // W2
+            // 
+            this.W2.Image = global::WOLayout.Properties.Resources.wrap;
+            this.W2.Location = new System.Drawing.Point(92, 140);
+            this.W2.Margin = new System.Windows.Forms.Padding(4);
+            this.W2.Name = "W2";
+            this.W2.Size = new System.Drawing.Size(87, 29);
+            this.W2.TabIndex = 10;
+            this.W2.TabStop = false;
+            // 
+            // W1
+            // 
+            this.W1.Image = global::WOLayout.Properties.Resources.wrap;
+            this.W1.Location = new System.Drawing.Point(93, 202);
+            this.W1.Margin = new System.Windows.Forms.Padding(4);
+            this.W1.Name = "W1";
+            this.W1.Size = new System.Drawing.Size(87, 29);
+            this.W1.TabIndex = 9;
+            this.W1.TabStop = false;
+            // 
+            // W4
+            // 
+            this.W4.Image = global::WOLayout.Properties.Resources.wrap;
+            this.W4.Location = new System.Drawing.Point(215, 204);
+            this.W4.Margin = new System.Windows.Forms.Padding(4);
+            this.W4.Name = "W4";
+            this.W4.Size = new System.Drawing.Size(87, 29);
+            this.W4.TabIndex = 8;
+            this.W4.TabStop = false;
+            // 
+            // E8
+            // 
+            this.E8.Image = global::WOLayout.Properties.Resources.ensamble;
+            this.E8.Location = new System.Drawing.Point(215, 347);
+            this.E8.Margin = new System.Windows.Forms.Padding(4);
+            this.E8.Name = "E8";
+            this.E8.Size = new System.Drawing.Size(87, 46);
+            this.E8.TabIndex = 7;
+            this.E8.TabStop = false;
+            // 
+            // E4
+            // 
+            this.E4.Image = global::WOLayout.Properties.Resources.ensamble;
+            this.E4.Location = new System.Drawing.Point(93, 345);
+            this.E4.Margin = new System.Windows.Forms.Padding(4);
+            this.E4.Name = "E4";
+            this.E4.Size = new System.Drawing.Size(87, 46);
+            this.E4.TabIndex = 4;
+            this.E4.TabStop = false;
+            // 
+            // E7
+            // 
+            this.E7.Image = global::WOLayout.Properties.Resources.ensamble;
+            this.E7.Location = new System.Drawing.Point(215, 437);
+            this.E7.Margin = new System.Windows.Forms.Padding(4);
+            this.E7.Name = "E7";
+            this.E7.Size = new System.Drawing.Size(87, 46);
+            this.E7.TabIndex = 6;
+            this.E7.TabStop = false;
+            // 
+            // E3
+            // 
+            this.E3.Image = global::WOLayout.Properties.Resources.ensamble;
+            this.E3.Location = new System.Drawing.Point(94, 437);
+            this.E3.Margin = new System.Windows.Forms.Padding(4);
+            this.E3.Name = "E3";
+            this.E3.Size = new System.Drawing.Size(87, 46);
+            this.E3.TabIndex = 5;
+            this.E3.TabStop = false;
+            // 
+            // E6
+            // 
+            this.E6.Image = global::WOLayout.Properties.Resources.ensamble;
+            this.E6.Location = new System.Drawing.Point(215, 530);
+            this.E6.Margin = new System.Windows.Forms.Padding(4);
+            this.E6.Name = "E6";
+            this.E6.Size = new System.Drawing.Size(87, 46);
+            this.E6.TabIndex = 4;
+            this.E6.TabStop = false;
+            // 
+            // E2
+            // 
+            this.E2.Image = global::WOLayout.Properties.Resources.ensamble;
+            this.E2.Location = new System.Drawing.Point(93, 530);
+            this.E2.Margin = new System.Windows.Forms.Padding(4);
+            this.E2.Name = "E2";
+            this.E2.Size = new System.Drawing.Size(87, 46);
+            this.E2.TabIndex = 3;
+            this.E2.TabStop = false;
+            // 
+            // E5
+            // 
+            this.E5.Image = global::WOLayout.Properties.Resources.ensamble;
+            this.E5.Location = new System.Drawing.Point(215, 619);
+            this.E5.Margin = new System.Windows.Forms.Padding(4);
+            this.E5.Name = "E5";
+            this.E5.Size = new System.Drawing.Size(87, 46);
+            this.E5.TabIndex = 2;
+            this.E5.TabStop = false;
+            // 
+            // E1
+            // 
+            this.E1.Image = global::WOLayout.Properties.Resources.ensamble;
+            this.E1.Location = new System.Drawing.Point(95, 619);
+            this.E1.Margin = new System.Windows.Forms.Padding(4);
+            this.E1.Name = "E1";
+            this.E1.Size = new System.Drawing.Size(87, 46);
+            this.E1.TabIndex = 1;
+            this.E1.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WOLayout.Properties.Resources.lineav21;
+            this.pictureBox1.Location = new System.Drawing.Point(92, -2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(220, 855);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dgwTables);
+            this.groupBox3.Location = new System.Drawing.Point(28, 396);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(829, 531);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
             // 
             // dgwTables
             // 
             this.dgwTables.AllowUserToAddRows = false;
             this.dgwTables.AllowUserToDeleteRows = false;
-            this.dgwTables.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgwTables.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -993,9 +842,10 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgwTables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgwTables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwTables.Location = new System.Drawing.Point(25, 37);
+            this.dgwTables.Location = new System.Drawing.Point(25, 23);
             this.dgwTables.Margin = new System.Windows.Forms.Padding(4);
             this.dgwTables.Name = "dgwTables";
+            this.dgwTables.ReadOnly = true;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1005,11 +855,11 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgwTables.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgwTables.RowHeadersVisible = false;
-            this.dgwTables.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgwTables.RowTemplate.Height = 26;
+            this.dgwTables.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgwTables.RowTemplate.Height = 40;
             this.dgwTables.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgwTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgwTables.Size = new System.Drawing.Size(454, 342);
+            this.dgwTables.Size = new System.Drawing.Size(780, 493);
             this.dgwTables.TabIndex = 4;
             this.dgwTables.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwTables_CellFormatting);
             // 
@@ -1018,11 +868,11 @@
             this.groupBox1.Controls.Add(this.dgwWO);
             this.groupBox1.Controls.Add(this.txtWO);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(28, 25);
+            this.groupBox1.Location = new System.Drawing.Point(28, 19);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(829, 190);
+            this.groupBox1.Size = new System.Drawing.Size(829, 164);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
@@ -1030,50 +880,60 @@
             // 
             this.dgwWO.AllowUserToAddRows = false;
             this.dgwWO.AllowUserToDeleteRows = false;
-            this.dgwWO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgwWO.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgwWO.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Navy;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.LightCyan;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgwWO.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgwWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwWO.Location = new System.Drawing.Point(25, 86);
+            this.dgwWO.Location = new System.Drawing.Point(25, 83);
             this.dgwWO.Margin = new System.Windows.Forms.Padding(4);
             this.dgwWO.Name = "dgwWO";
+            this.dgwWO.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwWO.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgwWO.RowHeadersVisible = false;
             this.dgwWO.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgwWO.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(59)))), ((int)(((byte)(166)))));
             this.dgwWO.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgwWO.RowTemplate.Height = 26;
+            this.dgwWO.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgwWO.RowTemplate.Height = 30;
             this.dgwWO.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgwWO.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgwWO.Size = new System.Drawing.Size(780, 59);
+            this.dgwWO.Size = new System.Drawing.Size(780, 58);
             this.dgwWO.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.label1.Location = new System.Drawing.Point(20, 36);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 29);
+            this.label1.Size = new System.Drawing.Size(91, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "WO #:";
+            this.label1.Text = "WO # :";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblProduct);
             this.groupBox2.Controls.Add(this.dgwItem);
-            this.groupBox2.Location = new System.Drawing.Point(28, 235);
+            this.groupBox2.Location = new System.Drawing.Point(28, 189);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(829, 171);
+            this.groupBox2.Size = new System.Drawing.Size(829, 199);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             // 
@@ -1082,7 +942,7 @@
             this.lblProduct.AutoSize = true;
             this.lblProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProduct.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.lblProduct.Location = new System.Drawing.Point(19, 33);
             this.lblProduct.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProduct.Name = "lblProduct";
@@ -1095,34 +955,37 @@
             // 
             this.dgwItem.AllowUserToAddRows = false;
             this.dgwItem.AllowUserToDeleteRows = false;
-            this.dgwItem.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgwItem.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgwItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwItem.Location = new System.Drawing.Point(25, 73);
             this.dgwItem.Margin = new System.Windows.Forms.Padding(4);
             this.dgwItem.Name = "dgwItem";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwItem.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgwItem.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwItem.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgwItem.RowHeadersVisible = false;
             this.dgwItem.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgwItem.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(59)))), ((int)(((byte)(166)))));
             this.dgwItem.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgwItem.RowTemplate.Height = 26;
+            this.dgwItem.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgwItem.RowTemplate.Height = 30;
             this.dgwItem.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgwItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgwItem.Size = new System.Drawing.Size(780, 80);
+            this.dgwItem.Size = new System.Drawing.Size(780, 94);
             this.dgwItem.TabIndex = 3;
             // 
             // statusStrip1
@@ -1135,10 +998,10 @@
             this.tssUserName,
             this.toolStripStatusLabel3,
             this.tssVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 887);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 978);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1544, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1640, 25);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -1187,7 +1050,7 @@
             this.btnExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1544, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1640, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -1234,7 +1097,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1544, 912);
+            this.ClientSize = new System.Drawing.Size(1640, 1003);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
@@ -1248,71 +1111,7 @@
             this.Load += new System.EventHandler(this.wfLayout_Load);
             this.Resize += new System.EventHandler(this.wfLayout_Resize);
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.PANEL3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.WO8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WO5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.W3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO17)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EO9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OFO1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OF1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.linea)).EndInit();
-            this.groupBox3.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
@@ -1321,6 +1120,53 @@
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O28)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O27)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O26)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O19)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.W4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwTables)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1353,7 +1199,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgwTables;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Panel PANEL3;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tssUserName;
@@ -1364,73 +1210,56 @@
         private System.Windows.Forms.ToolStripButton btnConfig;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton btnExit;
-        private System.Windows.Forms.PictureBox linea;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox E1;
+        private System.Windows.Forms.PictureBox W4;
+        private System.Windows.Forms.PictureBox E8;
+        private System.Windows.Forms.PictureBox E4;
+        private System.Windows.Forms.PictureBox E7;
+        private System.Windows.Forms.PictureBox E3;
+        private System.Windows.Forms.PictureBox E6;
+        private System.Windows.Forms.PictureBox E2;
+        private System.Windows.Forms.PictureBox E5;
+        private System.Windows.Forms.PictureBox W6;
+        private System.Windows.Forms.PictureBox W3;
+        private System.Windows.Forms.PictureBox W5;
+        private System.Windows.Forms.PictureBox W2;
+        private System.Windows.Forms.PictureBox W1;
+        private System.Windows.Forms.PictureBox O1;
+        private System.Windows.Forms.PictureBox O28;
+        private System.Windows.Forms.PictureBox O27;
+        private System.Windows.Forms.PictureBox O22;
+        private System.Windows.Forms.PictureBox O21;
+        private System.Windows.Forms.PictureBox O26;
+        private System.Windows.Forms.PictureBox O25;
+        private System.Windows.Forms.PictureBox O20;
+        private System.Windows.Forms.PictureBox O19;
+        private System.Windows.Forms.PictureBox O24;
+        private System.Windows.Forms.PictureBox O23;
+        private System.Windows.Forms.PictureBox O18;
+        private System.Windows.Forms.PictureBox O17;
+        private System.Windows.Forms.PictureBox O16;
+        private System.Windows.Forms.PictureBox O15;
+        private System.Windows.Forms.PictureBox O8;
+        private System.Windows.Forms.PictureBox O7;
+        private System.Windows.Forms.PictureBox O6;
+        private System.Windows.Forms.PictureBox O5;
+        private System.Windows.Forms.PictureBox O14;
+        private System.Windows.Forms.PictureBox O13;
+        private System.Windows.Forms.PictureBox O12;
+        private System.Windows.Forms.PictureBox O11;
+        private System.Windows.Forms.PictureBox O4;
+        private System.Windows.Forms.PictureBox O3;
+        private System.Windows.Forms.PictureBox O10;
+        private System.Windows.Forms.PictureBox O9;
+        private System.Windows.Forms.PictureBox O2;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lblProduct;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox E5;
-        private System.Windows.Forms.PictureBox E9;
-        private System.Windows.Forms.PictureBox E4;
-        private System.Windows.Forms.PictureBox E8;
-        private System.Windows.Forms.PictureBox E3;
-        private System.Windows.Forms.PictureBox E7;
-        private System.Windows.Forms.PictureBox E2;
-        private System.Windows.Forms.PictureBox E6;
-        private System.Windows.Forms.PictureBox E1;
-        private System.Windows.Forms.PictureBox OF1;
-        private System.Windows.Forms.PictureBox OFO8;
-        private System.Windows.Forms.PictureBox OFO7;
-        private System.Windows.Forms.PictureBox OFO6;
-        private System.Windows.Forms.PictureBox OFO5;
-        private System.Windows.Forms.PictureBox OFO4;
-        private System.Windows.Forms.PictureBox OFO3;
-        private System.Windows.Forms.PictureBox OFO2;
-        private System.Windows.Forms.PictureBox OFO1;
-        private System.Windows.Forms.PictureBox OF4;
-        private System.Windows.Forms.PictureBox OF3;
-        private System.Windows.Forms.PictureBox OF2;
-        private System.Windows.Forms.PictureBox EO12;
-        private System.Windows.Forms.PictureBox EO11;
-        private System.Windows.Forms.PictureBox EO14;
-        private System.Windows.Forms.PictureBox EO13;
-        private System.Windows.Forms.PictureBox EO16;
-        private System.Windows.Forms.PictureBox EO15;
-        private System.Windows.Forms.PictureBox EO18;
-        private System.Windows.Forms.PictureBox EO17;
-        private System.Windows.Forms.PictureBox WO8;
-        private System.Windows.Forms.PictureBox WO7;
-        private System.Windows.Forms.PictureBox WO10;
-        private System.Windows.Forms.PictureBox WO9;
-        private System.Windows.Forms.PictureBox WO12;
-        private System.Windows.Forms.PictureBox WO11;
-        private System.Windows.Forms.PictureBox EO2;
-        private System.Windows.Forms.PictureBox EO1;
-        private System.Windows.Forms.PictureBox EO4;
-        private System.Windows.Forms.PictureBox EO3;
-        private System.Windows.Forms.PictureBox EO6;
-        private System.Windows.Forms.PictureBox EO5;
-        private System.Windows.Forms.PictureBox EO8;
-        private System.Windows.Forms.PictureBox EO7;
-        private System.Windows.Forms.PictureBox EO10;
-        private System.Windows.Forms.PictureBox EO9;
-        private System.Windows.Forms.PictureBox WO2;
-        private System.Windows.Forms.PictureBox WO1;
-        private System.Windows.Forms.PictureBox WO4;
-        private System.Windows.Forms.PictureBox WO3;
-        private System.Windows.Forms.PictureBox WO6;
-        private System.Windows.Forms.PictureBox WO5;
-        private System.Windows.Forms.PictureBox OFO10;
-        private System.Windows.Forms.PictureBox OFO9;
-        private System.Windows.Forms.PictureBox OF5;
-        private System.Windows.Forms.PictureBox W3;
-        private System.Windows.Forms.PictureBox W4;
-        private System.Windows.Forms.PictureBox W5;
-        private System.Windows.Forms.PictureBox W6;
-        private System.Windows.Forms.PictureBox W1;
-        private System.Windows.Forms.PictureBox W2;
+        private System.Windows.Forms.Panel panel8;
     }
 }
 

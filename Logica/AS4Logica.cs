@@ -41,7 +41,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT CASE WHEN COUNT( DMRID) > 7 THEN 'YES' ELSE 'NO' END AS SUBASSY,"+
+                string sSql = "SELECT CASE WHEN COUNT( DMRID) > 7 THEN 'Si' ELSE 'No' END AS SUBASSY,"+
                         "COUNT(DMRID) AS COMPONENTS  "+
                         "FROM KBM400SQL.PACKDETAIL " +
                         "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +

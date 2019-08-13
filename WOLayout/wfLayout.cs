@@ -13,14 +13,14 @@ namespace WOLayout
 {
     public partial class wfLayout : Form
     {
-        private bool _bNumber = false;
-        private double _dAssyTime; 
+        private string _lsUser = string.Empty;
+        private double _dAssyTime;  
         private double _dTackIdeal;
         private double _dTackTime;
-        private int _iMaxTable;     //15
-        private int _iMesaEns;      //16
-        private int _iMesaWrap;     //17
-        private int _iEstSub;       //18
+        private int _iMaxTable;     
+        private int _iMesaEns;     
+        private int _iMesaWrap;    
+        private int _iEstSub;       
         private int _iSurtidor;
         private int _iInspSell;
         private int _iSellador;
@@ -48,8 +48,12 @@ namespace WOLayout
             _WindowStateAnt = WindowState;
         }
 
+        #region regInicio
         private void wfLayout_Load(object sender, EventArgs e)
         {
+            _lsUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            _lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
+
             WindowState = FormWindowState.Maximized;
 
             Inicio();
@@ -60,9 +64,8 @@ namespace WOLayout
 
         private void Inicio()
         {
-            string sUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            sUser = sUser.Substring(sUser.IndexOf("\\") + 1).ToUpper();
-            tssUserName.Text = sUser;
+
+            tssUserName.Text = _lsUser;
             tssVersion.Text = "V 1.0.0.1";
 
             txtWO.Clear();
@@ -124,20 +127,22 @@ namespace WOLayout
                 _dTape = decimal.Parse(_dtConf.Rows[0][25].ToString());
             
             txtWO.Focus();
-            CargarColumnas();
+            
             LimpiarLayout();
         }
-
 
         private void wfLayout_Activated(object sender, EventArgs e)
         {
             txtWO.Focus();
             txtWO.SelectAll();
         }
+        #endregion
+
+        #region regLayout
         private string getWrapDesc(string _asWrap)
         {
             string sWrapDesc = string.Empty;
-            if (_asWrap == "1") sWrapDesc = "Envelope";
+            if (_asWrap == "1") sWrapDesc = "Sobre";
             if (_asWrap == "2") sWrapDesc = "Vertical";
             if (_asWrap == "3") sWrapDesc = "Horizontal";
             if (_asWrap == "4") sWrapDesc = "Detroit";
@@ -155,6 +160,11 @@ namespace WOLayout
             if (_asWrap == "8") dWrapTime = (double)_dTape;
 
             return dWrapTime;
+        }
+
+        private void txtWO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
         private void txtWO_KeyDown(object sender, KeyEventArgs e)
@@ -190,7 +200,7 @@ namespace WOLayout
                     string sItem = dt.Rows[0][0].ToString();
                     string sName = dt.Rows[0][1].ToString();
                     AS4.Item = sItem;
-                    lblProduct.Text = sItem + "    " + sName.ToUpper();
+                    lblProduct.Text = sItem + " - " + sName.ToUpper();
 
                     DataTable dt2 = AS4Logica.ComponentsLayer(AS4);
                     dgwItem.DataSource = null;
@@ -213,7 +223,8 @@ namespace WOLayout
                             sLevel2 = dt2.Rows[2][0].ToString();
                             sWrap2 = dt2.Rows[2][1].ToString();
                         }
-
+                        string sLevelM = string.Empty;
+                        string sLevelS = string.Empty;
                         string sWrapMain = string.Empty;
                         string sWrapSub = string.Empty;
                         string sWCodeM = string.Empty;
@@ -225,10 +236,12 @@ namespace WOLayout
                         {
                             sWrapMain = getWrapDesc(sWrap1);
                             dWrapTime = getWrapTime(sWrap1);
+                            sLevelM = sLevel1;
                             if (!string.IsNullOrEmpty(sLevel2))
                             {
                                 sWrapSub = getWrapDesc(sWrap2);
                                 dWrapTime2 = getWrapTime(sWrap2);
+                                sLevelS = sLevel2;
                             }
                             sWCodeM = sWrap1;
                             sWCodeS = sWrap2;
@@ -237,10 +250,10 @@ namespace WOLayout
                         {
                             sWrapMain = getWrapDesc(sWrap2);
                             dWrapTime = getWrapTime(sWrap2);
-
+                            sLevelM = sLevel2;
                             sWrapSub = getWrapDesc(sWrap1);
                             dWrapTime2 = getWrapTime(sWrap1);
-
+                            sLevelS = sLevel1;
                             sWCodeM = sWrap2;
                             sWCodeS = sWrap1;
                         }
@@ -284,7 +297,7 @@ namespace WOLayout
                             iMesas = iOut + iBasin + iPiggy;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iMaxTable);
                             iOper = iMesas;
-                            dtN.Rows.Add("Assy", "OutFolder/Basin", iMesas, iOper);
+                            dtN.Rows.Add("Out", "OutFolder/Basin", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -295,7 +308,7 @@ namespace WOLayout
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
                             iOper = iMesas * _iEstSub;
-                            dtN.Rows.Add("Assy", "Sub-Assy", iMesas, iOper);
+                            dtN.Rows.Add("Sub-Ensamble", "Sub-Ensambles", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -304,7 +317,7 @@ namespace WOLayout
 
                             iMesas = (int)Math.Ceiling((decimal)iMain / (decimal)_iMaxTable);
                             iOper = iMesas;
-                            dtN.Rows.Add("Assy", "Conveyor Assy", iMesas, iOper);
+                            dtN.Rows.Add("Ensamble", "Ensamble Sobre Conveyor", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -328,7 +341,7 @@ namespace WOLayout
 
                             iMesas = 0;
                             iOper = 0;
-                            if (sLevel1 == "W") /******Validar con Ingenieria******/
+                            if (sLevelS == "W") /******Validar con Ingenieria******/
                             {
                                 dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
                                 iMesas = (int)dW;
@@ -346,10 +359,10 @@ namespace WOLayout
                             int wrap2m = iMesas;
                             int wrap2o = iOper;
 
-                            dtN.Rows.Add("Other", "Supplier", 0, _iSurtidor);
-                            dtN.Rows.Add("Other", "Sealer Inspection", 0, _iInspSell);
-                            dtN.Rows.Add("Other", "Sealer", 0, _iSellador);
-                            dtN.Rows.Add("Other", "Inspection 100%", 0, _iInspeccion);
+                            dtN.Rows.Add("Otros", "Surtidor", 0, _iSurtidor);
+                            dtN.Rows.Add("Otros", "Inspección Selladora", 0, _iInspSell);
+                            dtN.Rows.Add("Otros", "Selladora", 0, _iSellador);
+                            dtN.Rows.Add("Otros", "Inspección 100%", 0, _iInspeccion);
                             iTotalOps += iO;
 
                             lblMesas.Text = iTotalMes.ToString();
@@ -360,23 +373,21 @@ namespace WOLayout
                             LimpiarLayout();
                             if (wrap1m + wrap2m > 6)
                             {
-                                //llenar mesas de wrap al tope
+                                wrap2m = 6 - wrap1m;
                                 MessageBox.Show("Capacidad de Mesas Excedida en Estación de Empaque", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
+
+
+                            if (outfolderm + subassym + assym > 8)
+                                MessageBox.Show("Capacidad de Operadores Excedida", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             else
                             {
+                                llenarmesa(outfolderm, outfoldero, true);
+                                llenarmesa(subassym, subassyo, true);
+                                llenarmesa(assym, assyo, true);
                                 llenarmesa(wrap1m, wrap1o, false);
                                 llenarmesa(wrap2m, wrap2o, false);
-                            }
 
-
-                            if (subassym + assym > 9 || assym > 5)
-                                MessageBox.Show("Capacidad de Mesas Excedida en Estación de Empaque", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            else
-                            {
-                                llenarof(outfolderm, outfoldero);
-                                llenarensamble(assym, assyo, subassym, subassyo);
-                                
                             }
                         }
 
@@ -393,62 +404,97 @@ namespace WOLayout
             }
         }
 
-        
+        #endregion
+
+        #region regGrid
+        private void dgwTables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            int iRow = e.RowIndex;
+            string sValue = e.Value.ToString();
+
+
+            sValue = dgwTables[0, e.RowIndex].Value.ToString();
+            if (sValue == "Sub-Ensamble")
+            {
+                e.CellStyle.BackColor = Color.Gold;
+            }
+            if (sValue == "Ensamble")
+            {
+                e.CellStyle.BackColor = Color.SkyBlue;
+                //e.CellStyle.ForeColor = Color.White;
+            }
+            if (sValue == "Wrap")
+            {
+                e.CellStyle.BackColor = Color.MediumPurple;
+            }
+            if (sValue == "Out")
+            {
+                e.CellStyle.BackColor = Color.LightGreen;
+            }
+            if (sValue == "Otros")
+            {
+                e.CellStyle.BackColor = Color.WhiteSmoke;
+                e.CellStyle.ForeColor = Color.MediumBlue;
+            }
+        }
 
         private void CargarColumnas()
         {
             if (dgwWO.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("WO");
-                dtNew.Columns.Add("PRODUCT", typeof(string));
-                dtNew.Columns.Add("NAME", typeof(string));
-                dtNew.Columns.Add("BOXES", typeof(int));
+                dtNew.Columns.Add("PRODUCTO", typeof(string));
+                dtNew.Columns.Add("NOMBRE", typeof(string));
+                dtNew.Columns.Add("CAJAS", typeof(int));
                 dtNew.Columns.Add("KITS", typeof(int));
-                dtNew.Columns.Add("TOTAL KITS", typeof(int));
-                dtNew.Columns.Add("DURATION", typeof(decimal));
+                dtNew.Columns.Add("TOTAL EN KITS", typeof(int));
+                dtNew.Columns.Add("W.O. DURACION (min)", typeof(decimal));
                 dgwWO.DataSource = dtNew;
             }
             dgwWO.Columns[0].Visible = false;
             dgwWO.Columns[1].Visible = false;
-           
+            dgwWO.Columns[2].Width = ColumnWith(dgwWO, 15);
+            dgwWO.Columns[3].Width = ColumnWith(dgwWO, 15);
+            dgwWO.Columns[4].Width = ColumnWith(dgwWO, 30);
+            dgwWO.Columns[5].Width = ColumnWith(dgwWO, 45);
 
             if (dgwItem.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Item");
-                dtNew.Columns.Add("COMPONENTS", typeof(int));
-                dtNew.Columns.Add("PRE-ASSY", typeof(string));
+                dtNew.Columns.Add("COMPONENTES", typeof(int));
+                dtNew.Columns.Add("PRE-ENSAMBLE", typeof(string));
                 dtNew.Columns.Add("wrap_code", typeof(string));
-                dtNew.Columns.Add("WRAP MAIN", typeof(string));
-                dtNew.Columns.Add("DURATION", typeof(string));
+                dtNew.Columns.Add("WRAP PRINCIPAL", typeof(string));
+                dtNew.Columns.Add("WRAP DURACION (seg)", typeof(string));
                 dtNew.Columns.Add("wrap_code2", typeof(string));
                 dtNew.Columns.Add("WRAP SUB", typeof(string));
-                dtNew.Columns.Add("DURATION 2", typeof(string));
+                dtNew.Columns.Add("WRAP SUB DURACION (seg)", typeof(string));
                 dgwItem.DataSource = dtNew;
             }
 
             dgwItem.Columns[0].Width = ColumnWith(dgwItem, 20);
-            dgwItem.Columns[1].Width = ColumnWith(dgwItem, 15);
+            dgwItem.Columns[1].Width = ColumnWith(dgwItem, 20);
             dgwItem.Columns[2].Visible = false;
             dgwItem.Columns[3].Width = ColumnWith(dgwItem, 15);
-            dgwItem.Columns[4].Width = ColumnWith(dgwItem, 17);
+            dgwItem.Columns[4].Width = ColumnWith(dgwItem, 16);
             dgwItem.Columns[5].Visible = false;
             dgwItem.Columns[6].Width = ColumnWith(dgwItem, 15);
-            dgwItem.Columns[7].Width = ColumnWith(dgwItem, 20);
+            dgwItem.Columns[7].Width = ColumnWith(dgwItem, 16);
 
             if (dgwTables.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Tables");
-                dtNew.Columns.Add("TYPE", typeof(string));
-                dtNew.Columns.Add("DESCRIPTION", typeof(string));
-                dtNew.Columns.Add("TABLES", typeof(int));
+                dtNew.Columns.Add("AREA", typeof(string));
+                dtNew.Columns.Add("DESCRIPCION", typeof(string));
+                dtNew.Columns.Add("MESAS", typeof(int));
                 dtNew.Columns.Add("H.C.", typeof(int));
                 dgwTables.DataSource = dtNew;
             }
 
-            dgwTables.Columns[0].Width = ColumnWith(dgwTables, 18);
-            dgwTables.Columns[1].Width = ColumnWith(dgwTables, 45);
-            dgwTables.Columns[2].Width = ColumnWith(dgwTables, 20);
-            dgwTables.Columns[3].Width = ColumnWith(dgwTables, 20);
+            dgwTables.Columns[0].Width = ColumnWith(dgwTables, 25);
+            dgwTables.Columns[1].Width = ColumnWith(dgwTables, 48);
+            dgwTables.Columns[2].Width = ColumnWith(dgwTables, 15);
+            dgwTables.Columns[3].Width = ColumnWith(dgwTables, 15);
             dgwTables.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwTables.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwTables.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -465,6 +511,8 @@ namespace WOLayout
             return Convert.ToInt32(dTam);
         }
 
+        #endregion
+
         #region regBottons
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -479,15 +527,25 @@ namespace WOLayout
         
         private void btnConfig_Click(object sender, EventArgs e)
         {
-            wfConfig Config = new wfConfig();
-            Config.Show();
+            if (ValidaAcceso("CONF"))
+            {
+                wfConfig Config = new wfConfig();
+                Config.Show();
+            }
+            else
+                MessageBox.Show("Usuario sin Acceso a la Configuración", "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private bool ValidaAcceso(string _asProcess)
+        {
+            UsuarioLogica user = new UsuarioLogica();
+            user.Usuario = _lsUser;
+            if (UsuarioLogica.AccesoConfig(user))
+                return true;
+
+            return false;
         }
         #endregion
-
-        private void txtWO_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
+      
         #region regRes
         private void wfLayout_Resize(object sender, EventArgs e)
         {
@@ -496,7 +554,7 @@ namespace WOLayout
                 _WindowStateAnt = WindowState;
                 ResizeControl(panel1, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(panel2, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
-                ResizeControl(PANEL3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
+                ResizeControl(panel3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(groupBox3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(dgwTables, 1, ref _iWidthAnt, ref _iHeightAnt, 1);
             }
@@ -530,9 +588,10 @@ namespace WOLayout
         }
         #endregion
 
+        #region regDraw
         public PictureBox[] getmesas()
         {
-            PictureBox[] mesas = new PictureBox[20];
+            PictureBox[] mesas = new PictureBox[14];
             mesas[0] = E1;
             mesas[1] = E2;
             mesas[2] = E3;
@@ -541,66 +600,47 @@ namespace WOLayout
             mesas[5] = E6;
             mesas[6] = E7;
             mesas[7] = E8;
-            mesas[8] = E9;
-            mesas[9] = W1;
-            mesas[10] = W2;
-            mesas[11] = W3;
-            mesas[12] = W4;
-            mesas[13] = W5;
-            mesas[14] = W6;
-            mesas[15] = OF1;
-            mesas[16] = OF2;
-            mesas[17] = OF3;
-            mesas[18] = OF4;
-            mesas[19] = OF5;
-           
+            mesas[8] = W1;
+            mesas[9] = W2;
+            mesas[10] = W3;
+            mesas[11] = W4;
+            mesas[12] = W5;
+            mesas[13] = W6;
 
             return mesas;
         }
 
         public PictureBox[] getoperadores()
         {
-            PictureBox[] operadores = new PictureBox[40];
-            operadores[0] = EO1;
-            operadores[1] = EO2;
-            operadores[2] = EO3;
-            operadores[3] = EO4;
-            operadores[4] = EO5;
-            operadores[5] = EO6;
-            operadores[6] = EO7;
-            operadores[7] = EO8;
-            operadores[8] = EO9;
-            operadores[9] = EO10;
-            operadores[10] =EO11;
-            operadores[11] = EO12;
-            operadores[12] = EO13;
-            operadores[13] = EO14;
-            operadores[14] = EO15;
-            operadores[15] = EO16;
-            operadores[16] = EO17;
-            operadores[17] = EO18;
-            operadores[18] = WO1;
-            operadores[19] = WO2;
-            operadores[20] = WO3;
-            operadores[21] = WO4;
-            operadores[22] = WO5;
-            operadores[23] = WO6;
-            operadores[24] = WO7;
-            operadores[25] = WO8;
-            operadores[26] = WO9;
-            operadores[27] = WO10;
-            operadores[28] = WO11;
-            operadores[29] = WO12;
-            operadores[30] = OFO1;
-            operadores[31] = OFO2;
-            operadores[32] = OFO3;
-            operadores[33] = OFO4;
-            operadores[34] = OFO5;
-            operadores[35] = OFO6;
-            operadores[36] = OFO7;
-            operadores[37] = OFO8;
-            operadores[38] = OFO9;
-            operadores[39] = OFO10;
+            PictureBox[] operadores = new PictureBox[28];
+            operadores[0] = O1;
+            operadores[1] = O2;
+            operadores[2] = O3;
+            operadores[3] = O4;
+            operadores[4] = O5;
+            operadores[5] = O6;
+            operadores[6] = O7;
+            operadores[7] = O8;
+            operadores[8] = O9;
+            operadores[9] = O10;
+            operadores[10] = O11;
+            operadores[11] = O12;
+            operadores[12] = O13;
+            operadores[13] = O14;
+            operadores[14] = O15;
+            operadores[15] = O16;
+            operadores[16] = O17;
+            operadores[17] = O18;
+            operadores[18] = O19;
+            operadores[19] = O20;
+            operadores[20] = O21;
+            operadores[21] = O22;
+            operadores[22] = O23;
+            operadores[23] = O24;
+            operadores[24] = O25;
+            operadores[25] = O26;
+            operadores[26] = O27;
+            operadores[27] = O28;
 
             return operadores;
         }
@@ -610,12 +650,12 @@ namespace WOLayout
             PictureBox[] mesas = getmesas();
             PictureBox[] operadores = getoperadores();
 
-            for (int i = 0; i <= 19; i++)
+            for (int i = 0; i <= 13; i++)
             {
                 mesas[i].Visible = false;
             }
 
-            for (int i = 0; i <= 39; i++)
+            for (int i = 0; i <= 27; i++)
             {
                 operadores[i].Visible = false;
             }
@@ -632,7 +672,7 @@ namespace WOLayout
             if (ensamable)
                 posicionlibre = 0;
             else
-                posicionlibre = 9;
+                posicionlibre = 8;
 
             do
             {
@@ -655,92 +695,7 @@ namespace WOLayout
 
         }
 
-       public void llenarensamble(int emesas, int eoperadores,  int smesas, int soperadores)
-        {
-            PictureBox[] mesas = getmesas();
-            PictureBox[] operadores = getoperadores();
-            //si cabe de un lado
-            if (emesas + smesas <= 5)
-            {
-                for (int i = 0; i < smesas; i++)
-                {
-                    mesas[i].Image = Properties.Resources.sub;
-                    mesas[i].Visible = true;
-                    operadores[i*2].Visible = true;
-                    if (soperadores == smesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
+        #endregion
 
-                for (int i = smesas; i < smesas + emesas; i++)
-                {
-                    mesas[i].Image = Properties.Resources.ensamble;
-                    mesas[i].Visible = true;
-                    operadores[i*2].Visible = true;
-                    if (eoperadores == emesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
-            }
-            else
-            // si no cabe de un lado
-            {//LADO A
-                for (int i = 4; i > 4-emesas; i--)
-                {
-                    mesas[i].Image = Properties.Resources.ensamble;
-                    mesas[i].Visible = true;
-                    operadores[i*2].Visible = true;
-                    if (eoperadores == emesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
-                for (int i = 4-emesas; i >= 0; i--)
-                {
-                    mesas[i].Image = Properties.Resources.sub;
-                    mesas[i].Visible = true;
-                    operadores[i*2].Visible = true;
-                    if (soperadores == smesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
-
-                //LADO B
-                for (int i = 5; i < 5 + smesas -(5-emesas); i++)
-                {
-                    mesas[i].Image = Properties.Resources.sub;
-                    mesas[i].Visible = true;
-                    operadores[i * 2].Visible = true;
-                    if (soperadores == smesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
-
-            }
-
-        }
-        
-        public void llenarof(int nummesas, int nummoperadores)
-        {
-            PictureBox[] mesas = getmesas();
-            PictureBox[] operadores = getoperadores();
-
-            for (int i = 15; i < 15 + nummesas; i++)
-            {
-                mesas[i].Visible = true;
-                operadores[i * 2].Visible = true;
-                if (nummoperadores == nummesas * 2)
-                    operadores[(i * 2) + 1].Visible = true;
-            }
-
-        }
-
-        private void dgwTables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            int iRow = e.RowIndex;
-            if ((iRow % 2) == 0)
-                e.CellStyle.BackColor = Color.LightSkyBlue;
-            else
-                e.CellStyle.BackColor = Color.White;
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
