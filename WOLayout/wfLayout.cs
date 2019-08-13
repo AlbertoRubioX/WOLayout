@@ -14,13 +14,13 @@ namespace WOLayout
     public partial class wfLayout : Form
     {
         private string _lsUser = string.Empty;
-        private double _dAssyTime;  //14
+        private double _dAssyTime;  
         private double _dTackIdeal;
         private double _dTackTime;
-        private int _iMaxTable;     //15
-        private int _iMesaEns;      //16
-        private int _iMesaWrap;     //17
-        private int _iEstSub;       //18
+        private int _iMaxTable;     
+        private int _iMesaEns;     
+        private int _iMesaWrap;    
+        private int _iEstSub;       
         private int _iSurtidor;
         private int _iInspSell;
         private int _iSellador;
@@ -48,6 +48,7 @@ namespace WOLayout
             _WindowStateAnt = WindowState;
         }
 
+        #region regInicio
         private void wfLayout_Load(object sender, EventArgs e)
         {
             _lsUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
@@ -130,12 +131,14 @@ namespace WOLayout
             LimpiarLayout();
         }
 
-
         private void wfLayout_Activated(object sender, EventArgs e)
         {
             txtWO.Focus();
             txtWO.SelectAll();
         }
+        #endregion
+
+        #region regLayout
         private string getWrapDesc(string _asWrap)
         {
             string sWrapDesc = string.Empty;
@@ -220,7 +223,8 @@ namespace WOLayout
                             sLevel2 = dt2.Rows[2][0].ToString();
                             sWrap2 = dt2.Rows[2][1].ToString();
                         }
-
+                        string sLevelM = string.Empty;
+                        string sLevelS = string.Empty;
                         string sWrapMain = string.Empty;
                         string sWrapSub = string.Empty;
                         string sWCodeM = string.Empty;
@@ -232,10 +236,12 @@ namespace WOLayout
                         {
                             sWrapMain = getWrapDesc(sWrap1);
                             dWrapTime = getWrapTime(sWrap1);
+                            sLevelM = sLevel1;
                             if (!string.IsNullOrEmpty(sLevel2))
                             {
                                 sWrapSub = getWrapDesc(sWrap2);
                                 dWrapTime2 = getWrapTime(sWrap2);
+                                sLevelS = sLevel2;
                             }
                             sWCodeM = sWrap1;
                             sWCodeS = sWrap2;
@@ -244,10 +250,10 @@ namespace WOLayout
                         {
                             sWrapMain = getWrapDesc(sWrap2);
                             dWrapTime = getWrapTime(sWrap2);
-
+                            sLevelM = sLevel2;
                             sWrapSub = getWrapDesc(sWrap1);
                             dWrapTime2 = getWrapTime(sWrap1);
-
+                            sLevelS = sLevel1;
                             sWCodeM = sWrap2;
                             sWCodeS = sWrap1;
                         }
@@ -335,7 +341,7 @@ namespace WOLayout
 
                             iMesas = 0;
                             iOper = 0;
-                            if (sLevel1 == "W") /******Validar con Ingenieria******/
+                            if (sLevelS == "W") /******Validar con Ingenieria******/
                             {
                                 dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
                                 iMesas = (int)dW;
@@ -397,6 +403,8 @@ namespace WOLayout
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        #endregion
 
         #region regGrid
         private void dgwTables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -689,6 +697,5 @@ namespace WOLayout
 
         #endregion
 
-       
     }
 }
