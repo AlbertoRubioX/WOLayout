@@ -24,8 +24,8 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT Product_Name as PRODUCT,Product_Description AS NAME,Original_Work_Order_Quantity AS BOXES,Product_Kits_per_Case AS KITS,"+
-                "In_Kits_Work_Order_Quantity TOTAL_KITS, ((20 * In_Kits_Work_Order_Quantity) / 60) as DURATION "+
+                string sSql = "SELECT Product_Name as PRODUCT,Product_Description AS NAME,Original_Work_Order_Quantity AS CAJAS,Product_Kits_per_Case AS KITS,"+
+                "In_Kits_Work_Order_Quantity [TOTAL EN KITS], ((20 * In_Kits_Work_Order_Quantity) / 60) as [W.O. DURACION (min)] "+
                 "FROM Work_Order_Details where Company_Number = 686 and Work_Order_Number = '"+set.WorkOrder+"'";
                 datos = AccesoDatos.ConsultarSetup(sSql);
             }

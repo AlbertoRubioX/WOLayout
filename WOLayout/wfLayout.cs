@@ -13,7 +13,7 @@ namespace WOLayout
 {
     public partial class wfLayout : Form
     {
-        private bool _bNumber = false;
+        private string _lsUser = string.Empty;
         private double _dAssyTime;  //14
         private double _dTackIdeal;
         private double _dTackTime;
@@ -50,6 +50,9 @@ namespace WOLayout
 
         private void wfLayout_Load(object sender, EventArgs e)
         {
+            _lsUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            _lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
+
             WindowState = FormWindowState.Maximized;
 
             Inicio();
@@ -60,9 +63,8 @@ namespace WOLayout
 
         private void Inicio()
         {
-            string sUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            sUser = sUser.Substring(sUser.IndexOf("\\") + 1).ToUpper();
-            tssUserName.Text = sUser;
+
+            tssUserName.Text = _lsUser;
             tssVersion.Text = "V 1.0.0.1";
 
             txtWO.Clear();
@@ -124,7 +126,7 @@ namespace WOLayout
                 _dTape = decimal.Parse(_dtConf.Rows[0][25].ToString());
             
             txtWO.Focus();
-            CargarColumnas();
+            
             LimpiarLayout();
         }
 
@@ -137,7 +139,7 @@ namespace WOLayout
         private string getWrapDesc(string _asWrap)
         {
             string sWrapDesc = string.Empty;
-            if (_asWrap == "1") sWrapDesc = "Envelope";
+            if (_asWrap == "1") sWrapDesc = "Sobre";
             if (_asWrap == "2") sWrapDesc = "Vertical";
             if (_asWrap == "3") sWrapDesc = "Horizontal";
             if (_asWrap == "4") sWrapDesc = "Detroit";
@@ -155,6 +157,11 @@ namespace WOLayout
             if (_asWrap == "8") dWrapTime = (double)_dTape;
 
             return dWrapTime;
+        }
+
+        private void txtWO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
         private void txtWO_KeyDown(object sender, KeyEventArgs e)
@@ -190,7 +197,7 @@ namespace WOLayout
                     string sItem = dt.Rows[0][0].ToString();
                     string sName = dt.Rows[0][1].ToString();
                     AS4.Item = sItem;
-                    lblProduct.Text = sItem + "    " + sName.ToUpper();
+                    lblProduct.Text = sItem + " - " + sName.ToUpper();
 
                     DataTable dt2 = AS4Logica.ComponentsLayer(AS4);
                     dgwItem.DataSource = null;
@@ -284,7 +291,7 @@ namespace WOLayout
                             iMesas = iOut + iBasin + iPiggy;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iMaxTable);
                             iOper = iMesas;
-                            dtN.Rows.Add("Assy", "OutFolder/Basin", iMesas, iOper);
+                            dtN.Rows.Add("Out", "OutFolder/Basin", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -295,7 +302,7 @@ namespace WOLayout
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
                             iOper = iMesas * _iEstSub;
-                            dtN.Rows.Add("Assy", "Sub-Assy", iMesas, iOper);
+                            dtN.Rows.Add("Sub-Ensamble", "Sub-Ensambles", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -304,7 +311,7 @@ namespace WOLayout
 
                             iMesas = (int)Math.Ceiling((decimal)iMain / (decimal)_iMaxTable);
                             iOper = iMesas;
-                            dtN.Rows.Add("Assy", "Conveyor Assy", iMesas, iOper);
+                            dtN.Rows.Add("Ensamble", "Ensamble Sobre Conveyor", iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -346,10 +353,10 @@ namespace WOLayout
                             int wrap2m = iMesas;
                             int wrap2o = iOper;
 
-                            dtN.Rows.Add("Other", "Supplier", 0, _iSurtidor);
-                            dtN.Rows.Add("Other", "Sealer Inspection", 0, _iInspSell);
-                            dtN.Rows.Add("Other", "Sealer", 0, _iSellador);
-                            dtN.Rows.Add("Other", "Inspection 100%", 0, _iInspeccion);
+                            dtN.Rows.Add("Otros", "Surtidor", 0, _iSurtidor);
+                            dtN.Rows.Add("Otros", "Inspección Selladora", 0, _iInspSell);
+                            dtN.Rows.Add("Otros", "Selladora", 0, _iSellador);
+                            dtN.Rows.Add("Otros", "Inspección 100%", 0, _iInspeccion);
                             iTotalOps += iO;
 
                             lblMesas.Text = iTotalMes.ToString();
@@ -391,62 +398,95 @@ namespace WOLayout
             }
         }
 
-        
+        #region regGrid
+        private void dgwTables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            int iRow = e.RowIndex;
+            string sValue = e.Value.ToString();
+
+
+            sValue = dgwTables[0, e.RowIndex].Value.ToString();
+            if (sValue == "Sub-Ensamble")
+            {
+                e.CellStyle.BackColor = Color.Gold;
+            }
+            if (sValue == "Ensamble")
+            {
+                e.CellStyle.BackColor = Color.SkyBlue;
+                //e.CellStyle.ForeColor = Color.White;
+            }
+            if (sValue == "Wrap")
+            {
+                e.CellStyle.BackColor = Color.MediumPurple;
+            }
+            if (sValue == "Out")
+            {
+                e.CellStyle.BackColor = Color.LightGreen;
+            }
+            if (sValue == "Otros")
+            {
+                e.CellStyle.BackColor = Color.WhiteSmoke;
+                e.CellStyle.ForeColor = Color.MediumBlue;
+            }
+        }
 
         private void CargarColumnas()
         {
             if (dgwWO.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("WO");
-                dtNew.Columns.Add("PRODUCT", typeof(string));
-                dtNew.Columns.Add("NAME", typeof(string));
-                dtNew.Columns.Add("BOXES", typeof(int));
+                dtNew.Columns.Add("PRODUCTO", typeof(string));
+                dtNew.Columns.Add("NOMBRE", typeof(string));
+                dtNew.Columns.Add("CAJAS", typeof(int));
                 dtNew.Columns.Add("KITS", typeof(int));
-                dtNew.Columns.Add("TOTAL KITS", typeof(int));
-                dtNew.Columns.Add("DURATION", typeof(decimal));
+                dtNew.Columns.Add("TOTAL EN KITS", typeof(int));
+                dtNew.Columns.Add("W.O. DURACION (min)", typeof(decimal));
                 dgwWO.DataSource = dtNew;
             }
             dgwWO.Columns[0].Visible = false;
             dgwWO.Columns[1].Visible = false;
-           
+            dgwWO.Columns[2].Width = ColumnWith(dgwWO, 15);
+            dgwWO.Columns[3].Width = ColumnWith(dgwWO, 15);
+            dgwWO.Columns[4].Width = ColumnWith(dgwWO, 30);
+            dgwWO.Columns[5].Width = ColumnWith(dgwWO, 45);
 
             if (dgwItem.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Item");
-                dtNew.Columns.Add("COMPONENTS", typeof(int));
-                dtNew.Columns.Add("PRE-ASSY", typeof(string));
+                dtNew.Columns.Add("COMPONENTES", typeof(int));
+                dtNew.Columns.Add("PRE-ENSAMBLE", typeof(string));
                 dtNew.Columns.Add("wrap_code", typeof(string));
-                dtNew.Columns.Add("WRAP MAIN", typeof(string));
-                dtNew.Columns.Add("DURATION", typeof(string));
+                dtNew.Columns.Add("WRAP PRINCIPAL", typeof(string));
+                dtNew.Columns.Add("WRAP DURACION (seg)", typeof(string));
                 dtNew.Columns.Add("wrap_code2", typeof(string));
                 dtNew.Columns.Add("WRAP SUB", typeof(string));
-                dtNew.Columns.Add("DURATION 2", typeof(string));
+                dtNew.Columns.Add("WRAP SUB DURACION (seg)", typeof(string));
                 dgwItem.DataSource = dtNew;
             }
 
             dgwItem.Columns[0].Width = ColumnWith(dgwItem, 20);
-            dgwItem.Columns[1].Width = ColumnWith(dgwItem, 15);
+            dgwItem.Columns[1].Width = ColumnWith(dgwItem, 20);
             dgwItem.Columns[2].Visible = false;
             dgwItem.Columns[3].Width = ColumnWith(dgwItem, 15);
-            dgwItem.Columns[4].Width = ColumnWith(dgwItem, 17);
+            dgwItem.Columns[4].Width = ColumnWith(dgwItem, 16);
             dgwItem.Columns[5].Visible = false;
             dgwItem.Columns[6].Width = ColumnWith(dgwItem, 15);
-            dgwItem.Columns[7].Width = ColumnWith(dgwItem, 20);
+            dgwItem.Columns[7].Width = ColumnWith(dgwItem, 16);
 
             if (dgwTables.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Tables");
-                dtNew.Columns.Add("TYPE", typeof(string));
-                dtNew.Columns.Add("DESCRIPTION", typeof(string));
-                dtNew.Columns.Add("TABLES", typeof(int));
+                dtNew.Columns.Add("AREA", typeof(string));
+                dtNew.Columns.Add("DESCRIPCION", typeof(string));
+                dtNew.Columns.Add("MESAS", typeof(int));
                 dtNew.Columns.Add("H.C.", typeof(int));
                 dgwTables.DataSource = dtNew;
             }
 
-            dgwTables.Columns[0].Width = ColumnWith(dgwTables, 18);
-            dgwTables.Columns[1].Width = ColumnWith(dgwTables, 45);
-            dgwTables.Columns[2].Width = ColumnWith(dgwTables, 20);
-            dgwTables.Columns[3].Width = ColumnWith(dgwTables, 20);
+            dgwTables.Columns[0].Width = ColumnWith(dgwTables, 25);
+            dgwTables.Columns[1].Width = ColumnWith(dgwTables, 48);
+            dgwTables.Columns[2].Width = ColumnWith(dgwTables, 15);
+            dgwTables.Columns[3].Width = ColumnWith(dgwTables, 15);
             dgwTables.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwTables.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwTables.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -463,6 +503,8 @@ namespace WOLayout
             return Convert.ToInt32(dTam);
         }
 
+        #endregion
+
         #region regBottons
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -477,15 +519,25 @@ namespace WOLayout
         
         private void btnConfig_Click(object sender, EventArgs e)
         {
-            wfConfig Config = new wfConfig();
-            Config.Show();
+            if (ValidaAcceso("CONF"))
+            {
+                wfConfig Config = new wfConfig();
+                Config.Show();
+            }
+            else
+                MessageBox.Show("Usuario sin Acceso a la Configuración", "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private bool ValidaAcceso(string _asProcess)
+        {
+            UsuarioLogica user = new UsuarioLogica();
+            user.Usuario = _lsUser;
+            if (UsuarioLogica.AccesoConfig(user))
+                return true;
+
+            return false;
         }
         #endregion
-
-        private void txtWO_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
+      
         #region regRes
         private void wfLayout_Resize(object sender, EventArgs e)
         {
@@ -528,6 +580,7 @@ namespace WOLayout
         }
         #endregion
 
+        #region regDraw
         public PictureBox[] getmesas()
         {
             PictureBox[] mesas = new PictureBox[14];
@@ -634,13 +687,8 @@ namespace WOLayout
 
         }
 
-        private void dgwTables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            int iRow = e.RowIndex;
-            if ((iRow % 2) == 0)
-                e.CellStyle.BackColor = Color.LightSkyBlue;
-            else
-                e.CellStyle.BackColor = Color.White;
-        }
+        #endregion
+
+       
     }
 }
