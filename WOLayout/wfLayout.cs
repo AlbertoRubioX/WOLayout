@@ -56,6 +56,9 @@ namespace WOLayout
 
             WindowState = FormWindowState.Maximized;
 
+            tssUserName.Text = _lsUser;
+            tssVersion.Text = "1.0.0.4";
+
             Inicio();
 
             txtWO.Text = "0000000";
@@ -64,10 +67,6 @@ namespace WOLayout
 
         private void Inicio()
         {
-
-            tssUserName.Text = _lsUser;
-            tssVersion.Text = "V 1.0.0.1";
-
             txtWO.Clear();
 
             lblProduct.Text = "";
@@ -125,9 +124,10 @@ namespace WOLayout
                 _dEnvelope = decimal.Parse(_dtConf.Rows[0][23].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][25].ToString()))
                 _dTape = decimal.Parse(_dtConf.Rows[0][25].ToString());
-            
+            string sVersion = _dtConf.Rows[0]["version"].ToString();
+
             txtWO.Focus();
-            
+
             LimpiarLayout();
         }
 
@@ -186,11 +186,13 @@ namespace WOLayout
 
                 AS4Logica AS4 = new AS4Logica();
                 AS4.WO = sValue;
-                //DataTable dt = AS4Logica.WorkOrder(AS4);
-
+                
                 SetupLogica set = new SetupLogica();
                 set.WorkOrder = sValue;
                 DataTable dt = SetupLogica.ConsultarWO(set);
+                if (dt.Rows.Count == 0)
+                    dt = AS4Logica.WorkOrder(AS4);
+                
                 if (dt.Rows.Count > 0)
                 {
                     lblProduct.Text = string.Empty;
@@ -333,6 +335,7 @@ namespace WOLayout
                                 iOper = (iMesas * 2);
 
                             dtN.Rows.Add("Wrap", "Wrap 1", iMesas, iOper);
+
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -341,7 +344,7 @@ namespace WOLayout
 
                             iMesas = 0;
                             iOper = 0;
-                            if (sLevelS == "W") /******Validar con Ingenieria******/
+                            if (sLevelS == "W")
                             {
                                 dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
                                 iMesas = (int)dW;
@@ -351,7 +354,6 @@ namespace WOLayout
                                     iOper = (iMesas * 2);
                                 dtN.Rows.Add("Wrap", "Wrap 2", iMesas, iOper);
                             }
-                            /****************************************************/
 
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
@@ -557,7 +559,12 @@ namespace WOLayout
                 ResizeControl(panel2, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(panel3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(groupBox3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
+                ResizeControl(groupBox4, 2, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(dgwTables, 1, ref _iWidthAnt, ref _iHeightAnt, 1);
+                int iW = groupBox4.Width;
+                int iX = iW - ptbLogo.Width - 5;
+                ptbLogo.Location = new Point(iX,ptbLogo.Location.Y);
+
             }
         }
 
@@ -791,9 +798,6 @@ namespace WOLayout
 
         #endregion
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
     }
 }

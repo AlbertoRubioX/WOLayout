@@ -19,13 +19,28 @@ namespace Logica
             try
             {
                 string sSql = "SELECT DISTINCT "+
-                "FMWOSUM.WOPN AS JOB,'' as NAME, FMWOSUM.WOQTY AS BOXES, " +
+                "FMWOSUM.WOPN AS JOB,'' as NAME, FMWOSUM.WOQTY AS CAJAS, " +
                 "FKITMSTR.IMSTCK AS KITS,  " +
-                "FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS TOTAL_KITS, " +
-                "ROUND(20*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS DURATION " +
+                @"FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS ""TOTAL EN KITS"", " +
+                @"ROUND(20*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS ""W.O. DURACION (min)"" " +
                 "FROM B20E386T.KBM400MFG.FMWOSUM FMWOSUM, B20E386T.KBM400MFG.FKITMSTR FKITMSTR " +
                 "WHERE FMWOSUM.WOPN = FKITMSTR.IMPN " +
                 "AND FMWOSUM.WOWONO = '"+con.WO+"'";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
+        public static DataTable TableDescrip(AS4Logica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "SELECT * FROM SYSIBM.COLUMNS WHERE TABLE_NAME = 'FMWOSUM'";
                 datos = AccesoDatos.ConsultarAS4(sSql);
             }
             catch (Exception ex)
