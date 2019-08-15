@@ -19,7 +19,7 @@ namespace Logica
             try
             {
                 string sSql = "SELECT DISTINCT "+
-                "FMWOSUM.WOPN AS JOB,'' as NAME, FMWOSUM.WOQTY AS CAJAS, " +
+                "FMWOSUM.WOPN AS PRODUCTO,'' as NAME, FMWOSUM.WOQTY AS CAJAS, " +
                 "FKITMSTR.IMSTCK AS KITS,  " +
                 @"FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS ""TOTAL EN KITS"", " +
                 @"ROUND(20*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS ""W.O. DURACION (min)"" " +
@@ -51,23 +51,45 @@ namespace Logica
             return datos;
         }
 
+        public static DataTable Components(AS4Logica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "SELECT CASE WHEN COUNT( DMRID) > 7 THEN 'Si' ELSE 'No' END AS SUBASSY," +
+                        "COUNT(DMRID) AS COMPONENTS  " +
+                        "FROM KBM400SQL.PACKDETAIL " +
+                        "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +
+                        "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +
+                        "WHERE DMRID = '" + con.Item + "') AND LEVEL_CODE > '' AND ( SUBSTR(NODE,1,2) != 'S0' AND SUBSTR(NODE,1,2) != 'B0' )";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
+
         public static DataTable ComponentsLayer(AS4Logica con)
         {
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT CASE WHEN COUNT( DMRID) > 7 THEN 'Si' ELSE 'No' END AS SUBASSY,"+
-                        "COUNT(DMRID) AS COMPONENTS  "+
+                string sSql = "SELECT 0,CASE WHEN COUNT( DMRID) > 7 THEN 'Si' ELSE 'No' END AS SUBASSY," +
+                        "COUNT(DMRID) AS COMPONENTS  " +
                         "FROM KBM400SQL.PACKDETAIL " +
                         "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +
                         "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +
-                        "WHERE DMRID = '" + con.Item + "') AND LEVEL_CODE > '' AND ( SUBSTR(NODE,1,2) != 'S0' AND SUBSTR(NODE,1,2) != 'B0' ) " +
+                        "WHERE DMRID = '" + con.Item + "') AND LEVEL_CODE > '' AND ( SUBSTR(NODE,1,2) != 'S0' AND SUBSTR(NODE,1,2) != 'B0' ) "+
                         "UNION "+
-                        "SELECT SUBSTR(LEVEL_CODE,1, 1) AS LEVEL, FOLD "+
+                        "SELECT 1,SUBSTR(LEVEL_CODE,1, 1) AS LEVEL, FOLD " +
                         "FROM KBM400SQL.PACKDETAIL " +
                         "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +
                         "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +
-                        "WHERE DMRID = '" + con.Item + "') AND LEVEL_CODE > '' AND FOLD > 0 AND FOLD <> 7";
+                        "WHERE DMRID = '" + con.Item + "') AND (SUBSTR(LEVEL_CODE,1, 1) = 'W' OR SUBSTR(LEVEL_CODE,1, 1) = 'M' OR SUBSTR(LEVEL_CODE,1, 1) = 'L'  OR SUBSTR(LEVEL_CODE,1, 1) = 'S') " +
+                        "AND LEVEL_CODE > '' AND FOLD > 0 AND FOLD <> 7 ORDER BY 1";
                 
                 datos = AccesoDatos.ConsultarAS4(sSql);
             }
@@ -90,7 +112,7 @@ namespace Logica
                 "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +
                 "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +
                 "WHERE DMRID = '" + con.Item + "') AND LEVEL_CODE > '' "+
-                "AND(SUBSTR(NODE, 1, 2) != 'S0' AND SUBSTR(NODE, 1, 2) != 'B0') " +
+                "AND(SUBSTR(NODE, 1, 2) != 'S0' AND SUBSTR(NODE, 1, 2) != 'B0' AND SUBSTR(NODE, 1, 2) != 'F0') " +
                 "GROUP BY SUBSTR(LEVEL_CODE, 1, 1)";
 
                 datos = AccesoDatos.ConsultarAS4(sSql);
