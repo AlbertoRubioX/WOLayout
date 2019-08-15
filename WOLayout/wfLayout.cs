@@ -449,7 +449,7 @@ namespace WOLayout
                 dtNew.Columns.Add("PRODUCTO", typeof(string));
                 dtNew.Columns.Add("NOMBRE", typeof(string));
                 dtNew.Columns.Add("CAJAS", typeof(int));
-                dtNew.Columns.Add("KITS", typeof(int));
+                dtNew.Columns.Add("KITS x CAJA", typeof(int));
                 dtNew.Columns.Add("TOTAL EN KITS", typeof(int));
                 dtNew.Columns.Add("W.O. DURACION (min)", typeof(decimal));
                 dgwWO.DataSource = dtNew;
@@ -457,9 +457,9 @@ namespace WOLayout
             dgwWO.Columns[0].Visible = false;
             dgwWO.Columns[1].Visible = false;
             dgwWO.Columns[2].Width = ColumnWith(dgwWO, 15);
-            dgwWO.Columns[3].Width = ColumnWith(dgwWO, 15);
+            dgwWO.Columns[3].Width = ColumnWith(dgwWO, 25);
             dgwWO.Columns[4].Width = ColumnWith(dgwWO, 30);
-            dgwWO.Columns[5].Width = ColumnWith(dgwWO, 45);
+            dgwWO.Columns[5].Width = ColumnWith(dgwWO, 35);
 
             if (dgwItem.Rows.Count == 0)
             {
@@ -796,8 +796,12 @@ namespace WOLayout
 
         }
 
+
         #endregion
 
-        
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

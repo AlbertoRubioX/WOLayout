@@ -90,7 +90,6 @@
             this.EO7 = new System.Windows.Forms.PictureBox();
             this.EO10 = new System.Windows.Forms.PictureBox();
             this.EO9 = new System.Windows.Forms.PictureBox();
-            this.E5 = new System.Windows.Forms.PictureBox();
             this.E9 = new System.Windows.Forms.PictureBox();
             this.E4 = new System.Windows.Forms.PictureBox();
             this.E8 = new System.Windows.Forms.PictureBox();
@@ -99,8 +98,8 @@
             this.E2 = new System.Windows.Forms.PictureBox();
             this.E6 = new System.Windows.Forms.PictureBox();
             this.E1 = new System.Windows.Forms.PictureBox();
+            this.E5 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ptbLogo = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -131,6 +130,11 @@
             this.btnConfig = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
+            this.ptbLogo = new System.Windows.Forms.PictureBox();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -185,7 +189,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.EO7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EO10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EO9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.E9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.E4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.E8)).BeginInit();
@@ -194,8 +197,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.E2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.E6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.E1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -209,6 +212,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgwItem)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtWO
@@ -230,6 +235,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.panel10);
+            this.panel1.Controls.Add(this.panel9);
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.groupBox3);
@@ -238,16 +245,16 @@
             this.panel1.Location = new System.Drawing.Point(16, 34);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1419, 913);
+            this.panel1.Size = new System.Drawing.Size(1487, 913);
             this.panel1.TabIndex = 0;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.panel3);
             this.groupBox4.Controls.Add(this.ptbLogo);
-            this.groupBox4.Location = new System.Drawing.Point(878, 19);
+            this.groupBox4.Controls.Add(this.panel3);
+            this.groupBox4.Location = new System.Drawing.Point(926, 46);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(513, 879);
+            this.groupBox4.Size = new System.Drawing.Size(527, 838);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             // 
@@ -316,10 +323,10 @@
             this.panel3.Controls.Add(this.E1);
             this.panel3.Controls.Add(this.E5);
             this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(7, 12);
+            this.panel3.Location = new System.Drawing.Point(54, 12);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(407, 846);
+            this.panel3.Size = new System.Drawing.Size(410, 812);
             this.panel3.TabIndex = 0;
             // 
             // OFO10
@@ -792,15 +799,6 @@
             this.EO9.TabIndex = 114;
             this.EO9.TabStop = false;
             // 
-            // E5
-            // 
-            this.E5.Location = new System.Drawing.Point(23, 290);
-            this.E5.Name = "E5";
-            this.E5.Size = new System.Drawing.Size(92, 47);
-            this.E5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.E5.TabIndex = 99;
-            this.E5.TabStop = false;
-            // 
             // E9
             // 
             this.E9.Location = new System.Drawing.Point(146, 371);
@@ -873,47 +871,45 @@
             this.E1.TabIndex = 97;
             this.E1.TabStop = false;
             // 
+            // E5
+            // 
+            this.E5.Location = new System.Drawing.Point(23, 290);
+            this.E5.Name = "E5";
+            this.E5.Size = new System.Drawing.Size(92, 47);
+            this.E5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.E5.TabIndex = 99;
+            this.E5.TabStop = false;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::WOLayout.Properties.Resources.linea;
             this.pictureBox1.Location = new System.Drawing.Point(24, 23);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(213, 810);
+            this.pictureBox1.Size = new System.Drawing.Size(213, 795);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // ptbLogo
-            // 
-            this.ptbLogo.Image = global::WOLayout.Properties.Resources.LOG_Medline;
-            this.ptbLogo.Location = new System.Drawing.Point(431, 13);
-            this.ptbLogo.Margin = new System.Windows.Forms.Padding(4);
-            this.ptbLogo.Name = "ptbLogo";
-            this.ptbLogo.Size = new System.Drawing.Size(75, 62);
-            this.ptbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbLogo.TabIndex = 39;
-            this.ptbLogo.TabStop = false;
-            // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel2.BackgroundImage = global::WOLayout.Properties.Resources.ensamble;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Location = new System.Drawing.Point(862, 23);
+            this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.panel2.Location = new System.Drawing.Point(899, 29);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(10, 879);
+            this.panel2.Size = new System.Drawing.Size(10, 878);
             this.panel2.TabIndex = 7;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.panel8);
             this.groupBox3.Controls.Add(this.dgwTables);
-            this.groupBox3.Location = new System.Drawing.Point(28, 375);
+            this.groupBox3.Location = new System.Drawing.Point(28, 404);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(829, 523);
+            this.groupBox3.Size = new System.Drawing.Size(829, 480);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             // 
@@ -923,10 +919,10 @@
             this.panel8.Controls.Add(this.panel6);
             this.panel8.Controls.Add(this.panel5);
             this.panel8.Controls.Add(this.panel4);
-            this.panel8.Location = new System.Drawing.Point(515, 422);
+            this.panel8.Location = new System.Drawing.Point(119, 420);
             this.panel8.Margin = new System.Windows.Forms.Padding(4);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(290, 93);
+            this.panel8.Size = new System.Drawing.Size(583, 51);
             this.panel8.TabIndex = 10;
             // 
             // panel6
@@ -936,7 +932,7 @@
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.label4);
             this.panel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.panel6.Location = new System.Drawing.Point(4, 47);
+            this.panel6.Location = new System.Drawing.Point(296, 4);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(282, 42);
@@ -972,7 +968,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.label4.Location = new System.Drawing.Point(11, 8);
+            this.label4.Location = new System.Drawing.Point(21, 7);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(161, 25);
@@ -1007,7 +1003,7 @@
             this.panel4.BackColor = System.Drawing.Color.LightGray;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(4, 4);
+            this.panel4.Location = new System.Drawing.Point(8, 4);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(277, 42);
@@ -1066,7 +1062,7 @@
             this.groupBox1.Controls.Add(this.dgwWO);
             this.groupBox1.Controls.Add(this.txtWO);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(28, 19);
+            this.groupBox1.Location = new System.Drawing.Point(27, 47);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -1127,7 +1123,7 @@
             // 
             this.groupBox2.Controls.Add(this.lblProduct);
             this.groupBox2.Controls.Add(this.dgwItem);
-            this.groupBox2.Location = new System.Drawing.Point(28, 177);
+            this.groupBox2.Location = new System.Drawing.Point(28, 206);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
@@ -1200,7 +1196,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 948);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1445, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1516, 25);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -1209,8 +1205,8 @@
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(207, 20);
-            this.toolStripStatusLabel1.Text = "Medline Work Order Layout ";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(170, 20);
+            this.toolStripStatusLabel1.Text = "Medline MXC Playbook";
             // 
             // toolStripStatusLabel2
             // 
@@ -1260,7 +1256,7 @@
             this.btnExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1445, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1516, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -1301,13 +1297,81 @@
             this.btnExit.Text = "Exit";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // ptbLogo
+            // 
+            this.ptbLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ptbLogo.Image = global::WOLayout.Properties.Resources.LOG_Medline;
+            this.ptbLogo.Location = new System.Drawing.Point(472, 9);
+            this.ptbLogo.Margin = new System.Windows.Forms.Padding(4);
+            this.ptbLogo.Name = "ptbLogo";
+            this.ptbLogo.Size = new System.Drawing.Size(55, 50);
+            this.ptbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbLogo.TabIndex = 39;
+            this.ptbLogo.TabStop = false;
+            // 
+            // panel9
+            // 
+            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel9.AutoSize = true;
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel9.Controls.Add(this.label5);
+            this.panel9.Controls.Add(this.label2);
+            this.panel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Margin = new System.Windows.Forms.Padding(4);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(1490, 39);
+            this.panel9.TabIndex = 9;
+            // 
+            // panel10
+            // 
+            this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.panel10.Location = new System.Drawing.Point(0, 901);
+            this.panel10.Margin = new System.Windows.Forms.Padding(4);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(1486, 10);
+            this.panel10.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(360, 3);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(223, 32);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "INFORMACIÓN";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(1064, 3);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(134, 32);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "LAYOUT";
+            // 
             // wfLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1445, 973);
+            this.ClientSize = new System.Drawing.Size(1516, 973);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
@@ -1316,11 +1380,12 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "wfLayout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Medline ..: :.. Work Order Layout";
+            this.Text = "Medline ..: :.. MXC Playbook";
             this.Activated += new System.EventHandler(this.wfLayout_Activated);
             this.Load += new System.EventHandler(this.wfLayout_Load);
             this.Resize += new System.EventHandler(this.wfLayout_Resize);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OFO10)).EndInit();
@@ -1374,7 +1439,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.EO7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EO10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EO9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.E5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.E9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.E4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.E8)).EndInit();
@@ -1383,8 +1447,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.E2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.E6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.E1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.E5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
@@ -1406,6 +1470,9 @@
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1444,7 +1511,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lblProduct;
-        private System.Windows.Forms.PictureBox ptbLogo;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.PictureBox OFO10;
         private System.Windows.Forms.PictureBox OFO9;
@@ -1508,6 +1574,11 @@
         private System.Windows.Forms.PictureBox E1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.PictureBox ptbLogo;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
     }
 }
 
