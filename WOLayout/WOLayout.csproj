@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -144,6 +144,8 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\Blue-Background-down.jpg" />
+    <None Include="Resources\Blue-Background.jpg" />
     <None Include="Resources\sub.png" />
     <None Include="Resources\W.png" />
     <None Include="Resources\of.png" />
