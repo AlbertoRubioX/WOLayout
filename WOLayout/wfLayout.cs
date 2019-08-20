@@ -858,7 +858,7 @@ namespace WOLayout
             //18, 5, 2, 20
             double[,] ite = new double[40, 10];
 
-            ite[0, 0] = (_dAssyTime / _iMaxTable * (_iSub + _iMain));
+            ite[0, 0] = Math.Ceiling(_dAssyTime / _iMaxTable * (_iSub + _iMain));
             ite[0, 1] = ODisponibles - ite[0, 0] - OperadoresNA;
             ite[0, 2] =(_dAssyTime * _iMaxTable);
             ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / OWrap1));
