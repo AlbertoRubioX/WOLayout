@@ -19,10 +19,10 @@ namespace Logica
             try
             {
                 string sSql = "SELECT DISTINCT "+
-                "FMWOSUM.WOPN AS PRODUCTO,'' as NAME, FMWOSUM.WOQTY AS CAJAS, " +
-                "FKITMSTR.IMSTCK AS KITS,  " +
-                @"FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS ""TOTAL EN KITS"", " +
-                @"ROUND(20*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS ""W.O. DURACION (min)"" " +
+                "FMWOSUM.WOPN AS product,'' as name, FMWOSUM.WOQTY AS box, " +
+                "FKITMSTR.IMSTCK AS kits,  " +
+                @"FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS ""total_kits"", " +
+                @"ROUND(20*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS ""duration"" " +
                 "FROM B20E386T.KBM400MFG.FMWOSUM FMWOSUM, B20E386T.KBM400MFG.FKITMSTR FKITMSTR " +
                 "WHERE FMWOSUM.WOPN = FKITMSTR.IMPN " +
                 "AND FMWOSUM.WOWONO = '"+con.WO+"'";
@@ -99,6 +99,30 @@ namespace Logica
             }
 
             return datos;
+        }
+
+        public static bool ComponentsLayerFold(AS4Logica con)
+        {
+            try
+            {
+                string sSql = "SELECT FOLD FROM KBM400SQL.PACKDETAIL " +
+                        "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +
+                        "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +
+                        "WHERE DMRID = '" + con.Item + "') AND SUBSTR(LEVEL_CODE,1, 1) = 'F' AND FOLD > 0 AND FOLD <> 7";
+                DataTable datos = AccesoDatos.ConsultarAS4(sSql);
+                if(datos.Rows.Count > 0)
+                {
+                    string sValue = datos.Rows[0][0].ToString();
+                    if (!string.IsNullOrEmpty(sValue))
+                        return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return false;
         }
 
         public static DataTable LineLayout(AS4Logica con)

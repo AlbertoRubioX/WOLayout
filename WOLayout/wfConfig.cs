@@ -17,6 +17,7 @@ namespace WOLayout
         private decimal _ldHrsDisp;
         private string _lsCajas;
         private string _lsKitCaja;
+        public string _lsLen;
         public wfConfig()
         {
             InitializeComponent();
@@ -92,6 +93,9 @@ namespace WOLayout
 
                 }
 
+                ControlText(tabPage1);
+                ControlText(tabPage2);
+
                 txtJornada.Focus();
             }
             catch(Exception ex)
@@ -99,6 +103,35 @@ namespace WOLayout
                 MessageBox.Show("Error " + ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
+        }
+
+        private void ControlText(Control _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Lenguage = _lsLen;
+            con.Form = this.Name;
+
+            foreach (Control c in _control.Controls)
+            {
+                if (c is GroupBox)
+                {
+                    con.Control = c.Name;
+                    string sValue = ConfigLogica.ChangeLenguageCont(con);
+                    if (!string.IsNullOrEmpty(sValue))
+                        c.Text = sValue;
+                }
+
+                foreach (Control cs in c.Controls)
+                {
+                    if (cs is Label || cs is GroupBox)
+                    {
+                        con.Control = cs.Name;
+                        string sValue = ConfigLogica.ChangeLenguageCont(con);
+                        if (!string.IsNullOrEmpty(sValue))
+                            cs.Text = sValue;
+                    }
+                }
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)

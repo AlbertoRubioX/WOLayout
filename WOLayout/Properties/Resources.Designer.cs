@@ -173,6 +173,16 @@ namespace WOLayout.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mexico {
+            get {
+                object obj = ResourceManager.GetObject("mexico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap of {
             get {
                 object obj = ResourceManager.GetObject("of", resourceCulture);
@@ -196,6 +206,16 @@ namespace WOLayout.Properties {
         internal static System.Drawing.Bitmap sub {
             get {
                 object obj = ResourceManager.GetObject("sub", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap united_states {
+            get {
+                object obj = ResourceManager.GetObject("united-states", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
