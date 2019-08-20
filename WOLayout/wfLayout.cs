@@ -36,6 +36,12 @@ namespace WOLayout
         private int _iInspeccion;
         private string _lsLen;
 
+        //Manual
+        private int _iSub;
+        private int _iMain;
+        private double _sDuraW1;
+        private double _sDuraW2;
+
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
         private int _iHeightAnt;
@@ -361,6 +367,10 @@ namespace WOLayout
                             sWCodeS = sWrap1;
                         }
 
+                        //manual
+                        _sDuraW1 = dWrapTime;
+                        _sDuraW2 = dWrapTime2;
+
                         sDuraW1 = dWrapTime.ToString();
                         sDuraW2 = dWrapTime2.ToString();
 
@@ -623,9 +633,9 @@ namespace WOLayout
             dgwWO.Columns[1].Visible = false;
             dgwWO.Columns[0].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[2].Width = ColumnWith(dgwWO, 15);
-            dgwWO.Columns[3].Width = ColumnWith(dgwWO, 15);
+            dgwWO.Columns[3].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[4].Width = ColumnWith(dgwWO, 20);
-            dgwWO.Columns[5].Width = ColumnWith(dgwWO, 35);
+            dgwWO.Columns[5].Width = ColumnWith(dgwWO, 30);
 
             if (dgwItem.Rows.Count == 0)
             {
@@ -1037,6 +1047,51 @@ namespace WOLayout
 
         #endregion
 
-      
+
+        public void ModoManual(int ODisponibles, int OperadoresNA, int OWrap1, double BalanceoPermitido)
+        {
+
+            //18, 5, 2, 20
+            double[,] ite = new double[40, 10];
+
+            ite[0, 0] = (_dAssyTime / _iMaxTable * (_iSub + _iMain));
+            ite[0, 1] = ODisponibles - ite[0, 0] - OperadoresNA;
+            ite[0, 2] =(_dAssyTime * _iMaxTable);
+            ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / OWrap1));
+            ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
+            ite[0, 5] = (ite[0, 4] < BalanceoPermitido) ? 1 : 0;
+            ite[0, 6] = ite[0, 4] * ite[0, 5];
+            ite[0, 7] = (ite[0, 2] >= ite[0, 3]) ? ite[0, 2] : ite[0, 3];
+            ite[0, 8] = (ite[0, 6] == 0) ? 0 : ite[0, 6];
+            ite[0, 9] = (ite[0, 0] < 0 || ite[0, 1] < 0) ? 0 : Math.Ceiling(ite[0, 8]);
+
+            for (int i = 1; i <= 39; i++)
+            {
+                ite[i, 0] = (ite[i - 1, 0] - (OWrap1 / 2));
+                ite[i, 1] = ODisponibles - ite[i, 0] - OperadoresNA;
+                ite[i, 2] = ((_iSub + _iMain) * _dAssyTime / ite[i, 0]);
+                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / OWrap1));
+                ite[i, 4] = Math.Abs(ite[i, 2] - ite[i, 3]);
+                ite[i, 5] = (ite[i, 4] < BalanceoPermitido) ? 1 : 0;
+                ite[i, 6] = ite[i, 4] * ite[i, 5];
+                ite[i, 7] = (ite[i, 2] >= ite[i, 3]) ? ite[i, 2] : ite[i, 3];
+                ite[i, 8] = (ite[i, 6] == 0) ? 0 : ite[i, 6];
+                ite[i, 9] = (ite[i, 0] < 0 || ite[i, 1] < 0) ? 0 : Math.Ceiling(ite[i, 8]);
+            }
+
+            for (int i = 0; i < 40; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.Write(ite[i,j] + ", ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ModoManual(18, 5, 2, 20);
+        }
     }
 }
