@@ -14,13 +14,13 @@ namespace WOLayout
     public partial class wfLayout : Form
     {
         private string _lsUser = string.Empty;
-        private double _dAssyTime;  
+        private double _dAssyTime;
         private double _dTackIdeal;
         private double _dTackTime;
-        private int _iMaxTable;     
-        private int _iMesaEns;     
-        private int _iMesaWrap;    
-        private int _iEstSub;       
+        private int _iMaxTable;
+        private int _iMesaEns;
+        private int _iMesaWrap;
+        private int _iEstSub;
         private int _iSurtidor;
         private int _iInspSell;
         private int _iSellador;
@@ -34,6 +34,7 @@ namespace WOLayout
         private decimal _dCajas;
         private decimal _dKitCaja;
         private int _iInspeccion;
+        private string _lsLen;
 
         //Manual
         private int _iSub;
@@ -57,20 +58,105 @@ namespace WOLayout
         #region regInicio
         private void wfLayout_Load(object sender, EventArgs e)
         {
+            _lsLen = "SP";
             _lsUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             _lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
 
             WindowState = FormWindowState.Maximized;
-
+            
             tssUserName.Text = _lsUser;
-            tssVersion.Text = "1.0.0.7";
+            tssVersion.Text = "1.0.0.8";
 
             Inicio();
 
             txtWO.Text = "0000000";
             txtWO.SelectAll();
         }
+        private void ChangeLen()
+        {
 
+            ControlText(this);
+            ControlText(this.panel8);
+            ControlGridText(dgwWO);
+            ControlGridText(dgwItem);
+            ControlGridText(dgwTables);
+            ControlGridRows2(dgwItem);
+            ControlGridRows2(dgwTables);
+            
+        }
+        private void ControlText(Control _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Lenguage = _lsLen;
+            con.Form = this.Name;
+
+            foreach (Control c in _control.Controls)
+            {
+                foreach (Control cs in c.Controls)
+                {
+                    if (cs is Label)
+                    {
+                        con.Control = cs.Name;
+                        string sValue = ConfigLogica.ChangeLenguageCont(con);
+                        if (!string.IsNullOrEmpty(sValue))
+                            cs.Text = sValue;
+                    }
+                }
+            }
+        }
+        private void ControlGridText(DataGridView _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Lenguage = _lsLen;
+            con.Form = this.Name;
+            con.Control = _control.Name;
+            foreach (DataGridViewColumn c in _control.Columns)
+            {
+                if (c.Visible)
+                {
+                    con.SubControl = c.Name;
+                    string sValue = ConfigLogica.ChangeLenguageGrid(con);
+                    if (!string.IsNullOrEmpty(sValue))
+                        c.HeaderText = sValue;
+                }
+                
+            }
+        }
+        private string ControlGridRows(Control _control,string _asRow)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Lenguage = _lsLen;
+            con.Form = this.Name;
+            con.Control = _control.Name;
+            con.SubControl = _asRow;
+            string sValue = ConfigLogica.ChangeLenguageGrid(con);
+            if (!string.IsNullOrEmpty(sValue))
+                return sValue;
+
+            return null;
+        }
+        private void ControlGridRows2(DataGridView _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Lenguage = _lsLen;
+            con.Form = this.Name;
+            con.Control = _control.Name;
+            foreach(DataGridViewRow row in _control.Rows)
+            {
+                con.SubControl = row.Cells["code"].Value.ToString();
+                if (string.IsNullOrEmpty(con.SubControl))
+                    continue;
+
+                for (int i=0; i < 2; i++)
+                {
+                    con.Columna = i;
+                    string sValue = ConfigLogica.ChangeLenguageGridRow(con);
+                    if (!string.IsNullOrEmpty(sValue))
+                        row.Cells[i].Value = sValue;
+                }
+            }   
+        }
+      
         private void Inicio()
         {
             txtWO.Clear();
@@ -79,13 +165,13 @@ namespace WOLayout
             dgwItem.DataSource = null;
             dgwWO.DataSource = null;
             dgwTables.DataSource = null;
-            CargarColumnas();
+            
             lblMesas.Text = "0";
             lblOper.Text = "0";
 
             ConfigLogica conf = new ConfigLogica();
             _dtConf = ConfigLogica.Consultar();
-          
+
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][2].ToString()))
                 _dHrsDisp = decimal.Parse(_dtConf.Rows[0][2].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][3].ToString()))
@@ -95,7 +181,7 @@ namespace WOLayout
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][5].ToString()))
                 _dKitCaja = decimal.Parse(_dtConf.Rows[0][5].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][6].ToString()))
-                _dKits= decimal.Parse(_dtConf.Rows[0][6].ToString());
+                _dKits = decimal.Parse(_dtConf.Rows[0][6].ToString());
 
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][7].ToString()))
                 _dTackIdeal = double.Parse(_dtConf.Rows[0][7].ToString());
@@ -134,7 +220,9 @@ namespace WOLayout
 
             txtWO.Focus();
 
+            CargarColumnas();
             LimpiarLayout();
+            ChangeLen();
         }
 
         private void wfLayout_Activated(object sender, EventArgs e)
@@ -179,6 +267,7 @@ namespace WOLayout
             {
                 if (e.KeyCode == Keys.Escape)
                     Close();
+                
 
                 if (e.KeyCode != Keys.Enter)
                     return;
@@ -195,24 +284,27 @@ namespace WOLayout
 
                 AS4Logica AS4 = new AS4Logica();
                 AS4.WO = sValue;
-                
+
                 SetupLogica set = new SetupLogica();
                 set.WorkOrder = sValue;
-                DataTable dt = SetupLogica.ConsultarWO(set);
+                DataTable dt = AS4Logica.WorkOrder(AS4); 
                 if (dt.Rows.Count == 0)
-                    dt = AS4Logica.WorkOrder(AS4);
-                
+                    dt = SetupLogica.ConsultarWO(set);
+
                 if (dt.Rows.Count > 0)
                 {
                     lblProduct.Text = string.Empty;
                     dgwWO.DataSource = dt;
                     dgwWO.CurrentCell = null;
 
+                    dgwItem.DataSource = null;
+                    CargarColumnas();
+
                     string sItem = dt.Rows[0][0].ToString();
 
                     if (sItem.IndexOf("DYN") == -1)
                     {
-                        MessageBox.Show("El Producto no cuenta con Componentes", "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(ControlGridRows(txtWO, "err1"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Inicio();
                         return;
                     }
@@ -221,9 +313,7 @@ namespace WOLayout
                     AS4.Item = sItem;
                     lblProduct.Text = sItem + " - " + sName.ToUpper();
 
-                    DataTable dt2 = AS4Logica.ComponentsLayer(AS4);
-                    dgwItem.DataSource = null;
-                    CargarColumnas();
+                    DataTable dt2 = AS4Logica.ComponentsLayer(AS4);                
                     if (dt2.Rows.Count > 1)
                     {
 
@@ -285,7 +375,7 @@ namespace WOLayout
                         sDuraW2 = dWrapTime2.ToString();
 
                         DataTable dt3 = dgwItem.DataSource as DataTable;
-                        dt3.Rows.Add(iComp, sPre, sWCodeM, sWrapMain, sDuraW1, sWCodeS, sWrapSub, sDuraW2);
+                        dt3.Rows.Add(iComp, sPre, sWCodeM, sWrapMain, sDuraW1, sWCodeS, sWrapSub, sDuraW2,"comp");
 
                         //mesas / operadores
                         DataTable dt4 = AS4Logica.LineLayout(AS4);
@@ -314,6 +404,7 @@ namespace WOLayout
                                 if (sLevel == "W") iWrap += iCompx;
 
                             }
+                            
 
                             int iOper = 0;
                             int iMesas = 0;
@@ -321,7 +412,11 @@ namespace WOLayout
 
                             iOut += iBasin + iPiggy;
                             iMesas = (int)Math.Ceiling((decimal)iOut / (decimal)_iMaxTable);
-                            iOper = iMesas;
+                            int iOutOper = 1;
+                            //si tiene wrap ++
+                            if (AS4Logica.ComponentsLayerFold(AS4))
+                                iOutOper=2;
+                            iOper = iMesas * iOutOper;
                             dtN.Rows.Add("Out", "OutFolder/Basin", iOut, iMesas, iOper);
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
@@ -333,8 +428,9 @@ namespace WOLayout
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
                             iOper = iMesas * _iEstSub;
-                            dtN.Rows.Add("Sub-Ensamble", "Sub-Ensambles", iSub, iMesas, iOper);
-                            _iSub = iSub; //manual
+                            string sCol1 = ControlGridRows(dgwTables, "sub");
+                            string sCol2 = ControlGridRows(dgwTables, "sub_desc");
+                            dtN.Rows.Add(sCol1, sCol2,iSub, iMesas, iOper,"sub");
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -343,8 +439,9 @@ namespace WOLayout
 
                             iMesas = (int)Math.Ceiling((decimal)iMain / (decimal)_iMaxTable);
                             iOper = iMesas;
-                            dtN.Rows.Add("Ensamble", "Ensamble Sobre Conveyor", iMain, iMesas, iOper);
-                            _iMain = iMain; //manual
+                            sCol1 = ControlGridRows(dgwTables, "assy");
+                            sCol2 = ControlGridRows(dgwTables, "assy_desc");
+                            dtN.Rows.Add(sCol1, sCol2, iMain, iMesas, iOper,"assy");
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -352,14 +449,17 @@ namespace WOLayout
                             int assyo = iOper;
 
                             double dMax = (double)_iMaxTable;
+                            //70 -> dW = 4
+                            if (dWrapTime2 > 0)
+                                dWrapTime = (dWrapTime + dWrapTime2) / 2;
                             double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
                             iMesas = (int)dW;
                             if (sWCodeM == "1" || sWCodeM == "8")
                                 iOper = iMesas;
                             else
                                 iOper = (iMesas * 2);
-
-                            dtN.Rows.Add("Wrap", "Wrap 1",iWrap, iMesas, iOper);
+                            sCol2 = ControlGridRows(dgwTables, "wrap1_desc");
+                            dtN.Rows.Add("Wrap", sCol2,iWrap, iMesas, iOper,"wrap1");
 
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
@@ -369,7 +469,10 @@ namespace WOLayout
 
                             iMesas = 0;
                             iOper = 0;
-                            if (sLevelS == "W")
+                            int iWrapSm = 0;
+                            int iWrapSo = 0;
+                            //if (sLevelS == "W")
+                            if (sLevelS == "S")
                             {
                                 dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
                                 iMesas = (int)dW;
@@ -377,19 +480,50 @@ namespace WOLayout
                                     iOper = iMesas;
                                 else
                                     iOper = (iMesas * 2);
-                                dtN.Rows.Add("Wrap", "Wrap 2",iWrap, iMesas, iOper);
+
+                                sCol2 = ControlGridRows(dgwTables, "wrap2_desc");
+                                dtN.Rows.Add("Wrap Sub", sCol2,iWrap, iMesas, iOper,"wrap2");
+
+                                iTotalMes += iMesas;
+                                iTotalOps += iOper;
+
+                                iWrapSm = iMesas;
+                                iWrapSo = iOper;
+
                             }
 
-                            iTotalMes += iMesas;
-                            iTotalOps += iOper;
+                            int wrap2m = 0;
+                            int wrap2o = 0;
+                            //if (sLevelS == "W")
+                            //{
+                            //    dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
+                            //    iMesas = (int)dW;
+                            //    if (sWCodeS == "1" || sWCodeS == "8")
+                            //        iOper = iMesas;
+                            //    else
+                            //        iOper = (iMesas * 2);
 
-                            int wrap2m = iMesas;
-                            int wrap2o = iOper;
+                            //    sCol2 = ControlGridRows(dgwTables, "wrap2_desc");
+                            //    dtN.Rows.Add("Wrap Sub", sCol2, iWrap, iMesas, iOper, "wrap2");
 
-                            dtN.Rows.Add("Otros", "Surtidor",0, 0, _iSurtidor);
-                            dtN.Rows.Add("Otros", "Inspección Selladora",0, 0, _iInspSell);
-                            dtN.Rows.Add("Otros", "Selladora",0, 0, _iSellador);
-                            dtN.Rows.Add("Otros", "Inspección 100%",0, 0, _iInspeccion);
+                            //    iTotalMes += iMesas;
+                            //    iTotalOps += iOper;
+
+                            //    iWrapSm = iMesas;
+                            //    iWwrapSo = iOper;
+                            //    int wrap2m = iMesas;
+                            //    int wrap2o = iOper;
+                            //}
+
+                            sCol1 = ControlGridRows(dgwTables, "other");
+                            sCol2 = ControlGridRows(dgwTables, "deliver");
+                            dtN.Rows.Add(sCol1, sCol2,0, 0, _iSurtidor,"deliver");
+                            sCol2 = ControlGridRows(dgwTables, "insp_sealer");
+                            dtN.Rows.Add(sCol1, sCol2,0, 0, _iInspSell, "insp_sealer");
+                            sCol2 = ControlGridRows(dgwTables, "sealer");
+                            dtN.Rows.Add(sCol1, sCol2,0, 0, _iSellador,"sealer");
+                            sCol2 = ControlGridRows(dgwTables, "inspection");
+                            dtN.Rows.Add(sCol1, sCol2,0, 0, _iInspeccion,"inspection");
                             iTotalOps += iO;
 
                             lblMesas.Text = iTotalMes.ToString();
@@ -401,16 +535,18 @@ namespace WOLayout
                             if (wrap1m + wrap2m > 6)
                             {
                                 wrap2m = 6 - wrap1m;
-                                MessageBox.Show("Capacidad de Mesas Excedida en Estación de Wrapping", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show(ControlGridRows(txtWO, "err2"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            else
-                            {
-                                llenarmesa(wrap1m, wrap1o, false);
-                                llenarmesa(wrap2m, wrap2o, false);
-                            }
+                            
+                            llenarmesa(wrap1m, wrap1o, false);
+
+                            //llenarmesaWS(iWrapSm, iWrapSo, wrap1m); // sub-assembly wrapping tables
+                            
 
                             if (subassym + assym > 9 || assym > 5)
-                                MessageBox.Show("Capacidad de Mesas Excedida en Estación de Empaque", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            {
+                                MessageBox.Show(ControlGridRows(txtWO, "err3"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                             else
                             {
                                 llenarof(outfolderm, outfoldero);
@@ -419,18 +555,19 @@ namespace WOLayout
                             }
                         }
 
+                        ChangeLen();
                         dgwItem.ClearSelection();
                         txtWO.SelectAll();
                     }
                     else
                     {
-                        MessageBox.Show("No se encontro información del empaque en el Producto", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(ControlGridRows(txtWO, "err4"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Inicio();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Work Order Invalida o Incorrecta", "Alert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(ControlGridRows(txtWO, "err0"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Inicio();
                 }
                     
@@ -451,14 +588,18 @@ namespace WOLayout
 
 
             sValue = dgwTables[0, e.RowIndex].Value.ToString();
-            if (sValue == "Sub-Ensamble")
+            if (sValue == "Sub-Ensamble" || sValue == "Sub-Assembly")
             {
                 e.CellStyle.BackColor = Color.Gold;
             }
-            if (sValue == "Ensamble")
+            if (sValue == "Ensamble" || sValue == "Assembly")
             {
                 e.CellStyle.BackColor = Color.SkyBlue;
                 //e.CellStyle.ForeColor = Color.White;
+            }
+            if (sValue == "Wrap Sub")
+            {
+                e.CellStyle.BackColor = Color.LightPink;
             }
             if (sValue == "Wrap")
             {
@@ -468,7 +609,7 @@ namespace WOLayout
             {
                 e.CellStyle.BackColor = Color.LightGreen;
             }
-            if (sValue == "Otros")
+            if (sValue == "Otros" || sValue == "Others")
             {
                 e.CellStyle.BackColor = Color.WhiteSmoke;
                 e.CellStyle.ForeColor = Color.MediumBlue;
@@ -480,12 +621,12 @@ namespace WOLayout
             if (dgwWO.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("WO");
-                dtNew.Columns.Add("PRODUCTO", typeof(string));
-                dtNew.Columns.Add("NOMBRE", typeof(string));
-                dtNew.Columns.Add("CAJAS", typeof(int));
-                dtNew.Columns.Add("KITS x CAJA", typeof(int));
-                dtNew.Columns.Add("TOTAL EN KITS", typeof(int));
-                dtNew.Columns.Add("W.O. DURACION (min)", typeof(decimal));
+                dtNew.Columns.Add("product", typeof(string));
+                dtNew.Columns.Add("name", typeof(string));
+                dtNew.Columns.Add("box", typeof(int));
+                dtNew.Columns.Add("kits", typeof(int));
+                dtNew.Columns.Add("total_kits", typeof(int));
+                dtNew.Columns.Add("duration", typeof(decimal));
                 dgwWO.DataSource = dtNew;
             }
             
@@ -499,14 +640,15 @@ namespace WOLayout
             if (dgwItem.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Item");
-                dtNew.Columns.Add("COMPONENTES", typeof(int));
-                dtNew.Columns.Add("PRE-ENSAMBLE", typeof(string));
+                dtNew.Columns.Add("component", typeof(int));
+                dtNew.Columns.Add("passy", typeof(string));
                 dtNew.Columns.Add("wrap_code", typeof(string));
-                dtNew.Columns.Add("WRAP PRINCIPAL", typeof(string));
-                dtNew.Columns.Add("WRAP DURACION (seg)", typeof(string));
+                dtNew.Columns.Add("wrap1", typeof(string));
+                dtNew.Columns.Add("wrap1_seg", typeof(string));
                 dtNew.Columns.Add("wrap_code2", typeof(string));
-                dtNew.Columns.Add("WRAP SUB", typeof(string));
-                dtNew.Columns.Add("WRAP SUB DURACION (seg)", typeof(string));
+                dtNew.Columns.Add("wrap2", typeof(string));
+                dtNew.Columns.Add("wrap2_seg", typeof(string));
+                dtNew.Columns.Add("code", typeof(string));
                 dgwItem.DataSource = dtNew;
             }
 
@@ -518,18 +660,20 @@ namespace WOLayout
             dgwItem.Columns[5].Visible = false;
             dgwItem.Columns[6].Width = ColumnWith(dgwItem, 15);
             dgwItem.Columns[7].Width = ColumnWith(dgwItem, 16);
-
+            dgwItem.Columns[8].Visible = false;
             if (dgwTables.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Tables");
-                dtNew.Columns.Add("AREA", typeof(string));
-                dtNew.Columns.Add("DESCRIPCION", typeof(string));
-                dtNew.Columns.Add("COMP", typeof(string));
-                dtNew.Columns.Add("MESAS", typeof(int));
-                dtNew.Columns.Add("H.C.", typeof(int));
+                dtNew.Columns.Add("area", typeof(string));
+                dtNew.Columns.Add("descrip", typeof(string));
+                dtNew.Columns.Add("comp", typeof(string));
+                dtNew.Columns.Add("tables", typeof(int));
+                dtNew.Columns.Add("headcount", typeof(int));
+                dtNew.Columns.Add("code", typeof(string));
                 dgwTables.DataSource = dtNew;
             }
 
+            dgwTables.Columns[5].Visible = false;
             dgwTables.Columns[0].Width = ColumnWith(dgwTables, 25);
             dgwTables.Columns[1].Width = ColumnWith(dgwTables, 48);
             dgwTables.Columns[2].Width = ColumnWith(dgwTables, 10);
@@ -555,7 +699,23 @@ namespace WOLayout
         #endregion
 
         #region regBottons
+        private void btnLenguage_Click(object sender, EventArgs e)
+        {
+            if (_lsLen == "SP")
+            {
+                _lsLen = "EN";
+                btnLenguage.Image = Properties.Resources.mexico;
+            }
 
+            else
+            {
+                _lsLen = "SP";
+                btnLenguage.Image = Properties.Resources.united_states;
+            }
+
+
+            ChangeLen();
+        }
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
@@ -571,6 +731,7 @@ namespace WOLayout
             if (ValidaAcceso("CONF"))
             {
                 wfConfig Config = new wfConfig();
+                Config._lsLen = _lsLen;
                 Config.Show();
             }
             else
@@ -596,7 +757,7 @@ namespace WOLayout
                 ResizeControl(panel9, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(panel1, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(panel2, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
-                ResizeControl(panel3, 2, ref _iWidthAnt, ref _iHeightAnt, 0);
+                //ResizeControl(pnlLayout, 2, ref _iWidthAnt, ref _iHeightAnt, 0);
                 
                 ResizeControl(groupBox3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(groupBox4, 2, ref _iWidthAnt, ref _iHeightAnt, 0);
@@ -617,6 +778,11 @@ namespace WOLayout
                 iW = iY + iW / 2;
                 iX = iW - iX;
                 lblLayout.Location = new Point((int)iX, lblLayout.Location.Y);
+
+                iW = pnlLayout.Width / 2;
+                iX = groupBox4.Width / 2;
+                iX -= iW + 10;
+                pnlLayout.Location = new Point((int)iX, pnlLayout.Location.Y);
             }
         }
 
@@ -773,7 +939,37 @@ namespace WOLayout
             }
 
         }
+        public void llenarmesaWS(int _aiNummesas, int _aiNummoperadores, int _aiWrap1)
+        {
+            PictureBox[] pMesas = getmesas();
+            PictureBox[] pOperadores = getoperadores();
 
+            Boolean bLibre = true;
+            int iPosicionlibre;
+
+           
+            iPosicionlibre = 9 + _aiWrap1;
+
+            do
+            {
+                if (pMesas[iPosicionlibre].Visible)
+                {
+                    iPosicionlibre++;
+                }
+                else bLibre = false;
+            }
+            while (bLibre);
+
+
+            for (int i = iPosicionlibre; i < iPosicionlibre + _aiNummesas; i++)
+            {
+                pMesas[i].Visible = true;
+                pOperadores[i * 2].Visible = true;
+                if (_aiNummoperadores == _aiNummesas * 2)
+                    pOperadores[(i * 2) + 1].Visible = true;
+            }
+
+        }
         public void llenarensamble(int emesas, int eoperadores, int smesas, int soperadores)
         {
             PictureBox[] mesas = getmesas();

@@ -33,6 +33,11 @@ namespace Logica
         public decimal Sobre { get; set; }
         public decimal Tape { get; set; }
         public decimal WrapNA { get; set; }
+        public string Lenguage { get; set; }
+        public string Form { get; set; }
+        public string Control { get; set; }
+        public string SubControl { get; set; }
+        public int Columna { get; set; }
         public string Usuario { get; set; }
 
         public static int GuardarSP(ConfigLogica config)
@@ -53,6 +58,87 @@ namespace Logica
                 throw ex;
             }
             return datos;
+        }
+
+        public static DataTable ChangeLenguage(ConfigLogica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sColumn = "descripcion";
+                if (con.Lenguage == "EN")
+                    sColumn = "description";
+                else
+                datos = AccesoDatos.Consultar("SELECT "+sColumn+" FROM t_sysleng WHERE form = '"+con.Form+"' and control = '"+con.Control+"' and subcontrol = '"+con.SubControl+"' ");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
+        public static string ChangeLenguageCont(ConfigLogica con)
+        {
+            string sValue = string.Empty;
+            
+            try
+            {
+                string sColumn = "descripcion";
+                if (con.Lenguage == "EN")
+                    sColumn = "description";
+
+                string sSql = "SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' ";
+                DataTable datos = AccesoDatos.Consultar(sSql);
+                if (datos.Rows.Count > 0)
+                    sValue = datos.Rows[0][0].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return sValue;
+        }
+        public static string ChangeLenguageGrid(ConfigLogica con)
+        {
+            string sValue = string.Empty;
+
+            try
+            {
+                string sColumn = "descripcion";
+                if (con.Lenguage == "EN")
+                    sColumn = "description";
+
+                string sSql = "SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' and subcontrol = '"+con.SubControl+"' ";
+                DataTable datos = AccesoDatos.Consultar(sSql);
+                if (datos.Rows.Count > 0)
+                    sValue = datos.Rows[0][0].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return sValue;
+        }
+        public static string ChangeLenguageGridRow(ConfigLogica con)
+        {
+            string sValue = string.Empty;
+
+            try
+            {
+                string sColumn = "descripcion";
+                if (con.Lenguage == "EN")
+                    sColumn = "description";
+
+                string sSql = "SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' and subcontrol = '" + con.SubControl + "' and columna = "+con.Columna+" ";
+                DataTable datos = AccesoDatos.Consultar(sSql);
+                if (datos.Rows.Count > 0)
+                    sValue = datos.Rows[0][0].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return sValue;
         }
     }
 }

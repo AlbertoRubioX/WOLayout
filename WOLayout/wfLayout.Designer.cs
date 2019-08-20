@@ -39,7 +39,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.ptbLogo = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlLayout = new System.Windows.Forms.Panel();
             this.OFO10 = new System.Windows.Forms.PictureBox();
             this.OFO9 = new System.Windows.Forms.PictureBox();
             this.OF5 = new System.Windows.Forms.PictureBox();
@@ -107,11 +107,11 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.lblOper = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblHC = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblMesas = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblTables = new System.Windows.Forms.Label();
             this.dgwTables = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgwWO = new System.Windows.Forms.DataGridView();
@@ -124,21 +124,21 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssUserName = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnConfig = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
+            this.btnLenguage = new System.Windows.Forms.ToolStripButton();
             this.lblLayout = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblTopTitle1 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
             this.groupBox4.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnlLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OFO10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OFO9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OF5)).BeginInit();
@@ -249,93 +249,93 @@
             // ptbLogo
             // 
             this.ptbLogo.Image = global::WOLayout.Properties.Resources.LOG_Medline;
-            this.ptbLogo.Location = new System.Drawing.Point(-1, 817);
+            this.ptbLogo.Location = new System.Drawing.Point(-1, 802);
             this.ptbLogo.Margin = new System.Windows.Forms.Padding(4);
             this.ptbLogo.Name = "ptbLogo";
-            this.ptbLogo.Size = new System.Drawing.Size(65, 50);
+            this.ptbLogo.Size = new System.Drawing.Size(75, 65);
             this.ptbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptbLogo.TabIndex = 39;
             this.ptbLogo.TabStop = false;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.panel3);
+            this.groupBox4.Controls.Add(this.pnlLayout);
             this.groupBox4.Location = new System.Drawing.Point(879, 1);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(513, 852);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             // 
-            // panel3
+            // pnlLayout
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel3.Controls.Add(this.OFO10);
-            this.panel3.Controls.Add(this.OFO9);
-            this.panel3.Controls.Add(this.OF5);
-            this.panel3.Controls.Add(this.OFO8);
-            this.panel3.Controls.Add(this.OFO7);
-            this.panel3.Controls.Add(this.OFO6);
-            this.panel3.Controls.Add(this.OFO5);
-            this.panel3.Controls.Add(this.OFO4);
-            this.panel3.Controls.Add(this.OFO3);
-            this.panel3.Controls.Add(this.OFO2);
-            this.panel3.Controls.Add(this.OFO1);
-            this.panel3.Controls.Add(this.OF4);
-            this.panel3.Controls.Add(this.OF3);
-            this.panel3.Controls.Add(this.OF2);
-            this.panel3.Controls.Add(this.OF1);
-            this.panel3.Controls.Add(this.WO8);
-            this.panel3.Controls.Add(this.WO7);
-            this.panel3.Controls.Add(this.WO10);
-            this.panel3.Controls.Add(this.WO9);
-            this.panel3.Controls.Add(this.WO12);
-            this.panel3.Controls.Add(this.WO11);
-            this.panel3.Controls.Add(this.WO2);
-            this.panel3.Controls.Add(this.WO1);
-            this.panel3.Controls.Add(this.WO4);
-            this.panel3.Controls.Add(this.WO3);
-            this.panel3.Controls.Add(this.WO6);
-            this.panel3.Controls.Add(this.WO5);
-            this.panel3.Controls.Add(this.W4);
-            this.panel3.Controls.Add(this.W5);
-            this.panel3.Controls.Add(this.W6);
-            this.panel3.Controls.Add(this.W1);
-            this.panel3.Controls.Add(this.W2);
-            this.panel3.Controls.Add(this.W3);
-            this.panel3.Controls.Add(this.EO12);
-            this.panel3.Controls.Add(this.EO11);
-            this.panel3.Controls.Add(this.EO14);
-            this.panel3.Controls.Add(this.EO13);
-            this.panel3.Controls.Add(this.EO16);
-            this.panel3.Controls.Add(this.EO15);
-            this.panel3.Controls.Add(this.EO18);
-            this.panel3.Controls.Add(this.EO17);
-            this.panel3.Controls.Add(this.EO2);
-            this.panel3.Controls.Add(this.EO1);
-            this.panel3.Controls.Add(this.EO4);
-            this.panel3.Controls.Add(this.EO3);
-            this.panel3.Controls.Add(this.EO6);
-            this.panel3.Controls.Add(this.EO5);
-            this.panel3.Controls.Add(this.EO8);
-            this.panel3.Controls.Add(this.EO7);
-            this.panel3.Controls.Add(this.EO10);
-            this.panel3.Controls.Add(this.EO9);
-            this.panel3.Controls.Add(this.E9);
-            this.panel3.Controls.Add(this.E4);
-            this.panel3.Controls.Add(this.E8);
-            this.panel3.Controls.Add(this.E3);
-            this.panel3.Controls.Add(this.E7);
-            this.panel3.Controls.Add(this.E2);
-            this.panel3.Controls.Add(this.E6);
-            this.panel3.Controls.Add(this.E1);
-            this.panel3.Controls.Add(this.E5);
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(7, 12);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(499, 818);
-            this.panel3.TabIndex = 0;
+            this.pnlLayout.BackColor = System.Drawing.Color.White;
+            this.pnlLayout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnlLayout.Controls.Add(this.OFO10);
+            this.pnlLayout.Controls.Add(this.OFO9);
+            this.pnlLayout.Controls.Add(this.OF5);
+            this.pnlLayout.Controls.Add(this.OFO8);
+            this.pnlLayout.Controls.Add(this.OFO7);
+            this.pnlLayout.Controls.Add(this.OFO6);
+            this.pnlLayout.Controls.Add(this.OFO5);
+            this.pnlLayout.Controls.Add(this.OFO4);
+            this.pnlLayout.Controls.Add(this.OFO3);
+            this.pnlLayout.Controls.Add(this.OFO2);
+            this.pnlLayout.Controls.Add(this.OFO1);
+            this.pnlLayout.Controls.Add(this.OF4);
+            this.pnlLayout.Controls.Add(this.OF3);
+            this.pnlLayout.Controls.Add(this.OF2);
+            this.pnlLayout.Controls.Add(this.OF1);
+            this.pnlLayout.Controls.Add(this.WO8);
+            this.pnlLayout.Controls.Add(this.WO7);
+            this.pnlLayout.Controls.Add(this.WO10);
+            this.pnlLayout.Controls.Add(this.WO9);
+            this.pnlLayout.Controls.Add(this.WO12);
+            this.pnlLayout.Controls.Add(this.WO11);
+            this.pnlLayout.Controls.Add(this.WO2);
+            this.pnlLayout.Controls.Add(this.WO1);
+            this.pnlLayout.Controls.Add(this.WO4);
+            this.pnlLayout.Controls.Add(this.WO3);
+            this.pnlLayout.Controls.Add(this.WO6);
+            this.pnlLayout.Controls.Add(this.WO5);
+            this.pnlLayout.Controls.Add(this.W4);
+            this.pnlLayout.Controls.Add(this.W5);
+            this.pnlLayout.Controls.Add(this.W6);
+            this.pnlLayout.Controls.Add(this.W1);
+            this.pnlLayout.Controls.Add(this.W2);
+            this.pnlLayout.Controls.Add(this.W3);
+            this.pnlLayout.Controls.Add(this.EO12);
+            this.pnlLayout.Controls.Add(this.EO11);
+            this.pnlLayout.Controls.Add(this.EO14);
+            this.pnlLayout.Controls.Add(this.EO13);
+            this.pnlLayout.Controls.Add(this.EO16);
+            this.pnlLayout.Controls.Add(this.EO15);
+            this.pnlLayout.Controls.Add(this.EO18);
+            this.pnlLayout.Controls.Add(this.EO17);
+            this.pnlLayout.Controls.Add(this.EO2);
+            this.pnlLayout.Controls.Add(this.EO1);
+            this.pnlLayout.Controls.Add(this.EO4);
+            this.pnlLayout.Controls.Add(this.EO3);
+            this.pnlLayout.Controls.Add(this.EO6);
+            this.pnlLayout.Controls.Add(this.EO5);
+            this.pnlLayout.Controls.Add(this.EO8);
+            this.pnlLayout.Controls.Add(this.EO7);
+            this.pnlLayout.Controls.Add(this.EO10);
+            this.pnlLayout.Controls.Add(this.EO9);
+            this.pnlLayout.Controls.Add(this.E9);
+            this.pnlLayout.Controls.Add(this.E4);
+            this.pnlLayout.Controls.Add(this.E8);
+            this.pnlLayout.Controls.Add(this.E3);
+            this.pnlLayout.Controls.Add(this.E7);
+            this.pnlLayout.Controls.Add(this.E2);
+            this.pnlLayout.Controls.Add(this.E6);
+            this.pnlLayout.Controls.Add(this.E1);
+            this.pnlLayout.Controls.Add(this.E5);
+            this.pnlLayout.Controls.Add(this.pictureBox1);
+            this.pnlLayout.Location = new System.Drawing.Point(65, 12);
+            this.pnlLayout.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlLayout.Name = "pnlLayout";
+            this.pnlLayout.Size = new System.Drawing.Size(386, 818);
+            this.pnlLayout.TabIndex = 0;
             // 
             // OFO10
             // 
@@ -911,7 +911,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.panel8);
             this.groupBox3.Controls.Add(this.dgwTables);
             this.groupBox3.Location = new System.Drawing.Point(18, 316);
@@ -939,7 +938,7 @@
             this.panel6.BackColor = System.Drawing.Color.LightGray;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.panel7);
-            this.panel6.Controls.Add(this.label4);
+            this.panel6.Controls.Add(this.lblHC);
             this.panel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.panel6.Location = new System.Drawing.Point(4, 47);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
@@ -971,18 +970,18 @@
             this.lblOper.TabIndex = 7;
             this.lblOper.Text = "0";
             // 
-            // label4
+            // lblHC
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.label4.Location = new System.Drawing.Point(11, 8);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(161, 25);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "OPERADORES";
+            this.lblHC.AutoSize = true;
+            this.lblHC.BackColor = System.Drawing.Color.Transparent;
+            this.lblHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.lblHC.Location = new System.Drawing.Point(11, 8);
+            this.lblHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHC.Name = "lblHC";
+            this.lblHC.Size = new System.Drawing.Size(161, 25);
+            this.lblHC.TabIndex = 5;
+            this.lblHC.Text = "OPERADORES";
             // 
             // panel5
             // 
@@ -1011,25 +1010,25 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.LightGray;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.lblTables);
             this.panel4.Location = new System.Drawing.Point(4, 4);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(277, 42);
             this.panel4.TabIndex = 8;
             // 
-            // label3
+            // lblTables
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.label3.Location = new System.Drawing.Point(11, 9);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(167, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "TOTAL MESAS";
+            this.lblTables.AutoSize = true;
+            this.lblTables.BackColor = System.Drawing.Color.Transparent;
+            this.lblTables.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTables.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.lblTables.Location = new System.Drawing.Point(11, 9);
+            this.lblTables.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTables.Name = "lblTables";
+            this.lblTables.Size = new System.Drawing.Size(167, 25);
+            this.lblTables.TabIndex = 4;
+            this.lblTables.Text = "TOTAL MESAS";
             // 
             // dgwTables
             // 
@@ -1200,7 +1199,7 @@
             this.toolStripStatusLabel2,
             this.tssUserName,
             this.toolStripStatusLabel3,
-            this.toolStripStatusLabel4,
+            this.tsslVersion,
             this.tssVersion});
             this.statusStrip1.Location = new System.Drawing.Point(0, 937);
             this.statusStrip1.Name = "statusStrip1";
@@ -1214,8 +1213,8 @@
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(170, 20);
-            this.toolStripStatusLabel1.Text = "Medline MXC Playbook";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(194, 20);
+            this.toolStripStatusLabel1.Text = "Medline Mexicali Playbook";
             // 
             // toolStripStatusLabel2
             // 
@@ -1240,12 +1239,12 @@
             this.toolStripStatusLabel3.Size = new System.Drawing.Size(30, 20);
             this.toolStripStatusLabel3.Text = "  |  ";
             // 
-            // toolStripStatusLabel4
+            // tsslVersion
             // 
-            this.toolStripStatusLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(73, 20);
-            this.toolStripStatusLabel4.Text = "Versión : ";
+            this.tsslVersion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsslVersion.Name = "tsslVersion";
+            this.tsslVersion.Size = new System.Drawing.Size(73, 20);
+            this.tsslVersion.Text = "Versión : ";
             // 
             // tssVersion
             // 
@@ -1262,7 +1261,8 @@
             this.btnNew,
             this.btnConfig,
             this.toolStripLabel1,
-            this.btnExit});
+            this.btnExit,
+            this.btnLenguage});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1429, 27);
@@ -1306,6 +1306,16 @@
             this.btnExit.Text = "Exit";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnLenguage
+            // 
+            this.btnLenguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLenguage.Image = global::WOLayout.Properties.Resources.united_states;
+            this.btnLenguage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLenguage.Name = "btnLenguage";
+            this.btnLenguage.Size = new System.Drawing.Size(24, 24);
+            this.btnLenguage.Text = "Lenguage";
+            this.btnLenguage.Click += new System.EventHandler(this.btnLenguage_Click);
+            // 
             // lblLayout
             // 
             this.lblLayout.AutoSize = true;
@@ -1318,17 +1328,17 @@
             this.lblLayout.TabIndex = 0;
             this.lblLayout.Text = "LAYOUT";
             // 
-            // label5
+            // lblTopTitle1
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(362, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(164, 25);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "INFORMACION";
+            this.lblTopTitle1.AutoSize = true;
+            this.lblTopTitle1.BackColor = System.Drawing.Color.Transparent;
+            this.lblTopTitle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTopTitle1.ForeColor = System.Drawing.Color.White;
+            this.lblTopTitle1.Location = new System.Drawing.Point(362, 0);
+            this.lblTopTitle1.Name = "lblTopTitle1";
+            this.lblTopTitle1.Size = new System.Drawing.Size(164, 25);
+            this.lblTopTitle1.TabIndex = 1;
+            this.lblTopTitle1.Text = "INFORMACION";
             // 
             // panel9
             // 
@@ -1337,22 +1347,12 @@
             this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel9.Controls.Add(this.lblLayout);
-            this.panel9.Controls.Add(this.label5);
+            this.panel9.Controls.Add(this.lblTopTitle1);
             this.panel9.Controls.Add(this.panel1);
             this.panel9.Location = new System.Drawing.Point(12, 30);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(1406, 901);
             this.panel9.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(56, 426);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 63);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "PRUEBA MANUAL";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // wfLayout
             // 
@@ -1376,7 +1376,7 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.pnlLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OFO10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OFO9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OF5)).EndInit();
@@ -1478,11 +1478,11 @@
         private System.Windows.Forms.DataGridView dgwItem;
         private System.Windows.Forms.Label lblOper;
         private System.Windows.Forms.Label lblMesas;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblHC;
+        private System.Windows.Forms.Label lblTables;
         private System.Windows.Forms.DataGridView dgwTables;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlLayout;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tssUserName;
@@ -1562,11 +1562,11 @@
         private System.Windows.Forms.PictureBox E6;
         private System.Windows.Forms.PictureBox E1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel tsslVersion;
         private System.Windows.Forms.Label lblLayout;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblTopTitle1;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripButton btnLenguage;
     }
 }
 
