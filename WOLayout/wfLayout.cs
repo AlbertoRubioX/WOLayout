@@ -35,6 +35,12 @@ namespace WOLayout
         private decimal _dKitCaja;
         private int _iInspeccion;
 
+        //Manual
+        private int _iSub;
+        private int _iMain;
+        private double _sDuraW1;
+        private double _sDuraW2;
+
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
         private int _iHeightAnt;
@@ -271,6 +277,10 @@ namespace WOLayout
                             sWCodeS = sWrap1;
                         }
 
+                        //manual
+                        _sDuraW1 = dWrapTime;
+                        _sDuraW2 = dWrapTime2;
+
                         sDuraW1 = dWrapTime.ToString();
                         sDuraW2 = dWrapTime2.ToString();
 
@@ -323,7 +333,8 @@ namespace WOLayout
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
                             iOper = iMesas * _iEstSub;
-                            dtN.Rows.Add("Sub-Ensamble", "Sub-Ensambles",iSub, iMesas, iOper);
+                            dtN.Rows.Add("Sub-Ensamble", "Sub-Ensambles", iSub, iMesas, iOper);
+                            _iSub = iSub; //manual
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -333,6 +344,7 @@ namespace WOLayout
                             iMesas = (int)Math.Ceiling((decimal)iMain / (decimal)_iMaxTable);
                             iOper = iMesas;
                             dtN.Rows.Add("Ensamble", "Ensamble Sobre Conveyor", iMain, iMesas, iOper);
+                            _iMain = iMain; //manual
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -471,7 +483,7 @@ namespace WOLayout
                 dtNew.Columns.Add("PRODUCTO", typeof(string));
                 dtNew.Columns.Add("NOMBRE", typeof(string));
                 dtNew.Columns.Add("CAJAS", typeof(int));
-                dtNew.Columns.Add("KITS", typeof(int));
+                dtNew.Columns.Add("KITS x CAJA", typeof(int));
                 dtNew.Columns.Add("TOTAL EN KITS", typeof(int));
                 dtNew.Columns.Add("W.O. DURACION (min)", typeof(decimal));
                 dgwWO.DataSource = dtNew;
@@ -480,9 +492,9 @@ namespace WOLayout
             dgwWO.Columns[1].Visible = false;
             dgwWO.Columns[0].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[2].Width = ColumnWith(dgwWO, 15);
-            dgwWO.Columns[3].Width = ColumnWith(dgwWO, 15);
+            dgwWO.Columns[3].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[4].Width = ColumnWith(dgwWO, 20);
-            dgwWO.Columns[5].Width = ColumnWith(dgwWO, 35);
+            dgwWO.Columns[5].Width = ColumnWith(dgwWO, 30);
 
             if (dgwItem.Rows.Count == 0)
             {
@@ -836,8 +848,24 @@ namespace WOLayout
 
         }
 
+
         #endregion
 
-        
+
+        public void ModoManual(int ODisponibles, double AssyTime, int MaxTable, int CMain, int CSub, int OperadoresNA, int DuraW1, int DuraW2, int OWrap1, double BalanceoPermitido )
+        {
+            double[,] ite = new double[20, 10];
+
+            ite[0,0] = Math.Ceiling(_dAssyTime / _iMaxTable * (_iSub + _iMain));
+            ite[0,1] = ODisponibles - ite[0, 0] - OperadoresNA;
+            ite[0,2] = _dAssyTime * _iMaxTable;
+            ite[0,3] = (_sDuraW1 + _sDuraW2) / (ite[0, 1] / OWrap1);
+            ite[0,4] = Math.Abs(ite[0, 2]- ite[0, 3]);
+            ite[0,5] = (ite[0, 4] < BalanceoPermitido) ? 1 : 0;
+            ite[0,6] = ite[0, 5] * ite[0, 5];
+            ite[0,7] = (ite[0, 2] >= ite[0, 3]) ? ite[0, 2] : ite[0, 2];
+            ite[0, 8] = (ite[0, 6] == 0) ? ite[0, 6] : 0;
+
+        }
     }
 }
