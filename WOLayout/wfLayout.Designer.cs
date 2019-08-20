@@ -134,6 +134,7 @@
             this.lblLayout = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -910,6 +911,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.panel8);
             this.groupBox3.Controls.Add(this.dgwTables);
             this.groupBox3.Location = new System.Drawing.Point(18, 316);
@@ -1342,6 +1344,16 @@
             this.panel9.Size = new System.Drawing.Size(1406, 901);
             this.panel9.TabIndex = 3;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(56, 426);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 63);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "PRUEBA MANUAL";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // wfLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1554,6 +1566,7 @@
         private System.Windows.Forms.Label lblLayout;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button button1;
     }
 }
 
