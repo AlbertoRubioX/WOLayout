@@ -145,6 +145,7 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\w2.png" />
     <None Include="Resources\united-states.png" />
     <None Include="Resources\mexico.png" />
     <None Include="Resources\Blue-Background-down.jpg" />

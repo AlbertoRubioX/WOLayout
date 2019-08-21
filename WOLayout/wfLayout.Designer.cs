@@ -35,11 +35,50 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(wfLayout));
-            this.txtWO = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tssUserName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.btnConfig = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.btnExit = new System.Windows.Forms.ToolStripButton();
+            this.btnLenguage = new System.Windows.Forms.ToolStripButton();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.lblLayout = new System.Windows.Forms.Label();
+            this.lblTopTitle1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ptbLogo = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.pnlLayout = new System.Windows.Forms.Panel();
+            this.Panel3 = new System.Windows.Forms.Panel();
+            this.WSO16 = new System.Windows.Forms.PictureBox();
+            this.WSO15 = new System.Windows.Forms.PictureBox();
+            this.WSO14 = new System.Windows.Forms.PictureBox();
+            this.WSO13 = new System.Windows.Forms.PictureBox();
+            this.WSO12 = new System.Windows.Forms.PictureBox();
+            this.WSO11 = new System.Windows.Forms.PictureBox();
+            this.WSO10 = new System.Windows.Forms.PictureBox();
+            this.WSO9 = new System.Windows.Forms.PictureBox();
+            this.WSO8 = new System.Windows.Forms.PictureBox();
+            this.WSO7 = new System.Windows.Forms.PictureBox();
+            this.WSO6 = new System.Windows.Forms.PictureBox();
+            this.WSO5 = new System.Windows.Forms.PictureBox();
+            this.WSO4 = new System.Windows.Forms.PictureBox();
+            this.WSO3 = new System.Windows.Forms.PictureBox();
+            this.WSO2 = new System.Windows.Forms.PictureBox();
+            this.WSO1 = new System.Windows.Forms.PictureBox();
+            this.WS8 = new System.Windows.Forms.PictureBox();
+            this.WS7 = new System.Windows.Forms.PictureBox();
+            this.WS6 = new System.Windows.Forms.PictureBox();
+            this.WS5 = new System.Windows.Forms.PictureBox();
+            this.WS4 = new System.Windows.Forms.PictureBox();
+            this.WS3 = new System.Windows.Forms.PictureBox();
+            this.WS2 = new System.Windows.Forms.PictureBox();
+            this.WS1 = new System.Windows.Forms.PictureBox();
             this.OFO10 = new System.Windows.Forms.PictureBox();
             this.OFO9 = new System.Windows.Forms.PictureBox();
             this.OF5 = new System.Windows.Forms.PictureBox();
@@ -115,30 +154,42 @@
             this.dgwTables = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgwWO = new System.Windows.Forms.DataGridView();
+            this.txtWO = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tssUserName = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
-            this.btnConfig = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.btnExit = new System.Windows.Forms.ToolStripButton();
-            this.btnLenguage = new System.Windows.Forms.ToolStripButton();
-            this.lblLayout = new System.Windows.Forms.Label();
-            this.lblTopTitle1 = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.statusStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
             this.groupBox4.SuspendLayout();
-            this.pnlLayout.SuspendLayout();
+            this.Panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OFO10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OFO9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OF5)).BeginInit();
@@ -211,25 +262,171 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgwWO)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwItem)).BeginInit();
-            this.statusStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
-            // txtWO
+            // statusStrip1
             // 
-            this.txtWO.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtWO.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWO.Location = new System.Drawing.Point(119, 17);
-            this.txtWO.Margin = new System.Windows.Forms.Padding(4);
-            this.txtWO.MaxLength = 20;
-            this.txtWO.Name = "txtWO";
-            this.txtWO.Size = new System.Drawing.Size(115, 31);
-            this.txtWO.TabIndex = 1;
-            this.txtWO.Text = "0000000";
-            this.txtWO.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtWO.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWO_KeyDown);
-            this.txtWO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtWO_KeyPress);
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.tssUserName,
+            this.toolStripStatusLabel3,
+            this.tsslVersion,
+            this.tssVersion});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 937);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1429, 25);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(194, 20);
+            this.toolStripStatusLabel1.Text = "Medline Mexicali Playbook";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(30, 20);
+            this.toolStripStatusLabel2.Text = "  |  ";
+            // 
+            // tssUserName
+            // 
+            this.tssUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.tssUserName.Name = "tssUserName";
+            this.tssUserName.Size = new System.Drawing.Size(79, 20);
+            this.tssUserName.Text = "user_name";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(30, 20);
+            this.toolStripStatusLabel3.Text = "  |  ";
+            // 
+            // tsslVersion
+            // 
+            this.tsslVersion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsslVersion.Name = "tsslVersion";
+            this.tsslVersion.Size = new System.Drawing.Size(73, 20);
+            this.tsslVersion.Text = "Versión : ";
+            // 
+            // tssVersion
+            // 
+            this.tssVersion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tssVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.tssVersion.Name = "tssVersion";
+            this.tssVersion.Size = new System.Drawing.Size(57, 20);
+            this.tssVersion.Text = "1.0.0.0";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnNew,
+            this.btnConfig,
+            this.toolStripLabel1,
+            this.btnExit,
+            this.btnLenguage});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1429, 27);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnNew
+            // 
+            this.btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnNew.Image = global::WOLayout.Properties.Resources.file;
+            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(24, 24);
+            this.btnNew.Text = "Clean";
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnConfig
+            // 
+            this.btnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnConfig.Image = global::WOLayout.Properties.Resources.idea;
+            this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(24, 24);
+            this.btnConfig.Text = "Setting";
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(14, 24);
+            this.toolStripLabel1.Text = "|";
+            // 
+            // btnExit
+            // 
+            this.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExit.Image = global::WOLayout.Properties.Resources.bt_exit;
+            this.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(24, 24);
+            this.btnExit.Text = "Exit";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnLenguage
+            // 
+            this.btnLenguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLenguage.Image = global::WOLayout.Properties.Resources.united_states;
+            this.btnLenguage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLenguage.Name = "btnLenguage";
+            this.btnLenguage.Size = new System.Drawing.Size(24, 24);
+            this.btnLenguage.Text = "Lenguage";
+            this.btnLenguage.Click += new System.EventHandler(this.btnLenguage_Click);
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.Transparent;
+            this.panel9.BackgroundImage = global::WOLayout.Properties.Resources.Blue_Background_down;
+            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.lblLayout);
+            this.panel9.Controls.Add(this.lblTopTitle1);
+            this.panel9.Controls.Add(this.panel1);
+            this.panel9.Location = new System.Drawing.Point(12, 30);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(1406, 901);
+            this.panel9.TabIndex = 3;
+            // 
+            // lblLayout
+            // 
+            this.lblLayout.AutoSize = true;
+            this.lblLayout.BackColor = System.Drawing.Color.Transparent;
+            this.lblLayout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLayout.ForeColor = System.Drawing.Color.White;
+            this.lblLayout.Location = new System.Drawing.Point(1086, 1);
+            this.lblLayout.Name = "lblLayout";
+            this.lblLayout.Size = new System.Drawing.Size(99, 25);
+            this.lblLayout.TabIndex = 0;
+            this.lblLayout.Text = "LAYOUT";
+            // 
+            // lblTopTitle1
+            // 
+            this.lblTopTitle1.AutoSize = true;
+            this.lblTopTitle1.BackColor = System.Drawing.Color.Transparent;
+            this.lblTopTitle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTopTitle1.ForeColor = System.Drawing.Color.White;
+            this.lblTopTitle1.Location = new System.Drawing.Point(362, 0);
+            this.lblTopTitle1.Name = "lblTopTitle1";
+            this.lblTopTitle1.Size = new System.Drawing.Size(164, 25);
+            this.lblTopTitle1.TabIndex = 1;
+            this.lblTopTitle1.Text = "INFORMACION";
             // 
             // panel1
             // 
@@ -259,83 +456,331 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.pnlLayout);
+            this.groupBox4.Controls.Add(this.Panel3);
             this.groupBox4.Location = new System.Drawing.Point(879, 1);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(513, 852);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             // 
-            // pnlLayout
+            // Panel3
             // 
-            this.pnlLayout.BackColor = System.Drawing.Color.White;
-            this.pnlLayout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pnlLayout.Controls.Add(this.OFO10);
-            this.pnlLayout.Controls.Add(this.OFO9);
-            this.pnlLayout.Controls.Add(this.OF5);
-            this.pnlLayout.Controls.Add(this.OFO8);
-            this.pnlLayout.Controls.Add(this.OFO7);
-            this.pnlLayout.Controls.Add(this.OFO6);
-            this.pnlLayout.Controls.Add(this.OFO5);
-            this.pnlLayout.Controls.Add(this.OFO4);
-            this.pnlLayout.Controls.Add(this.OFO3);
-            this.pnlLayout.Controls.Add(this.OFO2);
-            this.pnlLayout.Controls.Add(this.OFO1);
-            this.pnlLayout.Controls.Add(this.OF4);
-            this.pnlLayout.Controls.Add(this.OF3);
-            this.pnlLayout.Controls.Add(this.OF2);
-            this.pnlLayout.Controls.Add(this.OF1);
-            this.pnlLayout.Controls.Add(this.WO8);
-            this.pnlLayout.Controls.Add(this.WO7);
-            this.pnlLayout.Controls.Add(this.WO10);
-            this.pnlLayout.Controls.Add(this.WO9);
-            this.pnlLayout.Controls.Add(this.WO12);
-            this.pnlLayout.Controls.Add(this.WO11);
-            this.pnlLayout.Controls.Add(this.WO2);
-            this.pnlLayout.Controls.Add(this.WO1);
-            this.pnlLayout.Controls.Add(this.WO4);
-            this.pnlLayout.Controls.Add(this.WO3);
-            this.pnlLayout.Controls.Add(this.WO6);
-            this.pnlLayout.Controls.Add(this.WO5);
-            this.pnlLayout.Controls.Add(this.W4);
-            this.pnlLayout.Controls.Add(this.W5);
-            this.pnlLayout.Controls.Add(this.W6);
-            this.pnlLayout.Controls.Add(this.W1);
-            this.pnlLayout.Controls.Add(this.W2);
-            this.pnlLayout.Controls.Add(this.W3);
-            this.pnlLayout.Controls.Add(this.EO12);
-            this.pnlLayout.Controls.Add(this.EO11);
-            this.pnlLayout.Controls.Add(this.EO14);
-            this.pnlLayout.Controls.Add(this.EO13);
-            this.pnlLayout.Controls.Add(this.EO16);
-            this.pnlLayout.Controls.Add(this.EO15);
-            this.pnlLayout.Controls.Add(this.EO18);
-            this.pnlLayout.Controls.Add(this.EO17);
-            this.pnlLayout.Controls.Add(this.EO2);
-            this.pnlLayout.Controls.Add(this.EO1);
-            this.pnlLayout.Controls.Add(this.EO4);
-            this.pnlLayout.Controls.Add(this.EO3);
-            this.pnlLayout.Controls.Add(this.EO6);
-            this.pnlLayout.Controls.Add(this.EO5);
-            this.pnlLayout.Controls.Add(this.EO8);
-            this.pnlLayout.Controls.Add(this.EO7);
-            this.pnlLayout.Controls.Add(this.EO10);
-            this.pnlLayout.Controls.Add(this.EO9);
-            this.pnlLayout.Controls.Add(this.E9);
-            this.pnlLayout.Controls.Add(this.E4);
-            this.pnlLayout.Controls.Add(this.E8);
-            this.pnlLayout.Controls.Add(this.E3);
-            this.pnlLayout.Controls.Add(this.E7);
-            this.pnlLayout.Controls.Add(this.E2);
-            this.pnlLayout.Controls.Add(this.E6);
-            this.pnlLayout.Controls.Add(this.E1);
-            this.pnlLayout.Controls.Add(this.E5);
-            this.pnlLayout.Controls.Add(this.pictureBox1);
-            this.pnlLayout.Location = new System.Drawing.Point(65, 12);
-            this.pnlLayout.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlLayout.Name = "pnlLayout";
-            this.pnlLayout.Size = new System.Drawing.Size(386, 818);
-            this.pnlLayout.TabIndex = 0;
+            this.Panel3.BackColor = System.Drawing.Color.White;
+            this.Panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Panel3.Controls.Add(this.WSO16);
+            this.Panel3.Controls.Add(this.WSO15);
+            this.Panel3.Controls.Add(this.WSO14);
+            this.Panel3.Controls.Add(this.WSO13);
+            this.Panel3.Controls.Add(this.WSO12);
+            this.Panel3.Controls.Add(this.WSO11);
+            this.Panel3.Controls.Add(this.WSO10);
+            this.Panel3.Controls.Add(this.WSO9);
+            this.Panel3.Controls.Add(this.WSO8);
+            this.Panel3.Controls.Add(this.WSO7);
+            this.Panel3.Controls.Add(this.WSO6);
+            this.Panel3.Controls.Add(this.WSO5);
+            this.Panel3.Controls.Add(this.WSO4);
+            this.Panel3.Controls.Add(this.WSO3);
+            this.Panel3.Controls.Add(this.WSO2);
+            this.Panel3.Controls.Add(this.WSO1);
+            this.Panel3.Controls.Add(this.WS8);
+            this.Panel3.Controls.Add(this.WS7);
+            this.Panel3.Controls.Add(this.WS6);
+            this.Panel3.Controls.Add(this.WS5);
+            this.Panel3.Controls.Add(this.WS4);
+            this.Panel3.Controls.Add(this.WS3);
+            this.Panel3.Controls.Add(this.WS2);
+            this.Panel3.Controls.Add(this.WS1);
+            this.Panel3.Controls.Add(this.OFO10);
+            this.Panel3.Controls.Add(this.OFO9);
+            this.Panel3.Controls.Add(this.OF5);
+            this.Panel3.Controls.Add(this.OFO8);
+            this.Panel3.Controls.Add(this.OFO7);
+            this.Panel3.Controls.Add(this.OFO6);
+            this.Panel3.Controls.Add(this.OFO5);
+            this.Panel3.Controls.Add(this.OFO4);
+            this.Panel3.Controls.Add(this.OFO3);
+            this.Panel3.Controls.Add(this.OFO2);
+            this.Panel3.Controls.Add(this.OFO1);
+            this.Panel3.Controls.Add(this.OF4);
+            this.Panel3.Controls.Add(this.OF3);
+            this.Panel3.Controls.Add(this.OF2);
+            this.Panel3.Controls.Add(this.OF1);
+            this.Panel3.Controls.Add(this.WO8);
+            this.Panel3.Controls.Add(this.WO7);
+            this.Panel3.Controls.Add(this.WO10);
+            this.Panel3.Controls.Add(this.WO9);
+            this.Panel3.Controls.Add(this.WO12);
+            this.Panel3.Controls.Add(this.WO11);
+            this.Panel3.Controls.Add(this.WO2);
+            this.Panel3.Controls.Add(this.WO1);
+            this.Panel3.Controls.Add(this.WO4);
+            this.Panel3.Controls.Add(this.WO3);
+            this.Panel3.Controls.Add(this.WO6);
+            this.Panel3.Controls.Add(this.WO5);
+            this.Panel3.Controls.Add(this.W4);
+            this.Panel3.Controls.Add(this.W5);
+            this.Panel3.Controls.Add(this.W6);
+            this.Panel3.Controls.Add(this.W1);
+            this.Panel3.Controls.Add(this.W2);
+            this.Panel3.Controls.Add(this.W3);
+            this.Panel3.Controls.Add(this.EO12);
+            this.Panel3.Controls.Add(this.EO11);
+            this.Panel3.Controls.Add(this.EO14);
+            this.Panel3.Controls.Add(this.EO13);
+            this.Panel3.Controls.Add(this.EO16);
+            this.Panel3.Controls.Add(this.EO15);
+            this.Panel3.Controls.Add(this.EO18);
+            this.Panel3.Controls.Add(this.EO17);
+            this.Panel3.Controls.Add(this.EO2);
+            this.Panel3.Controls.Add(this.EO1);
+            this.Panel3.Controls.Add(this.EO4);
+            this.Panel3.Controls.Add(this.EO3);
+            this.Panel3.Controls.Add(this.EO6);
+            this.Panel3.Controls.Add(this.EO5);
+            this.Panel3.Controls.Add(this.EO8);
+            this.Panel3.Controls.Add(this.EO7);
+            this.Panel3.Controls.Add(this.EO10);
+            this.Panel3.Controls.Add(this.EO9);
+            this.Panel3.Controls.Add(this.E9);
+            this.Panel3.Controls.Add(this.E4);
+            this.Panel3.Controls.Add(this.E8);
+            this.Panel3.Controls.Add(this.E3);
+            this.Panel3.Controls.Add(this.E7);
+            this.Panel3.Controls.Add(this.E2);
+            this.Panel3.Controls.Add(this.E6);
+            this.Panel3.Controls.Add(this.E1);
+            this.Panel3.Controls.Add(this.E5);
+            this.Panel3.Controls.Add(this.pictureBox1);
+            this.Panel3.Location = new System.Drawing.Point(65, 12);
+            this.Panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.Panel3.Name = "Panel3";
+            this.Panel3.Size = new System.Drawing.Size(386, 818);
+            this.Panel3.TabIndex = 0;
+            // 
+            // WSO16
+            // 
+            this.WSO16.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO16.Location = new System.Drawing.Point(327, 700);
+            this.WSO16.Name = "WSO16";
+            this.WSO16.Size = new System.Drawing.Size(28, 27);
+            this.WSO16.TabIndex = 186;
+            this.WSO16.TabStop = false;
+            // 
+            // WSO15
+            // 
+            this.WSO15.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO15.Location = new System.Drawing.Point(284, 700);
+            this.WSO15.Name = "WSO15";
+            this.WSO15.Size = new System.Drawing.Size(28, 27);
+            this.WSO15.TabIndex = 185;
+            this.WSO15.TabStop = false;
+            // 
+            // WSO14
+            // 
+            this.WSO14.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO14.Location = new System.Drawing.Point(327, 618);
+            this.WSO14.Name = "WSO14";
+            this.WSO14.Size = new System.Drawing.Size(28, 27);
+            this.WSO14.TabIndex = 184;
+            this.WSO14.TabStop = false;
+            // 
+            // WSO13
+            // 
+            this.WSO13.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO13.Location = new System.Drawing.Point(284, 618);
+            this.WSO13.Name = "WSO13";
+            this.WSO13.Size = new System.Drawing.Size(28, 27);
+            this.WSO13.TabIndex = 183;
+            this.WSO13.TabStop = false;
+            // 
+            // WSO12
+            // 
+            this.WSO12.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO12.Location = new System.Drawing.Point(327, 528);
+            this.WSO12.Name = "WSO12";
+            this.WSO12.Size = new System.Drawing.Size(28, 27);
+            this.WSO12.TabIndex = 182;
+            this.WSO12.TabStop = false;
+            // 
+            // WSO11
+            // 
+            this.WSO11.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO11.Location = new System.Drawing.Point(284, 528);
+            this.WSO11.Name = "WSO11";
+            this.WSO11.Size = new System.Drawing.Size(28, 27);
+            this.WSO11.TabIndex = 181;
+            this.WSO11.TabStop = false;
+            // 
+            // WSO10
+            // 
+            this.WSO10.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO10.Location = new System.Drawing.Point(327, 434);
+            this.WSO10.Name = "WSO10";
+            this.WSO10.Size = new System.Drawing.Size(28, 27);
+            this.WSO10.TabIndex = 180;
+            this.WSO10.TabStop = false;
+            // 
+            // WSO9
+            // 
+            this.WSO9.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO9.Location = new System.Drawing.Point(284, 434);
+            this.WSO9.Name = "WSO9";
+            this.WSO9.Size = new System.Drawing.Size(28, 27);
+            this.WSO9.TabIndex = 179;
+            this.WSO9.TabStop = false;
+            // 
+            // WSO8
+            // 
+            this.WSO8.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO8.Location = new System.Drawing.Point(327, 342);
+            this.WSO8.Name = "WSO8";
+            this.WSO8.Size = new System.Drawing.Size(28, 27);
+            this.WSO8.TabIndex = 178;
+            this.WSO8.TabStop = false;
+            // 
+            // WSO7
+            // 
+            this.WSO7.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO7.Location = new System.Drawing.Point(284, 342);
+            this.WSO7.Name = "WSO7";
+            this.WSO7.Size = new System.Drawing.Size(28, 27);
+            this.WSO7.TabIndex = 177;
+            this.WSO7.TabStop = false;
+            // 
+            // WSO6
+            // 
+            this.WSO6.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO6.Location = new System.Drawing.Point(327, 251);
+            this.WSO6.Name = "WSO6";
+            this.WSO6.Size = new System.Drawing.Size(28, 27);
+            this.WSO6.TabIndex = 176;
+            this.WSO6.TabStop = false;
+            // 
+            // WSO5
+            // 
+            this.WSO5.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO5.Location = new System.Drawing.Point(284, 251);
+            this.WSO5.Name = "WSO5";
+            this.WSO5.Size = new System.Drawing.Size(28, 27);
+            this.WSO5.TabIndex = 175;
+            this.WSO5.TabStop = false;
+            // 
+            // WSO4
+            // 
+            this.WSO4.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO4.Location = new System.Drawing.Point(327, 160);
+            this.WSO4.Name = "WSO4";
+            this.WSO4.Size = new System.Drawing.Size(28, 27);
+            this.WSO4.TabIndex = 174;
+            this.WSO4.TabStop = false;
+            // 
+            // WSO3
+            // 
+            this.WSO3.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO3.Location = new System.Drawing.Point(284, 160);
+            this.WSO3.Name = "WSO3";
+            this.WSO3.Size = new System.Drawing.Size(28, 27);
+            this.WSO3.TabIndex = 173;
+            this.WSO3.TabStop = false;
+            // 
+            // WSO2
+            // 
+            this.WSO2.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO2.Location = new System.Drawing.Point(327, 75);
+            this.WSO2.Name = "WSO2";
+            this.WSO2.Size = new System.Drawing.Size(28, 27);
+            this.WSO2.TabIndex = 172;
+            this.WSO2.TabStop = false;
+            // 
+            // WSO1
+            // 
+            this.WSO1.Image = global::WOLayout.Properties.Resources.operador;
+            this.WSO1.Location = new System.Drawing.Point(284, 77);
+            this.WSO1.Name = "WSO1";
+            this.WSO1.Size = new System.Drawing.Size(28, 27);
+            this.WSO1.TabIndex = 171;
+            this.WSO1.TabStop = false;
+            // 
+            // WS8
+            // 
+            this.WS8.Image = global::WOLayout.Properties.Resources.w2;
+            this.WS8.Location = new System.Drawing.Point(276, 725);
+            this.WS8.Name = "WS8";
+            this.WS8.Size = new System.Drawing.Size(92, 28);
+            this.WS8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WS8.TabIndex = 170;
+            this.WS8.TabStop = false;
+            // 
+            // WS7
+            // 
+            this.WS7.Image = global::WOLayout.Properties.Resources.w2;
+            this.WS7.Location = new System.Drawing.Point(276, 643);
+            this.WS7.Name = "WS7";
+            this.WS7.Size = new System.Drawing.Size(92, 28);
+            this.WS7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WS7.TabIndex = 167;
+            this.WS7.TabStop = false;
+            // 
+            // WS6
+            // 
+            this.WS6.Image = global::WOLayout.Properties.Resources.w2;
+            this.WS6.Location = new System.Drawing.Point(276, 553);
+            this.WS6.Name = "WS6";
+            this.WS6.Size = new System.Drawing.Size(92, 28);
+            this.WS6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WS6.TabIndex = 164;
+            this.WS6.TabStop = false;
+            // 
+            // WS5
+            // 
+            this.WS5.Image = global::WOLayout.Properties.Resources.w2;
+            this.WS5.Location = new System.Drawing.Point(276, 459);
+            this.WS5.Name = "WS5";
+            this.WS5.Size = new System.Drawing.Size(92, 28);
+            this.WS5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WS5.TabIndex = 161;
+            this.WS5.TabStop = false;
+            // 
+            // WS4
+            // 
+            this.WS4.Image = global::WOLayout.Properties.Resources.w2;
+            this.WS4.Location = new System.Drawing.Point(276, 367);
+            this.WS4.Name = "WS4";
+            this.WS4.Size = new System.Drawing.Size(92, 28);
+            this.WS4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WS4.TabIndex = 160;
+            this.WS4.TabStop = false;
+            // 
+            // WS3
+            // 
+            this.WS3.Image = global::WOLayout.Properties.Resources.w2;
+            this.WS3.Location = new System.Drawing.Point(276, 276);
+            this.WS3.Name = "WS3";
+            this.WS3.Size = new System.Drawing.Size(92, 28);
+            this.WS3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WS3.TabIndex = 159;
+            this.WS3.TabStop = false;
+            // 
+            // WS2
+            // 
+            this.WS2.Image = global::WOLayout.Properties.Resources.w2;
+            this.WS2.Location = new System.Drawing.Point(276, 185);
+            this.WS2.Name = "WS2";
+            this.WS2.Size = new System.Drawing.Size(92, 28);
+            this.WS2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WS2.TabIndex = 158;
+            this.WS2.TabStop = false;
+            // 
+            // WS1
+            // 
+            this.WS1.Image = global::WOLayout.Properties.Resources.w2;
+            this.WS1.Location = new System.Drawing.Point(276, 101);
+            this.WS1.Name = "WS1";
+            this.WS1.Size = new System.Drawing.Size(92, 28);
+            this.WS1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WS1.TabIndex = 157;
+            this.WS1.TabStop = false;
             // 
             // OFO10
             // 
@@ -1115,6 +1560,21 @@
             this.dgwWO.Size = new System.Drawing.Size(780, 58);
             this.dgwWO.TabIndex = 2;
             // 
+            // txtWO
+            // 
+            this.txtWO.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtWO.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtWO.Location = new System.Drawing.Point(119, 17);
+            this.txtWO.Margin = new System.Windows.Forms.Padding(4);
+            this.txtWO.MaxLength = 20;
+            this.txtWO.Name = "txtWO";
+            this.txtWO.Size = new System.Drawing.Size(115, 31);
+            this.txtWO.TabIndex = 1;
+            this.txtWO.Text = "0000000";
+            this.txtWO.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtWO.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWO_KeyDown);
+            this.txtWO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtWO_KeyPress);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -1190,170 +1650,6 @@
             this.dgwItem.Size = new System.Drawing.Size(780, 94);
             this.dgwItem.TabIndex = 3;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2,
-            this.tssUserName,
-            this.toolStripStatusLabel3,
-            this.tsslVersion,
-            this.tssVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 937);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1429, 25);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(194, 20);
-            this.toolStripStatusLabel1.Text = "Medline Mexicali Playbook";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(30, 20);
-            this.toolStripStatusLabel2.Text = "  |  ";
-            // 
-            // tssUserName
-            // 
-            this.tssUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.tssUserName.Name = "tssUserName";
-            this.tssUserName.Size = new System.Drawing.Size(79, 20);
-            this.tssUserName.Text = "user_name";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(30, 20);
-            this.toolStripStatusLabel3.Text = "  |  ";
-            // 
-            // tsslVersion
-            // 
-            this.tsslVersion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.tsslVersion.Name = "tsslVersion";
-            this.tsslVersion.Size = new System.Drawing.Size(73, 20);
-            this.tsslVersion.Text = "Versión : ";
-            // 
-            // tssVersion
-            // 
-            this.tssVersion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.tssVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.tssVersion.Name = "tssVersion";
-            this.tssVersion.Size = new System.Drawing.Size(57, 20);
-            this.tssVersion.Text = "1.0.0.0";
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNew,
-            this.btnConfig,
-            this.toolStripLabel1,
-            this.btnExit,
-            this.btnLenguage});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1429, 27);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnNew
-            // 
-            this.btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNew.Image = global::WOLayout.Properties.Resources.file;
-            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(24, 24);
-            this.btnNew.Text = "Clean";
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // btnConfig
-            // 
-            this.btnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnConfig.Image = global::WOLayout.Properties.Resources.idea;
-            this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(24, 24);
-            this.btnConfig.Text = "Setting";
-            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(14, 24);
-            this.toolStripLabel1.Text = "|";
-            // 
-            // btnExit
-            // 
-            this.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnExit.Image = global::WOLayout.Properties.Resources.bt_exit;
-            this.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(24, 24);
-            this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnLenguage
-            // 
-            this.btnLenguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLenguage.Image = global::WOLayout.Properties.Resources.united_states;
-            this.btnLenguage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLenguage.Name = "btnLenguage";
-            this.btnLenguage.Size = new System.Drawing.Size(24, 24);
-            this.btnLenguage.Text = "Lenguage";
-            this.btnLenguage.Click += new System.EventHandler(this.btnLenguage_Click);
-            // 
-            // lblLayout
-            // 
-            this.lblLayout.AutoSize = true;
-            this.lblLayout.BackColor = System.Drawing.Color.Transparent;
-            this.lblLayout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLayout.ForeColor = System.Drawing.Color.White;
-            this.lblLayout.Location = new System.Drawing.Point(1086, 1);
-            this.lblLayout.Name = "lblLayout";
-            this.lblLayout.Size = new System.Drawing.Size(99, 25);
-            this.lblLayout.TabIndex = 0;
-            this.lblLayout.Text = "LAYOUT";
-            // 
-            // lblTopTitle1
-            // 
-            this.lblTopTitle1.AutoSize = true;
-            this.lblTopTitle1.BackColor = System.Drawing.Color.Transparent;
-            this.lblTopTitle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTopTitle1.ForeColor = System.Drawing.Color.White;
-            this.lblTopTitle1.Location = new System.Drawing.Point(362, 0);
-            this.lblTopTitle1.Name = "lblTopTitle1";
-            this.lblTopTitle1.Size = new System.Drawing.Size(164, 25);
-            this.lblTopTitle1.TabIndex = 1;
-            this.lblTopTitle1.Text = "INFORMACION";
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.Color.Transparent;
-            this.panel9.BackgroundImage = global::WOLayout.Properties.Resources.Blue_Background_down;
-            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel9.Controls.Add(this.lblLayout);
-            this.panel9.Controls.Add(this.lblTopTitle1);
-            this.panel9.Controls.Add(this.panel1);
-            this.panel9.Location = new System.Drawing.Point(12, 30);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1406, 901);
-            this.panel9.TabIndex = 3;
-            // 
             // wfLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1373,10 +1669,40 @@
             this.Activated += new System.EventHandler(this.wfLayout_Activated);
             this.Load += new System.EventHandler(this.wfLayout_Load);
             this.Resize += new System.EventHandler(this.wfLayout_Resize);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            this.pnlLayout.ResumeLayout(false);
+            this.Panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.WSO16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSO1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WS1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OFO10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OFO9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OF5)).EndInit();
@@ -1455,12 +1781,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwItem)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1482,7 +1802,7 @@
         private System.Windows.Forms.Label lblTables;
         private System.Windows.Forms.DataGridView dgwTables;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Panel pnlLayout;
+        private System.Windows.Forms.Panel Panel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tssUserName;
@@ -1567,6 +1887,30 @@
         private System.Windows.Forms.Label lblTopTitle1;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.ToolStripButton btnLenguage;
+        private System.Windows.Forms.PictureBox WS1;
+        private System.Windows.Forms.PictureBox WS5;
+        private System.Windows.Forms.PictureBox WS4;
+        private System.Windows.Forms.PictureBox WS3;
+        private System.Windows.Forms.PictureBox WS2;
+        private System.Windows.Forms.PictureBox WS8;
+        private System.Windows.Forms.PictureBox WS7;
+        private System.Windows.Forms.PictureBox WS6;
+        private System.Windows.Forms.PictureBox WSO2;
+        private System.Windows.Forms.PictureBox WSO1;
+        private System.Windows.Forms.PictureBox WSO4;
+        private System.Windows.Forms.PictureBox WSO3;
+        private System.Windows.Forms.PictureBox WSO16;
+        private System.Windows.Forms.PictureBox WSO15;
+        private System.Windows.Forms.PictureBox WSO14;
+        private System.Windows.Forms.PictureBox WSO13;
+        private System.Windows.Forms.PictureBox WSO12;
+        private System.Windows.Forms.PictureBox WSO11;
+        private System.Windows.Forms.PictureBox WSO10;
+        private System.Windows.Forms.PictureBox WSO9;
+        private System.Windows.Forms.PictureBox WSO8;
+        private System.Windows.Forms.PictureBox WSO7;
+        private System.Windows.Forms.PictureBox WSO6;
+        private System.Windows.Forms.PictureBox WSO5;
     }
 }
 
