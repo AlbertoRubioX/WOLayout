@@ -41,6 +41,9 @@ namespace WOLayout
         private int _iMain;
         private double _sDuraW1;
         private double _sDuraW2;
+        private int _iOWrap1;
+        private int _iOperNA;
+        private int _iOut;
 
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
@@ -199,6 +202,9 @@ namespace WOLayout
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][13].ToString()))
                 _iEstSub = int.Parse(_dtConf.Rows[0][13].ToString());
 
+
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][14].ToString()))
+                _iOperNA = int.Parse(_dtConf.Rows[0][14].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][15].ToString()))
                 _iSurtidor = int.Parse(_dtConf.Rows[0][15].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][16].ToString()))
@@ -421,6 +427,8 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
+                            _iOut = iOut;
+
                             int outfolderm = iMesas;
                             int outfoldero = iOper;
 
@@ -431,6 +439,7 @@ namespace WOLayout
                             string sCol1 = ControlGridRows(dgwTables, "sub");
                             string sCol2 = ControlGridRows(dgwTables, "sub_desc");
                             dtN.Rows.Add(sCol1, sCol2,iSub, iMesas, iOper,"sub");
+                            _iSub = iSub;
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -442,6 +451,7 @@ namespace WOLayout
                             sCol1 = ControlGridRows(dgwTables, "assy");
                             sCol2 = ControlGridRows(dgwTables, "assy_desc");
                             dtN.Rows.Add(sCol1, sCol2, iMain, iMesas, iOper,"assy");
+                            _iMain = iMain;
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -540,6 +550,7 @@ namespace WOLayout
                             }
                             
                             llenarmesa(wrap1m, wrap1o, false);
+                            _iOWrap1 = wrap1o / wrap1m;
 
                             //llenarmesaWS(iWrapSm, iWrapSo, wrap1m); // sub-assembly wrapping tables
                             
@@ -553,11 +564,20 @@ namespace WOLayout
                                 llenarOFWS(outfolderm, outfoldero, iWrapSm, iWrapSo);
                                 llenarensamble(assym, assyo, subassym, subassyo);
                             }
+
+
                         }
 
                         ChangeLen();
                         dgwItem.ClearSelection();
                         txtWO.SelectAll();
+
+                        var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox("Operadores Requeridos: " + lblOper.Text + "\n \nOperadores disponibles: ", "Modo Manual", lblOper.Text);
+                        int n;
+                        if (Int32.Parse(iODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(iODisponibles, out n))
+                            ModoManual(Int32.Parse(iODisponibles));
+
+                       
                     }
                     else
                     {
@@ -1050,51 +1070,70 @@ namespace WOLayout
         #endregion
 
         #region LogicaModoManual
-        public void ModoManual(int ipODisponibles, int ipOperadoresNA, int ipOWrap1, double dpBalanceoPermitido)
+        public void ModoManual(int ipODisponibles)
         {
 
-            //18, 5, 2, 20
-            double[,] ite = new double[40, 10];
+            //Balance permitido = 20 (Estatico)
+            double[,] ite = new double[40, 9];
 
-            ite[0, 0] = Math.Ceiling(_dAssyTime / _iMaxTable * (_iSub + _iMain));
-            ite[0, 1] = ipODisponibles - ite[0, 0] - ipOperadoresNA;
+            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / _iMaxTable);
+            ite[0, 1] = ipODisponibles - ite[0, 0] - _iOperNA;
             ite[0, 2] =(_dAssyTime * _iMaxTable);
-            ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / ipOWrap1));
+            ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / _iOWrap1));
             ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
-            ite[0, 5] = (ite[0, 4] < dpBalanceoPermitido) ? 1 : 0;
+            ite[0, 5] = (ite[0, 4] < 20) ? 1 : 0;
             ite[0, 6] = ite[0, 4] * ite[0, 5];
             ite[0, 7] = (ite[0, 2] >= ite[0, 3]) ? ite[0, 2] : ite[0, 3];
             ite[0, 8] = (ite[0, 6] == 0) ? 0 : ite[0, 6];
-            ite[0, 9] = (ite[0, 0] < 0 || ite[0, 1] < 0) ? 0 : Math.Ceiling(ite[0, 8]);
+           // ite[0, 9] = (ite[0, 0] < 0 || ite[0, 1] < 0) ? 0 : Math.Ceiling(ite[0, 8]);
 
             for (int i = 1; i <= 39; i++)
             {
-                ite[i, 0] = (ite[i - 1, 0] - (ipOWrap1 / 2));
-                ite[i, 1] = ipODisponibles - ite[i, 0] - ipOperadoresNA;
-                ite[i, 2] = ((_iSub + _iMain) * _dAssyTime / ite[i, 0]);
-                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / ipOWrap1));
+                ite[i, 0] = (ite[i - 1, 0] - (_iOWrap1 / 2));
+                ite[i, 1] = ipODisponibles - ite[i, 0] - _iOperNA;
+                ite[i, 2] = ((_iSub + _iMain + _iOut) * _dAssyTime / ite[i, 0]);
+                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / _iOWrap1));
                 ite[i, 4] = Math.Abs(ite[i, 2] - ite[i, 3]);
-                ite[i, 5] = (ite[i, 4] < dpBalanceoPermitido) ? 1 : 0;
+                ite[i, 5] = (ite[i, 4] < 20) ? 1 : 0;
                 ite[i, 6] = ite[i, 4] * ite[i, 5];
                 ite[i, 7] = (ite[i, 2] >= ite[i, 3]) ? ite[i, 2] : ite[i, 3];
                 ite[i, 8] = (ite[i, 6] == 0) ? 0 : ite[i, 6];
-                ite[i, 9] = (ite[i, 0] < 0 || ite[i, 1] < 0) ? 0 : Math.Ceiling(ite[i, 8]);
+             //   ite[i, 9] = (ite[i, 0] < 0 || ite[i, 1] < 0) ? 0 : Math.Ceiling(ite[i, 8]);
             }
 
+            
+/* Imprimir matriz en consola
             for (int i = 0; i < 40; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     Console.Write(ite[i,j] + ", ");
                 }
                 Console.WriteLine();
             }
+            */
+            double dDeltaMenor = 1000;
+            int iAssyO=0;
+            int iWrapO=0;
+            int iCycleTimeLine=0;
+
+            for (int i = 1; i < 40; i++)
+            {
+                if (ite[i,8] > 0 && ite[i, 8] < dDeltaMenor)
+                {
+                    dDeltaMenor = ite[i, 8];
+                    iAssyO = (int)Math.Ceiling(ite[i, 0]);
+                    iWrapO = (int)Math.Ceiling(ite[i, 1]);
+                    iCycleTimeLine = (int)Math.Round(ite[i, 7]);
+                }
+            }
+
+            MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ModoManual(18, 5, 2, 20);
-        }
+
+
     }
     #endregion
 }
