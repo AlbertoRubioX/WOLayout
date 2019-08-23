@@ -104,6 +104,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="wfLayoutManual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfLayoutManual.Designer.cs">
+      <DependentUpon>wfLayoutManual.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="wfConfig.resx">
       <DependentUpon>wfConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +126,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="wfLayoutManual.resx">
+      <DependentUpon>wfLayoutManual.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -145,6 +154,7 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\Yellow-Background-down1.jpg" />
     <None Include="Resources\w2.png" />
     <None Include="Resources\united-states.png" />
     <None Include="Resources\mexico.png" />

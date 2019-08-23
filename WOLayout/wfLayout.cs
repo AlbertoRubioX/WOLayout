@@ -13,6 +13,7 @@ namespace WOLayout
 {
     public partial class wfLayout : Form
     {
+      
         private string _lsUser = string.Empty;
         private double _dAssyTime;
         private double _dTackIdeal;
@@ -37,13 +38,13 @@ namespace WOLayout
         private string _lsLen;
 
         //Manual
-        private int _iSub;
-        private int _iMain;
-        private double _sDuraW1;
-        private double _sDuraW2;
-        private int _iOWrap1;
-        private int _iOperNA;
-        private int _iOut;
+        private int _iSub=0;
+        private int _iMain=0;
+        private double _sDuraW1=0;
+        private double _sDuraW2=0;
+        private int _iOWrap1=0;
+        private int _iOperNA=0;
+        private int _iOut=0;
 
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
@@ -428,7 +429,6 @@ namespace WOLayout
                             iTotalOps += iOper;
 
                             _iOut = iOut;
-
                             int outfolderm = iMesas;
                             int outfoldero = iOper;
 
@@ -549,6 +549,7 @@ namespace WOLayout
                                 MessageBox.Show(ControlGridRows(txtWO, "err2"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             
+
                             llenarmesa(wrap1m, wrap1o, false);
                             _iOWrap1 = wrap1o / wrap1m;
 
@@ -572,11 +573,11 @@ namespace WOLayout
                         dgwItem.ClearSelection();
                         txtWO.SelectAll();
 
+                        //MODO MANUAL
                         var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox("Operadores Requeridos: " + lblOper.Text + "\n \nOperadores disponibles: ", "Modo Manual", lblOper.Text);
                         int n;
                         if (Int32.Parse(iODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(iODisponibles, out n))
                             ModoManual(Int32.Parse(iODisponibles));
-
                        
                     }
                     else
@@ -1128,7 +1129,11 @@ namespace WOLayout
                 }
             }
 
-            MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
+            // MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
+
+
+            wfLayoutManual nform = new wfLayoutManual(_lsLen, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
+            nform.Show();
 
         }
 
