@@ -77,7 +77,6 @@ namespace WOLayout
                 _lsLen = _dtConf.Rows[0]["lenguage"].ToString();
                 ChangeLen();
             }
-                
 
             txtWO.Text = "0000000";
             txtWO.SelectAll();
