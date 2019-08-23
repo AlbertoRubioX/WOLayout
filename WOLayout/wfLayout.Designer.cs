@@ -1313,7 +1313,7 @@
             this.btnLenguage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLenguage.Name = "btnLenguage";
             this.btnLenguage.Size = new System.Drawing.Size(24, 24);
-            this.btnLenguage.Text = "Lenguage";
+            this.btnLenguage.Text = "Change Language";
             this.btnLenguage.Click += new System.EventHandler(this.btnLenguage_Click);
             // 
             // lblLayout

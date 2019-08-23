@@ -16,8 +16,8 @@ namespace WOLayout
         private string _lsUser = string.Empty;
         private double _dAssyTime;
         private double _dTackIdeal;
-        private double _dTackTime;
-        private int _iMaxTable;
+        private decimal _dTackTime;
+        private decimal _dMaxTable;
         private int _iMesaEns;
         private int _iMesaWrap;
         private int _iEstSub;
@@ -65,9 +65,19 @@ namespace WOLayout
             WindowState = FormWindowState.Maximized;
             
             tssUserName.Text = _lsUser;
-            tssVersion.Text = "1.0.0.8";
+            tssVersion.Text = "1.0.0.9";
 
             Inicio();
+
+            ConfigLogica conf = new ConfigLogica();
+            _dtConf = ConfigLogica.Consultar();
+
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0]["lenguage"].ToString()) && _dtConf.Rows[0]["lenguage"].ToString() != _lsLen)
+            {
+                _lsLen = _dtConf.Rows[0]["lenguage"].ToString();
+                ChangeLen();
+            }
+                
 
             txtWO.Text = "0000000";
             txtWO.SelectAll();
@@ -82,12 +92,17 @@ namespace WOLayout
             ControlGridText(dgwTables);
             ControlGridRows2(dgwItem);
             ControlGridRows2(dgwTables);
+
+            if (_lsLen == "EN")
+                btnLenguage.Image = Properties.Resources.mexico;
+            else
+                btnLenguage.Image = Properties.Resources.united_states;
             
         }
         private void ControlText(Control _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
 
             foreach (Control c in _control.Controls)
@@ -97,7 +112,7 @@ namespace WOLayout
                     if (cs is Label)
                     {
                         con.Control = cs.Name;
-                        string sValue = ConfigLogica.ChangeLenguageCont(con);
+                        string sValue = ConfigLogica.ChangeLanguageCont(con);
                         if (!string.IsNullOrEmpty(sValue))
                             cs.Text = sValue;
                     }
@@ -107,7 +122,7 @@ namespace WOLayout
         private void ControlGridText(DataGridView _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
             con.Control = _control.Name;
             foreach (DataGridViewColumn c in _control.Columns)
@@ -115,7 +130,7 @@ namespace WOLayout
                 if (c.Visible)
                 {
                     con.SubControl = c.Name;
-                    string sValue = ConfigLogica.ChangeLenguageGrid(con);
+                    string sValue = ConfigLogica.ChangeLanguageGrid(con);
                     if (!string.IsNullOrEmpty(sValue))
                         c.HeaderText = sValue;
                 }
@@ -125,11 +140,11 @@ namespace WOLayout
         private string ControlGridRows(Control _control,string _asRow)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
             con.Control = _control.Name;
             con.SubControl = _asRow;
-            string sValue = ConfigLogica.ChangeLenguageGrid(con);
+            string sValue = ConfigLogica.ChangeLanguageGrid(con);
             if (!string.IsNullOrEmpty(sValue))
                 return sValue;
 
@@ -138,7 +153,7 @@ namespace WOLayout
         private void ControlGridRows2(DataGridView _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
             con.Control = _control.Name;
             foreach(DataGridViewRow row in _control.Rows)
@@ -150,7 +165,7 @@ namespace WOLayout
                 for (int i=0; i < 2; i++)
                 {
                     con.Columna = i;
-                    string sValue = ConfigLogica.ChangeLenguageGridRow(con);
+                    string sValue = ConfigLogica.ChangeLanguageGridRow(con);
                     if (!string.IsNullOrEmpty(sValue))
                         row.Cells[i].Value = sValue;
                 }
@@ -186,12 +201,12 @@ namespace WOLayout
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][7].ToString()))
                 _dTackIdeal = double.Parse(_dtConf.Rows[0][7].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][8].ToString()))
-                _dTackTime = double.Parse(_dtConf.Rows[0][8].ToString());
+                _dTackTime = decimal.Parse(_dtConf.Rows[0][8].ToString());
 
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][9].ToString()))
                 _dAssyTime = double.Parse(_dtConf.Rows[0][9].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][10].ToString()))
-                _iMaxTable = int.Parse(_dtConf.Rows[0][10].ToString());
+                _dMaxTable = decimal.Parse(_dtConf.Rows[0][10].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][11].ToString()))
                 _iMesaEns = int.Parse(_dtConf.Rows[0][11].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][12].ToString()))
@@ -284,7 +299,7 @@ namespace WOLayout
 
                 AS4Logica AS4 = new AS4Logica();
                 AS4.WO = sValue;
-
+                AS4.Takt = _dTackTime;
                 SetupLogica set = new SetupLogica();
                 set.WorkOrder = sValue;
                 DataTable dt = AS4Logica.WorkOrder(AS4); 
@@ -311,8 +326,10 @@ namespace WOLayout
 
                     string sName = dt.Rows[0][1].ToString();
                     AS4.Item = sItem;
-                    lblProduct.Text = sItem + " - " + sName.ToUpper();
+                    AS4.MaxComp = _dMaxTable;
 
+                    lblProduct.Text = sItem.Trim() + " - " + sName.ToUpper().TrimEnd();
+                    
                     DataTable dt2 = AS4Logica.ComponentsLayer(AS4);                
                     if (dt2.Rows.Count > 1)
                     {
@@ -411,7 +428,7 @@ namespace WOLayout
                             DataTable dtN = dgwTables.DataSource as DataTable;
 
                             iOut += iBasin + iPiggy;
-                            iMesas = (int)Math.Ceiling((decimal)iOut / (decimal)_iMaxTable);
+                            iMesas = (int)Math.Ceiling((decimal)iOut / _dMaxTable);
                             int iOutOper = 1;
                             //si tiene wrap ++
                             if (AS4Logica.ComponentsLayerFold(AS4))
@@ -424,7 +441,7 @@ namespace WOLayout
                             int outfolderm = iMesas;
                             int outfoldero = iOper;
 
-                            decimal cM = Math.Ceiling((decimal)iSub / (decimal)_iMaxTable);
+                            decimal cM = Math.Ceiling((decimal)iSub / _dMaxTable);
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
                             iOper = iMesas * _iEstSub;
@@ -437,7 +454,7 @@ namespace WOLayout
                             int subassym = iMesas;
                             int subassyo = iOper;
 
-                            iMesas = (int)Math.Ceiling((decimal)iMain / (decimal)_iMaxTable);
+                            iMesas = (int)Math.Ceiling((decimal)iMain / _dMaxTable);
                             iOper = iMesas;
                             sCol1 = ControlGridRows(dgwTables, "assy");
                             sCol2 = ControlGridRows(dgwTables, "assy_desc");
@@ -448,10 +465,7 @@ namespace WOLayout
                             int assym = iMesas;
                             int assyo = iOper;
 
-                            double dMax = (double)_iMaxTable;
-                            //70 -> dW = 4
-                            if (dWrapTime2 > 0)
-                                dWrapTime = (dWrapTime + dWrapTime2) / 2;
+                            double dMax = (double)_dMaxTable;
                             double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
                             iMesas = (int)dW;
                             if (sWCodeM == "1" || sWCodeM == "8")
@@ -636,6 +650,7 @@ namespace WOLayout
             dgwWO.Columns[3].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[4].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[5].Width = ColumnWith(dgwWO, 30);
+            dgwWO.Columns[5].DefaultCellStyle.Format = "N2";
 
             if (dgwItem.Rows.Count == 0)
             {
@@ -657,10 +672,13 @@ namespace WOLayout
             dgwItem.Columns[2].Visible = false;
             dgwItem.Columns[3].Width = ColumnWith(dgwItem, 15);
             dgwItem.Columns[4].Width = ColumnWith(dgwItem, 16);
+            dgwItem.Columns[4].DefaultCellStyle.Format = "N2";
             dgwItem.Columns[5].Visible = false;
             dgwItem.Columns[6].Width = ColumnWith(dgwItem, 15);
             dgwItem.Columns[7].Width = ColumnWith(dgwItem, 16);
+            dgwItem.Columns[7].DefaultCellStyle.Format = "N2";
             dgwItem.Columns[8].Visible = false;
+
             if (dgwTables.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Tables");
@@ -702,18 +720,10 @@ namespace WOLayout
         private void btnLenguage_Click(object sender, EventArgs e)
         {
             if (_lsLen == "SP")
-            {
                 _lsLen = "EN";
-                btnLenguage.Image = Properties.Resources.mexico;
-            }
-
             else
-            {
                 _lsLen = "SP";
-                btnLenguage.Image = Properties.Resources.united_states;
-            }
-
-
+              
             ChangeLen();
         }
         private void btnExit_Click(object sender, EventArgs e)
@@ -732,7 +742,12 @@ namespace WOLayout
             {
                 wfConfig Config = new wfConfig();
                 Config._lsLen = _lsLen;
-                Config.Show();
+                Config.ShowDialog();
+
+                string sLen = Config._lsLen;
+                if (sLen != _lsLen)
+                    btnLenguage_Click(sender, e);
+                
             }
             else
                 MessageBox.Show("Usuario sin Acceso a la Configuración", "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1054,9 +1069,9 @@ namespace WOLayout
             //18, 5, 2, 20
             double[,] ite = new double[40, 10];
 
-            ite[0, 0] = (_dAssyTime / _iMaxTable * (_iSub + _iMain));
+            ite[0, 0] = ((double)_dAssyTime / (double)_dMaxTable * (_iSub + _iMain));
             ite[0, 1] = ODisponibles - ite[0, 0] - OperadoresNA;
-            ite[0, 2] =(_dAssyTime * _iMaxTable);
+            ite[0, 2] =((double)_dAssyTime * (double)_dMaxTable);
             ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / OWrap1));
             ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
             ite[0, 5] = (ite[0, 4] < BalanceoPermitido) ? 1 : 0;
