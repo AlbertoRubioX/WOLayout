@@ -13,6 +13,7 @@ namespace WOLayout
 {
     public partial class wfLayout : Form
     {
+      
         private string _lsUser = string.Empty;
         private double _dAssyTime;
         private double _dTackIdeal;
@@ -37,10 +38,13 @@ namespace WOLayout
         private string _lsLen;
 
         //Manual
-        private int _iSub;
-        private int _iMain;
-        private double _sDuraW1;
-        private double _sDuraW2;
+        private int _iSub=0;
+        private int _iMain=0;
+        private double _sDuraW1=0;
+        private double _sDuraW2=0;
+        private int _iOWrap1=0;
+        private int _iOperNA=0;
+        private int _iOut=0;
 
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
@@ -213,6 +217,9 @@ namespace WOLayout
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][13].ToString()))
                 _iEstSub = int.Parse(_dtConf.Rows[0][13].ToString());
 
+
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0][14].ToString()))
+                _iOperNA = int.Parse(_dtConf.Rows[0][14].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][15].ToString()))
                 _iSurtidor = int.Parse(_dtConf.Rows[0][15].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][16].ToString()))
@@ -437,6 +444,7 @@ namespace WOLayout
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
+                            _iOut = iOut;
                             int outfolderm = iMesas;
                             int outfoldero = iOper;
 
@@ -447,6 +455,7 @@ namespace WOLayout
                             string sCol1 = ControlGridRows(dgwTables, "sub");
                             string sCol2 = ControlGridRows(dgwTables, "sub_desc");
                             dtN.Rows.Add(sCol1, sCol2,iSub, iMesas, iOper,"sub");
+                            _iSub = iSub;
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -458,6 +467,7 @@ namespace WOLayout
                             sCol1 = ControlGridRows(dgwTables, "assy");
                             sCol2 = ControlGridRows(dgwTables, "assy_desc");
                             dtN.Rows.Add(sCol1, sCol2, iMain, iMesas, iOper,"assy");
+                            _iMain = iMain;
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
@@ -496,6 +506,7 @@ namespace WOLayout
 
                                 sCol2 = ControlGridRows(dgwTables, "wrap2_desc");
                                 dtN.Rows.Add("Wrap Sub", sCol2,iWrap, iMesas, iOper,"wrap2");
+
 
                                 iTotalMes += iMesas;
                                 iTotalOps += iOper;
@@ -551,7 +562,9 @@ namespace WOLayout
                                 MessageBox.Show(ControlGridRows(txtWO, "err2"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             
+
                             llenarmesa(wrap1m, wrap1o, false);
+                            _iOWrap1 = wrap1o / wrap1m;
 
                             //llenarmesaWS(iWrapSm, iWrapSo, wrap1m); // sub-assembly wrapping tables
                             
@@ -562,15 +575,23 @@ namespace WOLayout
                             }
                             else
                             {
-                                llenarof(outfolderm, outfoldero);
+                                llenarOFWS(outfolderm, outfoldero, iWrapSm, iWrapSo);
                                 llenarensamble(assym, assyo, subassym, subassyo);
-
                             }
+
+
                         }
 
                         ChangeLen();
                         dgwItem.ClearSelection();
                         txtWO.SelectAll();
+
+                        //MODO MANUAL
+                        var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox("Operadores Requeridos: " + lblOper.Text + "\n \nOperadores disponibles: ", "Modo Manual", lblOper.Text);
+                        int n;
+                        if (Int32.Parse(iODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(iODisponibles, out n))
+                            ModoManual(Int32.Parse(iODisponibles));
+                       
                     }
                     else
                     {
@@ -793,10 +814,10 @@ namespace WOLayout
                 iX = iW - iX;
                 lblLayout.Location = new Point((int)iX, lblLayout.Location.Y);
 
-                iW = pnlLayout.Width / 2;
+                iW = Panel3.Width / 2;
                 iX = groupBox4.Width / 2;
                 iX -= iW + 10;
-                pnlLayout.Location = new Point((int)iX, pnlLayout.Location.Y);
+                Panel3.Location = new Point((int)iX, Panel3.Location.Y);
             }
         }
 
@@ -831,8 +852,8 @@ namespace WOLayout
         #region regDraw
         public PictureBox[] getmesas()
         {
-            PictureBox[] mesas = new PictureBox[20];
-            mesas[0] = E1;
+            PictureBox[] mesas = new PictureBox[28];
+            mesas[0] = E1; //ensamble
             mesas[1] = E2;
             mesas[2] = E3;
             mesas[3] = E4;
@@ -841,26 +862,33 @@ namespace WOLayout
             mesas[6] = E7;
             mesas[7] = E8;
             mesas[8] = E9;
-            mesas[9] = W1;
+            mesas[9] = W1; //wrap
             mesas[10] = W2;
             mesas[11] = W3;
             mesas[12] = W4;
             mesas[13] = W5;
             mesas[14] = W6;
-            mesas[15] = OF1;
+            mesas[15] = OF1; //outfolder
             mesas[16] = OF2;
             mesas[17] = OF3;
             mesas[18] = OF4;
             mesas[19] = OF5;
-
-
+            mesas[20] = WS1; //wrapsub
+            mesas[21] = WS2;
+            mesas[22] = WS3;
+            mesas[23] = WS4;
+            mesas[24] = WS5;
+            mesas[25] = WS6;
+            mesas[26] = WS7;
+            mesas[27] = WS8;
+            
             return mesas;
         }
 
         public PictureBox[] getoperadores()
         {
-            PictureBox[] operadores = new PictureBox[40];
-            operadores[0] = EO1;
+            PictureBox[] operadores = new PictureBox[56];
+            operadores[0] = EO1; //ensamble
             operadores[1] = EO2;
             operadores[2] = EO3;
             operadores[3] = EO4;
@@ -877,8 +905,8 @@ namespace WOLayout
             operadores[14] = EO15;
             operadores[15] = EO16;
             operadores[16] = EO17;
-            operadores[17] = EO18;
-            operadores[18] = WO1;
+            operadores[17] = EO18; 
+            operadores[18] = WO1; //wrap
             operadores[19] = WO2;
             operadores[20] = WO3;
             operadores[21] = WO4;
@@ -890,7 +918,7 @@ namespace WOLayout
             operadores[27] = WO10;
             operadores[28] = WO11;
             operadores[29] = WO12;
-            operadores[30] = OFO1;
+            operadores[30] = OFO1; //outfolder
             operadores[31] = OFO2;
             operadores[32] = OFO3;
             operadores[33] = OFO4;
@@ -900,6 +928,23 @@ namespace WOLayout
             operadores[37] = OFO8;
             operadores[38] = OFO9;
             operadores[39] = OFO10;
+            operadores[40] = WSO1; //wrapsub
+            operadores[41] = WSO2;
+            operadores[42] = WSO3;
+            operadores[43] = WSO4;
+            operadores[44] = WSO5;
+            operadores[45] = WSO6;
+            operadores[46] = WSO7;
+            operadores[47] = WSO8;
+            operadores[48] = WSO9;
+            operadores[49] = WSO10;
+            operadores[50] = WSO11;
+            operadores[51] = WSO12;
+            operadores[52] = WSO13;
+            operadores[53] = WSO14;
+            operadores[54] = WSO15;
+            operadores[55] = WSO16;
+ 
 
             return operadores;
         }
@@ -909,12 +954,12 @@ namespace WOLayout
             PictureBox[] mesas = getmesas();
             PictureBox[] operadores = getoperadores();
 
-            for (int i = 0; i <= 19; i++)
+            for (int i = 0; i <= 27; i++)
             {
                 mesas[i].Visible = false;
             }
 
-            for (int i = 0; i <= 39; i++)
+            for (int i = 0; i <= 55; i++)
             {
                 operadores[i].Visible = false;
             }
@@ -953,37 +998,7 @@ namespace WOLayout
             }
 
         }
-        public void llenarmesaWS(int _aiNummesas, int _aiNummoperadores, int _aiWrap1)
-        {
-            PictureBox[] pMesas = getmesas();
-            PictureBox[] pOperadores = getoperadores();
-
-            Boolean bLibre = true;
-            int iPosicionlibre;
-
-           
-            iPosicionlibre = 9 + _aiWrap1;
-
-            do
-            {
-                if (pMesas[iPosicionlibre].Visible)
-                {
-                    iPosicionlibre++;
-                }
-                else bLibre = false;
-            }
-            while (bLibre);
-
-
-            for (int i = iPosicionlibre; i < iPosicionlibre + _aiNummesas; i++)
-            {
-                pMesas[i].Visible = true;
-                pOperadores[i * 2].Visible = true;
-                if (_aiNummoperadores == _aiNummesas * 2)
-                    pOperadores[(i * 2) + 1].Visible = true;
-            }
-
-        }
+       
         public void llenarensamble(int emesas, int eoperadores, int smesas, int soperadores)
         {
             PictureBox[] mesas = getmesas();
@@ -1043,16 +1058,24 @@ namespace WOLayout
 
         }
 
-        public void llenarof(int nummesas, int nummoperadores)
+        public void llenarOFWS(int piOFMesas, int piOFOperadores, int piWSMesas, int piWSOperadores)
         {
             PictureBox[] mesas = getmesas();
             PictureBox[] operadores = getoperadores();
 
-            for (int i = 15; i < 15 + nummesas; i++)
+            for (int i = 15; i < 15 + piOFMesas; i++)
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
-                if (nummoperadores == nummesas * 2)
+                if (piWSOperadores == piOFMesas * 2)
+                    operadores[(i * 2) + 1].Visible = true;
+            }
+
+            for (int i = 20 + piOFMesas ; i < 20 + piWSMesas; i++)
+            {
+                mesas[i].Visible = true;
+                operadores[i * 2].Visible = true;
+                if (piWSOperadores == piOFMesas * 2)
                     operadores[(i * 2) + 1].Visible = true;
             }
 
@@ -1061,51 +1084,75 @@ namespace WOLayout
 
         #endregion
 
-
-        public void ModoManual(int ODisponibles, int OperadoresNA, int OWrap1, double BalanceoPermitido)
+        #region LogicaModoManual
+        public void ModoManual(int ipODisponibles)
         {
 
-            //18, 5, 2, 20
-            double[,] ite = new double[40, 10];
+            //Balance permitido = 20 (Estatico)
+            double[,] ite = new double[40, 9];
 
-            ite[0, 0] = ((double)_dAssyTime / (double)_dMaxTable * (_iSub + _iMain));
-            ite[0, 1] = ODisponibles - ite[0, 0] - OperadoresNA;
-            ite[0, 2] =((double)_dAssyTime * (double)_dMaxTable);
-            ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / OWrap1));
+            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / _iMaxTable);
+            ite[0, 1] = ipODisponibles - ite[0, 0] - _iOperNA;
+            ite[0, 2] =(_dAssyTime * _iMaxTable);
+            ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / _iOWrap1));
             ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
-            ite[0, 5] = (ite[0, 4] < BalanceoPermitido) ? 1 : 0;
+            ite[0, 5] = (ite[0, 4] < 20) ? 1 : 0;
             ite[0, 6] = ite[0, 4] * ite[0, 5];
             ite[0, 7] = (ite[0, 2] >= ite[0, 3]) ? ite[0, 2] : ite[0, 3];
             ite[0, 8] = (ite[0, 6] == 0) ? 0 : ite[0, 6];
-            ite[0, 9] = (ite[0, 0] < 0 || ite[0, 1] < 0) ? 0 : Math.Ceiling(ite[0, 8]);
+           // ite[0, 9] = (ite[0, 0] < 0 || ite[0, 1] < 0) ? 0 : Math.Ceiling(ite[0, 8]);
 
             for (int i = 1; i <= 39; i++)
             {
-                ite[i, 0] = (ite[i - 1, 0] - (OWrap1 / 2));
-                ite[i, 1] = ODisponibles - ite[i, 0] - OperadoresNA;
-                ite[i, 2] = ((_iSub + _iMain) * _dAssyTime / ite[i, 0]);
-                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / OWrap1));
+                ite[i, 0] = (ite[i - 1, 0] - (_iOWrap1 / 2));
+                ite[i, 1] = ipODisponibles - ite[i, 0] - _iOperNA;
+                ite[i, 2] = ((_iSub + _iMain + _iOut) * _dAssyTime / ite[i, 0]);
+                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / _iOWrap1));
                 ite[i, 4] = Math.Abs(ite[i, 2] - ite[i, 3]);
-                ite[i, 5] = (ite[i, 4] < BalanceoPermitido) ? 1 : 0;
+                ite[i, 5] = (ite[i, 4] < 20) ? 1 : 0;
                 ite[i, 6] = ite[i, 4] * ite[i, 5];
                 ite[i, 7] = (ite[i, 2] >= ite[i, 3]) ? ite[i, 2] : ite[i, 3];
                 ite[i, 8] = (ite[i, 6] == 0) ? 0 : ite[i, 6];
-                ite[i, 9] = (ite[i, 0] < 0 || ite[i, 1] < 0) ? 0 : Math.Ceiling(ite[i, 8]);
+             //   ite[i, 9] = (ite[i, 0] < 0 || ite[i, 1] < 0) ? 0 : Math.Ceiling(ite[i, 8]);
             }
 
+            
+/* Imprimir matriz en consola
             for (int i = 0; i < 40; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     Console.Write(ite[i,j] + ", ");
                 }
                 Console.WriteLine();
             }
+            */
+            double dDeltaMenor = 1000;
+            int iAssyO=0;
+            int iWrapO=0;
+            int iCycleTimeLine=0;
+
+            for (int i = 1; i < 40; i++)
+            {
+                if (ite[i,8] > 0 && ite[i, 8] < dDeltaMenor)
+                {
+                    dDeltaMenor = ite[i, 8];
+                    iAssyO = (int)Math.Ceiling(ite[i, 0]);
+                    iWrapO = (int)Math.Ceiling(ite[i, 1]);
+                    iCycleTimeLine = (int)Math.Round(ite[i, 7]);
+                }
+            }
+
+            // MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
+
+
+            wfLayoutManual nform = new wfLayoutManual(_lsLen, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
+            nform.Show();
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ModoManual(18, 5, 2, 20);
-        }
+
+
     }
+    #endregion
 }
