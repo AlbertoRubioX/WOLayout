@@ -45,6 +45,7 @@ namespace WOLayout
         private int _iOWrap1=0;
         private int _iOperNA=0;
         private int _iOut=0;
+        private int _iOutO = 0;
 
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
@@ -160,10 +161,15 @@ namespace WOLayout
                 }
             }   
         }
-      
+
         private void Inicio()
         {
             txtWO.Clear();
+            panel9.BackgroundImage = Properties.Resources.Blue_Background_down;
+            panel2.BackgroundImage = Properties.Resources.Blue_Background_down;
+            lblCycleTime.Text = "20";
+            lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
+
 
             lblProduct.Text = "";
             dgwItem.DataSource = null;
@@ -430,6 +436,7 @@ namespace WOLayout
 
                             _iOut = iOut;
                             int outfolderm = iMesas;
+                            _iOutO = iOper;
                             int outfoldero = iOper;
 
                             decimal cM = Math.Ceiling((decimal)iSub / (decimal)_iMaxTable);
@@ -979,9 +986,13 @@ namespace WOLayout
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
-                if (nummoperadores == nummesas * 2)
+                if (nummoperadores == nummesas * 2 || nummoperadores == (nummesas * 2) - 1)
                     operadores[(i * 2) + 1].Visible = true;
             }
+
+            if (nummoperadores == (nummesas * 2) - 1)
+                operadores[((posicionlibre + nummesas - 1) * 2) + 1].Visible = false;
+
 
         }
        
@@ -1053,7 +1064,7 @@ namespace WOLayout
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
-                if (piWSOperadores == piOFMesas * 2)
+                if (piOFOperadores == piOFMesas * 2)
                     operadores[(i * 2) + 1].Visible = true;
             }
 
@@ -1061,7 +1072,7 @@ namespace WOLayout
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
-                if (piWSOperadores == piOFMesas * 2)
+                if (piWSOperadores == piWSMesas * 2)
                     operadores[(i * 2) + 1].Visible = true;
             }
 
@@ -1078,7 +1089,7 @@ namespace WOLayout
             double[,] ite = new double[40, 9];
 
             ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / _iMaxTable);
-            ite[0, 1] = ipODisponibles - ite[0, 0] - _iOperNA;
+            ite[0, 1] = ipODisponibles - ite[0, 0] - (_iOperNA+_iOutO);
             ite[0, 2] =(_dAssyTime * _iMaxTable);
             ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / _iOWrap1));
             ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
@@ -1091,7 +1102,7 @@ namespace WOLayout
             for (int i = 1; i <= 39; i++)
             {
                 ite[i, 0] = (ite[i - 1, 0] - (_iOWrap1 / 2));
-                ite[i, 1] = ipODisponibles - ite[i, 0] - _iOperNA;
+                ite[i, 1] = ipODisponibles - ite[i, 0] - (_iOperNA + _iOutO);
                 ite[i, 2] = ((_iSub + _iMain + _iOut) * _dAssyTime / ite[i, 0]);
                 ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / _iOWrap1));
                 ite[i, 4] = Math.Abs(ite[i, 2] - ite[i, 3]);
@@ -1116,7 +1127,7 @@ namespace WOLayout
             double dDeltaMenor = 1000;
             int iAssyO=0;
             int iWrapO=0;
-            int iCycleTimeLine=0;
+            double iCycleTimeLine=0;
 
             for (int i = 1; i < 40; i++)
             {
@@ -1125,15 +1136,97 @@ namespace WOLayout
                     dDeltaMenor = ite[i, 8];
                     iAssyO = (int)Math.Ceiling(ite[i, 0]);
                     iWrapO = (int)Math.Ceiling(ite[i, 1]);
-                    iCycleTimeLine = (int)Math.Round(ite[i, 7]);
+                    iCycleTimeLine = ite[i, 7];
                 }
             }
 
             // MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
 
+            LimpiarLayout();
+            panel9.BackgroundImage = Properties.Resources.Yellow_Background_down1;
+            panel2.BackgroundImage = Properties.Resources.Yellow_Background_down1;
 
-            wfLayoutManual nform = new wfLayoutManual(_lsLen, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
-            nform.Show();
+
+            decimal sWODuracionVieja = (decimal)dgwWO[5, 0].Value;
+            double sWODuracionNueva = Math.Round((iCycleTimeLine * int.Parse(dgwWO[4, 0].Value.ToString())) / 60);
+            dgwWO[5, 0].Value = sWODuracionNueva;
+            int iOperadoresTotal = 0, iMesasTotal = 0;
+
+            //Actualizar tabla dgwTables
+            string ComponentesSubensamble = "0";
+            int iOutFolderM = 0, iOutFolderO = 0, iWrapSubO = 0, iWrapSubM = 0;
+
+            for (int i = 0; i < dgwTables.RowCount; i++)
+            {
+                if (dgwTables[0, i].Value.ToString() == "Out")
+                {
+                    iOutFolderM = Int32.Parse(dgwTables[3, i].Value.ToString());
+                    iOutFolderO = Int32.Parse(dgwTables[4, i].Value.ToString());
+                }
+
+                if (dgwTables[0, i].Value.ToString() == "Sub-Ensamble" || dgwTables[0, i].Value.ToString() == "Sub-Assembly")
+                {
+                    ComponentesSubensamble = dgwTables[2, i].Value.ToString();
+                    dgwTables[2, i + 1].Value = Int32.Parse(dgwTables[2, i + 1].Value.ToString());
+                    dgwTables.Rows.Remove(dgwTables.Rows[i]);
+                }
+
+                if (dgwTables[0, i].Value.ToString() == "Ensamble" || dgwTables[0, i].Value.ToString() == "Assembly")
+                {
+                    dgwTables[1, i].Value = "Ensamble (" + dgwTables[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
+                    dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesSubensamble);
+                    dgwTables[3, i].Value = iAssyO;
+                    dgwTables[4, i].Value = iAssyO;
+
+                    llenarensamble(iAssyO, iAssyO, 0, 0);
+
+
+                }
+
+                if (dgwTables[0, i].Value.ToString() == "Wrap")
+                {
+                    if (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2)
+                    {
+                        dgwTables[4, i].Value = iWrapO;
+                        dgwTables[3, i].Value = Math.Ceiling(iWrapO / 2.0);
+                    }
+                    else
+                    {
+                        dgwTables[4, i].Value = iWrapO;
+                        dgwTables[3, i].Value = iWrapO;
+                    }
+
+                    llenarmesa(Int32.Parse(dgwTables[3, i].Value.ToString()), iWrapO, false);
+
+                }
+
+                if (dgwTables[0, i].Value.ToString() == "Wrap Sub")
+                {
+                    iWrapSubM = Int32.Parse(dgwTables[3, i].Value.ToString());
+                    iWrapSubO = Int32.Parse(dgwTables[4, i].Value.ToString());
+                }
+            }
+
+            for (int i = 0; i < dgwTables.RowCount; i++)
+            {
+                iOperadoresTotal = iOperadoresTotal + Int32.Parse(dgwTables[4, i].Value.ToString());
+                iMesasTotal = iMesasTotal + Int32.Parse(dgwTables[3, i].Value.ToString());
+            }
+
+            lblOper.Text = iOperadoresTotal.ToString();
+            lblMesas.Text = iMesasTotal.ToString();
+
+            llenarOFWS(iOutFolderM, iOutFolderO, iWrapSubM, iWrapSubM);
+            lblCycleTime.Text = Math.Round(iCycleTimeLine, 3).ToString();
+
+            if (iCycleTimeLine > 20)
+                lblCycleTime.ForeColor = System.Drawing.Color.Red;
+            else
+                lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
+
+          //  wfLayoutManual nform = new wfLayoutManual(_lsLen, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
+           // nform.Show();
+           
 
         }
 

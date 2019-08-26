@@ -159,6 +159,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblCycleTime = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -1512,6 +1514,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblCycleTime);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dgwWO);
             this.groupBox1.Controls.Add(this.txtWO);
             this.groupBox1.Controls.Add(this.label1);
@@ -1649,6 +1653,30 @@
             this.dgwItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgwItem.Size = new System.Drawing.Size(780, 94);
             this.dgwItem.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.label2.Location = new System.Drawing.Point(301, 20);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(159, 29);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Cycle Time: ";
+            // 
+            // lblCycleTime
+            // 
+            this.lblCycleTime.AutoSize = true;
+            this.lblCycleTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lblCycleTime.Location = new System.Drawing.Point(454, 20);
+            this.lblCycleTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCycleTime.Name = "lblCycleTime";
+            this.lblCycleTime.Size = new System.Drawing.Size(41, 29);
+            this.lblCycleTime.TabIndex = 41;
+            this.lblCycleTime.Text = "20";
             // 
             // wfLayout
             // 
@@ -1911,6 +1939,8 @@
         private System.Windows.Forms.PictureBox WSO7;
         private System.Windows.Forms.PictureBox WSO6;
         private System.Windows.Forms.PictureBox WSO5;
+        private System.Windows.Forms.Label lblCycleTime;
+        private System.Windows.Forms.Label label2;
     }
 }
 
