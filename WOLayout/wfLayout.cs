@@ -42,7 +42,9 @@ namespace WOLayout
         private int _iMain=0;
         private double _sDuraW1=0;
         private double _sDuraW2=0;
+        private double _sDuraWS = 0;
         private int _iOWrap1=0;
+        private int _iOWrap2 = 0;
         private int _iOperNA=0;
         private int _iOut=0;
         private int _iOutO = 0;
@@ -524,7 +526,6 @@ namespace WOLayout
                             }
 
                             int wrap2m = 0;
-                            int wrap2o = 0;
                             //if (sLevelS == "W")
                             //{
                             //    dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
@@ -570,7 +571,7 @@ namespace WOLayout
                             }
                             
 
-                            llenarmesa(wrap1m, wrap1o, false);
+                            llenarmesa(wrap1m, wrap1o, false, false);
                             _iOWrap1 = wrap1o / wrap1m;
 
                             //llenarmesaWS(iWrapSm, iWrapSo, wrap1m); // sub-assembly wrapping tables
@@ -583,7 +584,7 @@ namespace WOLayout
                             else
                             {
                                 llenarOFWS(outfolderm, outfoldero, iWrapSm, iWrapSo);
-                                llenarensamble(assym, assyo, subassym, subassyo);
+                                llenarensamble(assym, assyo, subassym, subassyo, false);
                             }
 
 
@@ -972,7 +973,7 @@ namespace WOLayout
             }
         }
 
-        public void llenarmesa(int nummesas, int nummoperadores, bool ensamable)
+        public void llenarmesa(int nummesas, int nummoperadores, bool ensamable, bool manual)
         {
             PictureBox[] mesas = getmesas();
             PictureBox[] operadores = getoperadores();
@@ -995,7 +996,29 @@ namespace WOLayout
             }
             while (libre);
 
+            if(manual)
+            {
+                for (int i = 9; i < 15; i++)
+                {
+                    mesas[i].Visible = true;
+                    operadores[i * 2].Visible = true;
+                    if (nummoperadores == nummesas * 2 || nummoperadores == (nummesas * 2) - 1)
+                        operadores[(i * 2) + 1].Visible = true;
+                }
 
+                for (int i = 20; i < 20 + nummesas - 6 ; i++)
+                {
+                    mesas[i].Visible = true;
+                    operadores[i * 2].Visible = true;
+                    if (nummoperadores == nummesas * 2 || nummoperadores == (nummesas * 2) - 1)
+                        operadores[(i * 2) + 1].Visible = true;
+                }
+                if (nummoperadores == (nummesas * 2) - 1)
+                    operadores[((posicionlibre + nummesas - 1) * 2) + 1].Visible = false;
+
+            }
+            else
+            { 
             for (int i = posicionlibre; i < posicionlibre + nummesas; i++)
             {
                 mesas[i].Visible = true;
@@ -1006,65 +1029,100 @@ namespace WOLayout
 
             if (nummoperadores == (nummesas * 2) - 1)
                 operadores[((posicionlibre + nummesas - 1) * 2) + 1].Visible = false;
+            }
 
 
         }
        
-        public void llenarensamble(int emesas, int eoperadores, int smesas, int soperadores)
+        public void llenarensamble(int emesas, int eoperadores, int smesas, int soperadores, bool manual)
         {
             PictureBox[] mesas = getmesas();
             PictureBox[] operadores = getoperadores();
-            //si cabe de un lado
-            if (emesas + smesas <= 5)
-            {
-                for (int i = 0; i < smesas; i++)
-                {
-                    mesas[i].Image = Properties.Resources.sub;
-                    mesas[i].Visible = true;
-                    operadores[i * 2].Visible = true;
-                    if (soperadores == smesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
 
-                for (int i = smesas; i < smesas + emesas; i++)
+
+            if (manual)
+            {
+                //si cabe de un lado
+                if (emesas + smesas <= 5)
                 {
-                    mesas[i].Image = Properties.Resources.ensamble;
-                    mesas[i].Visible = true;
-                    operadores[i * 2].Visible = true;
-                    if (eoperadores == emesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
+                    for (int i = 0; i < smesas; i++)
+                    {
+                        mesas[i].Image = Properties.Resources.sub;
+                        mesas[i].Visible = true;
+                        operadores[i * 2].Visible = true;
+                        if (soperadores == smesas * 2)
+                            operadores[(i * 2) + 1].Visible = true;
+                    }
+
+                    for (int i = smesas; i < smesas + emesas; i++)
+                    {
+                        mesas[i].Image = Properties.Resources.ensamble;
+                        mesas[i].Visible = true;
+                        operadores[i * 2].Visible = true;
+                        if (eoperadores == emesas * 2)
+                            operadores[(i * 2) + 1].Visible = true;
+                    }
+                }
+                else
+                // si no cabe de un lado
+                {//LADO A
+                    for (int i = 4; i > 4 - emesas; i--)
+                    {
+                        mesas[i].Image = Properties.Resources.ensamble;
+                        mesas[i].Visible = true;
+                        operadores[i * 2].Visible = true;
+                        if (eoperadores == emesas * 2)
+                            operadores[(i * 2) + 1].Visible = true;
+                    }
+                    for (int i = 4 - emesas; i >= 0; i--)
+                    {
+                        mesas[i].Image = Properties.Resources.sub;
+                        mesas[i].Visible = true;
+                        operadores[i * 2].Visible = true;
+                        if (soperadores == smesas * 2)
+                            operadores[(i * 2) + 1].Visible = true;
+                    }
+
+                    //LADO B
+                    for (int i = 5; i < 5 + smesas - (5 - emesas); i++)
+                    {
+                        mesas[i].Image = Properties.Resources.sub;
+                        mesas[i].Visible = true;
+                        operadores[i * 2].Visible = true;
+                        if (soperadores == smesas * 2)
+                            operadores[(i * 2) + 1].Visible = true;
+                    }
+
                 }
             }
             else
-            // si no cabe de un lado
-            {//LADO A
-                for (int i = 4; i > 4 - emesas; i--)
-                {
-                    mesas[i].Image = Properties.Resources.ensamble;
-                    mesas[i].Visible = true;
-                    operadores[i * 2].Visible = true;
-                    if (eoperadores == emesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
-                for (int i = 4 - emesas; i >= 0; i--)
-                {
-                    mesas[i].Image = Properties.Resources.sub;
-                    mesas[i].Visible = true;
-                    operadores[i * 2].Visible = true;
-                    if (soperadores == smesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
+            {
 
-                //LADO B
-                for (int i = 5; i < 5 + smesas - (5 - emesas); i++)
+                if (emesas <= 5)
                 {
-                    mesas[i].Image = Properties.Resources.sub;
-                    mesas[i].Visible = true;
-                    operadores[i * 2].Visible = true;
-                    if (soperadores == smesas * 2)
-                        operadores[(i * 2) + 1].Visible = true;
+                    for (int i = 0; i < emesas; i++)
+                    {
+                        mesas[i].Image = Properties.Resources.ensamble;
+                        mesas[i].Visible = true;
+                        operadores[i * 2].Visible = true;
+                    }
                 }
+                else
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        mesas[i].Image = Properties.Resources.ensamble;
+                        mesas[i].Visible = true;
+                        operadores[i * 2].Visible = true;
+                    }
 
+                    for (int i = 0; i < emesas - 5; i++)
+                    {
+                        mesas[i].Image = Properties.Resources.ensamble;
+                        mesas[i].Visible = true;
+                        operadores[(i * 2) + 1].Visible = true;
+                    }
+                }
             }
 
         }
@@ -1102,10 +1160,10 @@ namespace WOLayout
             //Balance permitido = 20 (Estatico)
             double[,] ite = new double[40, 9];
 
-            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / _iMaxTable);
+            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / (double)_dMaxTable);
             ite[0, 1] = ipODisponibles - ite[0, 0] - (_iOperNA+_iOutO);
-            ite[0, 2] =(_dAssyTime * _iMaxTable);
-            ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / _iOWrap1));
+            ite[0, 2] =(_dAssyTime * (double)_dMaxTable);
+            ite[0, 3] = ((_sDuraW1 + _sDuraW2 ) / (ite[0, 1] / (_iOWrap1))); //mas duracion wrab sub,  mas operadores por mesa
             ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
             ite[0, 5] = (ite[0, 4] < 20) ? 1 : 0;
             ite[0, 6] = ite[0, 4] * ite[0, 5];
@@ -1118,7 +1176,7 @@ namespace WOLayout
                 ite[i, 0] = (ite[i - 1, 0] - (_iOWrap1 / 2));
                 ite[i, 1] = ipODisponibles - ite[i, 0] - (_iOperNA + _iOutO);
                 ite[i, 2] = ((_iSub + _iMain + _iOut) * _dAssyTime / ite[i, 0]);
-                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / _iOWrap1));
+                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / (_iOWrap1)  ));  //mas duracion wrab sub,  mas operadores por mesa
                 ite[i, 4] = Math.Abs(ite[i, 2] - ite[i, 3]);
                 ite[i, 5] = (ite[i, 4] < 20) ? 1 : 0;
                 ite[i, 6] = ite[i, 4] * ite[i, 5];
@@ -1189,10 +1247,10 @@ namespace WOLayout
                 {
                     dgwTables[1, i].Value = "Ensamble (" + dgwTables[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
                     dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesSubensamble);
-                    dgwTables[3, i].Value = iAssyO;
+                    dgwTables[3, i].Value = (iAssyO <= 5) ? iAssyO : 5;
                     dgwTables[4, i].Value = iAssyO;
 
-                    llenarensamble(iAssyO, iAssyO, 0, 0);
+                    llenarensamble(iAssyO, iAssyO, 0, 0, true);
 
 
                 }
@@ -1210,14 +1268,13 @@ namespace WOLayout
                         dgwTables[3, i].Value = iWrapO;
                     }
 
-                    llenarmesa(Int32.Parse(dgwTables[3, i].Value.ToString()), iWrapO, false);
+                    llenarmesa(Int32.Parse(dgwTables[3, i].Value.ToString()), iWrapO, false, true);
 
                 }
 
                 if (dgwTables[0, i].Value.ToString() == "Wrap Sub")
                 {
-                    iWrapSubM = Int32.Parse(dgwTables[3, i].Value.ToString());
-                    iWrapSubO = Int32.Parse(dgwTables[4, i].Value.ToString());
+                    dgwTables.Rows.Remove(dgwTables.Rows[i]);
                 }
             }
 
@@ -1230,7 +1287,7 @@ namespace WOLayout
             lblOper.Text = iOperadoresTotal.ToString();
             lblMesas.Text = iMesasTotal.ToString();
 
-            llenarOFWS(iOutFolderM, iOutFolderO, iWrapSubM, iWrapSubM);
+            llenarOFWS(iOutFolderM, iOutFolderO, iWrapSubM, iWrapSubO);
             lblCycleTime.Text = Math.Round(iCycleTimeLine, 3).ToString();
 
             if (iCycleTimeLine > 20)
@@ -1238,8 +1295,8 @@ namespace WOLayout
             else
                 lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
-          //  wfLayoutManual nform = new wfLayoutManual(_lsLen, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
-           // nform.Show();
+           //wfLayoutManual nform = new wfLayoutManual(_lsLen, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
+           //nform.Show();
            
 
         }
