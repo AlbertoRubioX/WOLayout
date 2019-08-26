@@ -30,6 +30,14 @@ namespace WOLayout
         
         private void wfConfig_Load(object sender, EventArgs e)
         {
+            Dictionary<string, string> List = new Dictionary<string, string>();
+            List.Add("SP", "Spanish");
+            List.Add("EN", "English");
+            cbxLang.DataSource = new BindingSource(List, null);
+            cbxLang.DisplayMember = "Value";
+            cbxLang.ValueMember = "Key";
+            cbxLang.SelectedIndex = 0;
+
             Inicio();
         }
         private void Inicio()
@@ -90,7 +98,7 @@ namespace WOLayout
                         txtTape.Text = data.Rows[0][25].ToString();
                     if (!string.IsNullOrEmpty(data.Rows[0][24].ToString()))
                         txtNA.Text = data.Rows[0][24].ToString();
-
+                    cbxLang.SelectedValue = data.Rows[0]["lenguage"].ToString();
                 }
 
                 ControlText(tabPage1);
@@ -108,7 +116,7 @@ namespace WOLayout
         private void ControlText(Control _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
 
             foreach (Control c in _control.Controls)
@@ -116,7 +124,7 @@ namespace WOLayout
                 if (c is GroupBox)
                 {
                     con.Control = c.Name;
-                    string sValue = ConfigLogica.ChangeLenguageCont(con);
+                    string sValue = ConfigLogica.ChangeLanguageCont(con);
                     if (!string.IsNullOrEmpty(sValue))
                         c.Text = sValue;
                 }
@@ -126,7 +134,7 @@ namespace WOLayout
                     if (cs is Label || cs is GroupBox)
                     {
                         con.Control = cs.Name;
-                        string sValue = ConfigLogica.ChangeLenguageCont(con);
+                        string sValue = ConfigLogica.ChangeLanguageCont(con);
                         if (!string.IsNullOrEmpty(sValue))
                             cs.Text = sValue;
                     }
@@ -238,9 +246,14 @@ namespace WOLayout
                 conf.Sobre = dSobre;
                 conf.Tape = dTape;
                 conf.WrapNA = dWrapNA;
+                conf.Language = cbxLang.SelectedValue.ToString();
                 conf.Usuario = _lsUsuario;
+
                 if (ConfigLogica.GuardarSP(conf) > 0)
+                {
+                    _lsLen = conf.Language;
                     Close();
+                }
                 else
                 {
                     MessageBox.Show("Unable to save changes", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -418,8 +431,14 @@ namespace WOLayout
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && (e.KeyChar != '.');
         }
+
         #endregion
 
-        
+        private void cbxLang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _lsLen = cbxLang.SelectedValue.ToString();
+            ControlText(tabPage1);
+            ControlText(tabPage2);
+        }
     }
 }
