@@ -18,24 +18,21 @@ namespace WOLayout
         private int _iHeightAnt;
         private string _lsLen;
 
-        public wfLayoutManual(string _plsLen, string pWO, object poWODataSource, object poItemDataSource, object poTablesDataSource, int AssyO, int WrapO, int CycleTime)
+        public wfLayoutManual(string _plsLen, string pWO, object poWODataSource, object poItemDataSource, object poTablesDataSource, int AssyO, int WrapO, double CycleTime)
         {
             InitializeComponent();
 
             _lsLen = _plsLen;
             txtWO.Text = pWO;
             dgwWO.DataSource = poWODataSource;
-
-           decimal sWODuracionVieja = (decimal)dgwWO[5, 0].Value;
-           decimal sWODuracionNueva = (CycleTime * int.Parse(dgwWO[4, 0].Value.ToString()))/60;
-            dgwWO[5, 0].Value = sWODuracionNueva;
-
             dgwItem.DataSource = poItemDataSource;
-            dgwTables.DataSource = poTablesDataSource;
+            dgwTables2.DataSource = poTablesDataSource;
 
             _iWidthAnt = Width;
             _iHeightAnt = Height;
             _WindowStateAnt = WindowState;
+
+            ActualizarLayout(CycleTime, AssyO, WrapO);
 
         }
 
@@ -51,13 +48,92 @@ namespace WOLayout
             ChangeLen();
         }
 
+        private void ActualizarLayout(double CycleTime, int AssyO, int WrapO)
+        {
+            decimal sWODuracionVieja = (decimal)dgwWO[5, 0].Value;
+            double sWODuracionNueva = Math.Round((CycleTime * int.Parse(dgwWO[4, 0].Value.ToString())) / 60);
+            dgwWO[5, 0].Value = sWODuracionNueva;
+            int iOperadoresTotal = 0, iMesasTotal = 0;
+
+            //Actualizar tabla dgwTables
+            string ComponentesSubensamble = "0";
+            int iOutFolderM = 0, iOutFolderO = 0, iWrapSubO = 0, iWrapSubM = 0;
+
+            for (int i = 0; i < dgwTables2.RowCount; i++)
+            {
+                if (dgwTables2[0, i].Value.ToString() == "Out")
+                {
+                    iOutFolderM = Int32.Parse(dgwTables2[3, i].Value.ToString());
+                    iOutFolderO = Int32.Parse(dgwTables2[4, i].Value.ToString());
+                }
+
+                if (dgwTables2[0, i].Value.ToString() == "Sub-Ensamble" || dgwTables2[0, i].Value.ToString() == "Sub-Assembly")
+                {
+                    ComponentesSubensamble = dgwTables2[2, i].Value.ToString();
+                    dgwTables2[2, i + 1].Value = Int32.Parse(dgwTables2[2, i + 1].Value.ToString());
+                    dgwTables2.Rows.Remove(dgwTables2.Rows[i]);
+                }
+
+                if (dgwTables2[0, i].Value.ToString() == "Ensamble" || dgwTables2[0, i].Value.ToString() == "Assembly")
+                {
+                    dgwTables2[1, i].Value = "Ensamble (" + dgwTables2[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
+                    dgwTables2[2, i].Value = Int32.Parse(dgwTables2[2, i].Value.ToString()) + Int32.Parse(ComponentesSubensamble);
+                    dgwTables2[3, i].Value = AssyO;
+                    dgwTables2[4, i].Value = AssyO;
+
+                    
+                }
+
+                if (dgwTables2[0, i].Value.ToString() == "Wrap")
+                {
+                    if (Int32.Parse(dgwTables2[4, i].Value.ToString()) / Int32.Parse(dgwTables2[3, i].Value.ToString()) == 2)
+                    {
+                        dgwTables2[4, i].Value = WrapO;
+                        dgwTables2[3, i].Value = Math.Ceiling(WrapO / 2.0);
+                    }
+                    else
+                    {
+                        dgwTables2[4, i].Value = WrapO;
+                        dgwTables2[3, i].Value = WrapO;
+                    }
+
+                    llenarmesa(WrapO, Int32.Parse(dgwTables2[3, i].Value.ToString()), false);
+
+                }
+
+                if (dgwTables2[0, i].Value.ToString() == "Wrap Sub")
+                {
+                    iWrapSubM = Int32.Parse(dgwTables2[3, i].Value.ToString());
+                    iWrapSubO = Int32.Parse(dgwTables2[4, i].Value.ToString());
+                }
+            }
+
+            for (int i = 0; i < dgwTables2.RowCount; i++)
+            {
+                iOperadoresTotal = iOperadoresTotal + Int32.Parse(dgwTables2[4, i].Value.ToString());
+                iMesasTotal = iMesasTotal + Int32.Parse(dgwTables2[3, i].Value.ToString());
+            }
+
+            lblOper.Text = iOperadoresTotal.ToString();
+            lblMesas.Text = iMesasTotal.ToString();
+
+            llenarOFWS(iOutFolderM, iOutFolderO, iWrapSubM, iWrapSubM);
+            lblCycleTime.Text = Math.Round(CycleTime, 3).ToString();
+
+            if (CycleTime > 20)
+                lblCycleTime.ForeColor = System.Drawing.Color.Red;
+            else
+                lblCycleTime.ForeColor = System.Drawing.Color.Green;
+
+        }
+
         private void dgwTables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             int iRow = e.RowIndex;
             string sValue = e.Value.ToString();
 
 
-            sValue = dgwTables[0, e.RowIndex].Value.ToString();
+            sValue = dgwTables2[0, e.RowIndex].Value.ToString();
             if (sValue == "Sub-Ensamble" || sValue == "Sub-Assembly")
             {
                 e.CellStyle.BackColor = Color.Gold;
@@ -130,7 +206,7 @@ namespace WOLayout
             dgwItem.Columns[6].Width = ColumnWith(dgwItem, 15);
             dgwItem.Columns[7].Width = ColumnWith(dgwItem, 16);
             dgwItem.Columns[8].Visible = false;
-            if (dgwTables.Rows.Count == 0)
+            if (dgwTables2.Rows.Count == 0)
             {
                 DataTable dtNew = new DataTable("Tables");
                 dtNew.Columns.Add("area", typeof(string));
@@ -139,19 +215,19 @@ namespace WOLayout
                 dtNew.Columns.Add("tables", typeof(int));
                 dtNew.Columns.Add("headcount", typeof(int));
                 dtNew.Columns.Add("code", typeof(string));
-                dgwTables.DataSource = dtNew;
+                dgwTables2.DataSource = dtNew;
             }
 
-            dgwTables.Columns[5].Visible = false;
-            dgwTables.Columns[0].Width = ColumnWith(dgwTables, 25);
-            dgwTables.Columns[1].Width = ColumnWith(dgwTables, 48);
-            dgwTables.Columns[2].Width = ColumnWith(dgwTables, 10);
-            dgwTables.Columns[3].Width = ColumnWith(dgwTables, 10);
-            dgwTables.Columns[4].Width = ColumnWith(dgwTables, 10);
-            dgwTables.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwTables.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwTables.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwTables.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwTables2.Columns[5].Visible = false;
+            dgwTables2.Columns[0].Width = ColumnWith(dgwTables2, 25);
+            dgwTables2.Columns[1].Width = ColumnWith(dgwTables2, 48);
+            dgwTables2.Columns[2].Width = ColumnWith(dgwTables2, 10);
+            dgwTables2.Columns[3].Width = ColumnWith(dgwTables2, 10);
+            dgwTables2.Columns[4].Width = ColumnWith(dgwTables2, 10);
+            dgwTables2.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwTables2.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwTables2.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwTables2.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         private int ColumnWith(DataGridView _dtGrid, double _dColWith)
@@ -173,9 +249,9 @@ namespace WOLayout
             ControlText(this.panel8);
             ControlGridText(dgwWO);
             ControlGridText(dgwItem);
-            ControlGridText(dgwTables);
+            ControlGridText(dgwTables2);
             ControlGridRows2(dgwItem);
-            ControlGridRows2(dgwTables);
+            ControlGridRows2(dgwTables2);
 
         }
         private void ControlText(Control _control)
@@ -263,7 +339,7 @@ namespace WOLayout
 
                 ResizeControl(groupBox3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(groupBox4, 2, ref _iWidthAnt, ref _iHeightAnt, 0);
-                ResizeControl(dgwTables, 1, ref _iWidthAnt, ref _iHeightAnt, 1);
+                ResizeControl(dgwTables2, 1, ref _iWidthAnt, ref _iHeightAnt, 1);
                 int iH = panel9.Height;
                 int iY = iH - ptbLogo.Height - 30;
                 ptbLogo.Location = new Point(ptbLogo.Location.X, iY);

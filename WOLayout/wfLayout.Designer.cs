@@ -154,6 +154,8 @@
             this.lblTables = new System.Windows.Forms.Label();
             this.dgwTables = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblCycleTime = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.dgwWO = new System.Windows.Forms.DataGridView();
             this.txtWO = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -161,6 +163,7 @@
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label3 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -1525,6 +1528,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.lblCycleTime);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dgwWO);
             this.groupBox1.Controls.Add(this.txtWO);
             this.groupBox1.Controls.Add(this.label1);
@@ -1535,6 +1541,23 @@
             this.groupBox1.Size = new System.Drawing.Size(829, 130);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
+            // 
+            // lblCycleTime
+            // 
+            this.lblCycleTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lblCycleTime.Location = new System.Drawing.Point(510, 19);
+            this.lblCycleTime.Name = "lblCycleTime";
+            this.lblCycleTime.Size = new System.Drawing.Size(100, 35);
+            this.lblCycleTime.TabIndex = 0;
+            this.lblCycleTime.Text = "20";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 1;
             // 
             // dgwWO
             // 
@@ -1664,6 +1687,16 @@
             this.dgwItem.TabIndex = 3;
             // 
             // openFileDialog1
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.label3.Location = new System.Drawing.Point(344, 19);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(159, 29);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Cycle Time :";
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
@@ -1930,6 +1963,9 @@
         private System.Windows.Forms.PictureBox WSO5;
         private System.Windows.Forms.ToolStripButton btnExportFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label lblCycleTime;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

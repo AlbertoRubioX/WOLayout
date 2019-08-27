@@ -137,7 +137,7 @@
             this.lblMesas = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblTables = new System.Windows.Forms.Label();
-            this.dgwTables = new System.Windows.Forms.DataGridView();
+            this.dgwTables2 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgwWO = new System.Windows.Forms.DataGridView();
             this.txtWO = new System.Windows.Forms.TextBox();
@@ -145,6 +145,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblCycleTime = new System.Windows.Forms.Label();
             this.panel9.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
@@ -241,7 +243,7 @@
             this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwTables)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwTables2)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwWO)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1215,7 +1217,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.panel8);
-            this.groupBox3.Controls.Add(this.dgwTables);
+            this.groupBox3.Controls.Add(this.dgwTables2);
             this.groupBox3.Location = new System.Drawing.Point(18, 316);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
@@ -1333,11 +1335,11 @@
             this.lblTables.TabIndex = 4;
             this.lblTables.Text = "TOTAL MESAS";
             // 
-            // dgwTables
+            // dgwTables2
             // 
-            this.dgwTables.AllowUserToAddRows = false;
-            this.dgwTables.AllowUserToDeleteRows = false;
-            this.dgwTables.BackgroundColor = System.Drawing.Color.White;
+            this.dgwTables2.AllowUserToAddRows = false;
+            this.dgwTables2.AllowUserToDeleteRows = false;
+            this.dgwTables2.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1345,12 +1347,12 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwTables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgwTables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwTables.Location = new System.Drawing.Point(25, 23);
-            this.dgwTables.Margin = new System.Windows.Forms.Padding(4);
-            this.dgwTables.Name = "dgwTables";
-            this.dgwTables.ReadOnly = true;
+            this.dgwTables2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgwTables2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwTables2.Location = new System.Drawing.Point(25, 23);
+            this.dgwTables2.Margin = new System.Windows.Forms.Padding(4);
+            this.dgwTables2.Name = "dgwTables2";
+            this.dgwTables2.ReadOnly = true;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1358,17 +1360,19 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwTables.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgwTables.RowHeadersVisible = false;
-            this.dgwTables.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgwTables.RowTemplate.Height = 40;
-            this.dgwTables.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgwTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgwTables.Size = new System.Drawing.Size(780, 390);
-            this.dgwTables.TabIndex = 4;
+            this.dgwTables2.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgwTables2.RowHeadersVisible = false;
+            this.dgwTables2.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgwTables2.RowTemplate.Height = 40;
+            this.dgwTables2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgwTables2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgwTables2.Size = new System.Drawing.Size(780, 390);
+            this.dgwTables2.TabIndex = 4;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblCycleTime);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dgwWO);
             this.groupBox1.Controls.Add(this.txtWO);
             this.groupBox1.Controls.Add(this.label1);
@@ -1505,6 +1509,29 @@
             this.dgwItem.Size = new System.Drawing.Size(780, 94);
             this.dgwItem.TabIndex = 3;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.label2.Location = new System.Drawing.Point(294, 20);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(159, 29);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Cycle Time: ";
+            // 
+            // lblCycleTime
+            // 
+            this.lblCycleTime.AutoSize = true;
+            this.lblCycleTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCycleTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.lblCycleTime.Location = new System.Drawing.Point(461, 19);
+            this.lblCycleTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCycleTime.Name = "lblCycleTime";
+            this.lblCycleTime.Size = new System.Drawing.Size(0, 29);
+            this.lblCycleTime.TabIndex = 3;
+            // 
             // wfLayoutManual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1616,7 +1643,7 @@
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwTables)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwTables2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwWO)).EndInit();
@@ -1732,7 +1759,7 @@
         private System.Windows.Forms.Label lblMesas;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lblTables;
-        private System.Windows.Forms.DataGridView dgwTables;
+        private System.Windows.Forms.DataGridView dgwTables2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgwWO;
         private System.Windows.Forms.TextBox txtWO;
@@ -1740,5 +1767,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblProduct;
         private System.Windows.Forms.DataGridView dgwItem;
+        private System.Windows.Forms.Label lblCycleTime;
+        private System.Windows.Forms.Label label2;
     }
 }
