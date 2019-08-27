@@ -571,7 +571,7 @@ namespace WOLayout
                             }
                             
 
-                            llenarmesa(wrap1m, wrap1o, false, false);
+                            llenarwrap(wrap1m, wrap1o);
                             _iOWrap1 = wrap1o / wrap1m;
 
                             //llenarmesaWS(iWrapSm, iWrapSo, wrap1m); // sub-assembly wrapping tables
@@ -984,62 +984,21 @@ namespace WOLayout
             }
         }
 
-        public void llenarmesa(int nummesas, int nummoperadores, bool ensamable, bool manual)
+        public void llenarwrap(int nummesas, int nummoperadores)
         {
             PictureBox[] mesas = getmesas();
             PictureBox[] operadores = getoperadores();
 
-            Boolean libre = true;
-            int posicionlibre;
 
-            if (ensamable)
-                posicionlibre = 0;
-            else
-                posicionlibre = 9;
-
-            do
+            if(nummesas < 7)
             {
-                if (mesas[posicionlibre].Visible)
-                {
-                    posicionlibre++;
-                }
-                else libre = false;
-            }
-            while (libre);
-
-            if(manual)
-            {
-                for (int i = 9; i < 15; i++)
+                for (int i = 9; i < 9 + nummesas; i++)
                 {
                     mesas[i].Visible = true;
                     operadores[i * 2].Visible = true;
                     if (nummoperadores == nummesas * 2 || nummoperadores == (nummesas * 2) - 1)
                         operadores[(i * 2) + 1].Visible = true;
                 }
-
-                for (int i = 20; i < 20 + nummesas - 6 ; i++)
-                {
-                    mesas[i].Visible = true;
-                    operadores[i * 2].Visible = true;
-                    if (nummoperadores == nummesas * 2 || nummoperadores == (nummesas * 2) - 1)
-                        operadores[(i * 2) + 1].Visible = true;
-                }
-                if (nummoperadores == (nummesas * 2) - 1)
-                    operadores[((posicionlibre + nummesas - 1) * 2) + 1].Visible = false;
-
-            }
-            else
-            { 
-            for (int i = posicionlibre; i < posicionlibre + nummesas; i++)
-            {
-                mesas[i].Visible = true;
-                operadores[i * 2].Visible = true;
-                if (nummoperadores == nummesas * 2 || nummoperadores == (nummesas * 2) - 1)
-                    operadores[(i * 2) + 1].Visible = true;
-            }
-
-            if (nummoperadores == (nummesas * 2) - 1)
-                operadores[((posicionlibre + nummesas - 1) * 2) + 1].Visible = false;
             }
 
 
@@ -1051,7 +1010,7 @@ namespace WOLayout
             PictureBox[] operadores = getoperadores();
 
 
-            if (manual)
+            if (!manual)
             {
                 //si cabe de un lado
                 if (emesas + smesas <= 5)
@@ -1139,6 +1098,7 @@ namespace WOLayout
         }
 
         public void llenarOFWS(int piOFMesas, int piOFOperadores, int piWSMesas, int piWSOperadores)
+
         {
             PictureBox[] mesas = getmesas();
             PictureBox[] operadores = getoperadores();
@@ -1151,7 +1111,7 @@ namespace WOLayout
                     operadores[(i * 2) + 1].Visible = true;
             }
 
-            for (int i = 20 + piOFMesas ; i < 20 + piWSMesas; i++)
+            for (int i = 20 + piOFMesas ; i <= 20 + piWSMesas; i++)
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
@@ -1237,69 +1197,78 @@ namespace WOLayout
 
             //Actualizar tabla dgwTables
             string ComponentesSubensamble = "0";
+            string ComponentesWrapSub = "0";
             int iOutFolderM = 0, iOutFolderO = 0, iWrapSubO = 0, iWrapSubM = 0;
 
             for (int i = 0; i < dgwTables.RowCount; i++)
             {
                 if (dgwTables[0, i].Value.ToString() == "Out")
                 {
-                    iOutFolderM = Int32.Parse(dgwTables[3, i].Value.ToString());
+                    iOutFolderM = Int32.Parse(dgwTables[3, i].Value.ToString()); // agarrando valores para llenar layout
                     iOutFolderO = Int32.Parse(dgwTables[4, i].Value.ToString());
                 }
 
                 if (dgwTables[0, i].Value.ToString() == "Sub-Ensamble" || dgwTables[0, i].Value.ToString() == "Sub-Assembly")
                 {
-                    ComponentesSubensamble = dgwTables[2, i].Value.ToString();
-                    dgwTables[2, i + 1].Value = Int32.Parse(dgwTables[2, i + 1].Value.ToString());
-                    dgwTables.Rows.Remove(dgwTables.Rows[i]);
+                    ComponentesSubensamble = dgwTables[2, i].Value.ToString(); //agarrando componentes para sumarlos a ensamble
+                    dgwTables.Rows.Remove(dgwTables.Rows[i]); //eliminando subensamble
                 }
 
                 if (dgwTables[0, i].Value.ToString() == "Ensamble" || dgwTables[0, i].Value.ToString() == "Assembly")
                 {
+                    //separando componentes en descripcion
                     if(_lsLen=="SP")
                         dgwTables[1, i].Value = "Ensamble (" + dgwTables[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
                     else
                         dgwTables[1, i].Value = "Assy (" + dgwTables[2, i].Value.ToString() + ") & Subassy (" + ComponentesSubensamble.ToString() + ")";
+
+                    //actulizando el total de componentes sub+assy
                     dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesSubensamble);
-                    dgwTables[3, i].Value = (iAssyO <= 5) ? iAssyO : 5;
-                    dgwTables[4, i].Value = iAssyO;
-
-                    llenarensamble(iAssyO, iAssyO, 0, 0, true);
-
+                    dgwTables[3, i].Value = (iAssyO <= 5) ? iAssyO : 5; // si los operadores son mas 5 se tienen que acomodar en 5 mesas
+                    dgwTables[4, i].Value = iAssyO; 
 
                 }
 
                 if (dgwTables[0, i].Value.ToString() == "Wrap")
                 {
-                    if (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2)
-                    {
-                        dgwTables[4, i].Value = iWrapO;
-                        dgwTables[3, i].Value = Math.Ceiling(iWrapO / 2.0);
-                    }
-                    else
-                    {
-                        dgwTables[4, i].Value = iWrapO;
-                        dgwTables[3, i].Value = iWrapO;
-                    }
-
-                    llenarmesa(Int32.Parse(dgwTables[3, i].Value.ToString()), iWrapO, false, true);
-
+                    //si el #operadores calculado anteriormente es el doble del #mesas el nuevo generado tambien sera el doble
+                    dgwTables[3, i].Value = (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2) ? Math.Ceiling(iWrapO / 2.0) : iWrapO;
+                    dgwTables[4, i].Value = iWrapO;
                 }
 
                 if (dgwTables[0, i].Value.ToString() == "Wrap Sub")
                 {
+                    ComponentesWrapSub = dgwTables[2, i].Value.ToString();
                     dgwTables.Rows.Remove(dgwTables.Rows[i]);
                 }
             }
 
             for (int i = 0; i < dgwTables.RowCount; i++)
             {
-                iOperadoresTotal = iOperadoresTotal + Int32.Parse(dgwTables[4, i].Value.ToString());
+                if (dgwTables[0, i].Value.ToString() == "Wrap")
+                {
+                    //sumando los componentes de sub previamente optenidos
+                    dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesWrapSub);
+                    //si se pasa el numero de wrap total dentro de wrap llenar las mesas de wrap y poner los sobrantes en wrapsub
+                    if (Int32.Parse(dgwTables[3, i].Value.ToString()) > 6)
+                    {
+                        llenarwrap(6, 12);
+                        iWrapSubM = Int32.Parse(dgwTables[3, i].Value.ToString()) - 6;
+                        iWrapSubO = iWrapO - 12;
+                    }
+                    else
+                        llenarwrap(Int32.Parse(dgwTables[3, i].Value.ToString()), iWrapO);
+                }
+
+                    iOperadoresTotal = iOperadoresTotal + Int32.Parse(dgwTables[4, i].Value.ToString());
                 iMesasTotal = iMesasTotal + Int32.Parse(dgwTables[3, i].Value.ToString());
             }
 
             lblOper.Text = iOperadoresTotal.ToString();
             lblMesas.Text = iMesasTotal.ToString();
+
+
+            llenarensamble(iAssyO, iAssyO, 0, 0, true);
 
             llenarOFWS(iOutFolderM, iOutFolderO, iWrapSubM, iWrapSubO);
             lblCycleTime.Text = Math.Round(iCycleTimeLine, 3).ToString();
