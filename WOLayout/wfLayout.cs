@@ -768,7 +768,7 @@ namespace WOLayout
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
 
-                for (int i = 1; i <= rowCount; i++)
+                for (int i = 4714; i <= rowCount; i++)
                 {
                     if (xlRange.Cells[i, 1].Value2 == null)
                         continue;
@@ -856,13 +856,14 @@ namespace WOLayout
                         DataTable dt = AS4Logica.PartKits(AS4);
                         if (dt.Rows.Count > 0)
                         {
+                            sItem = sValue;
                             sKits = dt.Rows[0][0].ToString();
                             xlRange.Cells[i, 2].Value2 = sKits;
                         }
                     }
 
                     if (string.IsNullOrEmpty(sItem))
-                        return;
+                        continue;
 
 
                     AS4.Item = sItem;
@@ -1043,6 +1044,7 @@ namespace WOLayout
                         xlRange.Cells[i, 3].Value2 = iTotalOps.ToString();
                         xlRange.Cells[i, 4].Value2 = iTotalMes.ToString();
                     }
+                    tssVersion.Text = i.ToString() + " of " + rowCount.ToString();
                 }
 
                 
