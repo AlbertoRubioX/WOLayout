@@ -595,10 +595,21 @@ namespace WOLayout
                         txtWO.SelectAll();
 
                         //MODO MANUAL
-                        var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox("Operadores Requeridos: " + lblOper.Text + "\n \nOperadores disponibles: ", "Modo Manual", lblOper.Text);
+                        string sMensajeManual = (_lsLen == "SP") ? "Operadores requeridos: " + lblOper.Text + "\n \nOperadores disponibles: " : "Required operators: " + lblOper.Text + "\n \nAvailable operators: ";
+                        string sEncabezadoManual = (_lsLen == "SP") ? "Modo Manual" : "Manual Mode";
+
+                        var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox(sMensajeManual, sEncabezadoManual, lblOper.Text);
                         int n;
-                        if (Int32.Parse(iODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(iODisponibles, out n))
-                            ModoManual(Int32.Parse(iODisponibles));
+                        //  
+                        try
+                        {
+                            if (Int32.Parse(iODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(iODisponibles, out n))
+                                ModoManual(Int32.Parse(iODisponibles));
+                        }
+                        catch (Exception)
+                        {
+                            
+                        }
                        
                     }
                     else
@@ -1245,7 +1256,10 @@ namespace WOLayout
 
                 if (dgwTables[0, i].Value.ToString() == "Ensamble" || dgwTables[0, i].Value.ToString() == "Assembly")
                 {
-                    dgwTables[1, i].Value = "Ensamble (" + dgwTables[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
+                    if(_lsLen=="SP")
+                        dgwTables[1, i].Value = "Ensamble (" + dgwTables[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
+                    else
+                        dgwTables[1, i].Value = "Assy (" + dgwTables[2, i].Value.ToString() + ") & Subassy (" + ComponentesSubensamble.ToString() + ")";
                     dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesSubensamble);
                     dgwTables[3, i].Value = (iAssyO <= 5) ? iAssyO : 5;
                     dgwTables[4, i].Value = iAssyO;
