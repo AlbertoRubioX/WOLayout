@@ -37,6 +37,22 @@ namespace Logica
 
             return datos;
         }
+
+        public static DataTable PartKits(AS4Logica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "SELECT DISTINCT IMSTCK FROM B20E386T.KBM400MFG.FKITMSTR FKITMSTR WHERE FKITMSTR.IMPN = '"+con.Item+"'";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
         public static DataTable TableDescrip(AS4Logica con)
         {
             DataTable datos = new DataTable();

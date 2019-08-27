@@ -181,7 +181,7 @@ namespace WOLayout
         private void ControlText(Control _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
 
             foreach (Control c in _control.Controls)
@@ -191,7 +191,7 @@ namespace WOLayout
                     if (cs is Label)
                     {
                         con.Control = cs.Name;
-                        string sValue = ConfigLogica.ChangeLenguageCont(con);
+                        string sValue = ConfigLogica.ChangeLanguageCont(con);
                         if (!string.IsNullOrEmpty(sValue))
                             cs.Text = sValue;
                     }
@@ -201,7 +201,7 @@ namespace WOLayout
         private void ControlGridText(DataGridView _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
             con.Control = _control.Name;
             foreach (DataGridViewColumn c in _control.Columns)
@@ -209,7 +209,7 @@ namespace WOLayout
                 if (c.Visible)
                 {
                     con.SubControl = c.Name;
-                    string sValue = ConfigLogica.ChangeLenguageGrid(con);
+                    string sValue = ConfigLogica.ChangeLanguageGrid(con);
                     if (!string.IsNullOrEmpty(sValue))
                         c.HeaderText = sValue;
                 }
@@ -219,11 +219,11 @@ namespace WOLayout
         private string ControlGridRows(Control _control, string _asRow)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
             con.Control = _control.Name;
             con.SubControl = _asRow;
-            string sValue = ConfigLogica.ChangeLenguageGrid(con);
+            string sValue = ConfigLogica.ChangeLanguageGrid(con);
             if (!string.IsNullOrEmpty(sValue))
                 return sValue;
 
@@ -232,7 +232,7 @@ namespace WOLayout
         private void ControlGridRows2(DataGridView _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Lenguage = _lsLen;
+            con.Language = _lsLen;
             con.Form = this.Name;
             con.Control = _control.Name;
             foreach (DataGridViewRow row in _control.Rows)
@@ -244,7 +244,7 @@ namespace WOLayout
                 for (int i = 0; i < 2; i++)
                 {
                     con.Columna = i;
-                    string sValue = ConfigLogica.ChangeLenguageGridRow(con);
+                    string sValue = ConfigLogica.ChangeLanguageGridRow(con);
                     if (!string.IsNullOrEmpty(sValue))
                         row.Cells[i].Value = sValue;
                 }

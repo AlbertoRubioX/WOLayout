@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
 using Logica;
 
 namespace WOLayout
@@ -29,6 +31,7 @@ namespace WOLayout
         private decimal _dVertical;
         private decimal _dTape;
         private decimal _dEnvelope;
+        private decimal _dDetroit;
         private decimal _dHrsDisp;
         private decimal _dSegDisp;
         private decimal _dKits;
@@ -97,9 +100,9 @@ namespace WOLayout
             ControlGridRows2(dgwTables);
 
             if (_lsLen == "EN")
-                btnLenguage.Image = Properties.Resources.mexico;
+                btnLanguage.Image = Properties.Resources.mexico;
             else
-                btnLenguage.Image = Properties.Resources.united_states;
+                btnLanguage.Image = Properties.Resources.united_states;
             
         }
         private void ControlText(Control _control)
@@ -237,6 +240,8 @@ namespace WOLayout
                 _dEnvelope = decimal.Parse(_dtConf.Rows[0][23].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][25].ToString()))
                 _dTape = decimal.Parse(_dtConf.Rows[0][25].ToString());
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0]["detroit"].ToString()))
+                _dDetroit = decimal.Parse(_dtConf.Rows[0]["detroit"].ToString());
             string sVersion = _dtConf.Rows[0]["version"].ToString();
 
             txtWO.Focus();
@@ -272,6 +277,7 @@ namespace WOLayout
             if (_asWrap == "1") dWrapTime = (double)_dEnvelope;
             if (_asWrap == "2") dWrapTime = (double)_dVertical;
             if (_asWrap == "3") dWrapTime = (double)_dHori;
+            if (_asWrap == "4") dWrapTime = (double)_dDetroit;
             if (_asWrap == "8") dWrapTime = (double)_dTape;
 
             return dWrapTime;
@@ -629,11 +635,10 @@ namespace WOLayout
             if (sValue == "Ensamble" || sValue == "Assembly")
             {
                 e.CellStyle.BackColor = Color.SkyBlue;
-                //e.CellStyle.ForeColor = Color.White;
             }
             if (sValue == "Wrap Sub")
             {
-                e.CellStyle.BackColor = Color.LightPink;
+                e.CellStyle.BackColor = Color.FromArgb(250,193,182);
             }
             if (sValue == "Wrap")
             {
@@ -737,6 +742,355 @@ namespace WOLayout
         #endregion
 
         #region regBottons
+        private void FillPlaybookFile(string _asFile,string _asFormat)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                Excel.Application xlApp = new Excel.Application();
+                xlApp.AskToUpdateLinks = false;
+                Excel.Workbooks xlWorkbookS = xlApp.Workbooks;
+                Excel.Workbook xlWorkbook = xlWorkbookS.Open(_asFile);
+
+                Excel.Worksheet xlWorksheet = new Excel.Worksheet();
+
+                string sValue = string.Empty;
+
+                int iSheets = xlWorkbook.Sheets.Count;
+                int iSheet = 3;
+                if (_asFormat == "D")
+                    iSheet = 5;
+                xlWorksheet = xlWorkbook.Sheets[iSheet];
+
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+
+                for (int i = 1; i <= rowCount; i++)
+                {
+                    if (xlRange.Cells[i, 1].Value2 == null)
+                        continue;
+
+                    if (xlRange.Cells[i, 1].Value2 != null)
+                        sValue = Convert.ToString(xlRange.Cells[i, 1].Value2.ToString());
+
+                    //if (sValue == "WO NO" || sValue == "")
+                    //{
+                    //    sValue = string.Empty;
+                    //    continue;
+                    //}
+
+                    if (string.IsNullOrEmpty(sValue))
+                        continue;
+
+                    if(_asFormat == "W")
+                    {
+                        decimal dWO = 0;
+                        if (!decimal.TryParse(sValue, out dWO))
+                        {
+                            sValue = string.Empty;
+                            continue;
+                        }
+
+                        if (xlRange.Cells[i, 8].Value2 != null)
+                            continue;
+
+                        if (sValue.Length < 7)
+                        {
+                            sValue = sValue.PadLeft(7, '0');
+                            
+                        }
+                    }
+                    else
+                    {
+                        
+                        if (xlRange.Cells[i, 2].Value2 != null)
+                            continue;
+
+                        if (sValue.IndexOf("DYN") == -1)
+                        {
+
+                            sValue = string.Empty;
+                            continue;
+                        }
+                    }
+
+                    int iTotalOps = 0;
+                    int iTotalMes = 0;
+
+                    AS4Logica AS4 = new AS4Logica();
+
+
+                    string sItem = string.Empty;
+                    string sKits = string.Empty;
+
+                    if(_asFormat == "W")
+                    {
+                        AS4.WO = sValue;
+                        AS4.Takt = _dTackTime;
+                        SetupLogica set = new SetupLogica();
+                        set.WorkOrder = sValue;
+                        DataTable dt = AS4Logica.WorkOrder(AS4);
+                        if (dt.Rows.Count == 0)
+                            dt = SetupLogica.ConsultarWO(set);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            sItem = dt.Rows[0][0].ToString();
+                            sKits = dt.Rows[0][3].ToString();
+                            string sDuration = dt.Rows[0][5].ToString();
+
+                            if (sItem.IndexOf("DYN") == -1)
+                                continue;
+
+
+                            xlRange.Cells[i, 8].Value2 = sKits;
+                            xlRange.Cells[i, 11].Value2 = sDuration;
+                        }
+                    }
+                    else
+                    {
+                        AS4.Item = sValue;
+                        DataTable dt = AS4Logica.PartKits(AS4);
+                        if (dt.Rows.Count > 0)
+                        {
+                            sKits = dt.Rows[0][0].ToString();
+                            xlRange.Cells[i, 2].Value2 = sKits;
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(sItem))
+                        return;
+
+
+                    AS4.Item = sItem;
+                    AS4.MaxComp = _dMaxTable;
+
+                    DataTable dt2 = AS4Logica.ComponentsLayer(AS4);
+                    if (dt2.Rows.Count > 1)
+                    {
+
+                        string sPre = dt2.Rows[0][1].ToString();
+                        int iComp = int.Parse(dt2.Rows[0][2].ToString());
+
+                        string sLevel1 = dt2.Rows[1][1].ToString();
+                        string sWrap1 = dt2.Rows[1][2].ToString();
+                        string sDuraW1 = string.Empty;
+                        string sDuraW2 = string.Empty;
+                        string sWrap2 = string.Empty;
+                        string sLevel2 = string.Empty;
+
+                        if (dt2.Rows.Count > 2)
+                        {
+                            sLevel2 = dt2.Rows[2][1].ToString();
+                            sWrap2 = dt2.Rows[2][2].ToString();
+                        }
+                        string sLevelM = string.Empty;
+                        string sLevelS = string.Empty;
+                        string sWrapMain = string.Empty;
+                        string sWrapSub = string.Empty;
+                        string sWCodeM = string.Empty;
+                        string sWCodeS = string.Empty;
+                        double dWrapTime = 0;
+                        double dWrapTime2 = 0;
+
+                        if (sLevel1 == "W")
+                        {
+                            sWrapMain = getWrapDesc(sWrap1);
+                            dWrapTime = getWrapTime(sWrap1);
+                            sLevelM = sLevel1;
+                            if (!string.IsNullOrEmpty(sLevel2))
+                            {
+                                sWrapSub = getWrapDesc(sWrap2);
+                                dWrapTime2 = getWrapTime(sWrap2);
+                                sLevelS = sLevel2;
+                            }
+                            sWCodeM = sWrap1;
+                            sWCodeS = sWrap2;
+                        }
+                        else
+                        {
+                            sWrapMain = getWrapDesc(sWrap2);
+                            dWrapTime = getWrapTime(sWrap2);
+                            sLevelM = sLevel2;
+                            sWrapSub = getWrapDesc(sWrap1);
+                            dWrapTime2 = getWrapTime(sWrap1);
+                            sLevelS = sLevel1;
+                            sWCodeM = sWrap2;
+                            sWCodeS = sWrap1;
+                        }
+
+                        //manual
+                        _sDuraW1 = dWrapTime;
+                        _sDuraW2 = dWrapTime2;
+
+                        sDuraW1 = dWrapTime.ToString();
+                        sDuraW2 = dWrapTime2.ToString();
+                        if (string.IsNullOrEmpty(sWCodeS))
+                            sWCodeS = "No";
+                        else
+                            sWCodeS = "Yes";
+
+                        if (_asFormat == "W")
+                            xlRange.Cells[i, 12].Value2 = sWCodeS;
+                        else
+                            xlRange.Cells[i, 5].Value2 = sWCodeS;
+
+                        //mesas / operadores
+                        DataTable dt4 = AS4Logica.LineLayout(AS4);
+                        if (dt4.Rows.Count > 0)
+                        {
+                            int iBasin = 0;
+                            int iPiggy = 0;
+                            int iOut = 0;
+                            int iSub = 0;
+                            int iMain = 0;
+                            int iWrap = 0;
+
+                            int iO = _iSurtidor + _iInspeccion + _iInspSell + _iSellador;
+
+                            for (int x = 0; x < dt4.Rows.Count; x++)
+                            {
+                                string sLevel = dt4.Rows[x][0].ToString();
+                                int iCompx = Convert.ToInt16(dt4.Rows[x][1].ToString());
+
+                                if (sLevel == "S") iSub += iCompx;
+                                if (sLevel == "B") iBasin += iCompx;
+                                if (sLevel == "F") iOut += iCompx;
+                                if (sLevel == "M" || sLevel == "L") iMain += iCompx;
+                                if (sLevel == "Y") iPiggy += iCompx;
+                                if (sLevel == "W") iWrap += iCompx;
+
+                            }
+
+
+                            int iOper = 0;
+                            int iMesas = 0;
+                            DataTable dtN = dgwTables.DataSource as DataTable;
+
+                            iOut += iBasin + iPiggy;
+                            iMesas = (int)Math.Ceiling((decimal)iOut / _dMaxTable);
+                            int iOutOper = 1;
+                            //si tiene wrap ++
+                            if (AS4Logica.ComponentsLayerFold(AS4))
+                                iOutOper = 2;
+                            iOper = iMesas * iOutOper;
+
+                            iTotalMes += iMesas;
+                            iTotalOps += iOper;
+
+                            _iOut = iOut;
+
+
+                            decimal cM = Math.Ceiling((decimal)iSub / _dMaxTable);
+                            iMesas = (int)cM;
+                            iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
+                            iOper = iMesas * _iEstSub;
+
+                            _iSub = iSub;
+                            iTotalMes += iMesas;
+                            iTotalOps += iOper;
+
+
+
+                            iMesas = (int)Math.Ceiling((decimal)iMain / _dMaxTable);
+                            iOper = iMesas;
+
+                            _iMain = iMain;
+                            iTotalMes += iMesas;
+                            iTotalOps += iOper;
+
+                            double dMax = (double)_dMaxTable;
+                            double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
+                            iMesas = (int)dW;
+                            if (sWCodeM == "1" || sWCodeM == "8")
+                                iOper = iMesas;
+                            else
+                                iOper = (iMesas * 2);
+
+                            iTotalMes += iMesas;
+                            iTotalOps += iOper;
+
+                            iMesas = 0;
+                            iOper = 0;
+
+                            if (sLevelS == "S")
+                            {
+                                dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
+                                iMesas = (int)dW;
+                                if (sWCodeS == "1" || sWCodeS == "8")
+                                    iOper = iMesas;
+                                else
+                                    iOper = (iMesas * 2);
+
+                                iTotalMes += iMesas;
+                                iTotalOps += iOper;
+                            }
+
+
+                        }
+                    }
+
+                    if (_asFormat == "W")
+                    {
+                        xlRange.Cells[i, 9].Value2 = iTotalOps.ToString();
+                        xlRange.Cells[i, 10].Value2 = iTotalMes.ToString();
+                    }
+                    else
+                    {
+                        xlRange.Cells[i, 3].Value2 = iTotalOps.ToString();
+                        xlRange.Cells[i, 4].Value2 = iTotalMes.ToString();
+                    }
+                }
+
+                
+
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlRange);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorksheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook.Sheets[iSheet]);
+                xlApp.DisplayAlerts = false;
+                xlWorkbook.Save();
+                xlWorkbook.Close(true);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbookS);
+                xlApp.DisplayAlerts = true;
+                xlApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+
+
+                Cursor = Cursors.Default;
+
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+                ex.ToString();
+                MessageBox.Show(ex.ToString());
+
+            }
+        }
+        private void btnExportFile_Click(object sender, EventArgs e)
+        {
+            string sArchivo = string.Empty;
+
+            wfOption Option = new wfOption();
+            Option.ShowDialog();
+            string sOption = Option._lsOption;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                sArchivo = openFileDialog1.FileName;
+
+            if (!File.Exists(sArchivo))
+                return;
+
+            
+            FillPlaybookFile(sArchivo, sOption);
+
+
+        }
+
         private void btnLenguage_Click(object sender, EventArgs e)
         {
             if (_lsLen == "SP")
@@ -1091,9 +1445,9 @@ namespace WOLayout
             //Balance permitido = 20 (Estatico)
             double[,] ite = new double[40, 9];
 
-            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / _iMaxTable);
+            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / (double)_dMaxTable);
             ite[0, 1] = ipODisponibles - ite[0, 0] - _iOperNA;
-            ite[0, 2] =(_dAssyTime * _iMaxTable);
+            ite[0, 2] =(_dAssyTime * (double)_dMaxTable);
             ite[0, 3] = ((_sDuraW1 + _sDuraW2) / (ite[0, 1] / _iOWrap1));
             ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
             ite[0, 5] = (ite[0, 4] < 20) ? 1 : 0;
@@ -1117,7 +1471,7 @@ namespace WOLayout
             }
 
             
-/* Imprimir matriz en consola
+            /* Imprimir matriz en consola
             for (int i = 0; i < 40; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -1150,9 +1504,8 @@ namespace WOLayout
             nform.Show();
 
         }
-
-
-
     }
     #endregion
+
+  
 }

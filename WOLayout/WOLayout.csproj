@@ -76,6 +76,9 @@
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -110,6 +113,12 @@
     <Compile Include="wfLayoutManual.Designer.cs">
       <DependentUpon>wfLayoutManual.cs</DependentUpon>
     </Compile>
+    <Compile Include="wfOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfOption.Designer.cs">
+      <DependentUpon>wfOption.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="wfConfig.resx">
       <DependentUpon>wfConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,6 +137,9 @@
     </Compile>
     <EmbeddedResource Include="wfLayoutManual.resx">
       <DependentUpon>wfLayoutManual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wfOption.resx">
+      <DependentUpon>wfOption.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -154,6 +166,8 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\excel_down_ico.png" />
+    <None Include="Resources\excel_down.jpg" />
     <None Include="Resources\Yellow-Background-down1.jpg" />
     <None Include="Resources\w2.png" />
     <None Include="Resources\united-states.png" />

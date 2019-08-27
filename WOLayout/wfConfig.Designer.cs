@@ -88,9 +88,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblLabor = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbxLang = new System.Windows.Forms.ComboBox();
+            this.lblLanguage = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.txtNA = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
+            this.txtDetroit = new System.Windows.Forms.TextBox();
+            this.lblDetroit = new System.Windows.Forms.Label();
             this.txtTape = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.txtSobre = new System.Windows.Forms.TextBox();
@@ -100,9 +103,8 @@
             this.txtHori = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblLanguage = new System.Windows.Forms.Label();
-            this.cbxLang = new System.Windows.Forms.ComboBox();
+            this.txtNA = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -112,9 +114,9 @@
             this.gbxGoal.SuspendLayout();
             this.gbxLabor.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -828,10 +830,42 @@
             this.tabPage2.Text = "Wrapping Time";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cbxLang);
+            this.groupBox1.Controls.Add(this.lblLanguage);
+            this.groupBox1.Location = new System.Drawing.Point(23, 202);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(828, 198);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            // 
+            // cbxLang
+            // 
+            this.cbxLang.FormattingEnabled = true;
+            this.cbxLang.Location = new System.Drawing.Point(143, 40);
+            this.cbxLang.Name = "cbxLang";
+            this.cbxLang.Size = new System.Drawing.Size(121, 24);
+            this.cbxLang.TabIndex = 13;
+            this.cbxLang.SelectedIndexChanged += new System.EventHandler(this.cbxLang_SelectedIndexChanged);
+            // 
+            // lblLanguage
+            // 
+            this.lblLanguage.AutoSize = true;
+            this.lblLanguage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLanguage.Location = new System.Drawing.Point(35, 42);
+            this.lblLanguage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLanguage.Name = "lblLanguage";
+            this.lblLanguage.Size = new System.Drawing.Size(85, 17);
+            this.lblLanguage.TabIndex = 12;
+            this.lblLanguage.Text = "Lenguaje :";
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.txtNA);
-            this.groupBox6.Controls.Add(this.label35);
+            this.groupBox6.Controls.Add(this.label1);
+            this.groupBox6.Controls.Add(this.txtDetroit);
+            this.groupBox6.Controls.Add(this.lblDetroit);
             this.groupBox6.Controls.Add(this.txtTape);
             this.groupBox6.Controls.Add(this.label25);
             this.groupBox6.Controls.Add(this.txtSobre);
@@ -848,27 +882,27 @@
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             // 
-            // txtNA
+            // txtDetroit
             // 
-            this.txtNA.Location = new System.Drawing.Point(191, 129);
-            this.txtNA.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNA.MaxLength = 6;
-            this.txtNA.Name = "txtNA";
-            this.txtNA.Size = new System.Drawing.Size(73, 22);
-            this.txtNA.TabIndex = 11;
-            this.txtNA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtNA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNA_KeyPress);
+            this.txtDetroit.Location = new System.Drawing.Point(191, 129);
+            this.txtDetroit.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDetroit.MaxLength = 6;
+            this.txtDetroit.Name = "txtDetroit";
+            this.txtDetroit.Size = new System.Drawing.Size(73, 22);
+            this.txtDetroit.TabIndex = 11;
+            this.txtDetroit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDetroit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNA_KeyPress);
             // 
-            // label35
+            // lblDetroit
             // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(35, 133);
-            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(44, 17);
-            this.label35.TabIndex = 10;
-            this.label35.Text = "N/A :";
+            this.lblDetroit.AutoSize = true;
+            this.lblDetroit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetroit.Location = new System.Drawing.Point(35, 133);
+            this.lblDetroit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDetroit.Name = "lblDetroit";
+            this.lblDetroit.Size = new System.Drawing.Size(67, 17);
+            this.lblDetroit.TabIndex = 10;
+            this.lblDetroit.Text = "Detroit :";
             // 
             // txtTape
             // 
@@ -969,35 +1003,26 @@
             this.panel1.Size = new System.Drawing.Size(905, 477);
             this.panel1.TabIndex = 4;
             // 
-            // groupBox1
+            // txtNA
             // 
-            this.groupBox1.Controls.Add(this.cbxLang);
-            this.groupBox1.Controls.Add(this.lblLanguage);
-            this.groupBox1.Location = new System.Drawing.Point(23, 202);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(828, 198);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
+            this.txtNA.Location = new System.Drawing.Point(591, 128);
+            this.txtNA.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNA.MaxLength = 6;
+            this.txtNA.Name = "txtNA";
+            this.txtNA.Size = new System.Drawing.Size(73, 22);
+            this.txtNA.TabIndex = 13;
+            this.txtNA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // lblLanguage
+            // label1
             // 
-            this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLanguage.Location = new System.Drawing.Point(35, 42);
-            this.lblLanguage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLanguage.Name = "lblLanguage";
-            this.lblLanguage.Size = new System.Drawing.Size(85, 17);
-            this.lblLanguage.TabIndex = 12;
-            this.lblLanguage.Text = "Lenguaje :";
-            // 
-            // cbxLang
-            // 
-            this.cbxLang.FormattingEnabled = true;
-            this.cbxLang.Location = new System.Drawing.Point(143, 40);
-            this.cbxLang.Name = "cbxLang";
-            this.cbxLang.Size = new System.Drawing.Size(121, 24);
-            this.cbxLang.TabIndex = 13;
-            this.cbxLang.SelectedIndexChanged += new System.EventHandler(this.cbxLang_SelectedIndexChanged);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(435, 132);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 17);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "N/A :";
             // 
             // wfConfig
             // 
@@ -1028,11 +1053,11 @@
             this.gbxLabor.ResumeLayout(false);
             this.gbxLabor.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1100,8 +1125,8 @@
         private System.Windows.Forms.Label lblLabor;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TextBox txtNA;
-        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.TextBox txtDetroit;
+        private System.Windows.Forms.Label lblDetroit;
         private System.Windows.Forms.TextBox txtTape;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox txtSobre;
@@ -1114,5 +1139,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cbxLang;
         private System.Windows.Forms.Label lblLanguage;
+        private System.Windows.Forms.TextBox txtNA;
+        private System.Windows.Forms.Label label1;
     }
 }

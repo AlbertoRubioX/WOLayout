@@ -98,6 +98,8 @@ namespace WOLayout
                         txtTape.Text = data.Rows[0][25].ToString();
                     if (!string.IsNullOrEmpty(data.Rows[0][24].ToString()))
                         txtNA.Text = data.Rows[0][24].ToString();
+                    if (!string.IsNullOrEmpty(data.Rows[0]["detroit"].ToString()))
+                        txtDetroit.Text = data.Rows[0]["detroit"].ToString();
                     cbxLang.SelectedValue = data.Rows[0]["lenguage"].ToString();
                 }
 
@@ -221,6 +223,9 @@ namespace WOLayout
                 decimal dWrapNA = 0;
                 if (!decimal.TryParse(txtNA.Text.ToString(), out dWrapNA))
                     dWrapNA = 0;
+                decimal dWrapDet = 0;
+                if (!decimal.TryParse(txtDetroit.Text.ToString(), out dWrapDet))
+                    dWrapDet = 0;
 
                 ConfigLogica conf = new ConfigLogica();
                 conf.Jornada = dJornada;
@@ -246,6 +251,7 @@ namespace WOLayout
                 conf.Sobre = dSobre;
                 conf.Tape = dTape;
                 conf.WrapNA = dWrapNA;
+                conf.Detroit = dWrapDet;
                 conf.Language = cbxLang.SelectedValue.ToString();
                 conf.Usuario = _lsUsuario;
 
