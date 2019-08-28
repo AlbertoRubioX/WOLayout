@@ -37,6 +37,7 @@ namespace WOLayout
         private decimal _dKits;
         private decimal _dCajas;
         private decimal _dKitCaja;
+        private string _sIndBoxHr;
         private int _iInspeccion;
 
         //Manual
@@ -167,6 +168,7 @@ namespace WOLayout
             if (!string.IsNullOrEmpty(_dtConf.Rows[0]["detroit"].ToString()))
                 _dDetroit = decimal.Parse(_dtConf.Rows[0]["detroit"].ToString());
             string sVersion = _dtConf.Rows[0]["version"].ToString();
+            _sIndBoxHr = _dtConf.Rows[0]["ind_boxhr"].ToString();
 
             txtWO.Focus();
 
@@ -359,8 +361,16 @@ namespace WOLayout
                     lblProduct.Text = string.Empty;
                     dgwWO.DataSource = dt;
                     dgwWO.CurrentCell = null;
-
                     dgwItem.DataSource = null;
+
+                    if (_sIndBoxHr == "1")
+                    {
+                        decimal dKits = decimal.Parse(dgwWO["kits", 0].Value.ToString());
+                        decimal dBox = _dTackTime * dKits;
+                        dBox = Math.Round( 3600 / dBox,2);
+                        dgwWO["boxhr", 0].Value = dBox.ToString();
+                    }
+
                     CargarColumnas();
 
                     string sItem = dt.Rows[0][0].ToString();
@@ -720,16 +730,30 @@ namespace WOLayout
                 dtNew.Columns.Add("kits", typeof(int));
                 dtNew.Columns.Add("total_kits", typeof(int));
                 dtNew.Columns.Add("duration", typeof(decimal));
+                dtNew.Columns.Add("boxhr", typeof(decimal));
                 dgwWO.DataSource = dtNew;
             }
-            
+
             dgwWO.Columns[1].Visible = false;
+            dgwWO.Columns[6].Visible = false;
             dgwWO.Columns[0].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[2].Width = ColumnWith(dgwWO, 15);
             dgwWO.Columns[3].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[4].Width = ColumnWith(dgwWO, 20);
             dgwWO.Columns[5].Width = ColumnWith(dgwWO, 30);
             dgwWO.Columns[5].DefaultCellStyle.Format = "N2";
+            if (_sIndBoxHr == "1")
+            {
+                dgwWO.Columns[6].Visible = true;
+                dgwWO.Columns[0].Width = ColumnWith(dgwWO, 19);
+                dgwWO.Columns[2].Width = ColumnWith(dgwWO, 10);
+                dgwWO.Columns[3].Width = ColumnWith(dgwWO, 8);
+                dgwWO.Columns[4].Width = ColumnWith(dgwWO, 18);
+                dgwWO.Columns[5].Width = ColumnWith(dgwWO, 28);
+                dgwWO.Columns[6].Width = ColumnWith(dgwWO, 22);
+                dgwWO.Columns[6].DefaultCellStyle.Format = "N2";
+            }
+
 
             if (dgwItem.Rows.Count == 0)
             {
@@ -1674,7 +1698,13 @@ namespace WOLayout
 
             llenarOFWS(iOutFolderM, iOutFolderO, iWrapSubM, iWrapSubO);
             lblCycleTime.Text = Math.Round(iCycleTimeLine, 3).ToString();
-
+            if(_sIndBoxHr == "1")
+            {
+                decimal dKits = decimal.Parse(dgwWO["kits",0].Value.ToString());
+                decimal dBox = (decimal)iCycleTimeLine * dKits;
+                dBox = Math.Round( 3600 / dBox, 2);
+                dgwWO["boxhr", 0].Value = dBox.ToString();
+            }
             if (iCycleTimeLine > (int)_dTackTime)
                 lblCycleTime.ForeColor = System.Drawing.Color.Red;
             else

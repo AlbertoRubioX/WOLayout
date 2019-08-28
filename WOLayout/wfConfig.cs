@@ -103,10 +103,15 @@ namespace WOLayout
                     cbxLang.SelectedValue = data.Rows[0]["lenguage"].ToString();
                     txtMaxHC.Text = data.Rows[0]["max_hc"].ToString();
                     txtMinHC.Text = data.Rows[0]["min_hc"].ToString();
+                    if (data.Rows[0]["ind_boxhr"].ToString() == "1")
+                        chbBoxHr.Checked = true;
+                    else
+                        chbBoxHr.Checked = false;    
                 }
 
-                ControlText(tabPage1);
-                ControlText(tabPage2);
+                Globals gs = new Globals();
+                gs.ControlText(this.Name,tabPage1);
+                gs.ControlText(this.Name,tabPage2);
 
                 txtJornada.Focus();
             }
@@ -114,37 +119,36 @@ namespace WOLayout
             {
                 MessageBox.Show("Error " + ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
         }
 
-        private void ControlText(Control _control)
-        {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
-            con.Form = this.Name;
+        //private void ControlText(Control _control)
+        //{
+        //    ConfigLogica con = new ConfigLogica();
+        //    con.Language = Globals._gsLang;
+        //    con.Form = this.Name;
 
-            foreach (Control c in _control.Controls)
-            {
-                if (c is GroupBox)
-                {
-                    con.Control = c.Name;
-                    string sValue = ConfigLogica.ChangeLanguageCont(con);
-                    if (!string.IsNullOrEmpty(sValue))
-                        c.Text = sValue;
-                }
+        //    foreach (Control c in _control.Controls)
+        //    {
+        //        if (c is GroupBox)
+        //        {
+        //            con.Control = c.Name;
+        //            string sValue = ConfigLogica.ChangeLanguageCont(con);
+        //            if (!string.IsNullOrEmpty(sValue))
+        //                c.Text = sValue;
+        //        }
 
-                foreach (Control cs in c.Controls)
-                {
-                    if (cs is Label || cs is GroupBox)
-                    {
-                        con.Control = cs.Name;
-                        string sValue = ConfigLogica.ChangeLanguageCont(con);
-                        if (!string.IsNullOrEmpty(sValue))
-                            cs.Text = sValue;
-                    }
-                }
-            }
-        }
+        //        foreach (Control cs in c.Controls)
+        //        {
+        //            if (cs is Label || cs is GroupBox || cs is CheckBox)
+        //            {
+        //                con.Control = cs.Name;
+        //                string sValue = ConfigLogica.ChangeLanguageCont(con);
+        //                if (!string.IsNullOrEmpty(sValue))
+        //                    cs.Text = sValue;
+        //            }
+        //        }
+        //    }
+        //}
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -234,6 +238,11 @@ namespace WOLayout
                 decimal dMinHC = 0;
                 if (!decimal.TryParse(txtMinHC.Text.ToString(), out dMinHC))
                     dMinHC = 0;
+                string sBoxHr;
+                if (chbBoxHr.Checked)
+                    sBoxHr = "1";
+                else
+                    sBoxHr = "0";
 
                 ConfigLogica conf = new ConfigLogica();
                 conf.Jornada = dJornada;
@@ -263,11 +272,13 @@ namespace WOLayout
                 conf.Language = cbxLang.SelectedValue.ToString();
                 conf.MaxHC = (int)dMaxHC;
                 conf.MinHC = (int)dMinHC;
+                conf.BoxHr = sBoxHr;
                 conf.Usuario = _lsUsuario;
 
                 if (ConfigLogica.GuardarSP(conf) > 0)
                 {
                     _lsLen = conf.Language;
+                    Globals._gsLang = _lsLen;
                     Close();
                 }
                 else
@@ -453,8 +464,10 @@ namespace WOLayout
         private void cbxLang_SelectedIndexChanged(object sender, EventArgs e)
         {
             _lsLen = cbxLang.SelectedValue.ToString();
-            ControlText(tabPage1);
-            ControlText(tabPage2);
+
+            Globals gs = new Globals(); 
+            gs.ControlText(this.Name, tabPage1);
+            gs.ControlText(this.Name, tabPage2);
         }
     }
 }

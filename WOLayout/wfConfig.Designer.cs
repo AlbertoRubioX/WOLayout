@@ -34,6 +34,11 @@
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtMinHC = new System.Windows.Forms.TextBox();
+            this.lblMinHC = new System.Windows.Forms.Label();
+            this.txtMaxHC = new System.Windows.Forms.TextBox();
+            this.lblMaxHC = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtMesaSub = new System.Windows.Forms.TextBox();
             this.lblSubAssy = new System.Windows.Forms.Label();
@@ -105,18 +110,15 @@
             this.txtHori = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtMinHC = new System.Windows.Forms.TextBox();
-            this.lblMinHC = new System.Windows.Forms.Label();
-            this.txtMaxHC = new System.Windows.Forms.TextBox();
-            this.lblMaxHC = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.chbBoxHr = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gbxEstation.SuspendLayout();
@@ -126,7 +128,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -195,6 +196,62 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TAK Data";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtMinHC);
+            this.groupBox2.Controls.Add(this.lblMinHC);
+            this.groupBox2.Controls.Add(this.txtMaxHC);
+            this.groupBox2.Controls.Add(this.lblMaxHC);
+            this.groupBox2.Location = new System.Drawing.Point(23, 200);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(823, 56);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            // 
+            // txtMinHC
+            // 
+            this.txtMinHC.Location = new System.Drawing.Point(625, 20);
+            this.txtMinHC.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMinHC.MaxLength = 6;
+            this.txtMinHC.Name = "txtMinHC";
+            this.txtMinHC.Size = new System.Drawing.Size(73, 22);
+            this.txtMinHC.TabIndex = 3;
+            this.txtMinHC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblMinHC
+            // 
+            this.lblMinHC.AutoSize = true;
+            this.lblMinHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMinHC.Location = new System.Drawing.Point(437, 24);
+            this.lblMinHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMinHC.Name = "lblMinHC";
+            this.lblMinHC.Size = new System.Drawing.Size(158, 17);
+            this.lblMinHC.TabIndex = 3;
+            this.lblMinHC.Text = "Head Count Mínimo :";
+            // 
+            // txtMaxHC
+            // 
+            this.txtMaxHC.Location = new System.Drawing.Point(209, 20);
+            this.txtMaxHC.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMaxHC.MaxLength = 3;
+            this.txtMaxHC.Name = "txtMaxHC";
+            this.txtMaxHC.Size = new System.Drawing.Size(73, 22);
+            this.txtMaxHC.TabIndex = 1;
+            this.txtMaxHC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblMaxHC
+            // 
+            this.lblMaxHC.AutoSize = true;
+            this.lblMaxHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaxHC.Location = new System.Drawing.Point(21, 24);
+            this.lblMaxHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMaxHC.Name = "lblMaxHC";
+            this.lblMaxHC.Size = new System.Drawing.Size(161, 17);
+            this.lblMaxHC.TabIndex = 0;
+            this.lblMaxHC.Text = "Head Count Máximo :";
             // 
             // groupBox5
             // 
@@ -844,6 +901,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chbBoxHr);
             this.groupBox1.Controls.Add(this.cbxLang);
             this.groupBox1.Controls.Add(this.lblLanguage);
             this.groupBox1.Location = new System.Drawing.Point(23, 202);
@@ -1036,62 +1094,6 @@
             this.panel1.Size = new System.Drawing.Size(905, 513);
             this.panel1.TabIndex = 4;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtMinHC);
-            this.groupBox2.Controls.Add(this.lblMinHC);
-            this.groupBox2.Controls.Add(this.txtMaxHC);
-            this.groupBox2.Controls.Add(this.lblMaxHC);
-            this.groupBox2.Location = new System.Drawing.Point(23, 200);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(823, 56);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            // 
-            // txtMinHC
-            // 
-            this.txtMinHC.Location = new System.Drawing.Point(625, 20);
-            this.txtMinHC.Margin = new System.Windows.Forms.Padding(4);
-            this.txtMinHC.MaxLength = 6;
-            this.txtMinHC.Name = "txtMinHC";
-            this.txtMinHC.Size = new System.Drawing.Size(73, 22);
-            this.txtMinHC.TabIndex = 3;
-            this.txtMinHC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lblMinHC
-            // 
-            this.lblMinHC.AutoSize = true;
-            this.lblMinHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMinHC.Location = new System.Drawing.Point(437, 24);
-            this.lblMinHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblMinHC.Name = "lblMinHC";
-            this.lblMinHC.Size = new System.Drawing.Size(158, 17);
-            this.lblMinHC.TabIndex = 3;
-            this.lblMinHC.Text = "Head Count Mínimo :";
-            // 
-            // txtMaxHC
-            // 
-            this.txtMaxHC.Location = new System.Drawing.Point(209, 20);
-            this.txtMaxHC.Margin = new System.Windows.Forms.Padding(4);
-            this.txtMaxHC.MaxLength = 3;
-            this.txtMaxHC.Name = "txtMaxHC";
-            this.txtMaxHC.Size = new System.Drawing.Size(73, 22);
-            this.txtMaxHC.TabIndex = 1;
-            this.txtMaxHC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lblMaxHC
-            // 
-            this.lblMaxHC.AutoSize = true;
-            this.lblMaxHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaxHC.Location = new System.Drawing.Point(21, 24);
-            this.lblMaxHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblMaxHC.Name = "lblMaxHC";
-            this.lblMaxHC.Size = new System.Drawing.Size(161, 17);
-            this.lblMaxHC.TabIndex = 0;
-            this.lblMaxHC.Text = "Head Count Máximo :";
-            // 
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
@@ -1131,6 +1133,18 @@
             this.tssVersion.Size = new System.Drawing.Size(177, 20);
             this.tssVersion.Text = "Configuration Parameters";
             // 
+            // chbBoxHr
+            // 
+            this.chbBoxHr.AutoSize = true;
+            this.chbBoxHr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbBoxHr.Location = new System.Drawing.Point(438, 43);
+            this.chbBoxHr.Name = "chbBoxHr";
+            this.chbBoxHr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chbBoxHr.Size = new System.Drawing.Size(199, 21);
+            this.chbBoxHr.TabIndex = 14;
+            this.chbBoxHr.Text = "Mostrar Cajas por Hora";
+            this.chbBoxHr.UseVisualStyleBackColor = true;
+            // 
             // wfConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1151,6 +1165,8 @@
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1167,8 +1183,6 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1263,5 +1277,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tssVersion;
+        private System.Windows.Forms.CheckBox chbBoxHr;
     }
 }

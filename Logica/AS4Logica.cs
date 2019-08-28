@@ -24,7 +24,8 @@ namespace Logica
                 "FMWOSUM.WOPN AS product,SF58041W.IMDSC as name, FMWOSUM.WOQTY AS box, " +
                 "FKITMSTR.IMSTCK AS kits,  " +
                 @"FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS ""total_kits"", " +
-                "ROUND("+con.Takt+"*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS duration " +
+                "ROUND("+con.Takt+"*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS duration, "+
+                "'' as boxhr " +
                 "FROM B20E386T.KBM400MFG.FMWOSUM FMWOSUM LEFT OUTER JOIN B20E386T.MRC400WEB.SF58041W SF58041W ON FMWOSUM.WOPN = SF58041W.IMPN, B20E386T.KBM400MFG.FKITMSTR FKITMSTR " +
                 "WHERE FMWOSUM.WOPN = FKITMSTR.IMPN " +
                 "AND FMWOSUM.WOWONO = '"+con.WO+"'";

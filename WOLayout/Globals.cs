@@ -23,9 +23,17 @@ namespace WOLayout
 
             foreach (Control c in _control.Controls)
             {
+                if (c is GroupBox)
+                {
+                    con.Control = c.Name;
+                    string sValue = ConfigLogica.ChangeLanguageCont(con);
+                    if (!string.IsNullOrEmpty(sValue))
+                        c.Text = sValue;
+                }
+
                 foreach (Control cs in c.Controls)
                 {
-                    if (cs is Label)
+                    if (cs is Label || cs is GroupBox || cs is CheckBox)
                     {
                         con.Control = cs.Name;
                         string sValue = ConfigLogica.ChangeLanguageCont(con);
