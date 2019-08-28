@@ -38,7 +38,6 @@ namespace WOLayout
         private decimal _dCajas;
         private decimal _dKitCaja;
         private int _iInspeccion;
-        private string _lsLen;
 
         //Manual
         private int _iSub=0;
@@ -56,6 +55,9 @@ namespace WOLayout
         private int _iWidthAnt;
         private int _iHeightAnt;
         DataTable _dtConf = new DataTable();
+
+        Globals _gs = new Globals();
+
         public wfLayout()
         {
             InitializeComponent();
@@ -68,9 +70,11 @@ namespace WOLayout
         #region regInicio
         private void wfLayout_Load(object sender, EventArgs e)
         {
-            _lsLen = "SP";
+            Globals._gsLang = "SP";
             _lsUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             _lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
+
+            Globals._gsUser = _lsUser;
 
             WindowState = FormWindowState.Maximized;
             
@@ -82,11 +86,12 @@ namespace WOLayout
             ConfigLogica conf = new ConfigLogica();
             _dtConf = ConfigLogica.Consultar();
 
-            if (!string.IsNullOrEmpty(_dtConf.Rows[0]["lenguage"].ToString()) && _dtConf.Rows[0]["lenguage"].ToString() != _lsLen)
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0]["lenguage"].ToString()) && _dtConf.Rows[0]["lenguage"].ToString() != Globals._gsLang)
             {
-                _lsLen = _dtConf.Rows[0]["lenguage"].ToString();
+                Globals._gsLang = _dtConf.Rows[0]["lenguage"].ToString();
                 ChangeLen();
             }
+            
 
             txtWO.Text = "0000000";
             txtWO.SelectAll();
@@ -97,7 +102,7 @@ namespace WOLayout
             txtWO.Clear();
             panel9.BackgroundImage = Properties.Resources.Blue_Background_down;
             panel2.BackgroundImage = Properties.Resources.Blue_Background_down;
-            lblCycleTime.Text = "20";
+            lblCycleTime.Text = _dTackTime.ToString();
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
 
@@ -180,16 +185,23 @@ namespace WOLayout
         #region regLanguage
         private void ChangeLen()
         {
+            _gs.ControlText(this.Name,this);
+            _gs.ControlText(this.Name,this.panel8);
+            _gs.ControlGridText(this.Name, dgwWO);
+            _gs.ControlGridText(this.Name, dgwItem);
+            _gs.ControlGridText(this.Name, dgwTables);
+            _gs.ControlGridRows2(this.Name, dgwItem);
+            _gs.ControlGridRows2(this.Name, dgwTables);
 
-            ControlText(this);
-            ControlText(this.panel8);
-            ControlGridText(dgwWO);
-            ControlGridText(dgwItem);
-            ControlGridText(dgwTables);
-            ControlGridRows2(dgwItem);
-            ControlGridRows2(dgwTables);
+            //ControlText(this);
+            //ControlText(this.panel8);
+            //ControlGridText(dgwWO);
+            //ControlGridText(dgwItem);
+            //ControlGridText(dgwTables);
+            //ControlGridRows2(dgwItem);
+            //ControlGridRows2(dgwTables);
 
-            if (_lsLen == "EN")
+            if (Globals._gsLang == "EN")
                 btnLanguage.Image = Properties.Resources.mexico;
             else
                 btnLanguage.Image = Properties.Resources.united_states;
@@ -198,7 +210,7 @@ namespace WOLayout
         private void ControlText(Control _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
+            con.Language = Globals._gsLang;
             con.Form = this.Name;
 
             foreach (Control c in _control.Controls)
@@ -218,7 +230,7 @@ namespace WOLayout
         private void ControlGridText(DataGridView _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
+            con.Language = Globals._gsLang;
             con.Form = this.Name;
             con.Control = _control.Name;
             foreach (DataGridViewColumn c in _control.Columns)
@@ -236,7 +248,7 @@ namespace WOLayout
         private string ControlGridRows(Control _control, string _asRow)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
+            con.Language = Globals._gsLang;
             con.Form = this.Name;
             con.Control = _control.Name;
             con.SubControl = _asRow;
@@ -249,7 +261,7 @@ namespace WOLayout
         private void ControlGridRows2(DataGridView _control)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
+            con.Language = Globals._gsLang;
             con.Form = this.Name;
             con.Control = _control.Name;
             foreach (DataGridViewRow row in _control.Rows)
@@ -270,7 +282,7 @@ namespace WOLayout
         private string MessageText(string _control, string _asMessage)
         {
             ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
+            con.Language = Globals._gsLang;
             con.Form = this.Name;
             con.Control = _control;
             con.SubControl = _asMessage;
@@ -617,15 +629,13 @@ namespace WOLayout
                         txtWO.SelectAll();
 
                         //MODO MANUAL
-                        //string sMensajeManual = (_lsLen == "SP") ? "Operadores requeridos: " + lblOper.Text + "\n \nOperadores disponibles: " : "Required operators: " + lblOper.Text + "\n \nAvailable operators: ";
-                        //string sEncabezadoManual = (_lsLen == "SP") ? "Modo Manual" : "Manual Mode";
+                        //string sMensajeManual = (Globals._gsLang == "SP") ? "Operadores requeridos: " + lblOper.Text + "\n \nOperadores disponibles: " : "Required operators: " + lblOper.Text + "\n \nAvailable operators: ";
+                        //string sEncabezadoManual = (Globals._gsLang == "SP") ? "Modo Manual" : "Manual Mode";
 
                         //var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox(sMensajeManual, sEncabezadoManual, lblOper.Text);
                        
 
                         wfHC HeadCount = new wfHC();
-                       
-                        HeadCount._lsLen = _lsLen;
                         HeadCount._lsOper = lblOper.Text.ToString();
                         HeadCount.ShowDialog();
 
@@ -1149,10 +1159,10 @@ namespace WOLayout
 
         private void btnLenguage_Click(object sender, EventArgs e)
         {
-            if (_lsLen == "SP")
-                _lsLen = "EN";
+            if (Globals._gsLang == "SP")
+                Globals._gsLang = "EN";
             else
-                _lsLen = "SP";
+                Globals._gsLang = "SP";
               
             ChangeLen();
         }
@@ -1171,11 +1181,11 @@ namespace WOLayout
             if (ValidaAcceso("CONF"))
             {
                 wfConfig Config = new wfConfig();
-                Config._lsLen = _lsLen;
+                Config._lsLen = Globals._gsLang;
                 Config.ShowDialog();
 
-                string sLen = Config._lsLen;
-                if (sLen != _lsLen)
+                string sLen = Globals._gsLang; ;
+                if (sLen != Globals._gsLang)
                     btnLenguage_Click(sender, e);
                 
             }
@@ -1609,7 +1619,7 @@ namespace WOLayout
                 if (dgwTables[0, i].Value.ToString() == "Ensamble" || dgwTables[0, i].Value.ToString() == "Assembly")
                 {
                     //separando componentes en descripcion
-                    if(_lsLen=="SP")
+                    if(Globals._gsLang=="SP")
                         dgwTables[1, i].Value = "Ensamble (" + dgwTables[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
                     else
                         dgwTables[1, i].Value = "Assy (" + dgwTables[2, i].Value.ToString() + ") & Subassy (" + ComponentesSubensamble.ToString() + ")";
@@ -1665,12 +1675,12 @@ namespace WOLayout
             llenarOFWS(iOutFolderM, iOutFolderO, iWrapSubM, iWrapSubO);
             lblCycleTime.Text = Math.Round(iCycleTimeLine, 3).ToString();
 
-            if (iCycleTimeLine > 20)
+            if (iCycleTimeLine > (int)_dTackTime)
                 lblCycleTime.ForeColor = System.Drawing.Color.Red;
             else
                 lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
-           //wfLayoutManual nform = new wfLayoutManual(_lsLen, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
+           //wfLayoutManual nform = new wfLayoutManual(Globals._gsLang, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
            //nform.Show();
            
 

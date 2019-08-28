@@ -13,11 +13,11 @@ namespace WOLayout
 {
     public partial class wfHC : Form
     {
-        public string _lsLen;
         public string _lsOper;
         private int _liMax;
         private int _liMin;
         private DataTable dt = new DataTable();
+        Globals _gs = new Globals();
         public wfHC()
         {
             InitializeComponent();
@@ -34,10 +34,10 @@ namespace WOLayout
             if (!int.TryParse(dt.Rows[0]["min_hc"].ToString(), out _liMin))
                 _liMin = 0;
 
-            ControlText(this);
-            ControlText(this.panel1);
+            _gs.ControlText(this.Name,this);
+            _gs.ControlText(this.Name,this.panel1);
             
-            this.Text = (_lsLen == "SP") ? "Modo Manual" : "Manual Mode";
+            this.Text = (Globals._gsLang == "SP") ? "Modo Manual" : "Manual Mode";
 
             txtInput2.Text = _lsOper;
             txtInput2.Enabled = false;
@@ -85,9 +85,9 @@ namespace WOLayout
                 else
                 {
                     if(iOper > _liMax)
-                        MessageBox.Show(MessageText(txtInput.Name, "err1") + " ( "+_liMax.ToString()+" )", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(_gs.MessageText(this.Name,txtInput.Name, "err1") + " ( "+_liMax.ToString()+" )", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     if (iOper < _liMin)
-                        MessageBox.Show(MessageText(txtInput.Name, "err2") + " ( " + _liMin.ToString() + " )", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(_gs.MessageText(this.Name,txtInput.Name, "err2") + " ( " + _liMin.ToString() + " )", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
@@ -100,40 +100,7 @@ namespace WOLayout
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
-        private string MessageText(string _control, string _asMessage)
-        {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
-            con.Form = this.Name;
-            con.Control = _control;
-            con.SubControl = _asMessage;
-            string sValue = ConfigLogica.ChangeLanguageGrid(con);
-            if (!string.IsNullOrEmpty(sValue))
-                return sValue;
-
-            return null;
-        }
-        private void ControlText(Control _control)
-        {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
-            con.Form = this.Name;
-
-            foreach (Control c in _control.Controls)
-            {
-                foreach (Control cs in c.Controls)
-                {
-                    if (cs is Label)
-                    {
-                        con.Control = cs.Name;
-                        string sValue = ConfigLogica.ChangeLanguageCont(con);
-                        if (!string.IsNullOrEmpty(sValue))
-                            cs.Text = sValue;
-                    }
-                }
-            }
-        }
-
+        
         private void wfHC_Activated(object sender, EventArgs e)
         {
             txtInput.Focus();

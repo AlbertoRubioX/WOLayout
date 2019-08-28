@@ -29,5 +29,10 @@ namespace WOLayout
             _lsOption = "D";
             Close();
         }
+
+        private void wfOption_Load(object sender, EventArgs e)
+        {
+            btnWO.Focus();
+        }
     }
 }

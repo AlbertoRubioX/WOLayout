@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnWO = new System.Windows.Forms.Button();
             this.btnDYN = new System.Windows.Forms.Button();
+            this.btnWO = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,18 +45,6 @@
             this.panel1.Size = new System.Drawing.Size(353, 142);
             this.panel1.TabIndex = 0;
             // 
-            // btnWO
-            // 
-            this.btnWO.BackgroundImage = global::WOLayout.Properties.Resources.Yellow_Background_down1;
-            this.btnWO.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWO.Location = new System.Drawing.Point(15, 19);
-            this.btnWO.Name = "btnWO";
-            this.btnWO.Size = new System.Drawing.Size(160, 107);
-            this.btnWO.TabIndex = 0;
-            this.btnWO.Text = "Work Order";
-            this.btnWO.UseVisualStyleBackColor = true;
-            this.btnWO.Click += new System.EventHandler(this.btnWO_Click);
-            // 
             // btnDYN
             // 
             this.btnDYN.BackgroundImage = global::WOLayout.Properties.Resources.Blue_Background;
@@ -70,6 +58,18 @@
             this.btnDYN.UseVisualStyleBackColor = true;
             this.btnDYN.Click += new System.EventHandler(this.btnDYN_Click);
             // 
+            // btnWO
+            // 
+            this.btnWO.BackgroundImage = global::WOLayout.Properties.Resources.Yellow_Background_down1;
+            this.btnWO.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWO.Location = new System.Drawing.Point(15, 19);
+            this.btnWO.Name = "btnWO";
+            this.btnWO.Size = new System.Drawing.Size(160, 107);
+            this.btnWO.TabIndex = 0;
+            this.btnWO.Text = "Work Order";
+            this.btnWO.UseVisualStyleBackColor = true;
+            this.btnWO.Click += new System.EventHandler(this.btnWO_Click);
+            // 
             // wfOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -80,6 +80,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "wfOption";
             this.Text = "Select Option";
+            this.Load += new System.EventHandler(this.wfOption_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
