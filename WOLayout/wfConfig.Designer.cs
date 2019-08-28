@@ -92,6 +92,8 @@
             this.cbxLang = new System.Windows.Forms.ComboBox();
             this.lblLanguage = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtNA = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtDetroit = new System.Windows.Forms.TextBox();
             this.lblDetroit = new System.Windows.Forms.Label();
             this.txtTape = new System.Windows.Forms.TextBox();
@@ -103,8 +105,15 @@
             this.txtHori = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtNA = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtMinHC = new System.Windows.Forms.TextBox();
+            this.lblMinHC = new System.Windows.Forms.Label();
+            this.txtMaxHC = new System.Windows.Forms.TextBox();
+            this.lblMaxHC = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -117,6 +126,8 @@
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -128,7 +139,7 @@
             this.btnExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(937, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(934, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -165,11 +176,12 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(884, 449);
+            this.tabControl1.Size = new System.Drawing.Size(884, 497);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.gbxEstation);
@@ -179,7 +191,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(876, 420);
+            this.tabPage1.Size = new System.Drawing.Size(876, 468);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TAK Data";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -200,12 +212,12 @@
             this.groupBox5.Controls.Add(this.txtAssyTime);
             this.groupBox5.Controls.Add(this.label33);
             this.groupBox5.Controls.Add(this.lblAssyTime);
-            this.groupBox5.Location = new System.Drawing.Point(23, 222);
+            this.groupBox5.Location = new System.Drawing.Point(23, 259);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox5.Size = new System.Drawing.Size(375, 190);
-            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             // 
             // txtMesaSub
@@ -374,12 +386,12 @@
             this.groupBox4.Controls.Add(this.lblDeliver);
             this.groupBox4.Controls.Add(this.txtOperNA);
             this.groupBox4.Controls.Add(this.lblOperNo);
-            this.groupBox4.Location = new System.Drawing.Point(423, 222);
+            this.groupBox4.Location = new System.Drawing.Point(423, 259);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(423, 190);
-            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             // 
             // txtInspec
@@ -500,18 +512,18 @@
             this.gbxEstation.Controls.Add(this.txtTack);
             this.gbxEstation.Controls.Add(this.label17);
             this.gbxEstation.Controls.Add(this.lblTak);
-            this.gbxEstation.Location = new System.Drawing.Point(23, 146);
+            this.gbxEstation.Location = new System.Drawing.Point(23, 142);
             this.gbxEstation.Margin = new System.Windows.Forms.Padding(4);
             this.gbxEstation.Name = "gbxEstation";
             this.gbxEstation.Padding = new System.Windows.Forms.Padding(4);
-            this.gbxEstation.Size = new System.Drawing.Size(823, 68);
+            this.gbxEstation.Size = new System.Drawing.Size(823, 56);
             this.gbxEstation.TabIndex = 2;
             this.gbxEstation.TabStop = false;
             this.gbxEstation.Text = "Estaciones";
             // 
             // txtTack80
             // 
-            this.txtTack80.Location = new System.Drawing.Point(625, 23);
+            this.txtTack80.Location = new System.Drawing.Point(625, 20);
             this.txtTack80.Margin = new System.Windows.Forms.Padding(4);
             this.txtTack80.MaxLength = 6;
             this.txtTack80.Name = "txtTack80";
@@ -524,7 +536,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(708, 27);
+            this.label15.Location = new System.Drawing.Point(708, 24);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(34, 17);
@@ -535,7 +547,7 @@
             // 
             this.lblTak80.AutoSize = true;
             this.lblTak80.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTak80.Location = new System.Drawing.Point(437, 27);
+            this.lblTak80.Location = new System.Drawing.Point(437, 24);
             this.lblTak80.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTak80.Name = "lblTak80";
             this.lblTak80.Size = new System.Drawing.Size(150, 17);
@@ -544,7 +556,7 @@
             // 
             // txtTack
             // 
-            this.txtTack.Location = new System.Drawing.Point(209, 23);
+            this.txtTack.Location = new System.Drawing.Point(209, 20);
             this.txtTack.Margin = new System.Windows.Forms.Padding(4);
             this.txtTack.MaxLength = 6;
             this.txtTack.Name = "txtTack";
@@ -558,7 +570,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(292, 27);
+            this.label17.Location = new System.Drawing.Point(292, 24);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(34, 17);
@@ -569,7 +581,7 @@
             // 
             this.lblTak.AutoSize = true;
             this.lblTak.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTak.Location = new System.Drawing.Point(21, 27);
+            this.lblTak.Location = new System.Drawing.Point(21, 24);
             this.lblTak.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTak.Name = "lblTak";
             this.lblTak.Size = new System.Drawing.Size(128, 17);
@@ -825,7 +837,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(876, 420);
+            this.tabPage2.Size = new System.Drawing.Size(876, 468);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Wrapping Time";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -881,6 +893,27 @@
             this.groupBox6.Size = new System.Drawing.Size(828, 188);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
+            // 
+            // txtNA
+            // 
+            this.txtNA.Location = new System.Drawing.Point(591, 128);
+            this.txtNA.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNA.MaxLength = 6;
+            this.txtNA.Name = "txtNA";
+            this.txtNA.Size = new System.Drawing.Size(73, 22);
+            this.txtNA.TabIndex = 13;
+            this.txtNA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(435, 132);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 17);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "N/A :";
             // 
             // txtDetroit
             // 
@@ -994,41 +1027,117 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Location = new System.Drawing.Point(16, 37);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(905, 477);
+            this.panel1.Size = new System.Drawing.Size(905, 513);
             this.panel1.TabIndex = 4;
             // 
-            // txtNA
+            // groupBox2
             // 
-            this.txtNA.Location = new System.Drawing.Point(591, 128);
-            this.txtNA.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNA.MaxLength = 6;
-            this.txtNA.Name = "txtNA";
-            this.txtNA.Size = new System.Drawing.Size(73, 22);
-            this.txtNA.TabIndex = 13;
-            this.txtNA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.groupBox2.Controls.Add(this.txtMinHC);
+            this.groupBox2.Controls.Add(this.lblMinHC);
+            this.groupBox2.Controls.Add(this.txtMaxHC);
+            this.groupBox2.Controls.Add(this.lblMaxHC);
+            this.groupBox2.Location = new System.Drawing.Point(23, 200);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(823, 56);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
             // 
-            // label1
+            // txtMinHC
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(435, 132);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 17);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "N/A :";
+            this.txtMinHC.Location = new System.Drawing.Point(625, 20);
+            this.txtMinHC.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMinHC.MaxLength = 6;
+            this.txtMinHC.Name = "txtMinHC";
+            this.txtMinHC.Size = new System.Drawing.Size(73, 22);
+            this.txtMinHC.TabIndex = 3;
+            this.txtMinHC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblMinHC
+            // 
+            this.lblMinHC.AutoSize = true;
+            this.lblMinHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMinHC.Location = new System.Drawing.Point(437, 24);
+            this.lblMinHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMinHC.Name = "lblMinHC";
+            this.lblMinHC.Size = new System.Drawing.Size(158, 17);
+            this.lblMinHC.TabIndex = 3;
+            this.lblMinHC.Text = "Head Count Mínimo :";
+            // 
+            // txtMaxHC
+            // 
+            this.txtMaxHC.Location = new System.Drawing.Point(209, 20);
+            this.txtMaxHC.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMaxHC.MaxLength = 3;
+            this.txtMaxHC.Name = "txtMaxHC";
+            this.txtMaxHC.Size = new System.Drawing.Size(73, 22);
+            this.txtMaxHC.TabIndex = 1;
+            this.txtMaxHC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblMaxHC
+            // 
+            this.lblMaxHC.AutoSize = true;
+            this.lblMaxHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaxHC.Location = new System.Drawing.Point(21, 24);
+            this.lblMaxHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMaxHC.Name = "lblMaxHC";
+            this.lblMaxHC.Size = new System.Drawing.Size(161, 17);
+            this.lblMaxHC.TabIndex = 0;
+            this.lblMaxHC.Text = "Head Count Máximo :";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.tssVersion});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 563);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(934, 25);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(194, 20);
+            this.toolStripStatusLabel1.Text = "Medline Mexicali Playbook";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(30, 20);
+            this.toolStripStatusLabel2.Text = "  |  ";
+            // 
+            // tssVersion
+            // 
+            this.tssVersion.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tssVersion.ForeColor = System.Drawing.Color.Black;
+            this.tssVersion.Name = "tssVersion";
+            this.tssVersion.Size = new System.Drawing.Size(177, 20);
+            this.tssVersion.Text = "Configuration Parameters";
             // 
             // wfConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 529);
+            this.BackgroundImage = global::WOLayout.Properties.Resources.Blue_Background;
+            this.ClientSize = new System.Drawing.Size(934, 588);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -1058,6 +1167,10 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1141,5 +1254,14 @@
         private System.Windows.Forms.Label lblLanguage;
         private System.Windows.Forms.TextBox txtNA;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtMinHC;
+        private System.Windows.Forms.Label lblMinHC;
+        private System.Windows.Forms.TextBox txtMaxHC;
+        private System.Windows.Forms.Label lblMaxHC;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel tssVersion;
     }
 }

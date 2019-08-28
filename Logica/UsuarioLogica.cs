@@ -12,6 +12,7 @@ namespace Logica
     {
         public decimal Tape { get; set; }
         public decimal WrapNA { get; set; }
+        public string Acceso { get; set; }
         public string Usuario { get; set; }
 
         public static int GuardarSP(UsuarioLogica user)
@@ -49,13 +50,24 @@ namespace Logica
             return datos;
         }
 
-        public static bool AccesoConfig(UsuarioLogica user)
+        public static bool ValidaAcceso(UsuarioLogica user)
         {
             
             try
             {
+                string sColumn = string.Empty;
+                switch(user.Acceso)
+                {
+                    case "CONF":
+                        sColumn = "ind_conf";
+                        break;
+                    case "EXPF":
+                        sColumn = "ind_export";
+                        break;
+                }
+                    
                 DataTable datos = new DataTable();
-                datos = AccesoDatos.Consultar("SELECT * FROM t_usuario where usuario = '" + user.Usuario + "' and ind_conf = '1'");
+                datos = AccesoDatos.Consultar("SELECT * FROM t_usuario where usuario = '" + user.Usuario + "' and "+sColumn+" = '1'");
                 if (datos.Rows.Count > 0)
                     return true;
                 else

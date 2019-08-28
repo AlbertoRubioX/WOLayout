@@ -75,7 +75,7 @@ namespace WOLayout
             WindowState = FormWindowState.Maximized;
             
             tssUserName.Text = _lsUser;
-            tssVersion.Text = "1.0.0.9";
+            tssVersion.Text = "1.0.0.10";
 
             Inicio();
 
@@ -91,96 +91,7 @@ namespace WOLayout
             txtWO.Text = "0000000";
             txtWO.SelectAll();
         }
-        private void ChangeLen()
-        {
-
-            ControlText(this);
-            ControlText(this.panel8);
-            ControlGridText(dgwWO);
-            ControlGridText(dgwItem);
-            ControlGridText(dgwTables);
-            ControlGridRows2(dgwItem);
-            ControlGridRows2(dgwTables);
-
-            if (_lsLen == "EN")
-                btnLanguage.Image = Properties.Resources.mexico;
-            else
-                btnLanguage.Image = Properties.Resources.united_states;
-            
-        }
-        private void ControlText(Control _control)
-        {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
-            con.Form = this.Name;
-
-            foreach (Control c in _control.Controls)
-            {
-                foreach (Control cs in c.Controls)
-                {
-                    if (cs is Label)
-                    {
-                        con.Control = cs.Name;
-                        string sValue = ConfigLogica.ChangeLanguageCont(con);
-                        if (!string.IsNullOrEmpty(sValue))
-                            cs.Text = sValue;
-                    }
-                }
-            }
-        }
-        private void ControlGridText(DataGridView _control)
-        {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
-            con.Form = this.Name;
-            con.Control = _control.Name;
-            foreach (DataGridViewColumn c in _control.Columns)
-            {
-                if (c.Visible)
-                {
-                    con.SubControl = c.Name;
-                    string sValue = ConfigLogica.ChangeLanguageGrid(con);
-                    if (!string.IsNullOrEmpty(sValue))
-                        c.HeaderText = sValue;
-                }
-                
-            }
-        }
-        private string ControlGridRows(Control _control,string _asRow)
-        {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
-            con.Form = this.Name;
-            con.Control = _control.Name;
-            con.SubControl = _asRow;
-            string sValue = ConfigLogica.ChangeLanguageGrid(con);
-            if (!string.IsNullOrEmpty(sValue))
-                return sValue;
-
-            return null;
-        }
-        private void ControlGridRows2(DataGridView _control)
-        {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = _lsLen;
-            con.Form = this.Name;
-            con.Control = _control.Name;
-            foreach(DataGridViewRow row in _control.Rows)
-            {
-                con.SubControl = row.Cells["code"].Value.ToString();
-                if (string.IsNullOrEmpty(con.SubControl))
-                    continue;
-
-                for (int i=0; i < 2; i++)
-                {
-                    con.Columna = i;
-                    string sValue = ConfigLogica.ChangeLanguageGridRow(con);
-                    if (!string.IsNullOrEmpty(sValue))
-                        row.Cells[i].Value = sValue;
-                }
-            }   
-        }
-
+      
         private void Inicio()
         {
             txtWO.Clear();
@@ -263,6 +174,111 @@ namespace WOLayout
         {
             txtWO.Focus();
             txtWO.SelectAll();
+        }
+        #endregion
+
+        #region regLanguage
+        private void ChangeLen()
+        {
+
+            ControlText(this);
+            ControlText(this.panel8);
+            ControlGridText(dgwWO);
+            ControlGridText(dgwItem);
+            ControlGridText(dgwTables);
+            ControlGridRows2(dgwItem);
+            ControlGridRows2(dgwTables);
+
+            if (_lsLen == "EN")
+                btnLanguage.Image = Properties.Resources.mexico;
+            else
+                btnLanguage.Image = Properties.Resources.united_states;
+
+        }
+        private void ControlText(Control _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Language = _lsLen;
+            con.Form = this.Name;
+
+            foreach (Control c in _control.Controls)
+            {
+                foreach (Control cs in c.Controls)
+                {
+                    if (cs is Label)
+                    {
+                        con.Control = cs.Name;
+                        string sValue = ConfigLogica.ChangeLanguageCont(con);
+                        if (!string.IsNullOrEmpty(sValue))
+                            cs.Text = sValue;
+                    }
+                }
+            }
+        }
+        private void ControlGridText(DataGridView _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Language = _lsLen;
+            con.Form = this.Name;
+            con.Control = _control.Name;
+            foreach (DataGridViewColumn c in _control.Columns)
+            {
+                if (c.Visible)
+                {
+                    con.SubControl = c.Name;
+                    string sValue = ConfigLogica.ChangeLanguageGrid(con);
+                    if (!string.IsNullOrEmpty(sValue))
+                        c.HeaderText = sValue;
+                }
+
+            }
+        }
+        private string ControlGridRows(Control _control, string _asRow)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Language = _lsLen;
+            con.Form = this.Name;
+            con.Control = _control.Name;
+            con.SubControl = _asRow;
+            string sValue = ConfigLogica.ChangeLanguageGrid(con);
+            if (!string.IsNullOrEmpty(sValue))
+                return sValue;
+
+            return null;
+        }
+        private void ControlGridRows2(DataGridView _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Language = _lsLen;
+            con.Form = this.Name;
+            con.Control = _control.Name;
+            foreach (DataGridViewRow row in _control.Rows)
+            {
+                con.SubControl = row.Cells["code"].Value.ToString();
+                if (string.IsNullOrEmpty(con.SubControl))
+                    continue;
+
+                for (int i = 0; i < 2; i++)
+                {
+                    con.Columna = i;
+                    string sValue = ConfigLogica.ChangeLanguageGridRow(con);
+                    if (!string.IsNullOrEmpty(sValue))
+                        row.Cells[i].Value = sValue;
+                }
+            }
+        }
+        private string MessageText(string _control, string _asMessage)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Language = _lsLen;
+            con.Form = this.Name;
+            con.Control = _control;
+            con.SubControl = _asMessage;
+            string sValue = ConfigLogica.ChangeLanguageGrid(con);
+            if (!string.IsNullOrEmpty(sValue))
+                return sValue;
+
+            return null;
         }
         #endregion
 
@@ -601,16 +617,25 @@ namespace WOLayout
                         txtWO.SelectAll();
 
                         //MODO MANUAL
-                        string sMensajeManual = (_lsLen == "SP") ? "Operadores requeridos: " + lblOper.Text + "\n \nOperadores disponibles: " : "Required operators: " + lblOper.Text + "\n \nAvailable operators: ";
-                        string sEncabezadoManual = (_lsLen == "SP") ? "Modo Manual" : "Manual Mode";
+                        //string sMensajeManual = (_lsLen == "SP") ? "Operadores requeridos: " + lblOper.Text + "\n \nOperadores disponibles: " : "Required operators: " + lblOper.Text + "\n \nAvailable operators: ";
+                        //string sEncabezadoManual = (_lsLen == "SP") ? "Modo Manual" : "Manual Mode";
 
-                        var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox(sMensajeManual, sEncabezadoManual, lblOper.Text);
+                        //var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox(sMensajeManual, sEncabezadoManual, lblOper.Text);
+                       
+
+                        wfHC HeadCount = new wfHC();
+                       
+                        HeadCount._lsLen = _lsLen;
+                        HeadCount._lsOper = lblOper.Text.ToString();
+                        HeadCount.ShowDialog();
+
+                        var sODisponibles = HeadCount._lsOper;
                         int n;
                         //  
                         try
                         {
-                            if (Int32.Parse(iODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(iODisponibles, out n))
-                                ModoManual(Int32.Parse(iODisponibles));
+                            if (Int32.Parse(sODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(sODisponibles, out n))
+                                ModoManual(Int32.Parse(sODisponibles));
                         }
                         catch (Exception)
                         {
@@ -787,8 +812,11 @@ namespace WOLayout
                 int rowCount = xlRange.Rows.Count;
                 int colCount = xlRange.Columns.Count;
 
-                for (int i = 4714; i <= rowCount; i++)
+                for (int i = 1; i <= rowCount; i++)
                 {
+
+                    tssVersion.Text = i.ToString() + " of " + rowCount.ToString();
+
                     if (xlRange.Cells[i, 1].Value2 == null)
                         continue;
 
@@ -1063,7 +1091,6 @@ namespace WOLayout
                         xlRange.Cells[i, 3].Value2 = iTotalOps.ToString();
                         xlRange.Cells[i, 4].Value2 = iTotalMes.ToString();
                     }
-                    tssVersion.Text = i.ToString() + " of " + rowCount.ToString();
                 }
 
                 
@@ -1094,6 +1121,14 @@ namespace WOLayout
         }
         private void btnExportFile_Click(object sender, EventArgs e)
         {
+
+            if (!ValidaAcceso("EXPF"))
+            {
+                MessageBox.Show(MessageText(btnExportFile.Name, "rest02"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+        
+
             string sArchivo = string.Empty;
 
             wfOption Option = new wfOption();
@@ -1145,13 +1180,14 @@ namespace WOLayout
                 
             }
             else
-                MessageBox.Show("Usuario sin Acceso a la Configuración", "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ControlGridRows(txtWO, "rest01"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private bool ValidaAcceso(string _asProcess)
         {
             UsuarioLogica user = new UsuarioLogica();
             user.Usuario = _lsUser;
-            if (UsuarioLogica.AccesoConfig(user))
+            user.Acceso = _asProcess;
+            if (UsuarioLogica.ValidaAcceso(user))
                 return true;
 
             return false;

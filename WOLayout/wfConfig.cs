@@ -101,6 +101,8 @@ namespace WOLayout
                     if (!string.IsNullOrEmpty(data.Rows[0]["detroit"].ToString()))
                         txtDetroit.Text = data.Rows[0]["detroit"].ToString();
                     cbxLang.SelectedValue = data.Rows[0]["lenguage"].ToString();
+                    txtMaxHC.Text = data.Rows[0]["max_hc"].ToString();
+                    txtMinHC.Text = data.Rows[0]["min_hc"].ToString();
                 }
 
                 ControlText(tabPage1);
@@ -226,6 +228,12 @@ namespace WOLayout
                 decimal dWrapDet = 0;
                 if (!decimal.TryParse(txtDetroit.Text.ToString(), out dWrapDet))
                     dWrapDet = 0;
+                decimal dMaxHC = 0;
+                if (!decimal.TryParse(txtMaxHC.Text.ToString(), out dMaxHC))
+                    dMaxHC = 0;
+                decimal dMinHC = 0;
+                if (!decimal.TryParse(txtMinHC.Text.ToString(), out dMinHC))
+                    dMinHC = 0;
 
                 ConfigLogica conf = new ConfigLogica();
                 conf.Jornada = dJornada;
@@ -253,6 +261,8 @@ namespace WOLayout
                 conf.WrapNA = dWrapNA;
                 conf.Detroit = dWrapDet;
                 conf.Language = cbxLang.SelectedValue.ToString();
+                conf.MaxHC = (int)dMaxHC;
+                conf.MinHC = (int)dMinHC;
                 conf.Usuario = _lsUsuario;
 
                 if (ConfigLogica.GuardarSP(conf) > 0)

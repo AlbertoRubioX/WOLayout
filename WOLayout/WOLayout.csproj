@@ -99,6 +99,12 @@
     <Compile Include="wfConfig.Designer.cs">
       <DependentUpon>wfConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="wfHC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfHC.Designer.cs">
+      <DependentUpon>wfHC.cs</DependentUpon>
+    </Compile>
     <Compile Include="wfLayout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     </Compile>
     <EmbeddedResource Include="wfConfig.resx">
       <DependentUpon>wfConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wfHC.resx">
+      <DependentUpon>wfHC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="wfLayout.resx">
       <DependentUpon>wfLayout.cs</DependentUpon>
