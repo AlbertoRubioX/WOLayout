@@ -41,6 +41,7 @@ namespace WOLayout
         private int _iInspeccion;
 
         //Manual
+        private bool _bModoManual=false;
         private int _iSub=0;
         private int _iMain=0;
         private double _sDuraW1=0;
@@ -51,6 +52,9 @@ namespace WOLayout
         private int _iOperNA=0;
         private int _iOut=0;
         private int _iOutO = 0;
+        private string _sAssyTextoE;
+        private string _sAssyTextoI;
+        private int _iPosAssyTexto =0;
 
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
@@ -106,6 +110,7 @@ namespace WOLayout
             lblCycleTime.Text = _dTackTime.ToString();
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
+            _bModoManual = false;
 
             lblProduct.Text = "";
             dgwItem.DataSource = null;
@@ -204,9 +209,22 @@ namespace WOLayout
             //ControlGridRows2(dgwTables);
 
             if (Globals._gsLang == "EN")
+            {
                 btnLanguage.Image = Properties.Resources.mexico;
+
+                if (_bModoManual)
+                    dgwTables[1, _iPosAssyTexto].Value = _sAssyTextoI;
+
+            }
+                
             else
+            {
                 btnLanguage.Image = Properties.Resources.united_states;
+
+                if (_bModoManual)
+                    dgwTables[1, _iPosAssyTexto].Value = _sAssyTextoE;
+            }
+                
 
         }
         private void ControlText(Control _control)
@@ -1537,7 +1555,7 @@ namespace WOLayout
                     operadores[(i * 2) + 1].Visible = true;
             }
 
-            for (int i = 20 + piOFMesas ; i <= 20 + piWSMesas; i++)
+            for (int i = 20 + piOFMesas ; i < 20 + piWSMesas; i++)
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
@@ -1553,7 +1571,7 @@ namespace WOLayout
         #region LogicaModoManual
         public void ModoManual(int ipODisponibles)
         {
-
+            _bModoManual = true;
             //Balance permitido = 20 (Estatico)
             double[,] ite = new double[40, 9];
 
@@ -1642,11 +1660,18 @@ namespace WOLayout
 
                 if (dgwTables[0, i].Value.ToString() == "Ensamble" || dgwTables[0, i].Value.ToString() == "Assembly")
                 {
+
+                    _iPosAssyTexto = i;
+                    _sAssyTextoE = "Ensamble (" + dgwTables[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
+                    _sAssyTextoI = "Assy (" + dgwTables[2, i].Value.ToString() + ") & Subassy (" + ComponentesSubensamble.ToString() + ")";
+
                     //separando componentes en descripcion
-                    if(Globals._gsLang=="SP")
-                        dgwTables[1, i].Value = "Ensamble (" + dgwTables[2, i].Value.ToString() + ") & Subensamble (" + ComponentesSubensamble.ToString() + ")";
+                    if (Globals._gsLang == "SP")
+                        dgwTables[1, i].Value = _sAssyTextoE;
+
                     else
-                        dgwTables[1, i].Value = "Assy (" + dgwTables[2, i].Value.ToString() + ") & Subassy (" + ComponentesSubensamble.ToString() + ")";
+                        dgwTables[1, i].Value = _sAssyTextoI;
+
 
                     //actulizando el total de componentes sub+assy
                     dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesSubensamble);
