@@ -1555,7 +1555,7 @@ namespace WOLayout
                     operadores[(i * 2) + 1].Visible = true;
             }
 
-            for (int i = 20 + piOFMesas ; i < 20 + piWSMesas; i++)
+            for (int i = 20 + piOFMesas ; i < 20 + piOFMesas + piWSMesas; i++)
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
