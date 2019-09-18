@@ -108,7 +108,11 @@ namespace WOLayout
                     if (data.Rows[0]["ind_boxhr"].ToString() == "1")
                         chbBoxHr.Checked = true;
                     else
-                        chbBoxHr.Checked = false;    
+                        chbBoxHr.Checked = false;
+                    if (data.Rows[0]["cycle_timer"].ToString() == "1")
+                        chbCycleTimer.Checked = true;
+                    else
+                        chbCycleTimer.Checked = false;
                 }
 
                 Globals gs = new Globals();
@@ -278,6 +282,10 @@ namespace WOLayout
                 conf.MaxHC = (int)dMaxHC;
                 conf.MinHC = (int)dMinHC;
                 conf.BoxHr = sBoxHr;
+                if (chbCycleTimer.Checked)
+                    conf.CycleTimer = "1";
+                else
+                    conf.CycleTimer = "0";
                 conf.OutAddTime = dOutAdd;
                 conf.Usuario = _lsUsuario;
 
@@ -475,5 +483,7 @@ namespace WOLayout
             gs.ControlText(this.Name, tabPage1);
             gs.ControlText(this.Name, tabPage2);
         }
+
+       
     }
 }

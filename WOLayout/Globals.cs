@@ -14,6 +14,7 @@ namespace WOLayout
         public static string _gsLocation;
         public static string _gsUser;
         public static string _gsLang;
+        public static string _gsStation;
 
         public void ControlText(string _asFormName,Control _control)
         {

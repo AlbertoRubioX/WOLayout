@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AS4Logica.cs" />
     <Compile Include="ComunicaLogica.cs" />
+    <Compile Include="LineRampeoLogica.cs" />
     <Compile Include="UsuarioLogica.cs" />
     <Compile Include="SetupLogica.cs" />
     <Compile Include="ConfigLogica.cs" />

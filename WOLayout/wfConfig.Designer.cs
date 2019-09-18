@@ -94,10 +94,13 @@
             this.lblLabor = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chbCycleTimer = new System.Windows.Forms.CheckBox();
             this.chbBoxHr = new System.Windows.Forms.CheckBox();
             this.cbxLang = new System.Windows.Forms.ComboBox();
             this.lblLanguage = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtOutAdd = new System.Windows.Forms.TextBox();
+            this.lblOutAdd = new System.Windows.Forms.Label();
             this.txtNA = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtDetroit = new System.Windows.Forms.TextBox();
@@ -115,8 +118,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtOutAdd = new System.Windows.Forms.TextBox();
-            this.lblOutAdd = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -131,6 +133,7 @@
             this.groupBox6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -890,6 +893,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
@@ -903,20 +907,31 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.chbBoxHr);
             this.groupBox1.Controls.Add(this.cbxLang);
             this.groupBox1.Controls.Add(this.lblLanguage);
             this.groupBox1.Location = new System.Drawing.Point(23, 224);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(828, 176);
+            this.groupBox1.Size = new System.Drawing.Size(828, 67);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // chbCycleTimer
+            // 
+            this.chbCycleTimer.AutoSize = true;
+            this.chbCycleTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbCycleTimer.Location = new System.Drawing.Point(374, 26);
+            this.chbCycleTimer.Name = "chbCycleTimer";
+            this.chbCycleTimer.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chbCycleTimer.Size = new System.Drawing.Size(281, 21);
+            this.chbCycleTimer.TabIndex = 15;
+            this.chbCycleTimer.Text = "Mostrar Cronometro de Cycle Time";
+            this.chbCycleTimer.UseVisualStyleBackColor = true;
             // 
             // chbBoxHr
             // 
             this.chbBoxHr.AutoSize = true;
             this.chbBoxHr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbBoxHr.Location = new System.Drawing.Point(408, 42);
+            this.chbBoxHr.Location = new System.Drawing.Point(38, 26);
             this.chbBoxHr.Name = "chbBoxHr";
             this.chbBoxHr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chbBoxHr.Size = new System.Drawing.Size(199, 21);
@@ -927,7 +942,7 @@
             // cbxLang
             // 
             this.cbxLang.FormattingEnabled = true;
-            this.cbxLang.Location = new System.Drawing.Point(143, 40);
+            this.cbxLang.Location = new System.Drawing.Point(143, 28);
             this.cbxLang.Name = "cbxLang";
             this.cbxLang.Size = new System.Drawing.Size(121, 24);
             this.cbxLang.TabIndex = 13;
@@ -937,7 +952,7 @@
             // 
             this.lblLanguage.AutoSize = true;
             this.lblLanguage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLanguage.Location = new System.Drawing.Point(35, 42);
+            this.lblLanguage.Location = new System.Drawing.Point(35, 30);
             this.lblLanguage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLanguage.Name = "lblLanguage";
             this.lblLanguage.Size = new System.Drawing.Size(85, 17);
@@ -967,6 +982,27 @@
             this.groupBox6.Size = new System.Drawing.Size(828, 210);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
+            // 
+            // txtOutAdd
+            // 
+            this.txtOutAdd.Location = new System.Drawing.Point(591, 171);
+            this.txtOutAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.txtOutAdd.MaxLength = 6;
+            this.txtOutAdd.Name = "txtOutAdd";
+            this.txtOutAdd.Size = new System.Drawing.Size(73, 22);
+            this.txtOutAdd.TabIndex = 15;
+            this.txtOutAdd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblOutAdd
+            // 
+            this.lblOutAdd.AutoSize = true;
+            this.lblOutAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOutAdd.Location = new System.Drawing.Point(339, 173);
+            this.lblOutAdd.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOutAdd.Name = "lblOutAdd";
+            this.lblOutAdd.Size = new System.Drawing.Size(244, 17);
+            this.lblOutAdd.TabIndex = 14;
+            this.lblOutAdd.Text = "Tiempo Adicional por Outfolder :";
             // 
             // txtNA
             // 
@@ -1149,26 +1185,15 @@
             this.tssVersion.Size = new System.Drawing.Size(177, 20);
             this.tssVersion.Text = "Configuration Parameters";
             // 
-            // txtOutAdd
+            // groupBox3
             // 
-            this.txtOutAdd.Location = new System.Drawing.Point(591, 171);
-            this.txtOutAdd.Margin = new System.Windows.Forms.Padding(4);
-            this.txtOutAdd.MaxLength = 6;
-            this.txtOutAdd.Name = "txtOutAdd";
-            this.txtOutAdd.Size = new System.Drawing.Size(73, 22);
-            this.txtOutAdd.TabIndex = 15;
-            this.txtOutAdd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lblOutAdd
-            // 
-            this.lblOutAdd.AutoSize = true;
-            this.lblOutAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOutAdd.Location = new System.Drawing.Point(339, 173);
-            this.lblOutAdd.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOutAdd.Name = "lblOutAdd";
-            this.lblOutAdd.Size = new System.Drawing.Size(244, 17);
-            this.lblOutAdd.TabIndex = 14;
-            this.lblOutAdd.Text = "Tiempo Adicional por Outfolder :";
+            this.groupBox3.Controls.Add(this.chbBoxHr);
+            this.groupBox3.Controls.Add(this.chbCycleTimer);
+            this.groupBox3.Location = new System.Drawing.Point(23, 297);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(828, 68);
+            this.groupBox3.TabIndex = 14;
+            this.groupBox3.TabStop = false;
             // 
             // wfConfig
             // 
@@ -1210,6 +1235,8 @@
             this.panel1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1305,5 +1332,7 @@
         private System.Windows.Forms.CheckBox chbBoxHr;
         private System.Windows.Forms.TextBox txtOutAdd;
         private System.Windows.Forms.Label lblOutAdd;
+        private System.Windows.Forms.CheckBox chbCycleTimer;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

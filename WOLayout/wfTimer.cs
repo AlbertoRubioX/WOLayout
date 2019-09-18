@@ -39,7 +39,7 @@ namespace WOLayout
             {
                 //beep
                 string[] sSounds = { "notify", "ringout", "tada","ir_inter" };
-                int iS = 3;//set as parameter
+                int iS = 2;//set as parameter
                 string sSound = @"C:\Windows\media\"+sSounds[iS]+".wav";
                 if(File.Exists(sSound))
                 {
@@ -51,7 +51,7 @@ namespace WOLayout
 
                 iTime = 0;
                 lblTimer.Visible = false;
-                this.BackColor = Color.Red;
+                this.BackColor = Color.DodgerBlue;
             }
 
             lblTimer.Text = iTime.ToString().PadLeft(2,'0');

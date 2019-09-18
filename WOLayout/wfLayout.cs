@@ -40,7 +40,9 @@ namespace WOLayout
         private decimal _dOutAdd;
         private string _sIndBoxHr;
         private int _iInspeccion;
-
+        private string _sTimer;
+        private string _sLine;
+        private decimal _dRampeo;
         //Manual
         private bool _bModoManual=false;
         private int _iSub=0;
@@ -56,6 +58,7 @@ namespace WOLayout
         private string _sAssyTextoE;
         private string _sAssyTextoI;
         private int _iPosAssyTexto =0;
+        
 
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
@@ -81,11 +84,25 @@ namespace WOLayout
             _lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
 
             Globals._gsUser = _lsUser;
-
+            Globals._gsStation = Environment.MachineName.ToUpper();
+            
             WindowState = FormWindowState.Maximized;
             
             tssUserName.Text = _lsUser;
-            tssVersion.Text = "1.0.0.10";
+            tssVersion.Text = "1.0.0.11";
+            
+            //GET line from pc station
+            LineaRampeoLogica line = new LineaRampeoLogica();
+            line.Estacion = Globals._gsStation;
+            DataTable dtLR = LineaRampeoLogica.ConsultarEstacion(line);
+            _dRampeo = 0;
+            if (dtLR.Rows.Count > 0)
+            {
+                _sLine = dtLR.Rows[0]["line"].ToString();
+                _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
+                
+            }
+                
 
             Inicio();
 
@@ -97,7 +114,6 @@ namespace WOLayout
                 Globals._gsLang = _dtConf.Rows[0]["lenguage"].ToString();
                 ChangeLen();
             }
-            
 
             txtWO.Text = "0000000";
             txtWO.SelectAll();
@@ -112,6 +128,24 @@ namespace WOLayout
             lblCycleTime.Text = "0";
             lblCycleTime.Text = _dTackTime.ToString();
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
+
+           
+            if (!string.IsNullOrEmpty(_sLine) && _sLine != "0")
+            {
+                lblLine.Text = lblLine.Text + " " + _sLine;
+                lblLine.Visible = true;
+                tsslRampeo.Visible = true;
+                tssRampeo.Text  = Math.Round(_dRampeo,0).ToString() + " %";
+                tssRampeo.Visible = true;
+
+                _dRampeo = _dRampeo / 100;
+            }
+            else
+            {
+                lblLine.Visible = false;
+                tsslRampeo.Visible =false;
+                tssRampeo.Visible = false;
+            }
 
             _bModoManual = false;
 
@@ -179,6 +213,7 @@ namespace WOLayout
             _sIndBoxHr = _dtConf.Rows[0]["ind_boxhr"].ToString();
             if (!string.IsNullOrEmpty(_dtConf.Rows[0]["out_addtime"].ToString()))
                 _dOutAdd = decimal.Parse(_dtConf.Rows[0]["out_addtime"].ToString());
+            _sTimer = _dtConf.Rows[0]["cycle_timer"].ToString();
 
             txtWO.Focus();
 
@@ -718,9 +753,14 @@ namespace WOLayout
                             
                         }
 
-                        btnTimer_Click(sender, e);
+                        //Rampeo
+                        if(_dRampeo < 100)
+                            CalculaRampeo();
 
-                       
+                        if(_sTimer == "1")
+                            btnTimer_Click(sender, e);
+
+                        timer1.Start();
                     }
                     else
                     {
@@ -740,10 +780,54 @@ namespace WOLayout
                 MessageBox.Show(ex.ToString());
             }
         }
+        private void CalculaRampeo()
+        {
+            try
+            {
+                decimal dCycle = decimal.Parse(lblCycleTime.Text.ToString());
+                decimal dRamp = dCycle / _dRampeo;
+                if (dRamp > 0)
+                    lblCycleTime.Text = Math.Round(dRamp, 2).ToString();
 
+                if (_sIndBoxHr == "1")
+                {
+                    decimal dBoxHr = decimal.Parse(dgwWO[4, 0].Value.ToString());
+                    if(dBoxHr > 0)
+                    {
+                        dRamp = dBoxHr * _dRampeo;
+                        dgwWO[4, 0].Value = Math.Round(dRamp, 2).ToString();
+                    }
+                    
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
         #endregion
 
         #region regGrid
+        private void dgwItem_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            
+            //if(e.ColumnIndex == 1)
+            //{
+            //    if (dgwItem[1, 0].Style.BackColor == Color.White)
+            //    {
+            //        string sValue = dgwItem[1, 0].Value.ToString();
+            //        if (sValue == "Si" || sValue == "Yes")
+            //        {
+            //            e.CellStyle.BackColor = Color.Red;
+            //            e.CellStyle.ForeColor = Color.Yellow;
+
+            //        }
+
+            //    }
+            //}
+            
+        }
         private void dgwTables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             int iRow = e.RowIndex;
@@ -829,8 +913,8 @@ namespace WOLayout
                 dgwItem.DataSource = dtNew;
             }
 
-            dgwItem.Columns[0].Width = ColumnWith(dgwItem, 20);
-            dgwItem.Columns[1].Width = ColumnWith(dgwItem, 20);
+            dgwItem.Columns[0].Width = ColumnWith(dgwItem, 17);
+            dgwItem.Columns[1].Width = ColumnWith(dgwItem, 23);
             dgwItem.Columns[2].Visible = false;
             dgwItem.Columns[3].Width = ColumnWith(dgwItem, 15);
             dgwItem.Columns[4].Width = ColumnWith(dgwItem, 16);
@@ -1624,7 +1708,7 @@ namespace WOLayout
 
             ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / (double)_iMaxTable);
             ite[0, 1] = ipODisponibles - ite[0, 0] - (_iOperNA+_iOutO);
-            ite[0, 2] =(_dAssyTime * (double)_dMaxTable);
+            ite[0, 2] =(_dAssyTime * (double)_iMaxTable);
             ite[0, 3] = Double.IsInfinity((_sDuraW1 + _sDuraW2 ) / (ite[0, 1] / (_iOWrap1))) ? 0: (_sDuraW1 + _sDuraW2) / (ite[0, 1] / (_iOWrap1)); //mas duracion wrab sub,  mas operadores por mesa
             ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
             ite[0, 5] = (ite[0, 4] < 20) ? 1 : 0;
@@ -1814,6 +1898,26 @@ namespace WOLayout
             }
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if(dgwItem.RowCount > 0)
+            {
+                string sPreassy = dgwItem[1, 0].Value.ToString();
+                if(sPreassy == "Si" || sPreassy =="Yes")
+                {
+                    if (dgwItem[1,0].Style.BackColor == Color.Red)
+                    {
+                        dgwItem[1, 0].Style.BackColor = Color.Yellow;
+                        dgwItem[1, 0].Style.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        dgwItem[1, 0].Style.BackColor = Color.Red;
+                        dgwItem[1, 0].Style.ForeColor = Color.Yellow;
+                    }
+                }
+            }
+        }
     }
     #endregion
 
