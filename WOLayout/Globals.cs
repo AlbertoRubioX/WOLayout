@@ -95,6 +95,23 @@ namespace WOLayout
                 }
             }
         }
+        public void ControlGridRows3(string _asFormName, DataGridView _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Language = _gsLang;
+            con.Form = _asFormName;
+            con.Control = _control.Name;
+            foreach (DataGridViewRow row in _control.Rows)
+            {
+                foreach (DataGridViewColumn col in _control.Columns)
+                {
+                    con.Valor = row.Cells[col.Index].Value.ToString();
+                    string sValue = ConfigLogica.ChangeLanguageGridRowValue(con);
+                    if (!string.IsNullOrEmpty(sValue))
+                        row.Cells[col.Index].Value = sValue;
+                }   
+            }
+        }
         public string MessageText(string _asFormName, string _control, string _asMessage)
         {
             ConfigLogica con = new ConfigLogica();

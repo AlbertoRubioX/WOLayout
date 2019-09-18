@@ -38,16 +38,18 @@ namespace Logica
         public int MaxHC { get; set; }
         public int MinHC { get; set; }
         public string BoxHr { get; set; }
+        public decimal OutAddTime { get; set; }
         public string Form { get; set; }
         public string Control { get; set; }
         public string SubControl { get; set; }
+        public string Valor { get; set; }
         public int Columna { get; set; }
         public string Usuario { get; set; }
 
         public static int GuardarSP(ConfigLogica config)
         {
-            string[] parametros = { "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA","@Detroit","@Language" ,"@MaxHC", "@MinHC","@BoxHr"};
-            return AccesoDatos.Actualizar("sp_mant_config", parametros, config.Jornada, config.HorasDisp, config.SegDisp, config.Cajas, config.Kits, config.KitLinea, config.Tak, config.Tak80,config.Assy, config.MaxComp, config.Mesas, config.MesaWrap, config.MesaSub, config.OperNA, config.Surtidor, config.InspSella, config.Selladora, config.Inspeccion, config.Usuario,config.Horizontal,config.Vertical,config.Sobre,config.Tape,config.WrapNA,config.Detroit,config.Language,config.MaxHC,config.MinHC,config.BoxHr);
+            string[] parametros = { "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA", "@Detroit", "@Language", "@MaxHC", "@MinHC", "@BoxHr", "@OutAddTime" };
+            return AccesoDatos.Actualizar("sp_mant_config", parametros, config.Jornada, config.HorasDisp, config.SegDisp, config.Cajas, config.Kits, config.KitLinea, config.Tak, config.Tak80, config.Assy, config.MaxComp, config.Mesas, config.MesaWrap, config.MesaSub, config.OperNA, config.Surtidor, config.InspSella, config.Selladora, config.Inspeccion, config.Usuario, config.Horizontal, config.Vertical, config.Sobre, config.Tape, config.WrapNA, config.Detroit, config.Language, config.MaxHC, config.MinHC, config.BoxHr, config.OutAddTime);
         }
 
         public static DataTable Consultar()
@@ -73,7 +75,7 @@ namespace Logica
                 if (con.Language == "EN")
                     sColumn = "description";
                 else
-                datos = AccesoDatos.Consultar("SELECT "+sColumn+" FROM t_sysleng WHERE form = '"+con.Form+"' and control = '"+con.Control+"' and subcontrol = '"+con.SubControl+"' ");
+                    datos = AccesoDatos.Consultar("SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' and subcontrol = '" + con.SubControl + "' ");
             }
             catch (Exception ex)
             {
@@ -84,7 +86,7 @@ namespace Logica
         public static string ChangeLanguageCont(ConfigLogica con)
         {
             string sValue = string.Empty;
-            
+
             try
             {
                 string sColumn = "descripcion";
@@ -112,7 +114,7 @@ namespace Logica
                 if (con.Language == "EN")
                     sColumn = "description";
 
-                string sSql = "SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' and subcontrol = '"+con.SubControl+"' ";
+                string sSql = "SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' and subcontrol = '" + con.SubControl + "' ";
                 DataTable datos = AccesoDatos.Consultar(sSql);
                 if (datos.Rows.Count > 0)
                     sValue = datos.Rows[0][0].ToString();
@@ -133,7 +135,33 @@ namespace Logica
                 if (con.Language == "EN")
                     sColumn = "description";
 
-                string sSql = "SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' and subcontrol = '" + con.SubControl + "' and columna = "+con.Columna+" ";
+                string sSql = "SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' and subcontrol = '" + con.SubControl + "' and columna = " + con.Columna + " ";
+                DataTable datos = AccesoDatos.Consultar(sSql);
+                if (datos.Rows.Count > 0)
+                    sValue = datos.Rows[0][0].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return sValue;
+        }
+        public static string ChangeLanguageGridRowValue(ConfigLogica con)
+        {
+            string sValue = string.Empty;
+
+            try
+            {
+                string sColumn = "descripcion";
+                string sColumn2 = "description";
+                if (con.Language == "EN")
+                {
+                    sColumn = "description";
+                    sColumn2 = "descripcion";
+                }
+                    
+
+                string sSql = "SELECT " + sColumn + " FROM t_sysleng WHERE form = '" + con.Form + "' and control = '" + con.Control + "' and "+sColumn2+" = '"+con.Valor+"'";
                 DataTable datos = AccesoDatos.Consultar(sSql);
                 if (datos.Rows.Count > 0)
                     sValue = datos.Rows[0][0].ToString();

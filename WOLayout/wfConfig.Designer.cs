@@ -94,6 +94,7 @@
             this.lblLabor = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chbBoxHr = new System.Windows.Forms.CheckBox();
             this.cbxLang = new System.Windows.Forms.ComboBox();
             this.lblLanguage = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -114,7 +115,8 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.chbBoxHr = new System.Windows.Forms.CheckBox();
+            this.txtOutAdd = new System.Windows.Forms.TextBox();
+            this.lblOutAdd = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -904,11 +906,23 @@
             this.groupBox1.Controls.Add(this.chbBoxHr);
             this.groupBox1.Controls.Add(this.cbxLang);
             this.groupBox1.Controls.Add(this.lblLanguage);
-            this.groupBox1.Location = new System.Drawing.Point(23, 202);
+            this.groupBox1.Location = new System.Drawing.Point(23, 224);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(828, 198);
+            this.groupBox1.Size = new System.Drawing.Size(828, 176);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // chbBoxHr
+            // 
+            this.chbBoxHr.AutoSize = true;
+            this.chbBoxHr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbBoxHr.Location = new System.Drawing.Point(408, 42);
+            this.chbBoxHr.Name = "chbBoxHr";
+            this.chbBoxHr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chbBoxHr.Size = new System.Drawing.Size(199, 21);
+            this.chbBoxHr.TabIndex = 14;
+            this.chbBoxHr.Text = "Mostrar Cajas por Hora";
+            this.chbBoxHr.UseVisualStyleBackColor = true;
             // 
             // cbxLang
             // 
@@ -932,6 +946,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.txtOutAdd);
+            this.groupBox6.Controls.Add(this.lblOutAdd);
             this.groupBox6.Controls.Add(this.txtNA);
             this.groupBox6.Controls.Add(this.label1);
             this.groupBox6.Controls.Add(this.txtDetroit);
@@ -948,13 +964,13 @@
             this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox6.Size = new System.Drawing.Size(828, 188);
+            this.groupBox6.Size = new System.Drawing.Size(828, 210);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             // 
             // txtNA
             // 
-            this.txtNA.Location = new System.Drawing.Point(591, 128);
+            this.txtNA.Location = new System.Drawing.Point(591, 125);
             this.txtNA.Margin = new System.Windows.Forms.Padding(4);
             this.txtNA.MaxLength = 6;
             this.txtNA.Name = "txtNA";
@@ -966,7 +982,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(435, 132);
+            this.label1.Location = new System.Drawing.Point(539, 125);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 17);
@@ -975,7 +991,7 @@
             // 
             // txtDetroit
             // 
-            this.txtDetroit.Location = new System.Drawing.Point(191, 129);
+            this.txtDetroit.Location = new System.Drawing.Point(191, 128);
             this.txtDetroit.Margin = new System.Windows.Forms.Padding(4);
             this.txtDetroit.MaxLength = 6;
             this.txtDetroit.Name = "txtDetroit";
@@ -988,7 +1004,7 @@
             // 
             this.lblDetroit.AutoSize = true;
             this.lblDetroit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetroit.Location = new System.Drawing.Point(35, 133);
+            this.lblDetroit.Location = new System.Drawing.Point(35, 130);
             this.lblDetroit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDetroit.Name = "lblDetroit";
             this.lblDetroit.Size = new System.Drawing.Size(67, 17);
@@ -997,7 +1013,7 @@
             // 
             // txtTape
             // 
-            this.txtTape.Location = new System.Drawing.Point(591, 81);
+            this.txtTape.Location = new System.Drawing.Point(591, 79);
             this.txtTape.Margin = new System.Windows.Forms.Padding(4);
             this.txtTape.MaxLength = 6;
             this.txtTape.Name = "txtTape";
@@ -1010,7 +1026,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(435, 85);
+            this.label25.Location = new System.Drawing.Point(450, 79);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(133, 17);
@@ -1019,7 +1035,7 @@
             // 
             // txtSobre
             // 
-            this.txtSobre.Location = new System.Drawing.Point(191, 76);
+            this.txtSobre.Location = new System.Drawing.Point(191, 79);
             this.txtSobre.Margin = new System.Windows.Forms.Padding(4);
             this.txtSobre.MaxLength = 6;
             this.txtSobre.Name = "txtSobre";
@@ -1032,7 +1048,7 @@
             // 
             this.lblEnvelope.AutoSize = true;
             this.lblEnvelope.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnvelope.Location = new System.Drawing.Point(35, 85);
+            this.lblEnvelope.Location = new System.Drawing.Point(35, 81);
             this.lblEnvelope.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEnvelope.Name = "lblEnvelope";
             this.lblEnvelope.Size = new System.Drawing.Size(61, 17);
@@ -1054,7 +1070,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(435, 37);
+            this.label19.Location = new System.Drawing.Point(510, 35);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(73, 17);
@@ -1133,17 +1149,26 @@
             this.tssVersion.Size = new System.Drawing.Size(177, 20);
             this.tssVersion.Text = "Configuration Parameters";
             // 
-            // chbBoxHr
+            // txtOutAdd
             // 
-            this.chbBoxHr.AutoSize = true;
-            this.chbBoxHr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbBoxHr.Location = new System.Drawing.Point(438, 43);
-            this.chbBoxHr.Name = "chbBoxHr";
-            this.chbBoxHr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chbBoxHr.Size = new System.Drawing.Size(199, 21);
-            this.chbBoxHr.TabIndex = 14;
-            this.chbBoxHr.Text = "Mostrar Cajas por Hora";
-            this.chbBoxHr.UseVisualStyleBackColor = true;
+            this.txtOutAdd.Location = new System.Drawing.Point(591, 171);
+            this.txtOutAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.txtOutAdd.MaxLength = 6;
+            this.txtOutAdd.Name = "txtOutAdd";
+            this.txtOutAdd.Size = new System.Drawing.Size(73, 22);
+            this.txtOutAdd.TabIndex = 15;
+            this.txtOutAdd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblOutAdd
+            // 
+            this.lblOutAdd.AutoSize = true;
+            this.lblOutAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOutAdd.Location = new System.Drawing.Point(339, 173);
+            this.lblOutAdd.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOutAdd.Name = "lblOutAdd";
+            this.lblOutAdd.Size = new System.Drawing.Size(244, 17);
+            this.lblOutAdd.TabIndex = 14;
+            this.lblOutAdd.Text = "Tiempo Adicional por Outfolder :";
             // 
             // wfConfig
             // 
@@ -1278,5 +1303,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tssVersion;
         private System.Windows.Forms.CheckBox chbBoxHr;
+        private System.Windows.Forms.TextBox txtOutAdd;
+        private System.Windows.Forms.Label lblOutAdd;
     }
 }

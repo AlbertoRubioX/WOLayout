@@ -103,6 +103,8 @@ namespace WOLayout
                     cbxLang.SelectedValue = data.Rows[0]["lenguage"].ToString();
                     txtMaxHC.Text = data.Rows[0]["max_hc"].ToString();
                     txtMinHC.Text = data.Rows[0]["min_hc"].ToString();
+                    txtOutAdd.Text = data.Rows[0]["out_addtime"].ToString();
+
                     if (data.Rows[0]["ind_boxhr"].ToString() == "1")
                         chbBoxHr.Checked = true;
                     else
@@ -243,6 +245,9 @@ namespace WOLayout
                     sBoxHr = "1";
                 else
                     sBoxHr = "0";
+                decimal dOutAdd = 0;
+                if (!decimal.TryParse(txtOutAdd.Text.ToString(), out dOutAdd))
+                    dOutAdd = 0;
 
                 ConfigLogica conf = new ConfigLogica();
                 conf.Jornada = dJornada;
@@ -273,6 +278,7 @@ namespace WOLayout
                 conf.MaxHC = (int)dMaxHC;
                 conf.MinHC = (int)dMinHC;
                 conf.BoxHr = sBoxHr;
+                conf.OutAddTime = dOutAdd;
                 conf.Usuario = _lsUsuario;
 
                 if (ConfigLogica.GuardarSP(conf) > 0)

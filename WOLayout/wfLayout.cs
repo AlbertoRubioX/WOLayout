@@ -20,7 +20,7 @@ namespace WOLayout
         private double _dAssyTime;
         private double _dTackIdeal;
         private decimal _dTackTime;
-        private decimal _dMaxTable;
+        private int _iMaxTable;
         private int _iMesaEns;
         private int _iMesaWrap;
         private int _iEstSub;
@@ -37,6 +37,7 @@ namespace WOLayout
         private decimal _dKits;
         private decimal _dCajas;
         private decimal _dKitCaja;
+        private decimal _dOutAdd;
         private string _sIndBoxHr;
         private int _iInspeccion;
 
@@ -103,9 +104,10 @@ namespace WOLayout
             txtWO.Clear();
             panel9.BackgroundImage = Properties.Resources.Blue_Background_down;
             panel2.BackgroundImage = Properties.Resources.Blue_Background_down;
+
+            lblCycleTime.Text = "0";
             lblCycleTime.Text = _dTackTime.ToString();
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
-
 
             lblProduct.Text = "";
             dgwItem.DataSource = null;
@@ -137,7 +139,7 @@ namespace WOLayout
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][9].ToString()))
                 _dAssyTime = double.Parse(_dtConf.Rows[0][9].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][10].ToString()))
-                _dMaxTable = decimal.Parse(_dtConf.Rows[0][10].ToString());
+                _iMaxTable = int.Parse(_dtConf.Rows[0][10].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][11].ToString()))
                 _iMesaEns = int.Parse(_dtConf.Rows[0][11].ToString());
             if (!string.IsNullOrEmpty(_dtConf.Rows[0][12].ToString()))
@@ -169,6 +171,8 @@ namespace WOLayout
                 _dDetroit = decimal.Parse(_dtConf.Rows[0]["detroit"].ToString());
             string sVersion = _dtConf.Rows[0]["version"].ToString();
             _sIndBoxHr = _dtConf.Rows[0]["ind_boxhr"].ToString();
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0]["out_addtime"].ToString()))
+                _dOutAdd = decimal.Parse(_dtConf.Rows[0]["out_addtime"].ToString());
 
             txtWO.Focus();
 
@@ -192,9 +196,8 @@ namespace WOLayout
             _gs.ControlGridText(this.Name, dgwWO);
             _gs.ControlGridText(this.Name, dgwItem);
             _gs.ControlGridText(this.Name, dgwTables);
-            _gs.ControlGridRows2(this.Name, dgwItem);
             _gs.ControlGridRows2(this.Name, dgwTables);
-
+            _gs.ControlGridRows3(this.Name, dgwItem); //change values
             //ControlText(this);
             //ControlText(this.panel8);
             //ControlGridText(dgwWO);
@@ -375,16 +378,17 @@ namespace WOLayout
 
                     string sItem = dt.Rows[0][0].ToString();
 
-                    if (sItem.IndexOf("DYN") == -1)
-                    {
-                        MessageBox.Show(ControlGridRows(txtWO, "err1"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Inicio();
-                        return;
-                    }
+                    //if (sItem.IndexOf("DYN") == -1)
+                    //{
+                    //    MessageBox.Show(_gs.ControlGridRows(this.Name,txtWO, "err1"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //    Inicio();
+                    //    return;
+                    //}
 
                     string sName = dt.Rows[0][1].ToString();
                     AS4.Item = sItem;
-                    AS4.MaxComp = _dMaxTable;
+                    int iMaxComp = _iMaxTable * _iMesaEns;
+                    AS4.MaxComp = iMaxComp; 
 
                     lblProduct.Text = sItem.Trim() + " - " + sName.ToUpper().TrimEnd();
                     
@@ -450,7 +454,7 @@ namespace WOLayout
                         sDuraW2 = dWrapTime2.ToString();
 
                         DataTable dt3 = dgwItem.DataSource as DataTable;
-                        dt3.Rows.Add(iComp, sPre, sWCodeM, sWrapMain, sDuraW1, sWCodeS, sWrapSub, sDuraW2,"comp");
+                        dt3.Rows.Add(iComp, sPre, sWCodeM, sWrapMain, sDuraW1, sWCodeS, sWrapSub, sDuraW2,null);
 
                         //mesas / operadores
                         DataTable dt4 = AS4Logica.LineLayout(AS4);
@@ -486,11 +490,44 @@ namespace WOLayout
                             DataTable dtN = dgwTables.DataSource as DataTable;
 
                             iOut += iBasin + iPiggy;
-                            iMesas = (int)Math.Ceiling((decimal)iOut / _dMaxTable);
+                            iMesas = (int)Math.Ceiling((decimal)iOut / _iMaxTable);
                             int iOutOper = 1;
-                            //si tiene wrap ++
-                            if (AS4Logica.ComponentsLayerFold(AS4))
-                                iOutOper=2;
+
+                            if(iOut > 0)
+                            {
+                                //Outfolder config
+                                AS4.Layer = "F";
+                                DataTable dtO = AS4Logica.ComponentsLayerDetail(AS4);
+                                if (dtO.Rows.Count > 0)
+                                {
+                                    int iFold = 0;
+                                    int iLevel = 0;
+                                    string sLevelAnt = string.Empty;
+                                    for (int i = 0; i < dtO.Rows.Count; i++)
+                                    {
+                                        string sLevel = dtO.Rows[i][1].ToString();
+                                        string sFold = dtO.Rows[i][2].ToString();
+                                        if (!string.IsNullOrEmpty(sFold) && sFold != "0" && sFold != "7")
+                                            iFold++;
+
+                                        if (sLevel != sLevelAnt)
+                                            iLevel++;
+
+                                        sLevelAnt = sLevel;
+                                    }
+
+                                    _dOutAdd = _dOutAdd * iLevel; //Outfolder added time
+                                    dWrapTime += (double)_dOutAdd; //add outfolder time to wrap time
+                                    dgwItem[4, 0].Value = dWrapTime.ToString();
+                                                      
+                                    if (iFold > 0)
+                                        iOutOper = 2;
+
+                                    //if (AS4Logica.ComponentsLayerFold(AS4))
+                                    //    iOutOper = 2;
+                                }
+                            }
+
                             iOper = iMesas * iOutOper;
                             dtN.Rows.Add("Out", "OutFolder/Basin", iOut, iMesas, iOper);
                             iTotalMes += iMesas;
@@ -501,12 +538,12 @@ namespace WOLayout
                             _iOutO = iOper;
                             int outfoldero = iOper;
 
-                            decimal cM = Math.Ceiling((decimal)iSub / _dMaxTable);
+                            decimal cM = Math.Ceiling((decimal)iSub / _iMaxTable);
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
                             iOper = iMesas * _iEstSub;
-                            string sCol1 = ControlGridRows(dgwTables, "sub");
-                            string sCol2 = ControlGridRows(dgwTables, "sub_desc");
+                            string sCol1 = _gs.ControlGridRows(this.Name,dgwTables, "sub");
+                            string sCol2 = _gs.ControlGridRows(this.Name,dgwTables, "sub_desc");
                             dtN.Rows.Add(sCol1, sCol2,iSub, iMesas, iOper,"sub");
                             _iSub = iSub;
                             iTotalMes += iMesas;
@@ -515,10 +552,10 @@ namespace WOLayout
                             int subassym = iMesas;
                             int subassyo = iOper;
 
-                            iMesas = (int)Math.Ceiling((decimal)iMain / _dMaxTable);
+                            iMesas = (int)Math.Ceiling((decimal)iMain / _iMaxTable);
                             iOper = iMesas;
-                            sCol1 = ControlGridRows(dgwTables, "assy");
-                            sCol2 = ControlGridRows(dgwTables, "assy_desc");
+                            sCol1 = _gs.ControlGridRows(this.Name, dgwTables, "assy");
+                            sCol2 = _gs.ControlGridRows(this.Name, dgwTables, "assy_desc");
                             dtN.Rows.Add(sCol1, sCol2, iMain, iMesas, iOper,"assy");
                             _iMain = iMain;
                             iTotalMes += iMesas;
@@ -527,14 +564,14 @@ namespace WOLayout
                             int assym = iMesas;
                             int assyo = iOper;
 
-                            double dMax = (double)_dMaxTable;
+                            double dMax = (double)_iMaxTable;
                             double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
                             iMesas = (int)dW;
                             if (sWCodeM == "1" || sWCodeM == "8")
                                 iOper = iMesas;
                             else
                                 iOper = (iMesas * 2);
-                            sCol2 = ControlGridRows(dgwTables, "wrap1_desc");
+                            sCol2 = _gs.ControlGridRows(this.Name,dgwTables, "wrap1_desc");
                             dtN.Rows.Add("Wrap", sCol2,iWrap, iMesas, iOper,"wrap1");
 
                             iTotalMes += iMesas;
@@ -557,7 +594,7 @@ namespace WOLayout
                                 else
                                     iOper = (iMesas * 2);
 
-                                sCol2 = ControlGridRows(dgwTables, "wrap2_desc");
+                                sCol2 = _gs.ControlGridRows(this.Name,dgwTables, "wrap2_desc");
                                 dtN.Rows.Add("Wrap Sub", sCol2,iWrap, iMesas, iOper,"wrap2");
 
 
@@ -591,14 +628,14 @@ namespace WOLayout
                             //    int wrap2o = iOper;
                             //}
 
-                            sCol1 = ControlGridRows(dgwTables, "other");
-                            sCol2 = ControlGridRows(dgwTables, "deliver");
+                            sCol1 = _gs.ControlGridRows(this.Name, dgwTables, "other");
+                            sCol2 = _gs.ControlGridRows(this.Name, dgwTables, "deliver");
                             dtN.Rows.Add(sCol1, sCol2,0, 0, _iSurtidor,"deliver");
-                            sCol2 = ControlGridRows(dgwTables, "insp_sealer");
+                            sCol2 = _gs.ControlGridRows(this.Name, dgwTables, "insp_sealer");
                             dtN.Rows.Add(sCol1, sCol2,0, 0, _iInspSell, "insp_sealer");
-                            sCol2 = ControlGridRows(dgwTables, "sealer");
+                            sCol2 = _gs.ControlGridRows(this.Name, dgwTables, "sealer");
                             dtN.Rows.Add(sCol1, sCol2,0, 0, _iSellador,"sealer");
-                            sCol2 = ControlGridRows(dgwTables, "inspection");
+                            sCol2 = _gs.ControlGridRows(this.Name, dgwTables, "inspection");
                             dtN.Rows.Add(sCol1, sCol2,0, 0, _iInspeccion,"inspection");
                             iTotalOps += iO;
 
@@ -611,7 +648,7 @@ namespace WOLayout
                             if (wrap1m + wrap2m > 6)
                             {
                                 wrap2m = 6 - wrap1m;
-                                MessageBox.Show(ControlGridRows(txtWO, "err2"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show(_gs.ControlGridRows(this.Name, txtWO, "err2"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             
 
@@ -661,17 +698,20 @@ namespace WOLayout
                         {
                             
                         }
+
+                        btnTimer_Click(sender, e);
+
                        
                     }
                     else
                     {
-                        MessageBox.Show(ControlGridRows(txtWO, "err4"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(_gs.ControlGridRows(this.Name, txtWO, "err4"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Inicio();
                     }
                 }
                 else
                 {
-                    MessageBox.Show(ControlGridRows(txtWO, "err0"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(_gs.ControlGridRows(this.Name, txtWO, "err0"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Inicio();
                 }
                     
@@ -839,6 +879,12 @@ namespace WOLayout
                 int iSheet = 3;
                 if (_asFormat == "D")
                     iSheet = 5;
+                if (iSheets < iSheet)
+                {
+                    MessageBox.Show(_gs.MessageText(this.Name,btnExportFile.Name, "err5"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Cursor = Cursors.Default;
+                    return;
+                }
                 xlWorksheet = xlWorkbook.Sheets[iSheet];
 
                 Excel.Range xlRange = xlWorksheet.UsedRange;
@@ -948,7 +994,7 @@ namespace WOLayout
 
 
                     AS4.Item = sItem;
-                    AS4.MaxComp = _dMaxTable;
+                    AS4.MaxComp = _iMaxTable;
 
                     DataTable dt2 = AS4Logica.ComponentsLayer(AS4);
                     if (dt2.Rows.Count > 1)
@@ -1053,7 +1099,7 @@ namespace WOLayout
                             DataTable dtN = dgwTables.DataSource as DataTable;
 
                             iOut += iBasin + iPiggy;
-                            iMesas = (int)Math.Ceiling((decimal)iOut / _dMaxTable);
+                            iMesas = (int)Math.Ceiling((decimal)iOut / _iMaxTable);
                             int iOutOper = 1;
                             //si tiene wrap ++
                             if (AS4Logica.ComponentsLayerFold(AS4))
@@ -1066,7 +1112,7 @@ namespace WOLayout
                             _iOut = iOut;
 
 
-                            decimal cM = Math.Ceiling((decimal)iSub / _dMaxTable);
+                            decimal cM = Math.Ceiling((decimal)iSub / _iMaxTable);
                             iMesas = (int)cM;
                             iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
                             iOper = iMesas * _iEstSub;
@@ -1077,14 +1123,14 @@ namespace WOLayout
 
 
 
-                            iMesas = (int)Math.Ceiling((decimal)iMain / _dMaxTable);
+                            iMesas = (int)Math.Ceiling((decimal)iMain / _iMaxTable);
                             iOper = iMesas;
 
                             _iMain = iMain;
                             iTotalMes += iMesas;
                             iTotalOps += iOper;
 
-                            double dMax = (double)_dMaxTable;
+                            double dMax = (double)_iMaxTable;
                             double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
                             iMesas = (int)dW;
                             if (sWCodeM == "1" || sWCodeM == "8")
@@ -1158,7 +1204,7 @@ namespace WOLayout
 
             if (!ValidaAcceso("EXPF"))
             {
-                MessageBox.Show(MessageText(btnExportFile.Name, "rest02"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(_gs.MessageText(this.Name,btnExportFile.Name, "rest02"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
         
@@ -1557,9 +1603,9 @@ namespace WOLayout
             //Balance permitido = 20 (Estatico)
             double[,] ite = new double[40, 9];
 
-            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / (double)_dMaxTable);
+            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / (double)_iMaxTable);
             ite[0, 1] = ipODisponibles - ite[0, 0] - (_iOperNA+_iOutO);
-            ite[0, 2] =(_dAssyTime * (double)_dMaxTable);
+            ite[0, 2] =(_dAssyTime * (double)_iMaxTable);
             ite[0, 3] = ((_sDuraW1 + _sDuraW2 ) / (ite[0, 1] / (_iOWrap1))); //mas duracion wrab sub,  mas operadores por mesa
             ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
             ite[0, 5] = (ite[0, 4] < 20) ? 1 : 0;
@@ -1715,6 +1761,33 @@ namespace WOLayout
            
 
         }
+
+        private void btnTimer_Click(object sender, EventArgs e)
+        {
+            FormCollection fc = Application.OpenForms;
+            try
+            {
+                bool bForm = false;
+                foreach (Form frm in fc)
+                {
+                    //iterate through
+                    if (frm.Name == "wfTimer")
+                        bForm = true;
+                }
+
+                if(!bForm)
+                {
+                    wfTimer Timer = new wfTimer();
+                    Timer._dCycle = decimal.Parse(lblCycleTime.Text.ToString());
+                    Timer.Show();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
     }
     #endregion
 

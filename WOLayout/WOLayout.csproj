@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -126,6 +126,12 @@
     <Compile Include="wfOption.Designer.cs">
       <DependentUpon>wfOption.cs</DependentUpon>
     </Compile>
+    <Compile Include="wfTimer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfTimer.Designer.cs">
+      <DependentUpon>wfTimer.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="wfConfig.resx">
       <DependentUpon>wfConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="wfOption.resx">
       <DependentUpon>wfOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wfTimer.resx">
+      <DependentUpon>wfTimer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -176,6 +185,7 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\timer.png" />
     <None Include="Resources\excel_down_ico.png" />
     <None Include="Resources\excel_down.jpg" />
     <None Include="Resources\Yellow-Background-down1.jpg" />
