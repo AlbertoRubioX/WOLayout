@@ -103,10 +103,16 @@ namespace WOLayout
                     cbxLang.SelectedValue = data.Rows[0]["lenguage"].ToString();
                     txtMaxHC.Text = data.Rows[0]["max_hc"].ToString();
                     txtMinHC.Text = data.Rows[0]["min_hc"].ToString();
+                    txtOutAdd.Text = data.Rows[0]["out_addtime"].ToString();
+
                     if (data.Rows[0]["ind_boxhr"].ToString() == "1")
                         chbBoxHr.Checked = true;
                     else
-                        chbBoxHr.Checked = false;    
+                        chbBoxHr.Checked = false;
+                    if (data.Rows[0]["cycle_timer"].ToString() == "1")
+                        chbCycleTimer.Checked = true;
+                    else
+                        chbCycleTimer.Checked = false;
                 }
 
                 Globals gs = new Globals();
@@ -243,6 +249,9 @@ namespace WOLayout
                     sBoxHr = "1";
                 else
                     sBoxHr = "0";
+                decimal dOutAdd = 0;
+                if (!decimal.TryParse(txtOutAdd.Text.ToString(), out dOutAdd))
+                    dOutAdd = 0;
 
                 ConfigLogica conf = new ConfigLogica();
                 conf.Jornada = dJornada;
@@ -273,6 +282,11 @@ namespace WOLayout
                 conf.MaxHC = (int)dMaxHC;
                 conf.MinHC = (int)dMinHC;
                 conf.BoxHr = sBoxHr;
+                if (chbCycleTimer.Checked)
+                    conf.CycleTimer = "1";
+                else
+                    conf.CycleTimer = "0";
+                conf.OutAddTime = dOutAdd;
                 conf.Usuario = _lsUsuario;
 
                 if (ConfigLogica.GuardarSP(conf) > 0)
@@ -469,5 +483,7 @@ namespace WOLayout
             gs.ControlText(this.Name, tabPage1);
             gs.ControlText(this.Name, tabPage2);
         }
+
+       
     }
 }

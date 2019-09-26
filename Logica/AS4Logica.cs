@@ -14,6 +14,7 @@ namespace Logica
         public decimal Takt { get; set; }
         public decimal MaxComp { get; set; }
         public string Item { get; set; }
+        public string Layer { get; set; }
 
         public static DataTable WorkOrder(AS4Logica con)
         {
@@ -22,7 +23,7 @@ namespace Logica
             {
                 string sSql = "SELECT DISTINCT "+
                 "FMWOSUM.WOPN AS product,SF58041W.IMDSC as name, FMWOSUM.WOQTY AS box, " +
-                "FKITMSTR.IMSTCK AS kits,  " +
+                "FKITMSTR.IMSTCK AS kits,  " + 
                 @"FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS ""total_kits"", " +
                 "ROUND("+con.Takt+"*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS duration, "+
                 "'' as boxhr " +
@@ -142,6 +143,25 @@ namespace Logica
             }
 
             return false;
+        }
+        public static DataTable ComponentsLayerDetail(AS4Logica con)
+        {
+
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "SELECT NODE,LEVEL_CODE,FOLD FROM KBM400SQL.PACKDETAIL " +
+                        "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = " +
+                        "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +
+                        "WHERE DMRID = '" + con.Item + "') AND SUBSTR(LEVEL_CODE,1, 1) = '"+con.Layer+"' ORDER BY LEVEL_CODE";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
         }
 
         public static DataTable LineLayout(AS4Logica con)
