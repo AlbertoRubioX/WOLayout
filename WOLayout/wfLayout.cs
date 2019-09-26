@@ -91,19 +91,6 @@ namespace WOLayout
             tssUserName.Text = _lsUser;
             tssVersion.Text = "1.0.0.11";
             
-            //GET line from pc station
-            LineaRampeoLogica line = new LineaRampeoLogica();
-            line.Estacion = Globals._gsStation;
-            DataTable dtLR = LineaRampeoLogica.ConsultarEstacion(line);
-            _dRampeo = 0;
-            if (dtLR.Rows.Count > 0)
-            {
-                _sLine = dtLR.Rows[0]["line"].ToString();
-                _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
-                
-            }
-                
-
             Inicio();
 
             ConfigLogica conf = new ConfigLogica();
@@ -129,11 +116,27 @@ namespace WOLayout
             lblCycleTime.Text = _dTackTime.ToString();
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
-           
+            lblLine.Visible = false;
+            tsslRampeo.Visible = false;
+            tssRampeo.Visible = false;
+
+            //rampeo
+            //GET line from pc station
+            LineaRampeoLogica line = new LineaRampeoLogica();
+            line.Estacion = Globals._gsStation;
+            DataTable dtLR = LineaRampeoLogica.ConsultarEstacion(line);
+            _dRampeo = 0;
+            if (dtLR.Rows.Count > 0)
+            {
+                _sLine = dtLR.Rows[0]["line"].ToString();
+                _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
+
+            }
+
             if (!string.IsNullOrEmpty(_sLine) && _sLine != "0")
             {
-                lblLine.Text = lblLine.Text + " " + _sLine;
-                lblLine.Visible = true;
+                //lblLine.Text = lblLine.Text + " " + _sLine;
+                //lblLine.Visible = true;
                 tsslRampeo.Visible = true;
                 tssRampeo.Text  = Math.Round(_dRampeo,0).ToString() + " %";
                 tssRampeo.Visible = true;
@@ -754,7 +757,7 @@ namespace WOLayout
                         }
 
                         //Rampeo
-                        if(_dRampeo < 100)
+                        if(_dRampeo > 0 && _dRampeo < 100)
                             CalculaRampeo();
 
                         if(_sTimer == "1")
@@ -791,11 +794,11 @@ namespace WOLayout
 
                 if (_sIndBoxHr == "1")
                 {
-                    decimal dBoxHr = decimal.Parse(dgwWO[4, 0].Value.ToString());
+                    decimal dBoxHr = decimal.Parse(dgwWO[6, 0].Value.ToString());
                     if(dBoxHr > 0)
                     {
                         dRamp = dBoxHr * _dRampeo;
-                        dgwWO[4, 0].Value = Math.Round(dRamp, 2).ToString();
+                        dgwWO[6, 0].Value = Math.Round(dRamp, 2).ToString();
                     }
                     
                 }

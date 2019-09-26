@@ -23,7 +23,7 @@ namespace Logica
             {
                 string sSql = "SELECT DISTINCT "+
                 "FMWOSUM.WOPN AS product,SF58041W.IMDSC as name, FMWOSUM.WOQTY AS box, " +
-                "FKITMSTR.IMSTCK AS kits,  " +
+                "FKITMSTR.IMSTCK AS kits,  " + 
                 @"FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS ""total_kits"", " +
                 "ROUND("+con.Takt+"*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS duration, "+
                 "'' as boxhr " +
