@@ -1775,14 +1775,14 @@ namespace WOLayout
                 }
             }
 
-            // MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
-
+             MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
+            
             LimpiarLayout();
             panel9.BackgroundImage = Properties.Resources.Yellow_Background_down1;
             panel2.BackgroundImage = Properties.Resources.Yellow_Background_down1;
 
 
-            decimal sWODuracionVieja = (decimal)dgwWO[5, 0].Value;
+         //   decimal sWODuracionVieja = (decimal)dgwWO[5, 0].Value;
             double sWODuracionNueva = Math.Round((iCycleTimeLine * int.Parse(dgwWO[4, 0].Value.ToString())) / 60);
             dgwWO[5, 0].Value = sWODuracionNueva;
             int iOperadoresTotal = 0, iMesasTotal = 0;
@@ -1792,7 +1792,7 @@ namespace WOLayout
             int iOutFolderM = 0, iOutFolderO = 0, iWrapSubO = 0, iWrapSubM = 0, iWrapMainM = 0 ;
 
 
-            int iWrapMainO = (int)Math.Round((_sDuraW1 / (_sDuraW1 + _sDuraW2)) * iWrapO); //operadores wrapmain
+            int iWrapMainO = (int)Math.Round((_sDuraW1 / (_sDuraW1 + _sDuraW2)) * iWrapO, MidpointRounding.AwayFromZero); //operadores wrapmain
             iWrapSubO = iWrapO - iWrapMainO;
 
             for (int i = 0; i < dgwTables.RowCount; i++)
@@ -1844,7 +1844,7 @@ namespace WOLayout
                 {
                     //ComponentesWrapSub = dgwTables[2, i].Value.ToString();
                     // dgwTables.Rows.Remove(dgwTables.Rows[i]);
-                    iWrapSubM = (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2) ? (int)Math.Ceiling(iWrapMainO / 2.0) : iWrapSubO;
+                    iWrapSubM = (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2) ? (int)Math.Ceiling(iWrapSubO / 2.0) : iWrapSubO;
                     dgwTables[3, i].Value = iWrapSubM;
                     dgwTables[4, i].Value = iWrapSubO;
                 }
