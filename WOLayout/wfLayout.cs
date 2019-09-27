@@ -93,6 +93,42 @@ namespace WOLayout
             
             Inicio();
 
+
+            lblLine.Visible = false;
+            tsslRampeo.Visible = false;
+            tssRampeo.Visible = false;
+
+            //rampeo
+            //GET line from pc station
+            LineaRampeoLogica line = new LineaRampeoLogica();
+            line.Estacion = Globals._gsStation;
+            DataTable dtLR = LineaRampeoLogica.ConsultarEstacion(line);
+            _dRampeo = 0;
+            if (dtLR.Rows.Count > 0)
+            {
+                _sLine = dtLR.Rows[0]["line"].ToString();
+                _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
+
+            }
+
+            if (!string.IsNullOrEmpty(_sLine) && _sLine != "0")
+            {
+                lblLine.Text = lblLine.Text + _sLine;
+                lblLine.Visible = true;
+                tsslRampeo.Visible = true;
+                tssRampeo.Text = Math.Round(_dRampeo, 0).ToString() + " %";
+                tssRampeo.Visible = true;
+
+                _dRampeo = _dRampeo / 100;
+            }
+            else
+            {
+                lblLine.Visible = false;
+                tsslRampeo.Visible = false;
+                tssRampeo.Visible = false;
+            }
+
+
             ConfigLogica conf = new ConfigLogica();
             _dtConf = ConfigLogica.Consultar();
 
@@ -115,40 +151,6 @@ namespace WOLayout
             lblCycleTime.Text = "0";
             lblCycleTime.Text = _dTackTime.ToString();
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
-
-            lblLine.Visible = false;
-            tsslRampeo.Visible = false;
-            tssRampeo.Visible = false;
-
-            //rampeo
-            //GET line from pc station
-            LineaRampeoLogica line = new LineaRampeoLogica();
-            line.Estacion = Globals._gsStation;
-            DataTable dtLR = LineaRampeoLogica.ConsultarEstacion(line);
-            _dRampeo = 0;
-            if (dtLR.Rows.Count > 0)
-            {
-                _sLine = dtLR.Rows[0]["line"].ToString();
-                _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
-
-            }
-
-            if (!string.IsNullOrEmpty(_sLine) && _sLine != "0")
-            {
-                //lblLine.Text = lblLine.Text + " " + _sLine;
-                //lblLine.Visible = true;
-                tsslRampeo.Visible = true;
-                tssRampeo.Text  = Math.Round(_dRampeo,0).ToString() + " %";
-                tssRampeo.Visible = true;
-
-                _dRampeo = _dRampeo / 100;
-            }
-            else
-            {
-                lblLine.Visible = false;
-                tsslRampeo.Visible =false;
-                tssRampeo.Visible = false;
-            }
 
             _bModoManual = false;
 
