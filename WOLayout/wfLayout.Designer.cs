@@ -43,9 +43,12 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssUserName = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslRampeo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tssRampeo = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnConfig = new System.Windows.Forms.ToolStripButton();
@@ -55,6 +58,7 @@
             this.btnLanguage = new System.Windows.Forms.ToolStripButton();
             this.btnTimer = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblLayout = new System.Windows.Forms.Label();
             this.lblTopTitle1 = new System.Windows.Forms.Label();
@@ -62,6 +66,10 @@
             this.ptbLogo = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Panel3 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblConveyorSpeed = new System.Windows.Forms.Label();
             this.WSO16 = new System.Windows.Forms.PictureBox();
             this.WSO15 = new System.Windows.Forms.PictureBox();
             this.WSO14 = new System.Windows.Forms.PictureBox();
@@ -149,6 +157,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblLine = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -169,11 +178,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblLine = new System.Windows.Forms.Label();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslRampeo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tssRampeo = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -181,6 +185,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.Panel3.SuspendLayout();
+            this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WSO16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WSO15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WSO14)).BeginInit();
@@ -296,7 +301,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 937);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1429, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1540, 25);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -323,13 +328,13 @@
             this.tssUserName.Size = new System.Drawing.Size(79, 20);
             this.tssUserName.Text = "user_name";
             // 
-            // toolStripStatusLabel3
+            // toolStripStatusLabel4
             // 
-            this.toolStripStatusLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(30, 20);
-            this.toolStripStatusLabel3.Text = "  |  ";
+            this.toolStripStatusLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(30, 20);
+            this.toolStripStatusLabel4.Text = "  |  ";
             // 
             // tsslVersion
             // 
@@ -346,6 +351,31 @@
             this.tssVersion.Size = new System.Drawing.Size(57, 20);
             this.tssVersion.Text = "1.0.0.0";
             // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(30, 20);
+            this.toolStripStatusLabel3.Text = "  |  ";
+            // 
+            // tsslRampeo
+            // 
+            this.tsslRampeo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsslRampeo.Name = "tsslRampeo";
+            this.tsslRampeo.Size = new System.Drawing.Size(222, 20);
+            this.tsslRampeo.Text = "Factor de Ajuste de Habilidad :";
+            this.tsslRampeo.Visible = false;
+            // 
+            // tssRampeo
+            // 
+            this.tssRampeo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tssRampeo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.tssRampeo.Name = "tssRampeo";
+            this.tssRampeo.Size = new System.Drawing.Size(53, 20);
+            this.tssRampeo.Text = "100 %";
+            this.tssRampeo.Visible = false;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -359,7 +389,7 @@
             this.btnTimer});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1429, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1540, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -435,6 +465,11 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.Transparent;
@@ -446,7 +481,7 @@
             this.panel9.Controls.Add(this.panel1);
             this.panel9.Location = new System.Drawing.Point(12, 30);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1406, 901);
+            this.panel9.Size = new System.Drawing.Size(1516, 901);
             this.panel9.TabIndex = 3;
             // 
             // lblLayout
@@ -485,7 +520,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1405, 863);
+            this.panel1.Size = new System.Drawing.Size(1516, 863);
             this.panel1.TabIndex = 0;
             // 
             // ptbLogo
@@ -504,7 +539,7 @@
             this.groupBox4.Controls.Add(this.Panel3);
             this.groupBox4.Location = new System.Drawing.Point(879, 1);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(513, 852);
+            this.groupBox4.Size = new System.Drawing.Size(616, 852);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             // 
@@ -512,6 +547,8 @@
             // 
             this.Panel3.BackColor = System.Drawing.Color.White;
             this.Panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Panel3.Controls.Add(this.label6);
+            this.Panel3.Controls.Add(this.panel10);
             this.Panel3.Controls.Add(this.WSO16);
             this.Panel3.Controls.Add(this.WSO15);
             this.Panel3.Controls.Add(this.WSO14);
@@ -597,16 +634,62 @@
             this.Panel3.Controls.Add(this.E1);
             this.Panel3.Controls.Add(this.E5);
             this.Panel3.Controls.Add(this.pictureBox1);
-            this.Panel3.Location = new System.Drawing.Point(65, 12);
+            this.Panel3.Location = new System.Drawing.Point(108, 12);
             this.Panel3.Margin = new System.Windows.Forms.Padding(4);
             this.Panel3.Name = "Panel3";
-            this.Panel3.Size = new System.Drawing.Size(386, 818);
+            this.Panel3.Size = new System.Drawing.Size(498, 833);
             this.Panel3.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("magv5", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(264, 761);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(161, 14);
+            this.label6.TabIndex = 189;
+            this.label6.Text = "CONVEYOR SPEED";
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.Green;
+            this.panel10.Controls.Add(this.label5);
+            this.panel10.Controls.Add(this.lblConveyorSpeed);
+            this.panel10.Location = new System.Drawing.Point(244, 777);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(199, 47);
+            this.panel10.TabIndex = 187;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("magv5", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Lime;
+            this.label5.Location = new System.Drawing.Point(135, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 13);
+            this.label5.TabIndex = 189;
+            this.label5.Text = "HERTZ";
+            // 
+            // lblConveyorSpeed
+            // 
+            this.lblConveyorSpeed.AutoSize = true;
+            this.lblConveyorSpeed.BackColor = System.Drawing.Color.Transparent;
+            this.lblConveyorSpeed.Font = new System.Drawing.Font("magv5", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConveyorSpeed.ForeColor = System.Drawing.Color.Lime;
+            this.lblConveyorSpeed.Location = new System.Drawing.Point(11, 11);
+            this.lblConveyorSpeed.Name = "lblConveyorSpeed";
+            this.lblConveyorSpeed.Size = new System.Drawing.Size(127, 28);
+            this.lblConveyorSpeed.TabIndex = 188;
+            this.lblConveyorSpeed.Text = "00.00";
             // 
             // WSO16
             // 
             this.WSO16.Image = global::WOLayout.Properties.Resources.operador;
-            this.WSO16.Location = new System.Drawing.Point(327, 700);
+            this.WSO16.Location = new System.Drawing.Point(327, 684);
             this.WSO16.Name = "WSO16";
             this.WSO16.Size = new System.Drawing.Size(28, 27);
             this.WSO16.TabIndex = 186;
@@ -615,7 +698,7 @@
             // WSO15
             // 
             this.WSO15.Image = global::WOLayout.Properties.Resources.operador;
-            this.WSO15.Location = new System.Drawing.Point(284, 700);
+            this.WSO15.Location = new System.Drawing.Point(284, 684);
             this.WSO15.Name = "WSO15";
             this.WSO15.Size = new System.Drawing.Size(28, 27);
             this.WSO15.TabIndex = 185;
@@ -624,7 +707,7 @@
             // WSO14
             // 
             this.WSO14.Image = global::WOLayout.Properties.Resources.operador;
-            this.WSO14.Location = new System.Drawing.Point(327, 618);
+            this.WSO14.Location = new System.Drawing.Point(327, 608);
             this.WSO14.Name = "WSO14";
             this.WSO14.Size = new System.Drawing.Size(28, 27);
             this.WSO14.TabIndex = 184;
@@ -633,7 +716,7 @@
             // WSO13
             // 
             this.WSO13.Image = global::WOLayout.Properties.Resources.operador;
-            this.WSO13.Location = new System.Drawing.Point(284, 618);
+            this.WSO13.Location = new System.Drawing.Point(284, 608);
             this.WSO13.Name = "WSO13";
             this.WSO13.Size = new System.Drawing.Size(28, 27);
             this.WSO13.TabIndex = 183;
@@ -750,7 +833,7 @@
             // WS8
             // 
             this.WS8.Image = global::WOLayout.Properties.Resources.w2;
-            this.WS8.Location = new System.Drawing.Point(276, 725);
+            this.WS8.Location = new System.Drawing.Point(276, 709);
             this.WS8.Name = "WS8";
             this.WS8.Size = new System.Drawing.Size(92, 28);
             this.WS8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -760,7 +843,7 @@
             // WS7
             // 
             this.WS7.Image = global::WOLayout.Properties.Resources.w2;
-            this.WS7.Location = new System.Drawing.Point(276, 643);
+            this.WS7.Location = new System.Drawing.Point(276, 633);
             this.WS7.Name = "WS7";
             this.WS7.Size = new System.Drawing.Size(92, 28);
             this.WS7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1412,6 +1495,20 @@
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             // 
+            // lblLine
+            // 
+            this.lblLine.AutoSize = true;
+            this.lblLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLine.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
+            this.lblLine.Location = new System.Drawing.Point(97, 469);
+            this.lblLine.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLine.Name = "lblLine";
+            this.lblLine.Size = new System.Drawing.Size(137, 52);
+            this.lblLine.TabIndex = 11;
+            this.lblLine.Text = "LINE ";
+            this.lblLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -1755,57 +1852,13 @@
             this.dgwItem.TabIndex = 3;
             this.dgwItem.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwItem_CellFormatting);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // lblLine
-            // 
-            this.lblLine.AutoSize = true;
-            this.lblLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLine.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.lblLine.Location = new System.Drawing.Point(97, 469);
-            this.lblLine.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLine.Name = "lblLine";
-            this.lblLine.Size = new System.Drawing.Size(137, 52);
-            this.lblLine.TabIndex = 11;
-            this.lblLine.Text = "LINE ";
-            this.lblLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(30, 20);
-            this.toolStripStatusLabel4.Text = "  |  ";
-            // 
-            // tsslRampeo
-            // 
-            this.tsslRampeo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.tsslRampeo.Name = "tsslRampeo";
-            this.tsslRampeo.Size = new System.Drawing.Size(222, 20);
-            this.tsslRampeo.Text = "Factor de Ajuste de Habilidad :";
-            this.tsslRampeo.Visible = false;
-            // 
-            // tssRampeo
-            // 
-            this.tssRampeo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.tssRampeo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
-            this.tssRampeo.Name = "tssRampeo";
-            this.tssRampeo.Size = new System.Drawing.Size(53, 20);
-            this.tssRampeo.Text = "100 %";
-            this.tssRampeo.Visible = false;
-            // 
             // wfLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1429, 962);
+            this.ClientSize = new System.Drawing.Size(1540, 962);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
@@ -1828,6 +1881,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ptbLogo)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.Panel3.ResumeLayout(false);
+            this.Panel3.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WSO16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WSO15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WSO14)).EndInit();
@@ -2072,6 +2128,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel tsslRampeo;
         private System.Windows.Forms.ToolStripStatusLabel tssRampeo;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblConveyorSpeed;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -187,6 +187,7 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\9917685723_6f2e1826e5_b.jpg" />
     <None Include="Resources\timer.png" />
     <None Include="Resources\excel_down_ico.png" />
     <None Include="Resources\excel_down.jpg" />

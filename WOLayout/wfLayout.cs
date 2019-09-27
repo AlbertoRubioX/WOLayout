@@ -764,6 +764,10 @@ namespace WOLayout
                             btnTimer_Click(sender, e);
 
                         timer1.Start();
+
+                        //Conveyor Speed
+                        CalculaConveyorSpeed();
+
                     }
                     else
                     {
@@ -808,6 +812,11 @@ namespace WOLayout
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void CalculaConveyorSpeed()
+        {
+            lblConveyorSpeed.Text = Math.Round((210.2 / Math.Pow(double.Parse(lblCycleTime.Text), 0.998)), 2).ToString();
         }
         #endregion
 
@@ -1775,7 +1784,7 @@ namespace WOLayout
                 }
             }
 
-             MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
+           //  MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
             
             LimpiarLayout();
             panel9.BackgroundImage = Properties.Resources.Yellow_Background_down1;
