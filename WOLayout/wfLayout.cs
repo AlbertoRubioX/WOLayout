@@ -135,8 +135,8 @@ namespace WOLayout
 
             if (!string.IsNullOrEmpty(_sLine) && _sLine != "0")
             {
-                //lblLine.Text = lblLine.Text + " " + _sLine;
-                //lblLine.Visible = true;
+                lblLine.Text = "L - " + _sLine;
+                lblLine.Visible = true;
                 tsslRampeo.Visible = true;
                 tssRampeo.Text  = Math.Round(_dRampeo,0).ToString() + " %";
                 tssRampeo.Visible = true;
@@ -800,9 +800,7 @@ namespace WOLayout
                         dRamp = dBoxHr * _dRampeo;
                         dgwWO[6, 0].Value = Math.Round(dRamp, 2).ToString();
                     }
-                    
                 }
-                
             }
             catch (Exception ex)
             {
@@ -983,8 +981,13 @@ namespace WOLayout
 
                 int iSheets = xlWorkbook.Sheets.Count;
                 int iSheet = 3;
+
+                if (_asFormat == "K")
+                    iSheet = 2;
+
                 if (_asFormat == "D")
                     iSheet = 5;
+
                 if (iSheets < iSheet)
                 {
                     MessageBox.Show(_gs.MessageText(this.Name,btnExportFile.Name, "err5"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1018,37 +1021,46 @@ namespace WOLayout
                     if (string.IsNullOrEmpty(sValue))
                         continue;
 
-                    if(_asFormat == "W")
+                    if (_asFormat == "K")
                     {
-                        decimal dWO = 0;
-                        if (!decimal.TryParse(sValue, out dWO))
-                        {
-                            sValue = string.Empty;
+                        if (xlRange.Cells[i, 4].Value2 != null)
                             continue;
-                        }
-
-                        if (xlRange.Cells[i, 8].Value2 != null)
-                            continue;
-
-                        if (sValue.Length < 7)
-                        {
-                            sValue = sValue.PadLeft(7, '0');
-                            
-                        }
                     }
                     else
                     {
-                        
-                        if (xlRange.Cells[i, 2].Value2 != null)
-                            continue;
+                        if (_asFormat == "W")
+                        {
+                            decimal dWO = 0;
+                            if (!decimal.TryParse(sValue, out dWO))
+                            {
+                                sValue = string.Empty;
+                                continue;
+                            }
 
-                        if (sValue.IndexOf("DYN") == -1)
+                            if (xlRange.Cells[i, 8].Value2 != null)
+                                continue;
+
+                            if (sValue.Length < 7)
+                            {
+                                sValue = sValue.PadLeft(7, '0');
+
+                            }
+                        }
+                        else
                         {
 
-                            sValue = string.Empty;
-                            continue;
+                            if (xlRange.Cells[i, 2].Value2 != null)
+                                continue;
+
+                            if (sValue.IndexOf("DYN") == -1)
+                            {
+
+                                sValue = string.Empty;
+                                continue;
+                            }
                         }
                     }
+                    
 
                     int iTotalOps = 0;
                     int iTotalMes = 0;
@@ -1058,6 +1070,8 @@ namespace WOLayout
 
                     string sItem = string.Empty;
                     string sKits = string.Empty;
+                    string sQty = string.Empty;
+                    decimal dQty = 0;
 
                     if(_asFormat == "W")
                     {
@@ -1086,12 +1100,33 @@ namespace WOLayout
                     else
                     {
                         AS4.Item = sValue;
-                        DataTable dt = AS4Logica.PartKits(AS4);
-                        if (dt.Rows.Count > 0)
+
+                        if (_asFormat == "K")
                         {
-                            sItem = sValue;
-                            sKits = dt.Rows[0][0].ToString();
-                            xlRange.Cells[i, 2].Value2 = sKits;
+                            DataTable dt = AS4Logica.PartKitsComp(AS4);
+                            if (dt.Rows.Count > 0)
+                            {
+                                sItem = sValue;
+                                sKits = dt.Rows[0][0].ToString();
+                                sQty = dt.Rows[0][1].ToString();
+                                if (!decimal.TryParse(sQty, out dQty))
+                                    dQty = 0;
+                                    
+                                xlRange.Cells[i, 4].Value2 = sKits;
+                                xlRange.Cells[i, 6].Value2 = dQty > 0 ? "Y":"N";
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            
+                            DataTable dt = AS4Logica.PartKits(AS4);
+                            if (dt.Rows.Count > 0)
+                            {
+                                sItem = sValue;
+                                sKits = dt.Rows[0][0].ToString();
+                                xlRange.Cells[i, 2].Value2 = sKits;
+                            }
                         }
                     }
 

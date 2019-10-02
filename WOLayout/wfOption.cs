@@ -34,5 +34,11 @@ namespace WOLayout
         {
             btnWO.Focus();
         }
+
+        private void btnKIT_Click(object sender, EventArgs e)
+        {
+            _lsOption = "K";
+            Close();
+        }
     }
 }

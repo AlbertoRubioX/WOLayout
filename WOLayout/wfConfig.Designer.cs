@@ -93,9 +93,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblLabor = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chbCycleTimer = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chbBoxHr = new System.Windows.Forms.CheckBox();
+            this.chbCycleTimer = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbxLang = new System.Windows.Forms.ComboBox();
             this.lblLanguage = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -118,7 +119,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -129,11 +130,11 @@
             this.gbxGoal.SuspendLayout();
             this.gbxLabor.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -178,6 +179,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(8, 5);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
@@ -905,15 +907,27 @@
             this.tabPage2.Text = "Wrapping Time";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // groupBox3
             // 
-            this.groupBox1.Controls.Add(this.cbxLang);
-            this.groupBox1.Controls.Add(this.lblLanguage);
-            this.groupBox1.Location = new System.Drawing.Point(23, 224);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(828, 67);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
+            this.groupBox3.Controls.Add(this.chbBoxHr);
+            this.groupBox3.Controls.Add(this.chbCycleTimer);
+            this.groupBox3.Location = new System.Drawing.Point(23, 297);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(828, 68);
+            this.groupBox3.TabIndex = 14;
+            this.groupBox3.TabStop = false;
+            // 
+            // chbBoxHr
+            // 
+            this.chbBoxHr.AutoSize = true;
+            this.chbBoxHr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbBoxHr.Location = new System.Drawing.Point(38, 26);
+            this.chbBoxHr.Name = "chbBoxHr";
+            this.chbBoxHr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chbBoxHr.Size = new System.Drawing.Size(199, 21);
+            this.chbBoxHr.TabIndex = 14;
+            this.chbBoxHr.Text = "Mostrar Cajas por Hora";
+            this.chbBoxHr.UseVisualStyleBackColor = true;
             // 
             // chbCycleTimer
             // 
@@ -927,17 +941,15 @@
             this.chbCycleTimer.Text = "Mostrar Cronometro de Cycle Time";
             this.chbCycleTimer.UseVisualStyleBackColor = true;
             // 
-            // chbBoxHr
+            // groupBox1
             // 
-            this.chbBoxHr.AutoSize = true;
-            this.chbBoxHr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbBoxHr.Location = new System.Drawing.Point(38, 26);
-            this.chbBoxHr.Name = "chbBoxHr";
-            this.chbBoxHr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chbBoxHr.Size = new System.Drawing.Size(199, 21);
-            this.chbBoxHr.TabIndex = 14;
-            this.chbBoxHr.Text = "Mostrar Cajas por Hora";
-            this.chbBoxHr.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.cbxLang);
+            this.groupBox1.Controls.Add(this.lblLanguage);
+            this.groupBox1.Location = new System.Drawing.Point(23, 224);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(828, 67);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
             // 
             // cbxLang
             // 
@@ -1185,15 +1197,15 @@
             this.tssVersion.Size = new System.Drawing.Size(177, 20);
             this.tssVersion.Text = "Configuration Parameters";
             // 
-            // groupBox3
+            // tabPage3
             // 
-            this.groupBox3.Controls.Add(this.chbBoxHr);
-            this.groupBox3.Controls.Add(this.chbCycleTimer);
-            this.groupBox3.Location = new System.Drawing.Point(23, 297);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(828, 68);
-            this.groupBox3.TabIndex = 14;
-            this.groupBox3.TabStop = false;
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(876, 468);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Line Setup";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // wfConfig
             // 
@@ -1228,6 +1240,8 @@
             this.gbxLabor.ResumeLayout(false);
             this.gbxLabor.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -1235,8 +1249,6 @@
             this.panel1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1334,5 +1346,6 @@
         private System.Windows.Forms.Label lblOutAdd;
         private System.Windows.Forms.CheckBox chbCycleTimer;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }

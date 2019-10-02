@@ -55,6 +55,25 @@ namespace Logica
 
             return datos;
         }
+        public static DataTable PartKitsComp(AS4Logica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "SELECT F.IMSTCK ,(SELECT QTY FROM  KBM400SQL.PACKDETAIL WHERE DMRID='"+con.Item+ "' AND NODE='03883' AND PACKDRAW_REV = (SELECT MAX(PACKDRAW_REV) FROM KBM400SQL.PACKDETAIL WHERE DMRID='"+con.Item+"')) AS QTY " +
+                "FROM B20E386T.KBM400MFG.FKITMSTR F " +
+                "INNER JOIN  KBM400SQL.PACKDETAIL P ON F.IMPN = P.DMRID " +
+                "WHERE F.IMPN = '"+con.Item+"' " + //AND F.IMCO = '686' 
+                "GROUP BY F.IMSTCK ";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
         public static DataTable TableDescrip(AS4Logica con)
         {
             DataTable datos = new DataTable();
