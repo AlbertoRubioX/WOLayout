@@ -148,8 +148,8 @@
   <data name="file" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\file.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="excel_down_ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\excel_down_ico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Blue-Background-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Blue-Background-down.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ensamble" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ensamble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,8 +160,8 @@
   <data name="of" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\of.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bt_exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bt_exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="excel_down_ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\excel_down_ico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="w2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\w2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,19 +172,22 @@
   <data name="operador" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\operador.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="timer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\timer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Blue-Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Blue-Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOG_Medline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LOG_Medline.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Blue-Background-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Blue-Background-down.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wrap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wrap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="timer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\timer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bt_exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bt_exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOG_Medline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LOG_Medline.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="9917685723_6f2e1826e5_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\9917685723_6f2e1826e5_b.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

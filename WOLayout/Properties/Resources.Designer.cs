@@ -63,6 +63,16 @@ namespace WOLayout.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _9917685723_6f2e1826e5_b {
+            get {
+                object obj = ResourceManager.GetObject("9917685723_6f2e1826e5_b", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Blue_Background {
             get {
                 object obj = ResourceManager.GetObject("Blue-Background", resourceCulture);

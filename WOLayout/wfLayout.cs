@@ -93,28 +93,6 @@ namespace WOLayout
             
             Inicio();
 
-            ConfigLogica conf = new ConfigLogica();
-            _dtConf = ConfigLogica.Consultar();
-
-            if (!string.IsNullOrEmpty(_dtConf.Rows[0]["lenguage"].ToString()) && _dtConf.Rows[0]["lenguage"].ToString() != Globals._gsLang)
-            {
-                Globals._gsLang = _dtConf.Rows[0]["lenguage"].ToString();
-                ChangeLen();
-            }
-
-            txtWO.Text = "0000000";
-            txtWO.SelectAll();
-        }
-      
-        private void Inicio()
-        {
-            txtWO.Clear();
-            panel9.BackgroundImage = Properties.Resources.Blue_Background_down;
-            panel2.BackgroundImage = Properties.Resources.Blue_Background_down;
-
-            lblCycleTime.Text = "0";
-            lblCycleTime.Text = _dTackTime.ToString();
-            lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
             lblLine.Visible = false;
             tsslRampeo.Visible = false;
@@ -138,7 +116,7 @@ namespace WOLayout
                 lblLine.Text = "L - " + _sLine;
                 lblLine.Visible = true;
                 tsslRampeo.Visible = true;
-                tssRampeo.Text  = Math.Round(_dRampeo,0).ToString() + " %";
+                tssRampeo.Text = Math.Round(_dRampeo, 0).ToString() + " %";
                 tssRampeo.Visible = true;
 
                 _dRampeo = _dRampeo / 100;
@@ -146,9 +124,33 @@ namespace WOLayout
             else
             {
                 lblLine.Visible = false;
-                tsslRampeo.Visible =false;
+                tsslRampeo.Visible = false;
                 tssRampeo.Visible = false;
             }
+
+
+            ConfigLogica conf = new ConfigLogica();
+            _dtConf = ConfigLogica.Consultar();
+
+            if (!string.IsNullOrEmpty(_dtConf.Rows[0]["lenguage"].ToString()) && _dtConf.Rows[0]["lenguage"].ToString() != Globals._gsLang)
+            {
+                Globals._gsLang = _dtConf.Rows[0]["lenguage"].ToString();
+                ChangeLen();
+            }
+
+            txtWO.Text = "0000000";
+            txtWO.SelectAll();
+        }
+      
+        private void Inicio()
+        {
+            txtWO.Clear();
+            panel9.BackgroundImage = Properties.Resources.Blue_Background_down;
+            panel2.BackgroundImage = Properties.Resources.Blue_Background_down;
+
+            lblCycleTime.Text = "0";
+            lblCycleTime.Text = _dTackTime.ToString();
+            lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
             _bModoManual = false;
 
@@ -764,6 +766,10 @@ namespace WOLayout
                             btnTimer_Click(sender, e);
 
                         timer1.Start();
+
+                        //Conveyor Speed
+                        CalculaConveyorSpeed();
+
                     }
                     else
                     {
@@ -806,6 +812,11 @@ namespace WOLayout
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void CalculaConveyorSpeed()
+        {
+            lblConveyorSpeed.Text = Math.Round((210.2 / Math.Pow(double.Parse(lblCycleTime.Text), 0.998)), 2).ToString();
         }
         #endregion
 
@@ -1614,7 +1625,10 @@ namespace WOLayout
                 }
             }
 
-
+            if(nummoperadores == (nummesas *2) - 1)
+            {
+                operadores[((8+nummesas) * 2) + 1].Visible = false;
+            }
         }
        
         public void llenarensamble(int emesas, int eoperadores, int smesas, int soperadores, bool manual)
@@ -1720,17 +1734,28 @@ namespace WOLayout
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
-                if (piOFOperadores == piOFMesas * 2)
+                if (piOFOperadores == piOFMesas * 2 || piOFOperadores == (piOFMesas * 2) - 1)
                     operadores[(i * 2) + 1].Visible = true;
+            }
+
+            if (piOFOperadores == (piOFMesas * 2) - 1)
+            {
+                operadores[((14 + piOFMesas) * 2) + 1].Visible = false;
             }
 
             for (int i = 20 + piOFMesas ; i < 20 + piOFMesas + piWSMesas; i++)
             {
                 mesas[i].Visible = true;
                 operadores[i * 2].Visible = true;
-                if (piWSOperadores == piWSMesas * 2)
+                if (piWSOperadores == piWSMesas * 2 ||  piWSOperadores == (piWSMesas * 2) - 1)
                     operadores[(i * 2) + 1].Visible = true;
             }
+
+            if (piWSOperadores == (piWSMesas * 2) - 1)
+            {
+                operadores[((19 + piOFMesas + piWSMesas) * 2) + 1].Visible = false;
+            }
+
 
         }
 
@@ -1781,8 +1806,8 @@ namespace WOLayout
             }
             
             double dDeltaMenor = 1000;
-            int iAssyO=0;
-            int iWrapO=0;
+            int iAssyO=0; //Operadores en Ensamble total
+            int iWrapO=0;  //Operadores en Wrap total
             double iCycleTimeLine=0;
 
             for (int i = 1; i < 40; i++)
@@ -1796,22 +1821,25 @@ namespace WOLayout
                 }
             }
 
-            // MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
-
+           //  MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
+            
             LimpiarLayout();
             panel9.BackgroundImage = Properties.Resources.Yellow_Background_down1;
             panel2.BackgroundImage = Properties.Resources.Yellow_Background_down1;
 
 
-            decimal sWODuracionVieja = (decimal)dgwWO[5, 0].Value;
+         //   decimal sWODuracionVieja = (decimal)dgwWO[5, 0].Value;
             double sWODuracionNueva = Math.Round((iCycleTimeLine * int.Parse(dgwWO[4, 0].Value.ToString())) / 60);
             dgwWO[5, 0].Value = sWODuracionNueva;
             int iOperadoresTotal = 0, iMesasTotal = 0;
 
             //Actualizar tabla dgwTables
             string ComponentesSubensamble = "0";
-            string ComponentesWrapSub = "0";
-            int iOutFolderM = 0, iOutFolderO = 0, iWrapSubO = 0, iWrapSubM = 0;
+            int iOutFolderM = 0, iOutFolderO = 0, iWrapSubO = 0, iWrapSubM = 0, iWrapMainM = 0 ;
+
+
+            int iWrapMainO = (int)Math.Round((_sDuraW1 / (_sDuraW1 + _sDuraW2)) * iWrapO, MidpointRounding.AwayFromZero); //operadores wrapmain
+            iWrapSubO = iWrapO - iWrapMainO;
 
             for (int i = 0; i < dgwTables.RowCount; i++)
             {
@@ -1852,23 +1880,28 @@ namespace WOLayout
                 if (dgwTables[0, i].Value.ToString() == "Wrap")
                 {
                     //si el #operadores calculado anteriormente es el doble del #mesas el nuevo generado tambien sera el doble
-                    dgwTables[3, i].Value = (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2) ? Math.Ceiling(iWrapO / 2.0) : iWrapO;
-                    dgwTables[4, i].Value = iWrapO;
+
+                    iWrapMainM = (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2) ? (int)Math.Ceiling(iWrapMainO / 2.0) : iWrapMainO;
+                    dgwTables[3, i].Value = iWrapMainM;
+                    dgwTables[4, i].Value = iWrapMainO;
                 }
 
                 if (dgwTables[0, i].Value.ToString() == "Wrap Sub")
                 {
-                    ComponentesWrapSub = dgwTables[2, i].Value.ToString();
-                    dgwTables.Rows.Remove(dgwTables.Rows[i]);
+                    //ComponentesWrapSub = dgwTables[2, i].Value.ToString();
+                    // dgwTables.Rows.Remove(dgwTables.Rows[i]);
+                    iWrapSubM = (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2) ? (int)Math.Ceiling(iWrapSubO / 2.0) : iWrapSubO;
+                    dgwTables[3, i].Value = iWrapSubM;
+                    dgwTables[4, i].Value = iWrapSubO;
                 }
             }
 
             for (int i = 0; i < dgwTables.RowCount; i++)
-            {
+            {/*
                 if (dgwTables[0, i].Value.ToString() == "Wrap")
                 {
                     //sumando los componentes de sub previamente optenidos
-                    dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesWrapSub);
+                  //  dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesWrapSub);
                     //si se pasa el numero de wrap total dentro de wrap llenar las mesas de wrap y poner los sobrantes en wrapsub
                     if (Int32.Parse(dgwTables[3, i].Value.ToString()) > 6)
                     {
@@ -1877,20 +1910,22 @@ namespace WOLayout
                         iWrapSubO = iWrapO - 12;
                     }
                     else
-                        llenarwrap(Int32.Parse(dgwTables[3, i].Value.ToString()), iWrapO);
-                }
+                        llenarwrap(Int32.Parse(dgwTables[3, i].Value.ToString()), iWrapMainO);
+                }*/
 
                     iOperadoresTotal = iOperadoresTotal + Int32.Parse(dgwTables[4, i].Value.ToString());
                 iMesasTotal = iMesasTotal + Int32.Parse(dgwTables[3, i].Value.ToString());
             }
 
+
             lblOper.Text = iOperadoresTotal.ToString();
             lblMesas.Text = iMesasTotal.ToString();
 
-
+            //Dibujar Layout con resultados finales
             llenarensamble(iAssyO, iAssyO, 0, 0, true);
-
+            llenarwrap(iWrapMainM, iWrapMainO);
             llenarOFWS(iOutFolderM, iOutFolderO, iWrapSubM, iWrapSubO);
+
             lblCycleTime.Text = Math.Round(iCycleTimeLine, 3).ToString();
             if(_sIndBoxHr == "1")
             {
