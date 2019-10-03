@@ -18,6 +18,8 @@ namespace WOLayout
         private string _lsCajas;
         private string _lsKitCaja;
         public string _lsLen;
+        Globals _gs = new Globals();
+
         public wfConfig()
         {
             InitializeComponent();
@@ -115,9 +117,15 @@ namespace WOLayout
                         chbCycleTimer.Checked = false;
                 }
 
+                dgwLine.DataSource = LineaRampeoLogica.Vista();
+                CargarColumnas();
+                _gs.ControlGridText(this.Name, dgwLine);
+
                 Globals gs = new Globals();
                 gs.ControlText(this.Name,tabPage1);
                 gs.ControlText(this.Name,tabPage2);
+                gs.ControlText(this.Name, tabPage3);
+                
 
                 txtJornada.Focus();
             }
@@ -125,6 +133,34 @@ namespace WOLayout
             {
                 MessageBox.Show("Error " + ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void CargarColumnas()
+        {
+            if (dgwLine.Rows.Count == 0)
+            {
+                DataTable dtNew = new DataTable("Line");
+                dtNew.Columns.Add("Station", typeof(string));
+                dtNew.Columns.Add("Line", typeof(string));
+                dtNew.Columns.Add("Factor", typeof(decimal));
+                dgwLine.DataSource = dtNew;
+            }
+
+            //dgwLine.Columns[0].Width = ColumnWith(dgwLine, 20);
+            dgwLine.Columns[2].DefaultCellStyle.Format = "N2";
+            dgwLine.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+        }
+        private int ColumnWith(DataGridView _dtGrid, double _dColWith)
+        {
+
+            double dW = _dtGrid.Width - 10;
+            double dTam = _dColWith;
+            double dPor = dTam / 100;
+            dTam = dW * dPor;
+            dTam = Math.Truncate(dTam);
+
+            return Convert.ToInt32(dTam);
         }
 
         //private void ControlText(Control _control)
@@ -484,6 +520,57 @@ namespace WOLayout
             gs.ControlText(this.Name, tabPage2);
         }
 
-       
+        private void btSave_Click(object sender, EventArgs e)
+        {
+            if (dgwLine.Rows.Count <= 1)
+                return;
+
+            foreach(DataGridViewRow row in dgwLine.Rows)
+            {
+                if (row.Index == dgwLine.Rows.Count - 1)
+                    continue;
+
+                string sStation = row.Cells[0].Value.ToString();
+                string sLine = row.Cells[1].Value.ToString();
+                decimal dFactor = 0;
+                if (!decimal.TryParse(row.Cells[2].Value.ToString(), out dFactor))
+                    dFactor = 0;
+
+                LineaRampeoLogica line = new LineaRampeoLogica();
+                line.Estacion = sStation;
+                line.Linea = sLine;
+                line.Factor = dFactor;
+                line.Usuario = Globals._gsUser;
+                LineaRampeoLogica.GuardarSP(line);
+
+            }
+        }
+
+        private void btRemove_Click(object sender, EventArgs e)
+        {
+            if (dgwLine.Rows.Count <= 1)
+                return;
+
+            foreach (DataGridViewRow row in dgwLine.SelectedRows)
+            {
+                if (row.Index == dgwLine.Rows.Count - 1)
+                    continue;
+
+                string sStation = row.Cells[0].Value.ToString();
+
+                if (MessageBox.Show(string.Format(_gs.ControlGridRows(this.Name,dgwLine, "rest01") + "{0} ?",sStation), "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    dgwLine.Rows.RemoveAt(row.Index);
+                    LineaRampeoLogica line = new LineaRampeoLogica();
+                    line.Estacion = sStation;
+                    LineaRampeoLogica.Eliminar(line);
+                    
+                }
+                else
+                    continue;
+            }
+            
+
+        }
     }
 }

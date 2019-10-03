@@ -60,7 +60,33 @@ namespace Logica
             }
             return datos;
         }
+        public static DataTable Vista()
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = AccesoDatos.Consultar("SELECT station,line,factor FROM t_lineramp order by line");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
 
-       
+        public static int Eliminar(LineaRampeoLogica line)
+        {
+            int iRes = 0;
+            try
+            {
+                iRes = AccesoDatos.Borrar("DELETE FROM t_lineramp WHERE station = '"+line.Estacion+"'");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return iRes;
+        }
+
     }
 }

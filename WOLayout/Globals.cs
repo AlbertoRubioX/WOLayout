@@ -16,22 +16,51 @@ namespace WOLayout
         public static string _gsLang;
         public static string _gsStation;
 
+        public void ControlItems(string _asFormName, StatusStrip _control)
+        {
+            ConfigLogica con = new ConfigLogica();
+            con.Language = _gsLang;
+            con.Form = _asFormName;
+
+            int iControls = _control.Items.Count;
+            if (iControls == 0)
+                return;
+
+            for (int i = 0; i < iControls; i++)
+            {
+                string sControl = _control.Items[i].Name.ToString();
+                con.Control = sControl;
+                string sValue = ConfigLogica.ChangeLanguageCont(con);
+                if (!string.IsNullOrEmpty(sValue))
+                    _control.Items[i].Text = sValue;
+            }
+        }
+
         public void ControlText(string _asFormName,Control _control)
         {
             ConfigLogica con = new ConfigLogica();
             con.Language = _gsLang;
             con.Form = _asFormName;
 
+            int iControls = _control.Controls.Count;
+            for(int i = 0; i < iControls; i++)
+            {
+                string sControl = _control.Controls[i].Name.ToString();
+                con.Control = sControl;
+                string sValue = ConfigLogica.ChangeLanguageCont(con);
+                if (!string.IsNullOrEmpty(sValue))
+                    _control.Controls[i].Text = sValue;
+            }
             foreach (Control c in _control.Controls)
             {
-                if (c is GroupBox)
+                if (c is GroupBox || c is Button || c is Label )
                 {
                     con.Control = c.Name;
                     string sValue = ConfigLogica.ChangeLanguageCont(con);
                     if (!string.IsNullOrEmpty(sValue))
                         c.Text = sValue;
                 }
-
+                
                 foreach (Control cs in c.Controls)
                 {
                     if (cs is Label || cs is GroupBox || cs is CheckBox)

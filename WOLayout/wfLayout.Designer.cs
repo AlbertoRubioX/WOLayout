@@ -66,7 +66,7 @@
             this.ptbLogo = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Panel3 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblSpeed = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.lblConveyorSpeed = new System.Windows.Forms.Label();
@@ -178,7 +178,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -547,7 +546,7 @@
             // 
             this.Panel3.BackColor = System.Drawing.Color.White;
             this.Panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Panel3.Controls.Add(this.label6);
+            this.Panel3.Controls.Add(this.lblSpeed);
             this.Panel3.Controls.Add(this.panel10);
             this.Panel3.Controls.Add(this.WSO16);
             this.Panel3.Controls.Add(this.WSO15);
@@ -640,17 +639,17 @@
             this.Panel3.Size = new System.Drawing.Size(498, 833);
             this.Panel3.TabIndex = 0;
             // 
-            // label6
+            // lblSpeed
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("magv5", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(264, 761);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(161, 14);
-            this.label6.TabIndex = 189;
-            this.label6.Text = "CONVEYOR SPEED";
+            this.lblSpeed.AutoSize = true;
+            this.lblSpeed.BackColor = System.Drawing.Color.Transparent;
+            this.lblSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSpeed.ForeColor = System.Drawing.Color.Black;
+            this.lblSpeed.Location = new System.Drawing.Point(243, 756);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Size = new System.Drawing.Size(165, 20);
+            this.lblSpeed.TabIndex = 189;
+            this.lblSpeed.Text = "CONVEYOR SPEED";
             // 
             // panel10
             // 
@@ -666,11 +665,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("magv5", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("DS-Digital", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Lime;
-            this.label5.Location = new System.Drawing.Point(135, 22);
+            this.label5.Location = new System.Drawing.Point(114, 10);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 13);
+            this.label5.Size = new System.Drawing.Size(82, 27);
             this.label5.TabIndex = 189;
             this.label5.Text = "HERTZ";
             // 
@@ -678,11 +677,11 @@
             // 
             this.lblConveyorSpeed.AutoSize = true;
             this.lblConveyorSpeed.BackColor = System.Drawing.Color.Transparent;
-            this.lblConveyorSpeed.Font = new System.Drawing.Font("magv5", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConveyorSpeed.Font = new System.Drawing.Font("DS-Digital", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConveyorSpeed.ForeColor = System.Drawing.Color.Lime;
-            this.lblConveyorSpeed.Location = new System.Drawing.Point(11, 11);
+            this.lblConveyorSpeed.Location = new System.Drawing.Point(7, 2);
             this.lblConveyorSpeed.Name = "lblConveyorSpeed";
-            this.lblConveyorSpeed.Size = new System.Drawing.Size(127, 28);
+            this.lblConveyorSpeed.Size = new System.Drawing.Size(110, 41);
             this.lblConveyorSpeed.TabIndex = 188;
             this.lblConveyorSpeed.Text = "00.00";
             // 
@@ -1852,11 +1851,6 @@
             this.dgwItem.TabIndex = 3;
             this.dgwItem.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwItem_CellFormatting);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // wfLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2136,7 +2130,7 @@
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblConveyorSpeed;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblSpeed;
     }
 }
 

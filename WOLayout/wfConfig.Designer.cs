@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -114,12 +115,16 @@
             this.label19 = new System.Windows.Forms.Label();
             this.txtHori = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btRemove = new System.Windows.Forms.Button();
+            this.btSave = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.dgwLine = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -133,6 +138,9 @@
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwLine)).BeginInit();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -1147,6 +1155,75 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Horizontal :";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btRemove);
+            this.tabPage3.Controls.Add(this.btSave);
+            this.tabPage3.Controls.Add(this.groupBox7);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(876, 468);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Line Setup";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btRemove
+            // 
+            this.btRemove.BackgroundImage = global::WOLayout.Properties.Resources.red_background;
+            this.btRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btRemove.Location = new System.Drawing.Point(584, 74);
+            this.btRemove.Name = "btRemove";
+            this.btRemove.Size = new System.Drawing.Size(164, 41);
+            this.btRemove.TabIndex = 2;
+            this.btRemove.Text = "Remove";
+            this.btRemove.UseVisualStyleBackColor = true;
+            this.btRemove.Click += new System.EventHandler(this.btRemove_Click);
+            // 
+            // btSave
+            // 
+            this.btSave.BackgroundImage = global::WOLayout.Properties.Resources.Blue_Background;
+            this.btSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSave.ForeColor = System.Drawing.Color.White;
+            this.btSave.Location = new System.Drawing.Point(584, 27);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(164, 41);
+            this.btSave.TabIndex = 1;
+            this.btSave.Text = "Save";
+            this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.dgwLine);
+            this.groupBox7.Location = new System.Drawing.Point(19, 15);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(536, 427);
+            this.groupBox7.TabIndex = 0;
+            this.groupBox7.TabStop = false;
+            // 
+            // dgwLine
+            // 
+            this.dgwLine.AllowUserToDeleteRows = false;
+            this.dgwLine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgwLine.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgwLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwLine.Location = new System.Drawing.Point(6, 12);
+            this.dgwLine.Name = "dgwLine";
+            this.dgwLine.RowTemplate.Height = 24;
+            this.dgwLine.Size = new System.Drawing.Size(524, 409);
+            this.dgwLine.TabIndex = 0;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
@@ -1197,16 +1274,6 @@
             this.tssVersion.Size = new System.Drawing.Size(177, 20);
             this.tssVersion.Text = "Configuration Parameters";
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(876, 468);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Line Setup";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // wfConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1246,6 +1313,9 @@
             this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgwLine)).EndInit();
             this.panel1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -1347,5 +1417,9 @@
         private System.Windows.Forms.CheckBox chbCycleTimer;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.DataGridView dgwLine;
+        private System.Windows.Forms.Button btRemove;
+        private System.Windows.Forms.Button btSave;
     }
 }

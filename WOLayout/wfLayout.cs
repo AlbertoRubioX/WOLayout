@@ -237,8 +237,15 @@ namespace WOLayout
         #region regLanguage
         private void ChangeLen()
         {
+            int iControls = statusStrip1.Items.Count;
+            if (iControls == 0)
+                return;
+
+
             _gs.ControlText(this.Name,this);
             _gs.ControlText(this.Name,this.panel8);
+            _gs.ControlText(this.Name, Panel3);
+            _gs.ControlItems(this.Name, statusStrip1);
             _gs.ControlGridText(this.Name, dgwWO);
             _gs.ControlGridText(this.Name, dgwItem);
             _gs.ControlGridText(this.Name, dgwTables);
