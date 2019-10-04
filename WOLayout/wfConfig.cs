@@ -525,25 +525,36 @@ namespace WOLayout
             if (dgwLine.Rows.Count <= 1)
                 return;
 
-            foreach(DataGridViewRow row in dgwLine.Rows)
+            Cursor = Cursors.WaitCursor;
+
+            try
             {
-                if (row.Index == dgwLine.Rows.Count - 1)
-                    continue;
+                foreach (DataGridViewRow row in dgwLine.Rows)
+                {
+                    if (row.Index == dgwLine.Rows.Count - 1)
+                        continue;
 
-                string sStation = row.Cells[0].Value.ToString();
-                string sLine = row.Cells[1].Value.ToString();
-                decimal dFactor = 0;
-                if (!decimal.TryParse(row.Cells[2].Value.ToString(), out dFactor))
-                    dFactor = 0;
+                    string sStation = row.Cells[0].Value.ToString();
+                    string sLine = row.Cells[1].Value.ToString();
+                    decimal dFactor = 0;
+                    if (!decimal.TryParse(row.Cells[2].Value.ToString(), out dFactor))
+                        dFactor = 0;
 
-                LineaRampeoLogica line = new LineaRampeoLogica();
-                line.Estacion = sStation;
-                line.Linea = sLine;
-                line.Factor = dFactor;
-                line.Usuario = Globals._gsUser;
-                LineaRampeoLogica.GuardarSP(line);
+                    LineaRampeoLogica line = new LineaRampeoLogica();
+                    line.Estacion = sStation;
+                    line.Linea = sLine;
+                    line.Factor = dFactor;
+                    line.Usuario = Globals._gsUser;
+                    LineaRampeoLogica.GuardarSP(line);
 
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            Cursor = Cursors.Default;
         }
 
         private void btRemove_Click(object sender, EventArgs e)

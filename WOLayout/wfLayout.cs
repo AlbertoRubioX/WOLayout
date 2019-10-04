@@ -89,45 +89,13 @@ namespace WOLayout
             WindowState = FormWindowState.Maximized;
             
             tssUserName.Text = _lsUser;
-            tssVersion.Text = "1.0.0.11";
-            
-            Inicio();
-
-
+            tssVersion.Text = "1.0.0.12";
+          
             lblLine.Visible = false;
             tsslRampeo.Visible = false;
             tssRampeo.Visible = false;
 
-            //rampeo
-            //GET line from pc station
-            LineaRampeoLogica line = new LineaRampeoLogica();
-            line.Estacion = Globals._gsStation;
-            DataTable dtLR = LineaRampeoLogica.ConsultarEstacion(line);
-            _dRampeo = 0;
-            if (dtLR.Rows.Count > 0)
-            {
-                _sLine = dtLR.Rows[0]["line"].ToString();
-                _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
-
-            }
-
-            if (!string.IsNullOrEmpty(_sLine) && _sLine != "0")
-            {
-                lblLine.Text = "L - " + _sLine;
-                lblLine.Visible = true;
-                tsslRampeo.Visible = true;
-                tssRampeo.Text = Math.Round(_dRampeo, 0).ToString() + " %";
-                tssRampeo.Visible = true;
-
-                _dRampeo = _dRampeo / 100;
-            }
-            else
-            {
-                lblLine.Visible = false;
-                tsslRampeo.Visible = false;
-                tssRampeo.Visible = false;
-            }
-
+            Inicio();
 
             ConfigLogica conf = new ConfigLogica();
             _dtConf = ConfigLogica.Consultar();
@@ -219,6 +187,37 @@ namespace WOLayout
             if (!string.IsNullOrEmpty(_dtConf.Rows[0]["out_addtime"].ToString()))
                 _dOutAdd = decimal.Parse(_dtConf.Rows[0]["out_addtime"].ToString());
             _sTimer = _dtConf.Rows[0]["cycle_timer"].ToString();
+
+
+            //rampeo
+            //GET line from pc station
+            LineaRampeoLogica line = new LineaRampeoLogica();
+            line.Estacion = Globals._gsStation;
+            DataTable dtLR = LineaRampeoLogica.ConsultarEstacion(line);
+            _dRampeo = 0;
+            if (dtLR.Rows.Count > 0)
+            {
+                _sLine = dtLR.Rows[0]["line"].ToString();
+                _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
+
+            }
+
+            if (!string.IsNullOrEmpty(_sLine) && _sLine != "0")
+            {
+                lblLine.Text = "L - " + _sLine;
+                lblLine.Visible = true;
+                tsslRampeo.Visible = true;
+                tssRampeo.Text = Math.Round(_dRampeo, 0).ToString() + " %";
+                tssRampeo.Visible = true;
+
+                _dRampeo = _dRampeo / 100;
+            }
+            else
+            {
+                lblLine.Visible = false;
+                tsslRampeo.Visible = false;
+                tssRampeo.Visible = false;
+            }
 
             txtWO.Focus();
 

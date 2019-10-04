@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -1173,9 +1173,10 @@
             this.btRemove.BackgroundImage = global::WOLayout.Properties.Resources.red_background;
             this.btRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btRemove.ForeColor = System.Drawing.Color.Black;
             this.btRemove.Location = new System.Drawing.Point(584, 74);
             this.btRemove.Name = "btRemove";
-            this.btRemove.Size = new System.Drawing.Size(164, 41);
+            this.btRemove.Size = new System.Drawing.Size(118, 41);
             this.btRemove.TabIndex = 2;
             this.btRemove.Text = "Remove";
             this.btRemove.UseVisualStyleBackColor = true;
@@ -1189,7 +1190,7 @@
             this.btSave.ForeColor = System.Drawing.Color.White;
             this.btSave.Location = new System.Drawing.Point(584, 27);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(164, 41);
+            this.btSave.Size = new System.Drawing.Size(118, 41);
             this.btSave.TabIndex = 1;
             this.btSave.Text = "Save";
             this.btSave.UseVisualStyleBackColor = true;
@@ -1209,14 +1210,14 @@
             this.dgwLine.AllowUserToDeleteRows = false;
             this.dgwLine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgwLine.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgwLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgwLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgwLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwLine.Location = new System.Drawing.Point(6, 12);
             this.dgwLine.Name = "dgwLine";

@@ -10,7 +10,7 @@ namespace Datos
 {
     public class Conexion
     {
-        public static string cadenaConexion = ConfigurationManager.ConnectionStrings["WOLayoutTest_Connection"].ToString();
+        public static string cadenaConexion = ConfigurationManager.ConnectionStrings["WOLayout_Connection"].ToString();
 
         private static void Cadena()
         {
