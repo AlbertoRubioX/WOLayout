@@ -10,6 +10,7 @@ namespace Logica
 {
     public class LineaRampeoLogica
     {
+        public string CN { get; set; }
         public string Linea { get; set; }
         public string Estacion { get; set; }
         public decimal Factor { get; set; }
@@ -17,8 +18,8 @@ namespace Logica
 
         public static int GuardarSP(LineaRampeoLogica line)
         {
-            string[] parametros = { "@Station","@Line","@Factor","@Usuario" };
-            return AccesoDatos.Actualizar("sp_mant_lineramp", parametros, line.Estacion,line.Linea,line.Factor,line.Usuario);
+            string[] parametros = {"@Company", "@Station","@Line","@Factor","@Usuario" };
+            return AccesoDatos.Actualizar("sp_mant_lineramp", parametros,line.CN, line.Estacion,line.Linea,line.Factor,line.Usuario);
         }
 
         public static DataTable ConsultarLinea(LineaRampeoLogica line)
@@ -60,12 +61,12 @@ namespace Logica
             }
             return datos;
         }
-        public static DataTable Vista()
+        public static DataTable Vista(LineaRampeoLogica lin)
         {
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT station,line,factor FROM t_lineramp order by line");
+                datos = AccesoDatos.Consultar("SELECT station,line,factor FROM t_lineramp WHERE company='"+lin.CN+"' order by line");
             }
             catch (Exception ex)
             {
@@ -79,13 +80,31 @@ namespace Logica
             int iRes = 0;
             try
             {
-                iRes = AccesoDatos.Borrar("DELETE FROM t_lineramp WHERE station = '"+line.Estacion+"'");
+                iRes = AccesoDatos.Borrar("DELETE FROM t_lineramp WHERE company ='"+line.CN+"' and station = '"+line.Estacion+"'");
             }
             catch (Exception ex)
             {
                 throw ex;
             }
             return iRes;
+        }
+
+        public static bool VerificaCapturaHora(LineaRampeoLogica line)
+        {
+            try
+            {
+                string sQuery = "SELECT c.line FROM t_lineconfd c inner join t_lineramp r on c.line = r.linehr " +
+                "WHERE R.station = '"+line.Estacion+ "' AND(c.clave = 'LMBA01' OR c.clave = 'LMBA02')  group by c.line HAVING COUNT(c.line)	 > 0";
+                DataTable datos = AccesoDatos.Consultar(sQuery);
+                if (datos.Rows.Count != 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }

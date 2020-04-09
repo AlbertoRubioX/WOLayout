@@ -67,7 +67,26 @@ namespace Logica
                 }
                     
                 DataTable datos = new DataTable();
-                datos = AccesoDatos.Consultar("SELECT * FROM t_usuario where usuario = '" + user.Usuario + "' and "+sColumn+" = '1'");
+                datos = AccesoDatos.Consultar("SELECT * FROM t_usuario where usuario = '" + user.Usuario + "' and "+sColumn+" >= '1'");
+                if (datos.Rows.Count > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
+        public static bool ValidaAcceso2(UsuarioLogica user)
+        {
+
+            try
+            {
+                
+                DataTable datos = new DataTable();
+                datos = AccesoDatos.Consultar("SELECT * FROM t_usuario where usuario = '" + user.Usuario + "' and ind_conf = '"+user.Acceso+"'");
                 if (datos.Rows.Count > 0)
                     return true;
                 else

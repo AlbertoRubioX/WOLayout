@@ -10,6 +10,7 @@ namespace Logica
 {
     public class AS4Logica
     {
+        public string CN { get; set; }
         public string WO { get; set; }
         public decimal Takt { get; set; }
         public decimal MaxComp { get; set; }
@@ -21,15 +22,18 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT DISTINCT "+
-                "FMWOSUM.WOPN AS product,SF58041W.IMDSC as name, FMWOSUM.WOQTY AS box, " +
-                "FKITMSTR.IMSTCK AS kits,  " + 
-                @"FMWOSUM.WOQTY * FKITMSTR.IMSTCK AS ""total_kits"", " +
-                "ROUND("+con.Takt+"*(FMWOSUM.WOQTY  * FKITMSTR.IMSTCK)/60,0) AS duration, "+
-                "'' as boxhr " +
-                "FROM B20E386T.KBM400MFG.FMWOSUM FMWOSUM LEFT OUTER JOIN B20E386T.MRC400WEB.SF58041W SF58041W ON FMWOSUM.WOPN = SF58041W.IMPN, B20E386T.KBM400MFG.FKITMSTR FKITMSTR " +
-                "WHERE FMWOSUM.WOPN = FKITMSTR.IMPN " +
-                "AND FMWOSUM.WOWONO = '"+con.WO+"'";
+                string sSql = "SELECT "+
+                "S.WOPN AS product,"+
+                "K.IMDSC AS name," +
+                "S.WOQTY AS box,"+
+                "K.IMSTCK AS kits," + 
+                "S.WOQTY * K.IMSTCK AS total_kits," +
+                "ROUND(("+con.Takt+"*(S.WOQTY  * K.IMSTCK)/60),2)/60 AS duration,"+
+                "'' as boxhr, " +
+                "ROUND(" + con.Takt + "*(S.WOQTY  * K.IMSTCK)/60,2)/60 AS duration_min " +
+                "FROM KBM400MFG.FMWOSUM S "+
+                "INNER JOIN KBM400MFG.FKITMSTR K ON S.WOPN = K.IMPN AND S.WOCO = K.IMCO " +
+                "WHERE S.WOCO = '"+con.CN+"' AND S.WOWONO = '"+con.WO+"'";
                 datos = AccesoDatos.ConsultarAS4(sSql);
             }
             catch (Exception ex)
@@ -45,7 +49,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT DISTINCT IMSTCK FROM B20E386T.KBM400MFG.FKITMSTR FKITMSTR WHERE FKITMSTR.IMPN = '"+con.Item+"'";
+                string sSql = "SELECT IMSTCK FROM KBM400MFG.FKITMSTR WHERE IMCO = '"+con.CN+"' AND IMPN = '"+con.Item+"'";
                 datos = AccesoDatos.ConsultarAS4(sSql);
             }
             catch (Exception ex)
@@ -63,7 +67,7 @@ namespace Logica
                 string sSql = "SELECT F.IMSTCK ,(SELECT QTY FROM  KBM400SQL.PACKDETAIL WHERE DMRID='"+con.Item+ "' AND NODE='03883' AND PACKDRAW_REV = (SELECT MAX(PACKDRAW_REV) FROM KBM400SQL.PACKDETAIL WHERE DMRID='"+con.Item+"')) AS QTY " +
                 "FROM B20E386T.KBM400MFG.FKITMSTR F " +
                 "INNER JOIN  KBM400SQL.PACKDETAIL P ON F.IMPN = P.DMRID " +
-                "WHERE F.IMPN = '"+con.Item+"' " + //AND F.IMCO = '686' 
+                "WHERE F.IMPN = '"+con.Item+"' AND F.IMCO = '"+con.CN+"' " +
                 "GROUP BY F.IMSTCK ";
                 datos = AccesoDatos.ConsultarAS4(sSql);
             }

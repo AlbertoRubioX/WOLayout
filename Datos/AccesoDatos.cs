@@ -109,8 +109,18 @@ namespace Datos
             return _iFolio;
         }
 
-      
-        #region regCloverRH
+        public static string Turno()
+        {
+            string _sTurno;
+            SqlCommand _comando = MetodosDatos.CrearComandoSP("sp_turno");
+            SqlParameter _Tur = new SqlParameter("@Turno", SqlDbType.VarChar);
+            _Tur.Direction = ParameterDirection.Output;
+            _comando.Parameters.Add(_Tur);
+            MetodosDatos.EjecutaComando(_comando);
+            _sTurno = _Tur.Value.ToString();
+            return _sTurno;
+        }
+        #region regTressRH
         //actualizar cpro
         public static int ActualizarCRH(string as_procedimiento, string[] nomparametros, params Object[] valparametros)
         {

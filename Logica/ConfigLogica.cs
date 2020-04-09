@@ -10,6 +10,7 @@ namespace Logica
 {
     public class ConfigLogica
     {
+        public string CN { get; set; }
         public decimal Jornada { get; set; }
         public decimal HorasDisp { get; set; }
         public decimal SegDisp { get; set; }
@@ -45,20 +46,35 @@ namespace Logica
         public string SubControl { get; set; }
         public string Valor { get; set; }
         public int Columna { get; set; }
+        public string ActiveCN { get; set; }
         public string Usuario { get; set; }
 
         public static int GuardarSP(ConfigLogica config)
         {
-            string[] parametros = { "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA", "@Detroit", "@Language", "@MaxHC", "@MinHC", "@BoxHr", "@OutAddTime", "@CycleTimer" };
-            return AccesoDatos.Actualizar("sp_mant_config", parametros, config.Jornada, config.HorasDisp, config.SegDisp, config.Cajas, config.Kits, config.KitLinea, config.Tak, config.Tak80, config.Assy, config.MaxComp, config.Mesas, config.MesaWrap, config.MesaSub, config.OperNA, config.Surtidor, config.InspSella, config.Selladora, config.Inspeccion, config.Usuario, config.Horizontal, config.Vertical, config.Sobre, config.Tape, config.WrapNA, config.Detroit, config.Language, config.MaxHC, config.MinHC, config.BoxHr, config.OutAddTime, config.CycleTimer);
+            string[] parametros = { "@Company", "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA", "@Detroit", "@Language", "@MaxHC", "@MinHC", "@BoxHr", "@OutAddTime", "@CycleTimer","@Active" };
+            return AccesoDatos.Actualizar("sp_mant_config", parametros, config.CN, config.Jornada, config.HorasDisp, config.SegDisp, config.Cajas, config.Kits, config.KitLinea, config.Tak, config.Tak80, config.Assy, config.MaxComp, config.Mesas, config.MesaWrap, config.MesaSub, config.OperNA, config.Surtidor, config.InspSella, config.Selladora, config.Inspeccion, config.Usuario, config.Horizontal, config.Vertical, config.Sobre, config.Tape, config.WrapNA, config.Detroit, config.Language, config.MaxHC, config.MinHC, config.BoxHr, config.OutAddTime, config.CycleTimer,config.ActiveCN);
         }
 
-        public static DataTable Consultar()
+        public static DataTable Consultar(ConfigLogica config)
         {
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT * FROM t_config WHERE clave = '01'");
+                datos = AccesoDatos.Consultar("SELECT * FROM t_config WHERE clave = '"+config.CN+"'");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
+
+        public static DataTable ActiveCompany()
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = AccesoDatos.Consultar("SELECT * FROM t_config WHERE active = '1'");
             }
             catch (Exception ex)
             {

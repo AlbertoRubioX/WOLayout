@@ -11,7 +11,7 @@ namespace Logica
     public class SetupLogica
     {
         public string WorkOrder { get; set; }
-
+        public decimal Takt { get; set; }
         public static int EjecutaSP(SetupLogica config)
         {
             //string[] parametros = { "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA" };
@@ -25,8 +25,8 @@ namespace Logica
             try
             {
                 string sSql = "SELECT Product_Name as product,Product_Description AS name,Original_Work_Order_Quantity AS box,Product_Kits_per_Case AS kits,"+
-                "In_Kits_Work_Order_Quantity total_kits, ((20 * In_Kits_Work_Order_Quantity) / 60) as duration,'' as boxhr "+
-                "FROM Work_Order_Details where Company_Number = 686 and Work_Order_Number = '"+set.WorkOrder+"'";
+                "In_Kits_Work_Order_Quantity total_kits, ((" + set.Takt + " * In_Kits_Work_Order_Quantity) / 60)/60 as duration,'' as boxhr,'' as duration_min " +
+                "FROM Work_Order_Details where  Work_Order_Number = '"+set.WorkOrder+"'"; //Company_Number = 686 and
                 datos = AccesoDatos.ConsultarSetup(sSql);
             }
             catch (Exception ex)
