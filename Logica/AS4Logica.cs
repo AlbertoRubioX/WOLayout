@@ -44,6 +44,46 @@ namespace Logica
             return datos;
         }
 
+        public static DataTable WorkOrderOld(AS4Logica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql =
+                "SELECT F.SKPN,P.FOLD " +
+                "FROM KBM400MFG.FQSPCHST F " +
+                "LEFT OUTER JOIN KBM400SQL.PACKDETAIL P ON P.DMRID = F.SKPN AND P.FOLD > 0 AND P.FOLD <> 7 AND P.PACKDRAW_REV = " +
+                "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER WHERE DMRID = F.SKPN) AND SUBSTR(LEVEL_CODE,1, 1) = 'F' " +
+                "WHERE F.SKWONO = '" + con.WO + "' AND F.SKCO = '" + con.CN + "' ";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
+        public static DataTable WorkOrderNew(AS4Logica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql =
+                "SELECT F.WOPN,P.FOLD " +
+                "FROM KBM400MFG.FMWOSUM F " +
+                "LEFT OUTER JOIN KBM400SQL.PACKDETAIL P ON P.DMRID = F.WOPN AND P.FOLD > 0 AND P.FOLD <> 7 AND P.PACKDRAW_REV = " +
+                "(SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER WHERE DMRID = F.WOPN) AND SUBSTR(LEVEL_CODE,1, 1) = 'F' " +
+                "WHERE F.WOWONO = '" + con.WO + "' AND F.WOCO = '" + con.CN + "' ";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
         public static DataTable PartKits(AS4Logica con)
         {
             DataTable datos = new DataTable();

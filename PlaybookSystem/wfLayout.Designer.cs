@@ -52,6 +52,7 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRampeo = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssRampeo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tssLoading = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnConfig = new System.Windows.Forms.ToolStripButton();
@@ -305,7 +306,8 @@
             this.tssVersion,
             this.toolStripStatusLabel3,
             this.tsslRampeo,
-            this.tssRampeo});
+            this.tssRampeo,
+            this.tssLoading});
             this.statusStrip1.Location = new System.Drawing.Point(0, 937);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
@@ -406,6 +408,15 @@
             this.tssRampeo.Size = new System.Drawing.Size(53, 20);
             this.tssRampeo.Text = "100 %";
             this.tssRampeo.Visible = false;
+            // 
+            // tssLoading
+            // 
+            this.tssLoading.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tssLoading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tssLoading.Name = "tssLoading";
+            this.tssLoading.Size = new System.Drawing.Size(101, 20);
+            this.tssLoading.Text = "| Rows 0 of 0";
+            this.tssLoading.Visible = false;
             // 
             // toolStrip1
             // 
@@ -2188,6 +2199,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripButton btnTimerWO;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.ToolStripStatusLabel tssLoading;
     }
 }
 
