@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Globals.cs" />
+    <Compile Include="wfTableComp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfTableComp.Designer.cs">
+      <DependentUpon>wfTableComp.cs</DependentUpon>
+    </Compile>
     <Compile Include="wfLineDown.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     <Compile Include="wfTimer.Designer.cs">
       <DependentUpon>wfTimer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="wfTableComp.resx">
+      <DependentUpon>wfTableComp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="wfLineDown.resx">
       <DependentUpon>wfLineDown.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +247,7 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\remove_line.png" />
     <None Include="Resources\iconfinder_Time_tracker_132171.png" />
     <None Include="Resources\iconfinder_Alarm_132148.png" />
     <None Include="Resources\addfrom.png" />

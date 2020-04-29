@@ -64,6 +64,9 @@ namespace Logica
                     case "EXPF":
                         sColumn = "ind_export";
                         break;
+                    case "PRO040":
+                        sColumn = "ind_tablesetup";
+                        break;
                 }
                     
                 DataTable datos = new DataTable();

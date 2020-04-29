@@ -55,9 +55,11 @@
   <ItemGroup>
     <Compile Include="AS4Logica.cs" />
     <Compile Include="ComunicaLogica.cs" />
+    <Compile Include="ItemSugLogica.cs" />
     <Compile Include="LineConfigHrLogica.cs" />
     <Compile Include="LineConfigLnLogica.cs" />
     <Compile Include="LineConfigLogica.cs" />
+    <Compile Include="ItemSugdetLogica.cs" />
     <Compile Include="LineHoraDetLogica.cs" />
     <Compile Include="LineDownLogica.cs" />
     <Compile Include="LineHoraLogica.cs" />

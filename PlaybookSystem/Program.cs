@@ -17,15 +17,28 @@ namespace PlaybookSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+                
+            string sUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            sUser = sUser.Substring(sUser.IndexOf("\\") + 1).ToUpper();
+            Globals._gsUser = sUser;
 
-            Globals._gsStation = Environment.MachineName.ToUpper();
-
-            LineaRampeoLogica line = new LineaRampeoLogica();
-            line.Estacion = Globals._gsStation;
-            if (LineaRampeoLogica.VerificaCapturaHora(line))
-                Application.Run(new wfLineHour());
+            UsuarioLogica user = new UsuarioLogica();
+            user.Usuario = sUser;
+            user.Acceso = "PRO040";
+            if (UsuarioLogica.ValidaAcceso(user))
+                Application.Run(new wfTableSetup());
             else
-                Application.Run(new wfLayout());
+            {
+                Globals._gsStation = Environment.MachineName.ToUpper();
+
+                LineaRampeoLogica line = new LineaRampeoLogica();
+                line.Estacion = Globals._gsStation;
+                if (LineaRampeoLogica.VerificaCapturaHora(line))
+                    Application.Run(new wfLineHour());
+                else
+                    Application.Run(new wfLayout());
+            }
         }
+        
     }
 }
