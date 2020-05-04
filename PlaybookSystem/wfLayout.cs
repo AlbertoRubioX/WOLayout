@@ -58,6 +58,9 @@ namespace PlaybookSystem
         private string _sAssyTextoI;
         private int _iPosAssyTexto =0;
         private string _lsProceso;
+        private string _lsItem;
+        private string _lsItemDesc;
+
 
         FormWindowState _WindowStateAnt;
         private int _iWidthAnt;
@@ -98,7 +101,11 @@ namespace PlaybookSystem
                 tssRampeo.Visible = false;
 
                 if (ValidaAcceso("EXPF"))
+                {
                     btnExportFile.Visible = true;
+                    btSugSet.Visible = true;
+                }
+                    
 
                 Inicio();
                 
@@ -131,6 +138,8 @@ namespace PlaybookSystem
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
             _bModoManual = false;
+            _lsItem = string.Empty;
+            _lsItemDesc = string.Empty;
 
             lblProduct.Text = "";
             dgwItem.DataSource = null;
@@ -519,7 +528,10 @@ namespace PlaybookSystem
 
                     if (!string.IsNullOrEmpty(sName))
                         lblProduct.Text = sItem.Trim() + " - " + sName.ToUpper().TrimEnd();
-                    
+
+                    _lsItem = sItem.Trim();
+                    _lsItemDesc = sName.Trim();
+
                     DataTable dt2 = AS4Logica.ComponentsLayer(AS4);                
                     if (dt2.Rows.Count > 1)
                     {
@@ -2277,6 +2289,23 @@ namespace PlaybookSystem
         private void dgwTables_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgwTables.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void btSug_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_lsItem))
+                return;
+
+            wfSugeComp Suge = new wfSugeComp();
+            Suge._lsItem = _lsItem;
+            Suge._lsDesc = _lsItemDesc;
+            Suge.ShowDialog();
+        }
+
+        private void btSugSet_Click(object sender, EventArgs e)
+        {
+            wfTableSetup Sug = new wfTableSetup();
+            Sug.ShowDialog();
         }
     }
     #endregion

@@ -30,10 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblLayout2 = new System.Windows.Forms.Label();
             this.dgwComp = new System.Windows.Forms.DataGridView();
-            this.lblLayout = new System.Windows.Forms.Label();
+            this.lbl001 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgwSuge = new System.Windows.Forms.DataGridView();
             this.txtLayout = new System.Windows.Forms.TextBox();
@@ -75,6 +77,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Controls.Add(this.txtLayout);
             this.panel1.Controls.Add(this.label1);
@@ -88,6 +91,18 @@
             this.panel1.Size = new System.Drawing.Size(811, 620);
             this.panel1.TabIndex = 4;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Blue;
+            this.button1.BackgroundImage = global::PlaybookSystem.Properties.Resources.go_down;
+            this.button1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(767, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(39, 22);
+            this.button1.TabIndex = 8;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -100,8 +115,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblLayout2);
             this.tabPage1.Controls.Add(this.dgwComp);
-            this.tabPage1.Controls.Add(this.lblLayout);
+            this.tabPage1.Controls.Add(this.lbl001);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -109,6 +125,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Lista de Componentes";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lblLayout2
+            // 
+            this.lblLayout2.AutoSize = true;
+            this.lblLayout2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLayout2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblLayout2.Location = new System.Drawing.Point(170, 7);
+            this.lblLayout2.Name = "lblLayout2";
+            this.lblLayout2.Size = new System.Drawing.Size(0, 20);
+            this.lblLayout2.TabIndex = 5;
             // 
             // dgwComp
             // 
@@ -128,16 +154,16 @@
             this.dgwComp.TabIndex = 4;
             this.dgwComp.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwComp_CellFormatting);
             // 
-            // lblLayout
+            // lbl001
             // 
-            this.lblLayout.AutoSize = true;
-            this.lblLayout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLayout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblLayout.Location = new System.Drawing.Point(8, 7);
-            this.lblLayout.Name = "lblLayout";
-            this.lblLayout.Size = new System.Drawing.Size(65, 20);
-            this.lblLayout.TabIndex = 3;
-            this.lblLayout.Text = "Layout";
+            this.lbl001.AutoSize = true;
+            this.lbl001.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl001.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lbl001.Location = new System.Drawing.Point(8, 7);
+            this.lbl001.Name = "lbl001";
+            this.lbl001.Size = new System.Drawing.Size(156, 20);
+            this.lbl001.TabIndex = 3;
+            this.lbl001.Text = "PackDraw Layout";
             // 
             // tabPage2
             // 
@@ -175,6 +201,7 @@
             this.txtLayout.Name = "txtLayout";
             this.txtLayout.Size = new System.Drawing.Size(69, 30);
             this.txtLayout.TabIndex = 1;
+            this.txtLayout.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtLayout.TextChanged += new System.EventHandler(this.txtLayout_TextChanged);
             // 
             // label1
@@ -215,6 +242,7 @@
             // 
             // btTable1
             // 
+            this.btTable1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btTable1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btTable1.Location = new System.Drawing.Point(16, 25);
             this.btTable1.Name = "btTable1";
@@ -316,7 +344,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 651);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(833, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(830, 25);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -408,7 +436,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::PlaybookSystem.Properties.Resources.Blue_Background;
-            this.ClientSize = new System.Drawing.Size(833, 676);
+            this.ClientSize = new System.Drawing.Size(830, 676);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -466,7 +494,9 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dgwComp;
-        private System.Windows.Forms.Label lblLayout;
+        private System.Windows.Forms.Label lbl001;
         private System.Windows.Forms.DataGridView dgwSuge;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblLayout2;
     }
 }

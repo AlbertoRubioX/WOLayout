@@ -54,16 +54,10 @@
             this.tssRampeo = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssLoading = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
-            this.btnConfig = new System.Windows.Forms.ToolStripButton();
-            this.btnTimer = new System.Windows.Forms.ToolStripButton();
-            this.btnTimerWO = new System.Windows.Forms.ToolStripButton();
-            this.btnExportFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.btnExit = new System.Windows.Forms.ToolStripButton();
-            this.btnLanguage = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblLayout = new System.Windows.Forms.Label();
             this.lblTopTitle1 = new System.Windows.Forms.Label();
@@ -183,7 +177,15 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.btnConfig = new System.Windows.Forms.ToolStripButton();
+            this.btnTimer = new System.Windows.Forms.ToolStripButton();
+            this.btnTimerWO = new System.Windows.Forms.ToolStripButton();
+            this.btnExportFile = new System.Windows.Forms.ToolStripButton();
+            this.btSug = new System.Windows.Forms.ToolStripButton();
+            this.btnExit = new System.Windows.Forms.ToolStripButton();
+            this.btnLanguage = new System.Windows.Forms.ToolStripButton();
+            this.btSugSet = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -427,65 +429,16 @@
             this.btnTimer,
             this.btnTimerWO,
             this.btnExportFile,
+            this.btSug,
             this.toolStripLabel1,
             this.btnExit,
-            this.btnLanguage});
+            this.btnLanguage,
+            this.btSugSet});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1540, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnNew
-            // 
-            this.btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNew.Image = global::PlaybookSystem.Properties.Resources.file;
-            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(24, 24);
-            this.btnNew.Text = "Clean";
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // btnConfig
-            // 
-            this.btnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnConfig.Image = global::PlaybookSystem.Properties.Resources.idea;
-            this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(24, 24);
-            this.btnConfig.Text = "Setting";
-            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
-            // 
-            // btnTimer
-            // 
-            this.btnTimer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTimer.Image = global::PlaybookSystem.Properties.Resources.iconfinder_Time_tracker_132171;
-            this.btnTimer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTimer.Name = "btnTimer";
-            this.btnTimer.Size = new System.Drawing.Size(24, 24);
-            this.btnTimer.Text = "Hora x Hora";
-            this.btnTimer.Click += new System.EventHandler(this.btnTimer_Click);
-            // 
-            // btnTimerWO
-            // 
-            this.btnTimerWO.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTimerWO.Image = global::PlaybookSystem.Properties.Resources.iconfinder_Alarm_132148;
-            this.btnTimerWO.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTimerWO.Name = "btnTimerWO";
-            this.btnTimerWO.Size = new System.Drawing.Size(24, 24);
-            this.btnTimerWO.Text = "Timer";
-            this.btnTimerWO.Click += new System.EventHandler(this.btnTimerWO_Click);
-            // 
-            // btnExportFile
-            // 
-            this.btnExportFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnExportFile.Image = global::PlaybookSystem.Properties.Resources.excel_down_ico;
-            this.btnExportFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnExportFile.Name = "btnExportFile";
-            this.btnExportFile.Size = new System.Drawing.Size(24, 24);
-            this.btnExportFile.Text = "Export to File";
-            this.btnExportFile.Visible = false;
-            this.btnExportFile.Click += new System.EventHandler(this.btnExportFile_Click);
             // 
             // toolStripLabel1
             // 
@@ -493,26 +446,6 @@
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(14, 24);
             this.toolStripLabel1.Text = "|";
-            // 
-            // btnExit
-            // 
-            this.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnExit.Image = global::PlaybookSystem.Properties.Resources.bt_exit;
-            this.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(24, 24);
-            this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnLanguage
-            // 
-            this.btnLanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLanguage.Image = global::PlaybookSystem.Properties.Resources.united_states;
-            this.btnLanguage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLanguage.Name = "btnLanguage";
-            this.btnLanguage.Size = new System.Drawing.Size(24, 24);
-            this.btnLanguage.Text = "Change Language";
-            this.btnLanguage.Click += new System.EventHandler(this.btnLenguage_Click);
             // 
             // openFileDialog1
             // 
@@ -522,6 +455,11 @@
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 300000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // panel9
             // 
@@ -1909,10 +1847,97 @@
             this.dgwItem.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwItem_CellFormatting);
             this.dgwItem.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwItem_ColumnAdded);
             // 
-            // timer2
+            // btnNew
             // 
-            this.timer2.Interval = 300000;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            this.btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnNew.Image = global::PlaybookSystem.Properties.Resources.file;
+            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(24, 24);
+            this.btnNew.Text = "Clean";
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnConfig
+            // 
+            this.btnConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnConfig.Image = global::PlaybookSystem.Properties.Resources.idea;
+            this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(24, 24);
+            this.btnConfig.Text = "Setting";
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
+            // 
+            // btnTimer
+            // 
+            this.btnTimer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTimer.Image = global::PlaybookSystem.Properties.Resources.iconfinder_Time_tracker_132171;
+            this.btnTimer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTimer.Name = "btnTimer";
+            this.btnTimer.Size = new System.Drawing.Size(24, 24);
+            this.btnTimer.Text = "Hora x Hora";
+            this.btnTimer.Click += new System.EventHandler(this.btnTimer_Click);
+            // 
+            // btnTimerWO
+            // 
+            this.btnTimerWO.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTimerWO.Image = global::PlaybookSystem.Properties.Resources.iconfinder_Alarm_132148;
+            this.btnTimerWO.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTimerWO.Name = "btnTimerWO";
+            this.btnTimerWO.Size = new System.Drawing.Size(24, 24);
+            this.btnTimerWO.Text = "Timer";
+            this.btnTimerWO.Click += new System.EventHandler(this.btnTimerWO_Click);
+            // 
+            // btnExportFile
+            // 
+            this.btnExportFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExportFile.Image = global::PlaybookSystem.Properties.Resources.excel_down_ico;
+            this.btnExportFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExportFile.Name = "btnExportFile";
+            this.btnExportFile.Size = new System.Drawing.Size(24, 24);
+            this.btnExportFile.Text = "Export to File";
+            this.btnExportFile.Visible = false;
+            this.btnExportFile.Click += new System.EventHandler(this.btnExportFile_Click);
+            // 
+            // btSug
+            // 
+            this.btSug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btSug.Image = global::PlaybookSystem.Properties.Resources.table_setup;
+            this.btSug.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btSug.Name = "btSug";
+            this.btSug.Size = new System.Drawing.Size(24, 24);
+            this.btSug.Text = "Sugerencia";
+            this.btSug.Click += new System.EventHandler(this.btSug_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExit.Image = global::PlaybookSystem.Properties.Resources.bt_exit;
+            this.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(24, 24);
+            this.btnExit.Text = "Exit";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnLanguage
+            // 
+            this.btnLanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLanguage.Image = global::PlaybookSystem.Properties.Resources.united_states;
+            this.btnLanguage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLanguage.Name = "btnLanguage";
+            this.btnLanguage.Size = new System.Drawing.Size(24, 24);
+            this.btnLanguage.Text = "Change Language";
+            this.btnLanguage.Click += new System.EventHandler(this.btnLenguage_Click);
+            // 
+            // btSugSet
+            // 
+            this.btSugSet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btSugSet.Image = global::PlaybookSystem.Properties.Resources.components;
+            this.btSugSet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btSugSet.Name = "btSugSet";
+            this.btSugSet.Size = new System.Drawing.Size(24, 24);
+            this.btSugSet.Text = "toolStripButton1";
+            this.btSugSet.Visible = false;
+            this.btSugSet.Click += new System.EventHandler(this.btSugSet_Click);
             // 
             // wfLayout
             // 
@@ -2200,6 +2225,8 @@
         private System.Windows.Forms.ToolStripButton btnTimerWO;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.ToolStripStatusLabel tssLoading;
+        private System.Windows.Forms.ToolStripButton btSug;
+        private System.Windows.Forms.ToolStripButton btSugSet;
     }
 }
 

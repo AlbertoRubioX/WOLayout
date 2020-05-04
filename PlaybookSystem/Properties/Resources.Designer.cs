@@ -123,6 +123,16 @@ namespace PlaybookSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components {
+            get {
+                object obj = ResourceManager.GetObject("components", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ensamble {
             get {
                 object obj = ResourceManager.GetObject("ensamble", resourceCulture);
@@ -306,6 +316,16 @@ namespace PlaybookSystem.Properties {
         internal static System.Drawing.Bitmap sub {
             get {
                 object obj = ResourceManager.GetObject("sub", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap table_setup {
+            get {
+                object obj = ResourceManager.GetObject("table_setup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

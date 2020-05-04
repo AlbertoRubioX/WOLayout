@@ -65,7 +65,12 @@ namespace PlaybookSystem
 
                 
                 btTable1.BackColor = Color.White;
-                
+                btTable2.BackColor = Color.White;
+                btTable3.BackColor = Color.White;
+                btTable4.BackColor = Color.White;
+                btTable5.BackColor = Color.White;
+                btTable6.BackColor = Color.White;
+
 
             }
             catch (Exception ex)
@@ -218,6 +223,39 @@ namespace PlaybookSystem
                     DataTable dtS = ItemSugdetLogica.ConsultarVista(itemd);
                     dgwSuge.DataSource = dtS;
                     CargarColumnasSug();
+
+                    if(dtS.Rows.Count > 0)
+                    {
+                        for(int x = 1; x <= 6; x++)
+                        {
+                            itemd.Mesa = x.ToString();
+                            DataTable dt = ItemSugdetLogica.ConsultarVistaMesa(itemd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                switch (x.ToString())
+                                {
+                                    case "1":
+                                        btTable1.BackColor = Color.Orange;
+                                        break;
+                                    case "2":
+                                        btTable2.BackColor = Color.Orange;
+                                        break;
+                                    case "3":
+                                        btTable3.BackColor = Color.Orange;
+                                        break;
+                                    case "4":
+                                        btTable4.BackColor = Color.Orange;
+                                        break;
+                                    case "5":
+                                        btTable5.BackColor = Color.Orange;
+                                        break;
+                                    case "6":
+                                        btTable6.BackColor = Color.Orange;
+                                        break;
+                                }
+                            }
+                        }
+                    }
                 }
                 else
                 {   
@@ -244,7 +282,7 @@ namespace PlaybookSystem
                 
                 tssDYN.Text = txtItem.Text.ToString();
                 tssTotal.Text = dtAS.Rows.Count.ToString();
-                lblLayout.Text = "Layout " + dtAS.Rows[0]["PACKDRAW_REV"].ToString();
+                lblLayout2.Text = dtAS.Rows[0]["PACKDRAW_REV"].ToString();
                 if(string.IsNullOrEmpty(txtLayout.Text))
                 {
                     txtLayout.Text = dtAS.Rows[0]["PACKDRAW_REV"].ToString();
@@ -669,6 +707,35 @@ namespace PlaybookSystem
             DataTable dtS = ItemSugdetLogica.ConsultarVista(itemd);
             dgwSuge.DataSource = dtS;
             CargarColumnasSug();
+
+            itemd.Mesa = _asMesa;
+            DataTable dt = ItemSugdetLogica.ConsultarVistaMesa(itemd);
+            if (dt.Rows.Count > 0)
+            {
+                switch(_asMesa)
+                {
+                    case "1":
+                        btTable1.BackColor = Color.Orange;
+                        break;
+                    case "2":
+                        btTable2.BackColor = Color.Orange;
+                        break;
+                    case "3":
+                        btTable3.BackColor = Color.Orange;
+                        break;
+                    case "4":
+                        btTable4.BackColor = Color.Orange;
+                        break;
+                    case "5":
+                        btTable5.BackColor = Color.Orange;
+                        break;
+                    case "6":
+                        btTable6.BackColor = Color.Orange;
+                        break;
+                }
+            }
+
+            CargarColumnas();
         }
         
         private void btTable1_Click(object sender, EventArgs e)
@@ -776,6 +843,18 @@ namespace PlaybookSystem
                 _lsLayout = txtLayout.Text.ToString();
                 _lbCambio = true;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtItem.Text.ToString()))
+                return;
+
+            wfSugeComp Suge = new wfSugeComp();
+            Suge._lsItem = txtItem.Text.ToString();
+            Suge._lsDesc = lblDescrip.Text.ToString();
+            Suge.ShowDialog();
+               
         }
     }
 }

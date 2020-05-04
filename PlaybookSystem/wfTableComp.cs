@@ -693,21 +693,35 @@ namespace PlaybookSystem
             string[] array = new string[4];
             array = Components(sCodigo);
 
-            LastRow(tabControl1.SelectedIndex);
+            //LastRow(tabControl1.SelectedIndex);
 
             int iTab = tabControl1.SelectedIndex;
             if (iTab == 0)
             {
                 //mesa
-                if (dgwTable.SelectedRows.Count == 0)
+                if (dgwTable.SelectedCells.Count == 0)
                     return;
 
-                int iIdx = -1;
-                if (!int.TryParse(dgwTable.SelectedRows[0].Index.ToString(), out iIdx))
-                    return;
+                //if (dgwTable.SelectedRows.Count == 0)
+                //    return;
+
+                int iIdx = 0;
+                if (!int.TryParse(dgwTable.SelectedCells[0].RowIndex.ToString(), out iIdx))
+                    iIdx = -1;
+
+                //if (!int.TryParse(dgwTable.SelectedRows[0].Index.ToString(), out iIdx))
+                //    iIdx = -1;
 
                 if (iIdx == -1)
                     return;
+
+                if(!string.IsNullOrEmpty(dgwTable[2, iIdx].Value.ToString()))
+                {
+                    string sValue = dgwTable[2, iIdx].Value.ToString();
+                    DialogResult result = MessageBox.Show("Desea reemplazar el componente " + sValue + "?",Text,MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
+                    if(result != DialogResult.Yes)
+                        return;
+                }
 
                 if(sCodigo.IndexOf("PS-") == -1)
                 {

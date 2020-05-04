@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Globals.cs" />
+    <Compile Include="wfSugeComp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfSugeComp.Designer.cs">
+      <DependentUpon>wfSugeComp.cs</DependentUpon>
+    </Compile>
     <Compile Include="wfTableComp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     <Compile Include="wfTimer.Designer.cs">
       <DependentUpon>wfTimer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="wfSugeComp.resx">
+      <DependentUpon>wfSugeComp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="wfTableComp.resx">
       <DependentUpon>wfTableComp.cs</DependentUpon>
     </EmbeddedResource>
@@ -247,11 +256,16 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\components.png" />
+    <None Include="Resources\go-down.png" />
+    <None Include="Resources\table_setup.png" />
+    <None Include="Resources\remove_line1.png" />
+    <None Include="Resources\addfrom1.png" />
+    <None Include="Resources\New1.png" />
     <None Include="Resources\remove_line.png" />
     <None Include="Resources\iconfinder_Time_tracker_132171.png" />
     <None Include="Resources\iconfinder_Alarm_132148.png" />
     <None Include="Resources\addfrom.png" />
-    <None Include="Resources\go-down.png" />
     <None Include="Resources\New.png" />
     <None Include="Resources\red-background.jpg" />
     <None Include="Resources\9917685723_6f2e1826e5_b.jpg" />
