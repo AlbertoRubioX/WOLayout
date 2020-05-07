@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btAdd = new System.Windows.Forms.Button();
             this.cbComp = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -45,7 +46,11 @@
             this.dgwPre5 = new System.Windows.Forms.DataGridView();
             this.lbl01 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnRemove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tssTable = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,11 +59,6 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnExit = new System.Windows.Forms.ToolStripButton();
-            this.btnRemove = new System.Windows.Forms.ToolStripButton();
-            this.btAdd = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -89,6 +89,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(681, 439);
             this.panel1.TabIndex = 0;
+            // 
+            // btAdd
+            // 
+            this.btAdd.BackgroundImage = global::PlaybookSystem.Properties.Resources.addfrom;
+            this.btAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btAdd.FlatAppearance.BorderSize = 0;
+            this.btAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btAdd.Location = new System.Drawing.Point(602, 9);
+            this.btAdd.Name = "btAdd";
+            this.btAdd.Size = new System.Drawing.Size(41, 41);
+            this.btAdd.TabIndex = 17;
+            this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
             // 
             // cbComp
             // 
@@ -141,9 +154,7 @@
             this.dgwTable.Size = new System.Drawing.Size(629, 315);
             this.dgwTable.TabIndex = 14;
             this.dgwTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwTable_CellFormatting);
-
             this.dgwTable.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwTable_ColumnAdded);
-            this.dgwTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgwTable_KeyDown);
             // 
             // tb1
             // 
@@ -155,7 +166,7 @@
             this.tb1.Padding = new System.Windows.Forms.Padding(3);
             this.tb1.Size = new System.Drawing.Size(640, 326);
             this.tb1.TabIndex = 1;
-            this.tb1.Text = "PS-01";
+            this.tb1.Text = "PRE-01";
             // 
             // dgwPre
             // 
@@ -171,7 +182,6 @@
             this.dgwPre.Size = new System.Drawing.Size(629, 315);
             this.dgwPre.TabIndex = 15;
             this.dgwPre.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwPre_ColumnAdded);
-            this.dgwPre.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgwPre_KeyDown);
             // 
             // tb2
             // 
@@ -182,7 +192,7 @@
             this.tb2.Padding = new System.Windows.Forms.Padding(3);
             this.tb2.Size = new System.Drawing.Size(640, 326);
             this.tb2.TabIndex = 2;
-            this.tb2.Text = "PS-02";
+            this.tb2.Text = "PRE-02";
             // 
             // dgwPre2
             // 
@@ -199,7 +209,6 @@
             this.dgwPre2.Size = new System.Drawing.Size(629, 315);
             this.dgwPre2.TabIndex = 15;
             this.dgwPre2.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwPre2_ColumnAdded);
-            this.dgwPre2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgwPre2_KeyDown);
             // 
             // tb3
             // 
@@ -210,7 +219,7 @@
             this.tb3.Padding = new System.Windows.Forms.Padding(3);
             this.tb3.Size = new System.Drawing.Size(640, 326);
             this.tb3.TabIndex = 3;
-            this.tb3.Text = "PS-03";
+            this.tb3.Text = "PRE-03";
             // 
             // dgwPre3
             // 
@@ -237,8 +246,7 @@
             this.tb4.Padding = new System.Windows.Forms.Padding(3);
             this.tb4.Size = new System.Drawing.Size(640, 326);
             this.tb4.TabIndex = 4;
-            this.tb4.Text = "PS-04";
-            
+            this.tb4.Text = "PRE-04";
             // 
             // dgwPre4
             // 
@@ -264,7 +272,7 @@
             this.tb5.Padding = new System.Windows.Forms.Padding(3);
             this.tb5.Size = new System.Drawing.Size(640, 326);
             this.tb5.TabIndex = 5;
-            this.tb5.Text = "PS-05";
+            this.tb5.Text = "PRE-05";
             // 
             // dgwPre5
             // 
@@ -291,7 +299,6 @@
             this.lbl01.Size = new System.Drawing.Size(148, 25);
             this.lbl01.TabIndex = 0;
             this.lbl01.Text = "Componente: ";
-            
             // 
             // toolStrip1
             // 
@@ -308,13 +315,54 @@
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // btnNew
+            // 
+            this.btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnNew.Image = global::PlaybookSystem.Properties.Resources.New;
+            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(24, 24);
+            this.btnNew.Text = "New";
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = global::PlaybookSystem.Properties.Resources.bt_save;
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(24, 24);
+            this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRemove.Image = global::PlaybookSystem.Properties.Resources.remove_line;
+            this.btnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(24, 24);
+            this.btnRemove.Text = "Delete";
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
+            // btnExit
+            // 
+            this.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExit.Image = global::PlaybookSystem.Properties.Resources.bt_exit;
+            this.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(24, 24);
+            this.btnExit.Text = "Exit";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tssTable,
@@ -384,63 +432,11 @@
             this.toolStripStatusLabel7.Size = new System.Drawing.Size(22, 20);
             this.toolStripStatusLabel7.Text = " | ";
             // 
-            // btnNew
-            // 
-            this.btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNew.Image = global::PlaybookSystem.Properties.Resources.New;
-            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(24, 24);
-            this.btnNew.Text = "New";
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSave.Image = global::PlaybookSystem.Properties.Resources.bt_save;
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(24, 24);
-            this.btnSave.Text = "Save";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnExit.Image = global::PlaybookSystem.Properties.Resources.bt_exit;
-            this.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(24, 24);
-            this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRemove.Image = global::PlaybookSystem.Properties.Resources.remove_line;
-            this.btnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(24, 24);
-            this.btnRemove.Text = "Delete";
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btAdd
-            // 
-            this.btAdd.BackgroundImage = global::PlaybookSystem.Properties.Resources.addfrom;
-            this.btAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btAdd.FlatAppearance.BorderSize = 0;
-            this.btAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btAdd.Location = new System.Drawing.Point(602, 9);
-            this.btAdd.Name = "btAdd";
-            this.btAdd.Size = new System.Drawing.Size(41, 41);
-            this.btAdd.TabIndex = 17;
-            this.btAdd.UseVisualStyleBackColor = true;
-            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
-            // 
             // wfTableComp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(696, 505);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);

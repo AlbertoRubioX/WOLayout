@@ -40,7 +40,7 @@ namespace PlaybookSystem
         private void wfLineHour_Load(object sender, EventArgs e)
         {
             Inicio();
-            tssHrVersion.Text = "Hora por Hora v. 1.0.0.25";
+            tssHrVersion.Text = "Hora por Hora v. 1.0.1.0";
             timer1.Start();
         }
         private void Inicio()

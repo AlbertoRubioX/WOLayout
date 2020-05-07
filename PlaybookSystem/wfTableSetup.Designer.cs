@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lblLayout2 = new System.Windows.Forms.Label();
@@ -40,16 +39,15 @@
             this.dgwSuge = new System.Windows.Forms.DataGridView();
             this.txtLayout = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblDescrip = new System.Windows.Forms.Label();
+            this.txtItem = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btTable2 = new System.Windows.Forms.Button();
             this.btTable1 = new System.Windows.Forms.Button();
             this.btTable6 = new System.Windows.Forms.Button();
             this.btTable5 = new System.Windows.Forms.Button();
             this.btTable4 = new System.Windows.Forms.Button();
             this.btTable3 = new System.Windows.Forms.Button();
-            this.lblDescrip = new System.Windows.Forms.Label();
-            this.txtItem = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -63,54 +61,47 @@
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssHrVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btTable7 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwComp)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwSuge)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Controls.Add(this.txtLayout);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.lblDescrip);
             this.panel1.Controls.Add(this.txtItem);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(11, 13);
+            this.panel1.Location = new System.Drawing.Point(210, 9);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(811, 620);
             this.panel1.TabIndex = 4;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Blue;
-            this.button1.BackgroundImage = global::PlaybookSystem.Properties.Resources.go_down;
-            this.button1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(767, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(39, 22);
-            this.button1.TabIndex = 8;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(23, 176);
+            this.tabControl1.Location = new System.Drawing.Point(23, 71);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(765, 436);
+            this.tabControl1.Size = new System.Drawing.Size(765, 541);
             this.tabControl1.TabIndex = 23;
             // 
             // tabPage1
@@ -121,7 +112,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(757, 407);
+            this.tabPage1.Size = new System.Drawing.Size(757, 512);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Lista de Componentes";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -150,8 +141,10 @@
             this.dgwComp.RowHeadersVisible = false;
             this.dgwComp.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgwComp.RowTemplate.Height = 24;
-            this.dgwComp.Size = new System.Drawing.Size(732, 365);
+            this.dgwComp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgwComp.Size = new System.Drawing.Size(732, 470);
             this.dgwComp.TabIndex = 4;
+            this.dgwComp.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwComp_CellContentClick);
             this.dgwComp.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwComp_CellFormatting);
             // 
             // lbl001
@@ -171,7 +164,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(757, 407);
+            this.tabPage2.Size = new System.Drawing.Size(757, 512);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Sugerencia";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -190,16 +183,17 @@
             this.dgwSuge.RowHeadersVisible = false;
             this.dgwSuge.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgwSuge.RowTemplate.Height = 24;
-            this.dgwSuge.Size = new System.Drawing.Size(732, 387);
+            this.dgwSuge.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgwSuge.Size = new System.Drawing.Size(732, 492);
             this.dgwSuge.TabIndex = 3;
             this.dgwSuge.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwSuge_CellFormatting);
             // 
             // txtLayout
             // 
             this.txtLayout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLayout.Location = new System.Drawing.Point(702, 27);
+            this.txtLayout.Location = new System.Drawing.Point(722, 27);
             this.txtLayout.Name = "txtLayout";
-            this.txtLayout.Size = new System.Drawing.Size(69, 30);
+            this.txtLayout.Size = new System.Drawing.Size(49, 30);
             this.txtLayout.TabIndex = 1;
             this.txtLayout.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtLayout.TextChanged += new System.EventHandler(this.txtLayout_TextChanged);
@@ -208,99 +202,17 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(606, 32);
+            this.label1.Location = new System.Drawing.Point(626, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 25);
             this.label1.TabIndex = 22;
             this.label1.Text = "Layout :";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btTable2);
-            this.groupBox1.Controls.Add(this.btTable1);
-            this.groupBox1.Controls.Add(this.btTable6);
-            this.groupBox1.Controls.Add(this.btTable5);
-            this.groupBox1.Controls.Add(this.btTable4);
-            this.groupBox1.Controls.Add(this.btTable3);
-            this.groupBox1.Location = new System.Drawing.Point(23, 71);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(765, 99);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Mesas";
-            // 
-            // btTable2
-            // 
-            this.btTable2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTable2.Location = new System.Drawing.Point(139, 25);
-            this.btTable2.Name = "btTable2";
-            this.btTable2.Size = new System.Drawing.Size(117, 59);
-            this.btTable2.TabIndex = 7;
-            this.btTable2.Text = "Mesa 2";
-            this.btTable2.UseVisualStyleBackColor = true;
-            this.btTable2.Click += new System.EventHandler(this.btTable2_Click);
-            // 
-            // btTable1
-            // 
-            this.btTable1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btTable1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTable1.Location = new System.Drawing.Point(16, 25);
-            this.btTable1.Name = "btTable1";
-            this.btTable1.Size = new System.Drawing.Size(117, 59);
-            this.btTable1.TabIndex = 6;
-            this.btTable1.Text = "Mesa 1";
-            this.btTable1.UseVisualStyleBackColor = true;
-            this.btTable1.Click += new System.EventHandler(this.btTable1_Click);
-            // 
-            // btTable6
-            // 
-            this.btTable6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTable6.Location = new System.Drawing.Point(631, 25);
-            this.btTable6.Name = "btTable6";
-            this.btTable6.Size = new System.Drawing.Size(117, 59);
-            this.btTable6.TabIndex = 5;
-            this.btTable6.Text = "Mesa 6";
-            this.btTable6.UseVisualStyleBackColor = true;
-            this.btTable6.Click += new System.EventHandler(this.btTable6_Click);
-            // 
-            // btTable5
-            // 
-            this.btTable5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTable5.Location = new System.Drawing.Point(508, 25);
-            this.btTable5.Name = "btTable5";
-            this.btTable5.Size = new System.Drawing.Size(117, 59);
-            this.btTable5.TabIndex = 4;
-            this.btTable5.Text = "Mesa 5";
-            this.btTable5.UseVisualStyleBackColor = true;
-            this.btTable5.Click += new System.EventHandler(this.btTable5_Click);
-            // 
-            // btTable4
-            // 
-            this.btTable4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTable4.Location = new System.Drawing.Point(385, 25);
-            this.btTable4.Name = "btTable4";
-            this.btTable4.Size = new System.Drawing.Size(117, 59);
-            this.btTable4.TabIndex = 3;
-            this.btTable4.Text = "Mesa 4";
-            this.btTable4.UseVisualStyleBackColor = true;
-            this.btTable4.Click += new System.EventHandler(this.btTable4_Click);
-            // 
-            // btTable3
-            // 
-            this.btTable3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTable3.Location = new System.Drawing.Point(262, 25);
-            this.btTable3.Name = "btTable3";
-            this.btTable3.Size = new System.Drawing.Size(117, 59);
-            this.btTable3.TabIndex = 2;
-            this.btTable3.Text = "Mesa 3";
-            this.btTable3.UseVisualStyleBackColor = true;
-            this.btTable3.Click += new System.EventHandler(this.btTable3_Click);
-            // 
             // lblDescrip
             // 
             this.lblDescrip.AutoSize = true;
             this.lblDescrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescrip.Location = new System.Drawing.Point(292, 30);
+            this.lblDescrip.Location = new System.Drawing.Point(278, 30);
             this.lblDescrip.Name = "lblDescrip";
             this.lblDescrip.Size = new System.Drawing.Size(109, 25);
             this.lblDescrip.TabIndex = 19;
@@ -311,7 +223,7 @@
             this.txtItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtItem.Location = new System.Drawing.Point(101, 27);
             this.txtItem.Name = "txtItem";
-            this.txtItem.Size = new System.Drawing.Size(185, 30);
+            this.txtItem.Size = new System.Drawing.Size(171, 30);
             this.txtItem.TabIndex = 0;
             this.txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItem_KeyDown);
             // 
@@ -324,6 +236,90 @@
             this.label2.Size = new System.Drawing.Size(61, 25);
             this.label2.TabIndex = 17;
             this.label2.Text = "Job :";
+            // 
+            // btTable2
+            // 
+            this.btTable2.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
+            this.btTable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTable2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTable2.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.btTable2.Location = new System.Drawing.Point(35, 136);
+            this.btTable2.Name = "btTable2";
+            this.btTable2.Size = new System.Drawing.Size(117, 59);
+            this.btTable2.TabIndex = 7;
+            this.btTable2.Text = "Mesa 2";
+            this.btTable2.UseVisualStyleBackColor = true;
+            this.btTable2.Click += new System.EventHandler(this.btTable2_Click);
+            // 
+            // btTable1
+            // 
+            this.btTable1.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
+            this.btTable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTable1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTable1.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.btTable1.Location = new System.Drawing.Point(35, 71);
+            this.btTable1.Name = "btTable1";
+            this.btTable1.Size = new System.Drawing.Size(117, 59);
+            this.btTable1.TabIndex = 6;
+            this.btTable1.Text = "Mesa 1";
+            this.btTable1.UseVisualStyleBackColor = true;
+            this.btTable1.Click += new System.EventHandler(this.btTable1_Click);
+            // 
+            // btTable6
+            // 
+            this.btTable6.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
+            this.btTable6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTable6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTable6.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.btTable6.Location = new System.Drawing.Point(35, 396);
+            this.btTable6.Name = "btTable6";
+            this.btTable6.Size = new System.Drawing.Size(117, 59);
+            this.btTable6.TabIndex = 5;
+            this.btTable6.Text = "Mesa 6";
+            this.btTable6.UseVisualStyleBackColor = true;
+            this.btTable6.Click += new System.EventHandler(this.btTable6_Click);
+            // 
+            // btTable5
+            // 
+            this.btTable5.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
+            this.btTable5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTable5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTable5.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.btTable5.Location = new System.Drawing.Point(35, 331);
+            this.btTable5.Name = "btTable5";
+            this.btTable5.Size = new System.Drawing.Size(117, 59);
+            this.btTable5.TabIndex = 4;
+            this.btTable5.Text = "Mesa 5";
+            this.btTable5.UseVisualStyleBackColor = true;
+            this.btTable5.Click += new System.EventHandler(this.btTable5_Click);
+            // 
+            // btTable4
+            // 
+            this.btTable4.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
+            this.btTable4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTable4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTable4.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.btTable4.Location = new System.Drawing.Point(35, 266);
+            this.btTable4.Name = "btTable4";
+            this.btTable4.Size = new System.Drawing.Size(117, 59);
+            this.btTable4.TabIndex = 3;
+            this.btTable4.Text = "Mesa 4";
+            this.btTable4.UseVisualStyleBackColor = true;
+            this.btTable4.Click += new System.EventHandler(this.btTable4_Click);
+            // 
+            // btTable3
+            // 
+            this.btTable3.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
+            this.btTable3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTable3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTable3.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.btTable3.Location = new System.Drawing.Point(35, 201);
+            this.btTable3.Name = "btTable3";
+            this.btTable3.Size = new System.Drawing.Size(117, 59);
+            this.btTable3.TabIndex = 2;
+            this.btTable3.Text = "Mesa 3";
+            this.btTable3.UseVisualStyleBackColor = true;
+            this.btTable3.Click += new System.EventHandler(this.btTable3_Click);
             // 
             // statusStrip1
             // 
@@ -341,10 +337,10 @@
             this.toolStripStatusLabel2,
             this.tssVersion,
             this.tssHrVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 651);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 637);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(830, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1026, 25);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -429,14 +425,79 @@
             // 
             this.tssHrVersion.Name = "tssHrVersion";
             this.tssHrVersion.Size = new System.Drawing.Size(50, 20);
-            this.tssHrVersion.Text = "1.0.0.0";
+            this.tssHrVersion.Text = "1.0.0.1";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.btTable7);
+            this.panel2.Controls.Add(this.btTable6);
+            this.panel2.Controls.Add(this.btTable2);
+            this.panel2.Controls.Add(this.btTable5);
+            this.panel2.Controls.Add(this.btTable1);
+            this.panel2.Controls.Add(this.btTable4);
+            this.panel2.Controls.Add(this.btTable3);
+            this.panel2.Location = new System.Drawing.Point(7, 9);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(197, 620);
+            this.panel2.TabIndex = 6;
+            // 
+            // btTable7
+            // 
+            this.btTable7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btTable7.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
+            this.btTable7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTable7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTable7.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.btTable7.Location = new System.Drawing.Point(35, 461);
+            this.btTable7.Name = "btTable7";
+            this.btTable7.Size = new System.Drawing.Size(117, 59);
+            this.btTable7.TabIndex = 8;
+            this.btTable7.Text = "Mesa 7";
+            this.btTable7.UseVisualStyleBackColor = false;
+            this.btTable7.Click += new System.EventHandler(this.btTable7_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Location = new System.Drawing.Point(7, 10);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(197, 42);
+            this.panel3.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PlaybookSystem.Properties.Resources.LOG_Medline;
+            this.pictureBox1.Location = new System.Drawing.Point(1, -4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(53, 43);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Azure;
+            this.label3.Location = new System.Drawing.Point(74, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 24);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "MESAS";
             // 
             // wfTableSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::PlaybookSystem.Properties.Resources.Blue_Background;
-            this.ClientSize = new System.Drawing.Size(830, 676);
+            this.ClientSize = new System.Drawing.Size(1026, 662);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -455,9 +516,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgwComp)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwSuge)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -475,7 +539,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblDescrip;
         private System.Windows.Forms.TextBox txtItem;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btTable6;
         private System.Windows.Forms.Button btTable5;
         private System.Windows.Forms.Button btTable4;
@@ -496,7 +559,11 @@
         private System.Windows.Forms.DataGridView dgwComp;
         private System.Windows.Forms.Label lbl001;
         private System.Windows.Forms.DataGridView dgwSuge;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblLayout2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btTable7;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

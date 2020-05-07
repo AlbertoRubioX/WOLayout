@@ -39,7 +39,7 @@ namespace PlaybookSystem
             Globals._gsCompany = "686";
 
             Inicio();
-            tssHrVersion.Text = "1.0.0.0";
+            tssHrVersion.Text = "1.0.0.1";
             
         }
         private void wfTableSetup_Activated(object sender, EventArgs e)
@@ -63,14 +63,20 @@ namespace PlaybookSystem
                 dgwSuge.DataSource = null;
                 CargarColumnasSug();
 
-                
-                btTable1.BackColor = Color.White;
-                btTable2.BackColor = Color.White;
-                btTable3.BackColor = Color.White;
-                btTable4.BackColor = Color.White;
-                btTable5.BackColor = Color.White;
-                btTable6.BackColor = Color.White;
-
+                btTable1.FlatAppearance.BorderColor = Color.Cyan;
+                btTable1.ForeColor = Color.DarkTurquoise;
+                btTable2.FlatAppearance.BorderColor = Color.Cyan;
+                btTable2.ForeColor = Color.DarkTurquoise;
+                btTable3.FlatAppearance.BorderColor = Color.Cyan;
+                btTable3.ForeColor = Color.DarkTurquoise;
+                btTable4.FlatAppearance.BorderColor = Color.Cyan;
+                btTable4.ForeColor = Color.DarkTurquoise;
+                btTable5.FlatAppearance.BorderColor = Color.Cyan;
+                btTable5.ForeColor = Color.DarkTurquoise;
+                btTable6.FlatAppearance.BorderColor = Color.Cyan;
+                btTable6.ForeColor = Color.DarkTurquoise;
+                btTable7.FlatAppearance.BorderColor = Color.Cyan;
+                btTable7.ForeColor = Color.DarkTurquoise;
 
             }
             catch (Exception ex)
@@ -85,7 +91,7 @@ namespace PlaybookSystem
             {
                 DataTable dtNew = new DataTable("Comp");
                 dtNew.Columns.Add("NIVEL", typeof(string));
-                dtNew.Columns.Add("CODIGO", typeof(string));
+                dtNew.Columns.Add("NO. PARTE", typeof(string));
                 dtNew.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew.Columns.Add("CANT", typeof(decimal));
                 dtNew.Columns.Add("UM", typeof(string));
@@ -120,7 +126,25 @@ namespace PlaybookSystem
             dgwComp.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwComp.Columns[4].ReadOnly = true;
 
-           
+            foreach(DataGridViewRow row in dgwComp.Rows)
+            {
+                bool bExist = false;
+                string sValue = dgwComp[1, row.Index].Value.ToString();
+                foreach (DataGridViewRow row2 in dgwSuge.Rows)
+                {
+                    string sComp = dgwSuge[3, row2.Index].Value.ToString();
+                    if (sComp == sValue)
+                    {
+                        bExist = true;
+                        break;
+                    }
+                }
+                if(bExist)
+                    row.DefaultCellStyle.BackColor = Color.Orange;
+                else
+                    row.DefaultCellStyle.BackColor = Color.White;
+            }
+            
         }
         private void CargarColumnasSug()
         {
@@ -131,7 +155,7 @@ namespace PlaybookSystem
                 dtNew.Columns.Add("item", typeof(string));
                 dtNew.Columns.Add("MESA", typeof(string));
                 dtNew.Columns.Add("#", typeof(decimal));
-                dtNew.Columns.Add("CODIGO", typeof(string));
+                dtNew.Columns.Add("NO. PARTE", typeof(string));
                 dtNew.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew.Columns.Add("CANT", typeof(decimal));
                 dtNew.Columns.Add("UM", typeof(string));
@@ -158,13 +182,13 @@ namespace PlaybookSystem
             dgwSuge.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[4].ReadOnly = true;
 
-            dgwSuge.Columns[5].Width = ColumnWith(dgwSuge, 10);//qty
+            dgwSuge.Columns[5].Width = ColumnWith(dgwSuge, 6);//qty
             dgwSuge.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgwSuge.Columns[5].DefaultCellStyle.Format = "0";
             dgwSuge.Columns[5].ReadOnly = true;
 
-            dgwSuge.Columns[6].Width = ColumnWith(dgwSuge, 5);//um
+            dgwSuge.Columns[6].Width = ColumnWith(dgwSuge, 8);//um
             dgwSuge.Columns[6].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[6].ReadOnly = true;
@@ -226,7 +250,7 @@ namespace PlaybookSystem
 
                     if(dtS.Rows.Count > 0)
                     {
-                        for(int x = 1; x <= 6; x++)
+                        for(int x = 1; x <= 7; x++)
                         {
                             itemd.Mesa = x.ToString();
                             DataTable dt = ItemSugdetLogica.ConsultarVistaMesa(itemd);
@@ -235,22 +259,32 @@ namespace PlaybookSystem
                                 switch (x.ToString())
                                 {
                                     case "1":
-                                        btTable1.BackColor = Color.Orange;
+                                        btTable1.FlatAppearance.BorderColor = Color.Orange;
+                                        btTable1.ForeColor = Color.DarkOrange;
                                         break;
                                     case "2":
-                                        btTable2.BackColor = Color.Orange;
+                                        btTable2.FlatAppearance.BorderColor = Color.Orange;
+                                        btTable2.ForeColor = Color.DarkOrange;
                                         break;
                                     case "3":
-                                        btTable3.BackColor = Color.Orange;
+                                        btTable3.FlatAppearance.BorderColor = Color.Orange;
+                                        btTable3.ForeColor = Color.DarkOrange;
                                         break;
                                     case "4":
-                                        btTable4.BackColor = Color.Orange;
+                                        btTable4.FlatAppearance.BorderColor = Color.Orange;
+                                        btTable4.ForeColor = Color.DarkOrange;
                                         break;
                                     case "5":
-                                        btTable5.BackColor = Color.Orange;
+                                        btTable5.FlatAppearance.BorderColor = Color.Orange;
+                                        btTable5.ForeColor = Color.DarkOrange;
                                         break;
                                     case "6":
-                                        btTable6.BackColor = Color.Orange;
+                                        btTable6.FlatAppearance.BorderColor = Color.Orange;
+                                        btTable6.ForeColor = Color.DarkOrange;
+                                        break;
+                                    case "7":
+                                        btTable7.FlatAppearance.BorderColor = Color.Orange;
+                                        btTable7.ForeColor = Color.DarkOrange;
                                         break;
                                 }
                             }
@@ -302,81 +336,8 @@ namespace PlaybookSystem
         }
 
         #region regSave
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-        private bool Valida()
-        {
-            bool bValida = true;
-
-            if (string.IsNullOrEmpty(txtItem.Text))
-                return false;
-
-            if (string.IsNullOrEmpty(txtLayout.Text))
-                return false;
-
-            if (dgwComp.Rows.Count == 0)
-                return false;
-
-            
-            //foreach(DataGridViewRow row in dgwLine.Rows)
-            //{
-            //    if (row.Index == 0 && (string.IsNullOrEmpty(dgwLine[4, row.Index].Value.ToString()) || dgwLine[4, row.Index].Value.ToString()=="0"))
-            //    {
-            //        bValida = false;
-            //        MessageBox.Show("No se ha capturado la primer hora del día", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //        dgwLine.CurrentCell = dgwLine[4, row.Index];
-            //        dgwLine.Focus();
-            //        break;
-            //    }
-
-               
-            //}
-
-           
-
-            return bValida;
-        }
-        private void CargaWO()
-        {
-            
-            int iHora = DateTime.Now.Hour;
-            int iHr = 0;
-            string sValAnt = string.Empty;
-
-            foreach (DataGridViewRow row in dgwComp.Rows)
-            {
-                //string sActual = dgwLine[4, row.Index].Value.ToString();
-                //int iActual = 0;
-                //if (!int.TryParse(sActual, out iActual))
-                //    iActual = 0;
-               
-                string sWO = dgwComp[7, row.Index].Value.ToString();
-                string sHorario = dgwComp[1, row.Index].Value.ToString();
-                sHorario = sHorario.Substring(0, 2);
-                iHr = int.Parse(sHorario);
-
-                if (iHora > iHr && (string.IsNullOrEmpty(sWO)))
-                    dgwComp[7, row.Index].Value = _lsOrden;
-                
-            }
-        }
-        
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!Valida())
-                    return;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error " + ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            
-        }
-
+       
+      
         private bool Guardar()
         {
             bool bReturn = true;
@@ -710,44 +671,83 @@ namespace PlaybookSystem
 
             itemd.Mesa = _asMesa;
             DataTable dt = ItemSugdetLogica.ConsultarVistaMesa(itemd);
-            if (dt.Rows.Count > 0)
+            int iRows = dt.Rows.Count;
+            ButtonColor(_asMesa, iRows);
+            
+            CargarColumnas();
+        }
+        private void ButtonColor(string _asMesa,int _aiCant)
+        {
+            if (_aiCant == 0)
             {
-                switch(_asMesa)
+                switch (_asMesa)
                 {
                     case "1":
-                        btTable1.BackColor = Color.Orange;
+                        btTable1.FlatAppearance.BorderColor = Color.Cyan;
+                        btTable1.ForeColor = Color.DarkTurquoise;
                         break;
                     case "2":
-                        btTable2.BackColor = Color.Orange;
+                        btTable2.FlatAppearance.BorderColor = Color.Cyan;
+                        btTable2.ForeColor = Color.DarkTurquoise;
                         break;
                     case "3":
-                        btTable3.BackColor = Color.Orange;
+                        btTable3.FlatAppearance.BorderColor = Color.Cyan;
+                        btTable3.ForeColor = Color.DarkTurquoise;
                         break;
                     case "4":
-                        btTable4.BackColor = Color.Orange;
+                        btTable4.FlatAppearance.BorderColor = Color.Cyan;
+                        btTable4.ForeColor = Color.DarkTurquoise;
                         break;
                     case "5":
-                        btTable5.BackColor = Color.Orange;
+                        btTable5.FlatAppearance.BorderColor = Color.Cyan;
+                        btTable5.ForeColor = Color.DarkTurquoise;
                         break;
                     case "6":
-                        btTable6.BackColor = Color.Orange;
+                        btTable6.FlatAppearance.BorderColor = Color.Cyan;
+                        btTable6.ForeColor = Color.DarkTurquoise;
+                        break;
+                    case "7":
+                        btTable7.FlatAppearance.BorderColor = Color.Cyan;
+                        btTable7.ForeColor = Color.DarkTurquoise;
                         break;
                 }
             }
-
-            CargarColumnas();
+            else
+            {
+                switch (_asMesa)
+                {
+                    case "1":
+                        btTable1.FlatAppearance.BorderColor = Color.Orange;
+                        btTable1.ForeColor = Color.DarkOrange;
+                        break;
+                    case "2":
+                        btTable2.FlatAppearance.BorderColor = Color.Orange;
+                        btTable2.ForeColor = Color.DarkOrange;
+                        break;
+                    case "3":
+                        btTable3.FlatAppearance.BorderColor = Color.Orange;
+                        btTable3.ForeColor = Color.DarkOrange;
+                        break;
+                    case "4":
+                        btTable4.FlatAppearance.BorderColor = Color.Orange;
+                        btTable4.ForeColor = Color.DarkOrange;
+                        break;
+                    case "5":
+                        btTable5.FlatAppearance.BorderColor = Color.Orange;
+                        btTable5.ForeColor = Color.DarkOrange;
+                        break;
+                    case "6":
+                        btTable6.FlatAppearance.BorderColor = Color.Orange;
+                        btTable6.ForeColor = Color.DarkOrange;
+                        break;
+                    case "7":
+                        btTable7.FlatAppearance.BorderColor = Color.Orange;
+                        btTable7.ForeColor = Color.DarkOrange;
+                        break;
+                }
+            }
         }
-        
-        private void btTable1_Click(object sender, EventArgs e)
-        {
-        
-            OpenTable("1");
-        }
-        
-        private void btTable3_Click(object sender, EventArgs e)
-        {
-            OpenTable("3");
-        }
+       
 
         private void dgwSuge_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -775,6 +775,16 @@ namespace PlaybookSystem
             }
         }
 
+        private void btTable1_Click(object sender, EventArgs e)
+        {
+
+            OpenTable("1");
+        }
+
+        private void btTable3_Click(object sender, EventArgs e)
+        {
+            OpenTable("3");
+        }
         private void btTable2_Click(object sender, EventArgs e)
         {
             OpenTable("2");
@@ -794,8 +804,12 @@ namespace PlaybookSystem
         {
             OpenTable("6");
         }
-        
 
+        private void btTable7_Click(object sender, EventArgs e)
+        {
+
+            OpenTable("7");
+        }
         public void ResizeControl(Control ac_Control, int ai_Hor, ref int ai_WidthAnt, ref int ai_HegihtAnt, int ai_Retorna)
         {
             if (ai_WidthAnt == 0)
@@ -828,6 +842,7 @@ namespace PlaybookSystem
             {
                 _WindowStateAnt = WindowState;
                 ResizeControl(panel1, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
+                ResizeControl(panel2, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(tabControl1, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
                 
                 ResizeControl(dgwComp, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
@@ -856,5 +871,12 @@ namespace PlaybookSystem
             Suge.ShowDialog();
                
         }
+
+        private void dgwComp_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+       
     }
 }

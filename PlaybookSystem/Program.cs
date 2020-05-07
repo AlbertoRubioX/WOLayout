@@ -23,7 +23,7 @@ namespace PlaybookSystem
             Globals._gsUser = sUser;
 
             UsuarioLogica user = new UsuarioLogica();
-            user.Usuario = sUser+"00";
+            user.Usuario = sUser;
             user.Acceso = "PRO040";
             if (UsuarioLogica.ValidaAcceso(user))
                 Application.Run(new wfTableSetup());

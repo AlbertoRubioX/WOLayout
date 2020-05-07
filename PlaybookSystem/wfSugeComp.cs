@@ -514,57 +514,14 @@ namespace PlaybookSystem
             return bValida;
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*
-            int iT = tabControl1.SelectedIndex;
-            if(iT > 0)
-            {
-                if (dgwTable.Rows.Count == 0)
-                    tabControl1.SelectedIndex = 0;
-
-
-                bool bExiste = false;
-                string sPS = "PS-0" + iT.ToString();
-                foreach (DataGridViewRow row in dgwTable.Rows)
-                {
-                    if (!string.IsNullOrEmpty(dgwTable[2, row.Index].Value.ToString()))
-                    {
-                        string sCodigo = dgwTable[2, row.Index].Value.ToString();
-                        if(sCodigo == sPS)
-                        {
-                            bExiste = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!bExiste)
-                {
-                    MessageBox.Show("No se han capturado Pre-Ensambles en la Mesa", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    tabControl1.SelectedIndex = 0;
-                    return;
-                }
-                
-            }
-            */
-        }
+      
         
         private void dgwTable_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgwTable.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
-        private void dgwPre_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            
-        }
-
-        private void dgwPre2_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-           
-        }
-
+      
         private void dgwTable_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             int iRow = e.RowIndex;
@@ -591,13 +548,17 @@ namespace PlaybookSystem
                 case "6":
                     e.CellStyle.BackColor = Color.LightBlue;
                     break;
+                case "7":
+                    e.CellStyle.BackColor = Color.MediumPurple;
+                    break;
             }
 
             sValue = dgwTable[2, e.RowIndex].Value.ToString();
-            if (sValue.IndexOf("PS-") != -1)
+            if (sValue.IndexOf("PRE-") != -1)
             {
                 e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Italic);
-                e.CellStyle.BackColor = Color.WhiteSmoke;
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                //e.CellStyle.BackColor = Color.WhiteSmoke;
             }
         }
 

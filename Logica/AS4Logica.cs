@@ -232,7 +232,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT D.LEVEL_CODE as NIVEL, D.NODE as CODIGO, K.IMDSC as DESCRIPCION ,D.QTY as CANT,D.UM as UM,D.PACKDRAW_REV " +
+                string sSql = "SELECT D.LEVEL_CODE as NIVEL, D.NODE as NO_PARTE, K.IMDSC as DESCRIPCION ,D.QTY as CANT,D.UM as UM,D.PACKDRAW_REV " +
                 "FROM KBM400SQL.PACKDETAIL D INNER JOIN KBM400MFG.FKITMSTR K ON D.NODE = K.IMPN AND K.IMCO = '"+con.CN+"' " +
                 "WHERE D.DMRID = '" + con.Item + "' " +
                 "AND SUBSTR(D.LEVEL_CODE, 1, 1) <> 'Z' AND SUBSTR(D.LEVEL_CODE, 1, 1) <> 'W' " +

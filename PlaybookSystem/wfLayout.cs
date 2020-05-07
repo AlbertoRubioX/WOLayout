@@ -94,7 +94,7 @@ namespace PlaybookSystem
                 WindowState = FormWindowState.Maximized;
 
                 tssUserName.Text = _lsUser;
-                tssVersion.Text = "1.0.0.29";
+                tssVersion.Text = "1.0.1.0";
 
                 lblLine.Visible = false;
                 tsslRampeo.Visible = false;
@@ -853,14 +853,25 @@ namespace PlaybookSystem
                         if(_dRampeo > 0 && _dRampeo < 100)
                             CalculaRampeo();
 
+                        //Conveyor Speed
+                        CalculaConveyorSpeed();
+
+                        //sugestion
+                        ItemSugLogica sug = new ItemSugLogica();
+                        sug.Item = _lsItem;
+                        DataTable dtS = ItemSugLogica.ConsultarItem(sug);
+                        if(dtS.Rows.Count > 0)
+                        {
+                            wfSugeComp Suge = new wfSugeComp();
+                            Suge._lsItem = _lsItem;
+                            Suge._lsDesc = _lsItemDesc;
+                            Suge.Show();
+                        }
+
                         if (_sTimer == "1")
                             ShowTimer();
 
                         timer1.Start();
-
-                        //Conveyor Speed
-                        CalculaConveyorSpeed();
-
                     }
                     else
                     {

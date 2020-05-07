@@ -78,7 +78,7 @@
             this.panel1.Controls.Add(this.lbl01);
             this.panel1.Location = new System.Drawing.Point(8, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(681, 547);
+            this.panel1.Size = new System.Drawing.Size(676, 624);
             this.panel1.TabIndex = 0;
             // 
             // lblItem
@@ -104,9 +104,8 @@
             this.tabControl1.Location = new System.Drawing.Point(14, 50);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(648, 492);
+            this.tabControl1.Size = new System.Drawing.Size(648, 569);
             this.tabControl1.TabIndex = 15;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -115,7 +114,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(640, 461);
+            this.tabPage1.Size = new System.Drawing.Size(640, 538);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Compenentes por Mesa";
             // 
@@ -131,7 +130,7 @@
             this.dgwTable.Name = "dgwTable";
             this.dgwTable.RowHeadersVisible = false;
             this.dgwTable.RowTemplate.Height = 24;
-            this.dgwTable.Size = new System.Drawing.Size(629, 450);
+            this.dgwTable.Size = new System.Drawing.Size(629, 527);
             this.dgwTable.TabIndex = 14;
             this.dgwTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwTable_CellFormatting);
             this.dgwTable.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwTable_ColumnAdded);
@@ -144,9 +143,9 @@
             this.tb1.Location = new System.Drawing.Point(4, 27);
             this.tb1.Name = "tb1";
             this.tb1.Padding = new System.Windows.Forms.Padding(3);
-            this.tb1.Size = new System.Drawing.Size(640, 461);
+            this.tb1.Size = new System.Drawing.Size(640, 538);
             this.tb1.TabIndex = 1;
-            this.tb1.Text = "PS-01";
+            this.tb1.Text = "PRE-01";
             // 
             // dgwPre
             // 
@@ -159,9 +158,8 @@
             this.dgwPre.Name = "dgwPre";
             this.dgwPre.RowHeadersVisible = false;
             this.dgwPre.RowTemplate.Height = 24;
-            this.dgwPre.Size = new System.Drawing.Size(629, 450);
+            this.dgwPre.Size = new System.Drawing.Size(629, 527);
             this.dgwPre.TabIndex = 15;
-            this.dgwPre.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwPre_ColumnAdded);
             // 
             // tb2
             // 
@@ -170,9 +168,9 @@
             this.tb2.Location = new System.Drawing.Point(4, 27);
             this.tb2.Name = "tb2";
             this.tb2.Padding = new System.Windows.Forms.Padding(3);
-            this.tb2.Size = new System.Drawing.Size(640, 461);
+            this.tb2.Size = new System.Drawing.Size(640, 538);
             this.tb2.TabIndex = 2;
-            this.tb2.Text = "PS-02";
+            this.tb2.Text = "PRE-02";
             // 
             // dgwPre2
             // 
@@ -186,9 +184,8 @@
             this.dgwPre2.Name = "dgwPre2";
             this.dgwPre2.RowHeadersVisible = false;
             this.dgwPre2.RowTemplate.Height = 24;
-            this.dgwPre2.Size = new System.Drawing.Size(629, 450);
+            this.dgwPre2.Size = new System.Drawing.Size(629, 527);
             this.dgwPre2.TabIndex = 15;
-            this.dgwPre2.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwPre2_ColumnAdded);
             // 
             // tb3
             // 
@@ -197,9 +194,9 @@
             this.tb3.Location = new System.Drawing.Point(4, 27);
             this.tb3.Name = "tb3";
             this.tb3.Padding = new System.Windows.Forms.Padding(3);
-            this.tb3.Size = new System.Drawing.Size(640, 461);
+            this.tb3.Size = new System.Drawing.Size(640, 538);
             this.tb3.TabIndex = 3;
-            this.tb3.Text = "PS-03";
+            this.tb3.Text = "PRE-03";
             // 
             // dgwPre3
             // 
@@ -213,7 +210,7 @@
             this.dgwPre3.Name = "dgwPre3";
             this.dgwPre3.RowHeadersVisible = false;
             this.dgwPre3.RowTemplate.Height = 24;
-            this.dgwPre3.Size = new System.Drawing.Size(629, 450);
+            this.dgwPre3.Size = new System.Drawing.Size(629, 527);
             this.dgwPre3.TabIndex = 15;
             // 
             // tb4
@@ -224,9 +221,9 @@
             this.tb4.Location = new System.Drawing.Point(4, 27);
             this.tb4.Name = "tb4";
             this.tb4.Padding = new System.Windows.Forms.Padding(3);
-            this.tb4.Size = new System.Drawing.Size(640, 461);
+            this.tb4.Size = new System.Drawing.Size(640, 538);
             this.tb4.TabIndex = 4;
-            this.tb4.Text = "PS-04";
+            this.tb4.Text = "PRE-04";
             // 
             // dgwPre4
             // 
@@ -240,7 +237,7 @@
             this.dgwPre4.Name = "dgwPre4";
             this.dgwPre4.RowHeadersVisible = false;
             this.dgwPre4.RowTemplate.Height = 24;
-            this.dgwPre4.Size = new System.Drawing.Size(629, 450);
+            this.dgwPre4.Size = new System.Drawing.Size(629, 527);
             this.dgwPre4.TabIndex = 15;
             // 
             // tb5
@@ -250,9 +247,9 @@
             this.tb5.Location = new System.Drawing.Point(4, 27);
             this.tb5.Name = "tb5";
             this.tb5.Padding = new System.Windows.Forms.Padding(3);
-            this.tb5.Size = new System.Drawing.Size(640, 461);
+            this.tb5.Size = new System.Drawing.Size(640, 538);
             this.tb5.TabIndex = 5;
-            this.tb5.Text = "PS-05";
+            this.tb5.Text = "PRE-05";
             // 
             // dgwPre5
             // 
@@ -266,7 +263,7 @@
             this.dgwPre5.Name = "dgwPre5";
             this.dgwPre5.RowHeadersVisible = false;
             this.dgwPre5.RowTemplate.Height = 24;
-            this.dgwPre5.Size = new System.Drawing.Size(629, 450);
+            this.dgwPre5.Size = new System.Drawing.Size(629, 527);
             this.dgwPre5.TabIndex = 15;
             // 
             // lbl01
@@ -291,9 +288,9 @@
             this.toolStripStatusLabel5,
             this.tssTotal,
             this.toolStripStatusLabel7});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 569);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 650);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(696, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(691, 25);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -356,7 +353,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::PlaybookSystem.Properties.Resources.Blue_Background;
-            this.ClientSize = new System.Drawing.Size(696, 594);
+            this.ClientSize = new System.Drawing.Size(691, 675);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Name = "wfSugeComp";

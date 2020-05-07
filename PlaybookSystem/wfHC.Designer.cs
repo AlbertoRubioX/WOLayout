@@ -45,14 +45,14 @@
             this.panel1.Controls.Add(this.lblText1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(470, 158);
+            this.panel1.Size = new System.Drawing.Size(515, 158);
             this.panel1.TabIndex = 0;
             // 
             // txtInput2
             // 
             this.txtInput2.Enabled = false;
             this.txtInput2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInput2.Location = new System.Drawing.Point(339, 19);
+            this.txtInput2.Location = new System.Drawing.Point(385, 19);
             this.txtInput2.Name = "txtInput2";
             this.txtInput2.ReadOnly = true;
             this.txtInput2.Size = new System.Drawing.Size(87, 38);
@@ -73,7 +73,7 @@
             // txtInput
             // 
             this.txtInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInput.Location = new System.Drawing.Point(339, 83);
+            this.txtInput.Location = new System.Drawing.Point(385, 83);
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(87, 38);
             this.txtInput.TabIndex = 1;
@@ -97,7 +97,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::PlaybookSystem.Properties.Resources.Blue_Background;
-            this.ClientSize = new System.Drawing.Size(489, 182);
+            this.ClientSize = new System.Drawing.Size(539, 182);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Name = "wfHC";
