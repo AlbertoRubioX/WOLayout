@@ -460,7 +460,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Controls.Add(this.label3);
@@ -472,7 +472,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PlaybookSystem.Properties.Resources.LOG_Medline;
-            this.pictureBox1.Location = new System.Drawing.Point(1, -4);
+            this.pictureBox1.Location = new System.Drawing.Point(0, -1);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(53, 43);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -483,7 +483,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Azure;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.label3.Location = new System.Drawing.Point(74, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 24);

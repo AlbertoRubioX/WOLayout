@@ -154,6 +154,7 @@
             this.dgwTable.Size = new System.Drawing.Size(629, 315);
             this.dgwTable.TabIndex = 14;
             this.dgwTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwTable_CellFormatting);
+            
             this.dgwTable.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwTable_ColumnAdded);
             // 
             // tb1

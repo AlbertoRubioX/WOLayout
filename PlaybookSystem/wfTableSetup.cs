@@ -39,7 +39,7 @@ namespace PlaybookSystem
             Globals._gsCompany = "686";
 
             Inicio();
-            tssHrVersion.Text = "1.0.0.1";
+            tssHrVersion.Text = "1.0.0.3";
             
         }
         private void wfTableSetup_Activated(object sender, EventArgs e)

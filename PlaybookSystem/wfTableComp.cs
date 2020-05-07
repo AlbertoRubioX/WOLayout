@@ -807,6 +807,24 @@ namespace PlaybookSystem
                         tabControl1.SelectedIndex = 0;
                         return false;
                     }
+                    //comparar cantidad en packdraw
+                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    {
+                        string sCodigo = _dt.Rows[i][1].ToString();
+                        if (sCodigo == sComp)
+                        {
+                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
+                            if (iCant > iC)
+                            {
+                                int iCa = (int)iC;
+                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente "+sCodigo+" supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                tabControl1.SelectedIndex = 0;
+                                dgwTable.Rows[row.Index].Selected = true;
+                                return false;
+                            }
+                        }
+                    }
+
 
                     iComp++;
                     
@@ -909,8 +927,173 @@ namespace PlaybookSystem
                         return false;
                     }
 
+                    //comparar cantidad en packdraw
+                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    {
+                        string sCodigo = _dt.Rows[i][1].ToString();
+                        if (sCodigo == sComp)
+                        {
+                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
+                            if (iCant > iC)
+                            {
+                                int iCa = (int)iC;
+                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                tabControl1.SelectedIndex = 1;
+                                dgwPre.Rows[row.Index].Selected = true;
+                                return false;
+                            }
+                        }
+                    }
                 }
             }
+
+            //PRE02
+            foreach (DataGridViewRow row in dgwPre2.Rows)
+            {
+                if (!string.IsNullOrEmpty(dgwPre2[2, row.Index].Value.ToString()))
+                {
+                    string sComp = dgwPre2[2, row.Index].Value.ToString();
+                    decimal iCant = 0;
+                    if (!decimal.TryParse(dgwPre2[4, row.Index].Value.ToString(), out iCant))
+                        iCant = 0;
+
+                    if (iCant == 0)
+                    {
+                        MessageBox.Show("No se ha capturado la cantidad en el componente " + sComp, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tabControl1.SelectedIndex = 2;
+                        return false;
+                    }
+
+                    //comparar cantidad en packdraw
+                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    {
+                        string sCodigo = _dt.Rows[i][1].ToString();
+                        if (sCodigo == sComp)
+                        {
+                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
+                            if (iCant > iC)
+                            {
+                                int iCa = (int)iC;
+                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                tabControl1.SelectedIndex = 2;
+                                dgwPre2.Rows[row.Index].Selected = true;
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            //PRE03
+            foreach (DataGridViewRow row in dgwPre3.Rows)
+            {
+                if (!string.IsNullOrEmpty(dgwPre3[2, row.Index].Value.ToString()))
+                {
+                    string sComp = dgwPre3[2, row.Index].Value.ToString();
+                    decimal iCant = 0;
+                    if (!decimal.TryParse(dgwPre3[4, row.Index].Value.ToString(), out iCant))
+                        iCant = 0;
+
+                    if (iCant == 0)
+                    {
+                        MessageBox.Show("No se ha capturado la cantidad en el componente " + sComp, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tabControl1.SelectedIndex = 1;
+                        return false;
+                    }
+
+                    //comparar cantidad en packdraw
+                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    {
+                        string sCodigo = _dt.Rows[i][1].ToString();
+                        if (sCodigo == sComp)
+                        {
+                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
+                            if (iCant > iC)
+                            {
+                                int iCa = (int)iC;
+                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                tabControl1.SelectedIndex = 3;
+                                dgwPre3.Rows[row.Index].Selected = true;
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            //PRE04
+            foreach (DataGridViewRow row in dgwPre4.Rows)
+            {
+                if (!string.IsNullOrEmpty(dgwPre4[2, row.Index].Value.ToString()))
+                {
+                    string sComp = dgwPre4[2, row.Index].Value.ToString();
+                    decimal iCant = 0;
+                    if (!decimal.TryParse(dgwPre4[4, row.Index].Value.ToString(), out iCant))
+                        iCant = 0;
+
+                    if (iCant == 0)
+                    {
+                        MessageBox.Show("No se ha capturado la cantidad en el componente " + sComp, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tabControl1.SelectedIndex = 1;
+                        return false;
+                    }
+
+                    //comparar cantidad en packdraw
+                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    {
+                        string sCodigo = _dt.Rows[i][1].ToString();
+                        if (sCodigo == sComp)
+                        {
+                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
+                            if (iCant > iC)
+                            {
+                                int iCa = (int)iC;
+                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                tabControl1.SelectedIndex = 4;
+                                dgwPre4.Rows[row.Index].Selected = true;
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            //PRE05
+            foreach (DataGridViewRow row in dgwPre5.Rows)
+            {
+                if (!string.IsNullOrEmpty(dgwPre5[2, row.Index].Value.ToString()))
+                {
+                    string sComp = dgwPre5[2, row.Index].Value.ToString();
+                    decimal iCant = 0;
+                    if (!decimal.TryParse(dgwPre5[4, row.Index].Value.ToString(), out iCant))
+                        iCant = 0;
+
+                    if (iCant == 0)
+                    {
+                        MessageBox.Show("No se ha capturado la cantidad en el componente " + sComp, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tabControl1.SelectedIndex = 4;
+                        return false;
+                    }
+
+                    //comparar cantidad en packdraw
+                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    {
+                        string sCodigo = _dt.Rows[i][1].ToString();
+                        if (sCodigo == sComp)
+                        {
+                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
+                            if (iCant > iC)
+                            {
+                                int iCa = (int)iC;
+                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                tabControl1.SelectedIndex = 5;
+                                dgwPre5.Rows[row.Index].Selected = true;
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+
+
             return bValida;
         }
 
@@ -1215,39 +1398,63 @@ namespace PlaybookSystem
                 {
                     if (sCodigo.IndexOf("PRE-") != -1)
                     {
-                        Result = MessageBox.Show("Desea eliminar los componentes asignados al pre-ensamble " + sCodigo + " ?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                        if (Result == DialogResult.Yes)
-                        {
-                            item.Mesa = sCodigo;
-                            ItemSugdetLogica.EliminarSP(item);
-                        }
-                        else
-                        {
-                            if (Result == DialogResult.Cancel)
-                                return;
-                        }
-
+                        int iRowS = 0;
                         iTab = int.Parse(sCodigo.Substring(sCodigo.Length - 1, 1));
                         switch (iTab)
                         {
                             case 1:
-                                dgwPre.DataSource = null;
+                                iRowS = dgwPre.Rows.Count;
                                 break;
                             case 2:
-                                dgwPre2.DataSource = null;
+                                iRowS = dgwPre2.Rows.Count;
                                 break;
                             case 3:
-                                dgwPre3.DataSource = null;
+                                iRowS = dgwPre3.Rows.Count;
                                 break;
                             case 4:
-                                dgwPre4.DataSource = null;
+                                iRowS = dgwPre4.Rows.Count;
                                 break;
                             case 5:
-                                dgwPre5.DataSource = null;
+                                iRowS = dgwPre5.Rows.Count;
                                 break;
                         }
+                        if(iRowS > 0)
+                        {
+                            Result = MessageBox.Show("Desea eliminar los componentes asignados al pre-ensamble " + sCodigo + " ?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                            if (Result == DialogResult.Yes)
+                            {
+                                item.Mesa = sCodigo;
+                                ItemSugdetLogica.EliminarSP(item);
+                            }
+                            else
+                            {
+                                if (Result == DialogResult.Cancel)
+                                    return;
+                            }
+
+                            iTab = int.Parse(sCodigo.Substring(sCodigo.Length - 1, 1));
+                            switch (iTab)
+                            {
+                                case 1:
+                                    dgwPre.DataSource = null;
+                                    break;
+                                case 2:
+                                    dgwPre2.DataSource = null;
+                                    break;
+                                case 3:
+                                    dgwPre3.DataSource = null;
+                                    break;
+                                case 4:
+                                    dgwPre4.DataSource = null;
+                                    break;
+                                case 5:
+                                    dgwPre5.DataSource = null;
+                                    break;
+                            }
+                        }
                     }
-                    
+
+                    item.Mesa = _lsMesa;
                     ItemSugdetLogica.Eliminar(item);
                     
                     dgwTable[2, iIdx].Value = string.Empty;
@@ -1415,7 +1622,9 @@ namespace PlaybookSystem
             }
         }
 
-     
+
         #endregion
+
+         
     }
 }
