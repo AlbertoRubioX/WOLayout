@@ -26,7 +26,7 @@ namespace PlaybookSystem
         {
             InitializeComponent();
         }
-
+        #region Inicio
         private void wfTableComp_Load(object sender, EventArgs e)
         {
             _lsProceso = "PRO040";
@@ -677,6 +677,9 @@ namespace PlaybookSystem
             Inicio();
         }
 
+        #endregion
+
+        #region Save
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!Valida())
@@ -783,7 +786,32 @@ namespace PlaybookSystem
                 cbComp.Focus();
             }
         }
-        
+        private bool ValidaCant(string _asComp,int _aiCant)
+        {
+            bool bValida = true;
+            int iCx = 0;
+
+            if(_asComp.IndexOf("PRE") == -1)
+            {
+                for (int i = 0; i < _dt.Rows.Count; i++)
+                {
+                    string sCodigo = _dt.Rows[i][1].ToString();
+                    if (sCodigo == _asComp)
+                    {
+                        decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
+                        iCx += (int)iC;
+                    }
+                }
+
+                if (_aiCant > iCx)
+                {
+                    MessageBox.Show("La cantidad capturada (" + _aiCant.ToString() + ") para el componente " + _asComp + " supera la cantidad en PackDraw (" + iCx.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    bValida = false;
+                }
+            }
+            
+            return bValida;
+        }
         private bool Valida()
         {
             bool bValida = true;
@@ -808,21 +836,12 @@ namespace PlaybookSystem
                         return false;
                     }
                     //comparar cantidad en packdraw
-                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    int iCanti = (int)iCant;
+                    if (!ValidaCant(sComp, iCanti))
                     {
-                        string sCodigo = _dt.Rows[i][1].ToString();
-                        if (sCodigo == sComp)
-                        {
-                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
-                            if (iCant > iC)
-                            {
-                                int iCa = (int)iC;
-                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente "+sCodigo+" supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                tabControl1.SelectedIndex = 0;
-                                dgwTable.Rows[row.Index].Selected = true;
-                                return false;
-                            }
-                        }
+                        tabControl1.SelectedIndex = 0;
+                        dgwTable.Rows[row.Index].Cells[4].Selected = true;
+                        return false;
                     }
 
 
@@ -928,21 +947,12 @@ namespace PlaybookSystem
                     }
 
                     //comparar cantidad en packdraw
-                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    int iCanti = (int)iCant;
+                    if (!ValidaCant(sComp, iCanti))
                     {
-                        string sCodigo = _dt.Rows[i][1].ToString();
-                        if (sCodigo == sComp)
-                        {
-                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
-                            if (iCant > iC)
-                            {
-                                int iCa = (int)iC;
-                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                tabControl1.SelectedIndex = 1;
-                                dgwPre.Rows[row.Index].Selected = true;
-                                return false;
-                            }
-                        }
+                        tabControl1.SelectedIndex = 1;
+                        dgwPre.Rows[row.Index].Cells[4].Selected = true;
+                        return false;
                     }
                 }
             }
@@ -965,21 +975,12 @@ namespace PlaybookSystem
                     }
 
                     //comparar cantidad en packdraw
-                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    int iCanti = (int)iCant;
+                    if (!ValidaCant(sComp, iCanti))    
                     {
-                        string sCodigo = _dt.Rows[i][1].ToString();
-                        if (sCodigo == sComp)
-                        {
-                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
-                            if (iCant > iC)
-                            {
-                                int iCa = (int)iC;
-                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                tabControl1.SelectedIndex = 2;
-                                dgwPre2.Rows[row.Index].Selected = true;
-                                return false;
-                            }
-                        }
+                        tabControl1.SelectedIndex = 2;
+                        dgwPre2.Rows[row.Index].Cells[4].Selected = true;
+                        return false;
                     }
                 }
             }
@@ -1002,21 +1003,12 @@ namespace PlaybookSystem
                     }
 
                     //comparar cantidad en packdraw
-                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    int iCanti = (int)iCant;
+                    if (!ValidaCant(sComp, iCanti))
                     {
-                        string sCodigo = _dt.Rows[i][1].ToString();
-                        if (sCodigo == sComp)
-                        {
-                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
-                            if (iCant > iC)
-                            {
-                                int iCa = (int)iC;
-                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                tabControl1.SelectedIndex = 3;
-                                dgwPre3.Rows[row.Index].Selected = true;
-                                return false;
-                            }
-                        }
+                        tabControl1.SelectedIndex = 3;
+                        dgwPre3.Rows[row.Index].Cells[4].Selected = true;
+                        return false;
                     }
                 }
             }
@@ -1038,21 +1030,12 @@ namespace PlaybookSystem
                     }
 
                     //comparar cantidad en packdraw
-                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    int iCanti = (int)iCant;
+                    if (!ValidaCant(sComp, iCanti))
                     {
-                        string sCodigo = _dt.Rows[i][1].ToString();
-                        if (sCodigo == sComp)
-                        {
-                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
-                            if (iCant > iC)
-                            {
-                                int iCa = (int)iC;
-                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                tabControl1.SelectedIndex = 4;
-                                dgwPre4.Rows[row.Index].Selected = true;
-                                return false;
-                            }
-                        }
+                        tabControl1.SelectedIndex = 4;
+                        dgwPre4.Rows[row.Index].Cells[4].Selected = true;
+                        return false;
                     }
                 }
             }
@@ -1074,21 +1057,12 @@ namespace PlaybookSystem
                     }
 
                     //comparar cantidad en packdraw
-                    for (int i = 0; i < _dt.Rows.Count; i++)
+                    int iCanti = (int)iCant;
+                    if (!ValidaCant(sComp, iCanti))
                     {
-                        string sCodigo = _dt.Rows[i][1].ToString();
-                        if (sCodigo == sComp)
-                        {
-                            decimal iC = decimal.Parse(_dt.Rows[i][3].ToString());
-                            if (iCant > iC)
-                            {
-                                int iCa = (int)iC;
-                                MessageBox.Show("La cantidad capturada (" + iCant.ToString() + ") para el componente " + sCodigo + " supera la cantidad en PackDraw (" + iCa.ToString() + ")", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                tabControl1.SelectedIndex = 5;
-                                dgwPre5.Rows[row.Index].Selected = true;
-                                return false;
-                            }
-                        }
+                        tabControl1.SelectedIndex = 5;
+                        dgwPre5.Rows[row.Index].Cells[4].Selected = true;
+                        return false;
                     }
                 }
             }
@@ -1097,6 +1071,11 @@ namespace PlaybookSystem
             return bValida;
         }
 
+        #endregion
+
+        #region MyRegion
+
+        #endregion
         private void btAdd_Click(object sender, EventArgs e)
         {
             if (cbComp.SelectedIndex == -1)
@@ -1265,29 +1244,6 @@ namespace PlaybookSystem
 
             return array;
         }
-        private void LastRow(int iTab)
-        {
-            if(iTab == 0)
-            {
-                foreach(DataGridViewRow row in dgwTable.Rows)
-                {
-                    if(string.IsNullOrEmpty(dgwTable[2, row.Index].Value.ToString()))
-                    {
-                        row.Selected = true;
-                        break;
-                    }
-                    dgwTable.ClearSelection();
-                }
-            }
-            else
-            {
-                foreach (DataGridViewRow row in dgwPre.Rows)
-                {
-                    if (string.IsNullOrEmpty(dgwPre[1, row.Index].Value.ToString()))
-                        row.Selected = true;
-                }
-            }
-        }
         
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1322,7 +1278,32 @@ namespace PlaybookSystem
                 
             }
         }
-        
+
+        #region gridControl
+
+        private void LastRow(int iTab)
+        {
+            if (iTab == 0)
+            {
+                foreach (DataGridViewRow row in dgwTable.Rows)
+                {
+                    if (string.IsNullOrEmpty(dgwTable[2, row.Index].Value.ToString()))
+                    {
+                        row.Selected = true;
+                        break;
+                    }
+                    dgwTable.ClearSelection();
+                }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dgwPre.Rows)
+                {
+                    if (string.IsNullOrEmpty(dgwPre[1, row.Index].Value.ToString()))
+                        row.Selected = true;
+                }
+            }
+        }
         private void dgwTable_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgwTable.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -1364,6 +1345,7 @@ namespace PlaybookSystem
             dgwPre5.Height = this.Height - 250;
         }
 
+        #endregion
 
         #region regRemove
         private void btnRemove_Click(object sender, EventArgs e)
