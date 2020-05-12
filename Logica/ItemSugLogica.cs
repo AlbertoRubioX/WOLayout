@@ -35,6 +35,20 @@ namespace Logica
             }
             return datos;
         }
+
+        public static int UpdateItem(ItemSugLogica item)
+        {
+            int iRes = 0;
+            try
+            {
+                iRes = AccesoDatos.Borrar("UPDATE t_itemsug set f_id = getdate(),u_id = '"+item.Usuario+"' WHERE item = '" + item.Item + "" );
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return iRes;
+        }
         /*
         public static DataTable ConsultarFolio(ItemSugLogica line)
         {

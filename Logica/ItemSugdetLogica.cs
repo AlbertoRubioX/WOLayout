@@ -18,11 +18,11 @@ namespace Logica
         public decimal Cant { get; set; }
         public string UM { get; set; }
         public string Tipo { get; set; }
-
+        public string Usuario { get; set; }
         public static int GuardarSP(ItemSugdetLogica item)
         {
-            string[] parametros = { "@Item", "@Mesa", "@Consec", "@Code", "@Descrip", "@Cant", "@Um", "@Tipo" };
-            return AccesoDatos.Actualizar("sp_mant_itemsugdet", parametros, item.Item, item.Mesa, item.Consec, item.Codigo, item.Descrip, item.Cant, item.UM, item.Tipo);
+            string[] parametros = { "@Item", "@Mesa", "@Consec", "@Code", "@Descrip", "@Cant", "@Um", "@Tipo", "@Usuario" };
+            return AccesoDatos.Actualizar("sp_mant_itemsugdet", parametros, item.Item, item.Mesa, item.Consec, item.Codigo, item.Descrip, item.Cant, item.UM, item.Tipo, item.Usuario);
         }
 
         public static DataTable ConsultarItem(ItemSugdetLogica item)
@@ -44,7 +44,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT item,mesa as MESA,consec as #,code as [NO. PARTE],descrip as DESCRIPCION,cant as CANT,um as UM FROM t_itemsugd WHERE item = '" + Item.Item + "' ORDER BY tipo,mesa,consec");
+                datos = AccesoDatos.Consultar("SELECT item,mesa as MESA,0 as #,code as [NO. PARTE],descrip as DESCRIPCION,cant as CANT,um as UM,consec FROM t_itemsugd WHERE item = '" + Item.Item + "' ORDER BY tipo,mesa,consec");
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT mesa as MESA,consec as #,code as [NO. PARTE],descrip as DESCRIPCION,cant as CANT,um as UM FROM t_itemsugd WHERE item = '" + Item.Item + "' and mesa = '" + Item.Mesa + "' and tipo = 'C' ORDER BY consec");
+                datos = AccesoDatos.Consultar("SELECT mesa as MESA,0 as #,code as [NO. PARTE],descrip as DESCRIPCION,cant as CANT,um as UM,consec FROM t_itemsugd WHERE item = '" + Item.Item + "' and mesa = '" + Item.Mesa + "' and tipo = 'C' ORDER BY consec");
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT mesa as MESA,consec as #,code as [NO. PARTE],descrip as DESCRIPCION,cant as CANT,um as UM FROM t_itemsugd " +
+                string sSql = "SELECT mesa as MESA,0 as #,code as [NO. PARTE],descrip as DESCRIPCION,cant as CANT,um as UM,consec FROM t_itemsugd " +
                 "WHERE item = '" + Item.Item + "' and mesa = '" + Item.Codigo + "' " +
                 "ORDER BY consec";
                 //"and mesa in (select code from t_itemsugd where item = '" + Item.Item + "' and tipo = 'C' and mesa = '" + Item.Mesa + "') " +

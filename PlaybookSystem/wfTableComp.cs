@@ -65,14 +65,16 @@ namespace PlaybookSystem
                 item.Mesa = _lsMesa;
                 int iT = 0;
                 DataTable dt = ItemSugdetLogica.ConsultarVistaMesa(item);
-                dgwTable.DataSource = dt;
                 for (int x = 0; x < dt.Rows.Count; x++)
                 {
+                    dt.Rows[x][1] = x + 1;
+
                     string sCodigo = dt.Rows[x][2].ToString();
                     if (!string.IsNullOrEmpty(sCodigo))
                         iT++;
                 }
-                
+
+                dgwTable.DataSource = dt;
                 DataTable dtS = ItemSugdetLogica.ListarPS(item);
                 iT = iT - dtS.Rows.Count;
                 int iTab = 0;
@@ -101,6 +103,27 @@ namespace PlaybookSystem
                             dgwPre5.DataSource = ItemSugdetLogica.ConsultarVistaPS(item);
                             break;
                     }
+                }
+                //set sort value to pre
+                foreach (DataGridViewRow row in dgwPre.Rows)
+                {
+                    dgwPre[1, row.Index].Value = row.Index + 1;
+                }
+                foreach (DataGridViewRow row in dgwPre2.Rows)
+                {
+                    dgwPre2[1, row.Index].Value = row.Index + 1;
+                }
+                foreach (DataGridViewRow row in dgwPre3.Rows)
+                {
+                    dgwPre3[1, row.Index].Value = row.Index + 1;
+                }
+                foreach (DataGridViewRow row in dgwPre4.Rows)
+                {
+                    dgwPre4[1, row.Index].Value = row.Index + 1;
+                }
+                foreach (DataGridViewRow row in dgwPre5.Rows)
+                {
+                    dgwPre5[1, row.Index].Value = row.Index + 1;
                 }
 
                 iT += dgwPre.Rows.Count;
@@ -174,7 +197,7 @@ namespace PlaybookSystem
                 dtNew.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew.Columns.Add("CANT", typeof(decimal));
                 dtNew.Columns.Add("UM", typeof(string));
-
+                dtNew.Columns.Add("consec", typeof(decimal));
                 dgwTable.DataSource = dtNew;
             }
 
@@ -182,6 +205,7 @@ namespace PlaybookSystem
             dgwTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 
             dgwTable.Columns[0].Visible = false;
+            dgwTable.Columns[6].Visible = false;
 
             dgwTable.Columns[1].Width = ColumnWith(dgwTable, 5);
             dgwTable.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -215,7 +239,7 @@ namespace PlaybookSystem
                     for (int i = iCons; i < iConsec; i++)
                     {
                         DataTable dtA = dgwTable.DataSource as DataTable;
-                        dtA.Rows.Add(_lsMesa, i, null, null, null, null);
+                        dtA.Rows.Add(_lsMesa, i, null, null, null, null,i);
                     }
                     iCons = iConsec;
                 }
@@ -227,219 +251,11 @@ namespace PlaybookSystem
             DataTable dt = dgwTable.DataSource as DataTable;
             for (int i = iR; i <= _liCom; i++)
             {
-                dt.Rows.Add(_lsMesa, i, null, null, null, null);
+                dt.Rows.Add(_lsMesa, i, null, null, null, null,i);
             }
 
             dgwTable.Sort(dgwTable.Columns[1], ListSortDirection.Ascending);
-            #region regPS
-            iRows = dgwPre.Rows.Count;
-            if (iRows == 0)
-            {
-                DataTable dtNew2 = new DataTable("pre");
-                dtNew2.Columns.Add("ps", typeof(string));
-                dtNew2.Columns.Add("#", typeof(decimal));
-                dtNew2.Columns.Add("CODIGO", typeof(string));
-                dtNew2.Columns.Add("DESCRIPCION", typeof(string));
-                dtNew2.Columns.Add("CANT", typeof(decimal));
-                dtNew2.Columns.Add("UM", typeof(string));
 
-                
-                dgwPre.DataSource = dtNew2;
-            }
-            dgwPre.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dgwPre.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-
-            dgwPre.Columns[0].Visible = false;
-
-            dgwPre.Columns[1].Width = ColumnWith(dgwPre, 5);
-            dgwPre.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre.Columns[1].ReadOnly = true;
-
-            dgwPre.Columns[2].Width = ColumnWith(dgwPre, 20);
-            dgwPre.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre.Columns[2].ReadOnly = true;
-
-            dgwPre.Columns[3].Width = ColumnWith(dgwPre, 55);
-            dgwPre.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre.Columns[3].ReadOnly = true;
-
-            dgwPre.Columns[4].Width = ColumnWith(dgwPre, 10);//qty
-            dgwPre.Columns[4].DefaultCellStyle.BackColor = Color.LightYellow;
-            dgwPre.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwPre.Columns[4].DefaultCellStyle.Format = "0";
-
-            dgwPre.Columns[5].Width = ColumnWith(dgwPre, 10);//um
-            dgwPre.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre.Columns[5].ReadOnly = true;
-
-            iRows = dgwPre2.Rows.Count;
-            if (iRows == 0)
-            {
-                DataTable dtNew2 = new DataTable("pre");
-                dtNew2.Columns.Add("ps", typeof(string));
-                dtNew2.Columns.Add("#", typeof(decimal));
-                dtNew2.Columns.Add("CODIGO", typeof(string));
-                dtNew2.Columns.Add("DESCRIPCION", typeof(string));
-                dtNew2.Columns.Add("CANT", typeof(decimal));
-                dtNew2.Columns.Add("UM", typeof(string));
-
-
-                dgwPre2.DataSource = dtNew2;
-            }
-            dgwPre2.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dgwPre2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-
-            dgwPre2.Columns[0].Visible = false;
-
-            dgwPre2.Columns[1].Width = ColumnWith(dgwPre, 5);
-            dgwPre2.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre2.Columns[1].ReadOnly = true;
-
-            dgwPre2.Columns[2].Width = ColumnWith(dgwPre, 20);
-            dgwPre2.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre2.Columns[2].ReadOnly = true;
-
-            dgwPre2.Columns[3].Width = ColumnWith(dgwPre, 55);
-            dgwPre2.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre2.Columns[3].ReadOnly = true;
-
-            dgwPre2.Columns[4].Width = ColumnWith(dgwPre, 10);//qty
-            dgwPre2.Columns[4].DefaultCellStyle.BackColor = Color.LightYellow;
-            dgwPre2.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre2.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwPre2.Columns[4].DefaultCellStyle.Format = "0";
-
-            dgwPre2.Columns[5].Width = ColumnWith(dgwPre, 10);//um
-            dgwPre2.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre2.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre2.Columns[5].ReadOnly = true;
-            //*3*//
-            iRows = dgwPre3.Rows.Count;
-            if (iRows == 0)
-            {
-                DataTable dtNew2 = new DataTable("pre");
-                dtNew2.Columns.Add("ps", typeof(string));
-                dtNew2.Columns.Add("#", typeof(decimal));
-                dtNew2.Columns.Add("CODIGO", typeof(string));
-                dtNew2.Columns.Add("DESCRIPCION", typeof(string));
-                dtNew2.Columns.Add("CANT", typeof(decimal));
-                dtNew2.Columns.Add("UM", typeof(string));
-                
-                dgwPre3.DataSource = dtNew2;
-            }
-            dgwPre3.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dgwPre3.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-
-            dgwPre3.Columns[0].Visible = false;
-
-            dgwPre3.Columns[1].Width = ColumnWith(dgwPre, 5);
-            dgwPre3.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre3.Columns[1].ReadOnly = true;
-
-            dgwPre3.Columns[2].Width = ColumnWith(dgwPre, 20);
-            dgwPre3.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre3.Columns[2].ReadOnly = true;
-
-            dgwPre3.Columns[3].Width = ColumnWith(dgwPre, 55);
-            dgwPre3.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre3.Columns[3].ReadOnly = true;
-
-            dgwPre3.Columns[4].Width = ColumnWith(dgwPre, 10);//qty
-            dgwPre3.Columns[4].DefaultCellStyle.BackColor = Color.LightYellow;
-            dgwPre3.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre3.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwPre3.Columns[4].DefaultCellStyle.Format = "0";
-
-            dgwPre3.Columns[5].Width = ColumnWith(dgwPre, 10);//um
-            dgwPre3.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre3.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre3.Columns[5].ReadOnly = true;
-            //*4*//
-            iRows = dgwPre4.Rows.Count;
-            if (iRows == 0)
-            {
-                DataTable dtNew2 = new DataTable("pre");
-                dtNew2.Columns.Add("ps", typeof(string));
-                dtNew2.Columns.Add("#", typeof(decimal));
-                dtNew2.Columns.Add("CODIGO", typeof(string));
-                dtNew2.Columns.Add("DESCRIPCION", typeof(string));
-                dtNew2.Columns.Add("CANT", typeof(decimal));
-                dtNew2.Columns.Add("UM", typeof(string));
-                
-                dgwPre4.DataSource = dtNew2;
-            }
-            dgwPre4.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dgwPre4.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-
-            dgwPre4.Columns[0].Visible = false;
-
-            dgwPre4.Columns[1].Width = ColumnWith(dgwPre, 5);
-            dgwPre4.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre4.Columns[1].ReadOnly = true;
-
-            dgwPre4.Columns[2].Width = ColumnWith(dgwPre, 20);
-            dgwPre4.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre4.Columns[2].ReadOnly = true;
-
-            dgwPre4.Columns[3].Width = ColumnWith(dgwPre, 55);
-            dgwPre4.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre4.Columns[3].ReadOnly = true;
-
-            dgwPre4.Columns[4].Width = ColumnWith(dgwPre, 10);//qty
-            dgwPre4.Columns[4].DefaultCellStyle.BackColor = Color.LightYellow;
-            dgwPre4.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre4.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwPre4.Columns[4].DefaultCellStyle.Format = "0";
-
-            dgwPre4.Columns[5].Width = ColumnWith(dgwPre, 10);//um
-            dgwPre4.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre4.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre4.Columns[5].ReadOnly = true;
-            //*5*//
-            iRows = dgwPre5.Rows.Count;
-            if (iRows == 0)
-            {
-                DataTable dtNew2 = new DataTable("pre");
-                dtNew2.Columns.Add("ps", typeof(string));
-                dtNew2.Columns.Add("#", typeof(decimal));
-                dtNew2.Columns.Add("CODIGO", typeof(string));
-                dtNew2.Columns.Add("DESCRIPCION", typeof(string));
-                dtNew2.Columns.Add("CANT", typeof(decimal));
-                dtNew2.Columns.Add("UM", typeof(string));
-
-
-                dgwPre5.DataSource = dtNew2;
-            }
-            dgwPre5.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dgwPre5.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-
-            dgwPre5.Columns[0].Visible = false;
-
-            dgwPre5.Columns[1].Width = ColumnWith(dgwPre, 5);
-            dgwPre5.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre5.Columns[1].ReadOnly = true;
-
-            dgwPre5.Columns[2].Width = ColumnWith(dgwPre, 20);
-            dgwPre5.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre5.Columns[2].ReadOnly = true;
-
-            dgwPre5.Columns[3].Width = ColumnWith(dgwPre, 55);
-            dgwPre5.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre5.Columns[3].ReadOnly = true;
-
-            dgwPre5.Columns[4].Width = ColumnWith(dgwPre, 10);//qty
-            dgwPre5.Columns[4].DefaultCellStyle.BackColor = Color.LightYellow;
-            dgwPre5.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre5.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgwPre5.Columns[4].DefaultCellStyle.Format = "0";
-
-            dgwPre5.Columns[5].Width = ColumnWith(dgwPre, 10);//um
-            dgwPre5.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre5.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwPre5.Columns[5].ReadOnly = true;
-            #endregion
         }
 
         private void CargarColumnasSP()
@@ -454,7 +270,7 @@ namespace PlaybookSystem
                 dtNew2.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew2.Columns.Add("CANT", typeof(decimal));
                 dtNew2.Columns.Add("UM", typeof(string));
-
+                dtNew2.Columns.Add("consec", typeof(decimal));
 
                 dgwPre.DataSource = dtNew2;
             }
@@ -462,6 +278,7 @@ namespace PlaybookSystem
             dgwPre.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 
             dgwPre.Columns[0].Visible = false;
+            dgwPre.Columns[6].Visible = false;
 
             dgwPre.Columns[1].Width = ColumnWith(dgwPre, 5);
             dgwPre.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -496,7 +313,7 @@ namespace PlaybookSystem
                 dtNew2.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew2.Columns.Add("CANT", typeof(decimal));
                 dtNew2.Columns.Add("UM", typeof(string));
-
+                dtNew2.Columns.Add("consec", typeof(decimal));
 
                 dgwPre2.DataSource = dtNew2;
             }
@@ -504,6 +321,7 @@ namespace PlaybookSystem
             dgwPre2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 
             dgwPre2.Columns[0].Visible = false;
+            dgwPre2.Columns[6].Visible = false;
 
             dgwPre2.Columns[1].Width = ColumnWith(dgwPre, 5);
             dgwPre2.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -527,6 +345,9 @@ namespace PlaybookSystem
             dgwPre2.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwPre2.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwPre2.Columns[5].ReadOnly = true;
+
+           
+
             //*3*//
             iRows = dgwPre3.Rows.Count;
             if (iRows == 0)
@@ -538,13 +359,14 @@ namespace PlaybookSystem
                 dtNew2.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew2.Columns.Add("CANT", typeof(decimal));
                 dtNew2.Columns.Add("UM", typeof(string));
-
+                dtNew2.Columns.Add("consec", typeof(decimal));
                 dgwPre3.DataSource = dtNew2;
             }
             dgwPre3.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgwPre3.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 
             dgwPre3.Columns[0].Visible = false;
+            dgwPre3.Columns[6].Visible = false;
 
             dgwPre3.Columns[1].Width = ColumnWith(dgwPre, 5);
             dgwPre3.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -568,6 +390,8 @@ namespace PlaybookSystem
             dgwPre3.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwPre3.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwPre3.Columns[5].ReadOnly = true;
+
+            
             //*4*//
             iRows = dgwPre4.Rows.Count;
             if (iRows == 0)
@@ -579,13 +403,14 @@ namespace PlaybookSystem
                 dtNew2.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew2.Columns.Add("CANT", typeof(decimal));
                 dtNew2.Columns.Add("UM", typeof(string));
-
+                dtNew2.Columns.Add("consec", typeof(decimal));
                 dgwPre4.DataSource = dtNew2;
             }
             dgwPre4.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgwPre4.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 
             dgwPre4.Columns[0].Visible = false;
+            dgwPre4.Columns[6].Visible = false;
 
             dgwPre4.Columns[1].Width = ColumnWith(dgwPre, 5);
             dgwPre4.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -609,6 +434,8 @@ namespace PlaybookSystem
             dgwPre4.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwPre4.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwPre4.Columns[5].ReadOnly = true;
+            
+
             //*5*//
             iRows = dgwPre5.Rows.Count;
             if (iRows == 0)
@@ -620,7 +447,7 @@ namespace PlaybookSystem
                 dtNew2.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew2.Columns.Add("CANT", typeof(decimal));
                 dtNew2.Columns.Add("UM", typeof(string));
-
+                dtNew2.Columns.Add("consec", typeof(decimal));
 
                 dgwPre5.DataSource = dtNew2;
             }
@@ -628,6 +455,7 @@ namespace PlaybookSystem
             dgwPre5.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 
             dgwPre5.Columns[0].Visible = false;
+            dgwPre5.Columns[6].Visible = false;
 
             dgwPre5.Columns[1].Width = ColumnWith(dgwPre, 5);
             dgwPre5.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -687,7 +515,7 @@ namespace PlaybookSystem
 
             try
             {
-
+                
                 ItemSugdetLogica item = new ItemSugdetLogica();
                 item.Item = _lsItem;
                 item.Mesa = _lsMesa;
@@ -696,12 +524,13 @@ namespace PlaybookSystem
                 {
                     if (!string.IsNullOrEmpty(dgwTable[2, row.Index].Value.ToString()))
                     {
-                        item.Consec = int.Parse(dgwTable[1, row.Index].Value.ToString());
+                        item.Consec = int.Parse(dgwTable[6, row.Index].Value.ToString());
                         item.Codigo = dgwTable[2, row.Index].Value.ToString();
                         item.Descrip = dgwTable[3, row.Index].Value.ToString();
                         item.Cant = decimal.Parse(dgwTable[4, row.Index].Value.ToString());
                         item.UM = dgwTable[5, row.Index].Value.ToString();
                         item.Tipo = "C";
+                        item.Usuario = Globals._gsUser;
                         ItemSugdetLogica.GuardarSP(item);
                     }
                 }
@@ -712,12 +541,13 @@ namespace PlaybookSystem
                     if (!string.IsNullOrEmpty(dgwPre[2, row.Index].Value.ToString()))
                     {
                         item.Mesa = dgwPre[0, row.Index].Value.ToString();
-                        item.Consec = int.Parse(dgwPre[1, row.Index].Value.ToString());
+                        item.Consec = int.Parse(dgwPre[6, row.Index].Value.ToString());
                         item.Codigo = dgwPre[2, row.Index].Value.ToString();
                         item.Descrip = dgwPre[3, row.Index].Value.ToString();
                         item.Cant = decimal.Parse(dgwPre[4, row.Index].Value.ToString());
                         item.UM = dgwPre[5, row.Index].Value.ToString();
                         item.Tipo = "S";
+                        item.Usuario = Globals._gsUser;
                         ItemSugdetLogica.GuardarSP(item);
                     }
                 }
@@ -726,12 +556,13 @@ namespace PlaybookSystem
                     if (!string.IsNullOrEmpty(dgwPre2[2, row.Index].Value.ToString()))
                     {
                         item.Mesa = dgwPre2[0, row.Index].Value.ToString();
-                        item.Consec = int.Parse(dgwPre2[1, row.Index].Value.ToString());
+                        item.Consec = int.Parse(dgwPre2[6, row.Index].Value.ToString());
                         item.Codigo = dgwPre2[2, row.Index].Value.ToString();
                         item.Descrip = dgwPre2[3, row.Index].Value.ToString();
                         item.Cant = decimal.Parse(dgwPre2[4, row.Index].Value.ToString());
                         item.UM = dgwPre2[5, row.Index].Value.ToString();
                         item.Tipo = "S";
+                        item.Usuario = Globals._gsUser;
                         ItemSugdetLogica.GuardarSP(item);
                     }
                 }
@@ -740,12 +571,13 @@ namespace PlaybookSystem
                     if (!string.IsNullOrEmpty(dgwPre3[2, row.Index].Value.ToString()))
                     {
                         item.Mesa = dgwPre3[0, row.Index].Value.ToString();
-                        item.Consec = int.Parse(dgwPre3[1, row.Index].Value.ToString());
+                        item.Consec = int.Parse(dgwPre3[6, row.Index].Value.ToString());
                         item.Codigo = dgwPre3[2, row.Index].Value.ToString();
                         item.Descrip = dgwPre3[3, row.Index].Value.ToString();
                         item.Cant = decimal.Parse(dgwPre3[4, row.Index].Value.ToString());
                         item.UM = dgwPre3[5, row.Index].Value.ToString();
                         item.Tipo = "S";
+                        item.Usuario = Globals._gsUser;
                         ItemSugdetLogica.GuardarSP(item);
                     }
                 }
@@ -754,12 +586,13 @@ namespace PlaybookSystem
                     if (!string.IsNullOrEmpty(dgwPre4[2, row.Index].Value.ToString()))
                     {
                         item.Mesa = dgwPre4[0, row.Index].Value.ToString();
-                        item.Consec = int.Parse(dgwPre4[1, row.Index].Value.ToString());
+                        item.Consec = int.Parse(dgwPre4[6, row.Index].Value.ToString());
                         item.Codigo = dgwPre4[2, row.Index].Value.ToString();
                         item.Descrip = dgwPre4[3, row.Index].Value.ToString();
                         item.Cant = decimal.Parse(dgwPre4[4, row.Index].Value.ToString());
                         item.UM = dgwPre4[5, row.Index].Value.ToString();
                         item.Tipo = "S";
+                        item.Usuario = Globals._gsUser;
                         ItemSugdetLogica.GuardarSP(item);
                     }
                 }
@@ -768,15 +601,21 @@ namespace PlaybookSystem
                     if (!string.IsNullOrEmpty(dgwPre5[2, row.Index].Value.ToString()))
                     {
                         item.Mesa = dgwPre5[0, row.Index].Value.ToString();
-                        item.Consec = int.Parse(dgwPre5[1, row.Index].Value.ToString());
+                        item.Consec = int.Parse(dgwPre5[6, row.Index].Value.ToString());
                         item.Codigo = dgwPre5[2, row.Index].Value.ToString();
                         item.Descrip = dgwPre5[3, row.Index].Value.ToString();
                         item.Cant = decimal.Parse(dgwPre5[4, row.Index].Value.ToString());
                         item.UM = dgwPre5[5, row.Index].Value.ToString();
                         item.Tipo = "S";
+                        item.Usuario = Globals._gsUser;
                         ItemSugdetLogica.GuardarSP(item);
                     }
                 }
+
+                ItemSugLogica sug = new ItemSugLogica();
+                sug.Item = _lsItem;
+                sug.Usuario = Globals._gsUser;
+                ItemSugLogica.UpdateItem(sug);
 
                 Close();
             }
@@ -1187,7 +1026,7 @@ namespace PlaybookSystem
                     int iRow = dgwPre.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString());
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
                         
                 }
                 if (iTab == 2)
@@ -1195,37 +1034,35 @@ namespace PlaybookSystem
                     int iRow = dgwPre2.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre2.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString());
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
                 }
                 if (iTab == 3)
                 {
                     int iRow = dgwPre3.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre3.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString());
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
                 }
                 if (iTab == 4)
                 {
                     int iRow = dgwPre4.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre4.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString());
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
                 }
                 if (iTab == 5)
                 {
                     int iRow = dgwPre5.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre5.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString());
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
                 }
 
                 int iT = int.Parse(tssTotal.Text.ToString());
                 iT++;
                 tssTotal.Text = iT.ToString();
             }
-
             LastRow(tabControl1.SelectedIndex);
-
         }
         private string[] Components(string _sCode)
         {
@@ -1368,7 +1205,7 @@ namespace PlaybookSystem
                 if (string.IsNullOrEmpty(sCodigo))
                     return;
 
-                int iConsec = int.Parse(dgwTable[1, iIdx].Value.ToString());
+                int iConsec = int.Parse(dgwTable[6, iIdx].Value.ToString());
 
                 ItemSugdetLogica item = new ItemSugdetLogica();
                 item.Item = _lsItem;
@@ -1448,165 +1285,166 @@ namespace PlaybookSystem
                     CargarColumnasSP();
                 }
             }
-            if (iTab == 1)
+            else
             {
-                //mesa
-                if (dgwPre.SelectedCells.Count == 0)
-                    return;
-
-                int iIdx = -1;
-                if (!int.TryParse(dgwPre.SelectedCells[0].RowIndex.ToString(), out iIdx))
-                    return;
-
-                if (iIdx == -1)
-                    return;
-
-                string sCodigo = dgwPre[2, iIdx].Value.ToString();
-                if (string.IsNullOrEmpty(sCodigo))
-                    return;
-
-                string sMesa = dgwPre[0, iIdx].Value.ToString();
-                int iConsec = int.Parse(dgwPre[1, iIdx].Value.ToString());
-                DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (Result == DialogResult.Yes)
+                if (iTab == 1)
                 {
-                    ItemSugdetLogica item = new ItemSugdetLogica();
-                    item.Item = _lsItem;
-                    item.Mesa = sMesa;
-                    item.Consec = iConsec;
-                    ItemSugdetLogica.Eliminar(item);
-                    dgwPre.Rows.RemoveAt(iIdx);
+                    //mesa
+                    if (dgwPre.SelectedCells.Count == 0)
+                        return;
+
+                    int iIdx = -1;
+                    if (!int.TryParse(dgwPre.SelectedCells[0].RowIndex.ToString(), out iIdx))
+                        return;
+
+                    if (iIdx == -1)
+                        return;
+
+                    string sCodigo = dgwPre[2, iIdx].Value.ToString();
+                    if (string.IsNullOrEmpty(sCodigo))
+                        return;
+
+                    string sMesa = dgwPre[0, iIdx].Value.ToString();
+                    int iConsec = int.Parse(dgwPre[6, iIdx].Value.ToString());
+                    DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (Result == DialogResult.Yes)
+                    {
+                        ItemSugdetLogica item = new ItemSugdetLogica();
+                        item.Item = _lsItem;
+                        item.Mesa = sMesa;
+                        item.Consec = iConsec;
+                        ItemSugdetLogica.Eliminar(item);
+                        dgwPre.Rows.RemoveAt(iIdx);
+                    }
                 }
-            }
-            if (iTab == 2)
-            {
-                //mesa
-                if (dgwPre2.SelectedCells.Count == 0)
-                    return;
-
-                int iIdx = -1;
-                if (!int.TryParse(dgwPre2.SelectedCells[0].RowIndex.ToString(), out iIdx))
-                    return;
-
-                if (iIdx == -1)
-                    return;
-
-                string sCodigo = dgwPre2[2, iIdx].Value.ToString();
-                if (string.IsNullOrEmpty(sCodigo))
-                    return;
-
-                string sMesa = dgwPre2[0, iIdx].Value.ToString();
-                int iConsec = int.Parse(dgwPre2[1, iIdx].Value.ToString());
-                DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (Result == DialogResult.Yes)
+                if (iTab == 2)
                 {
-                    ItemSugdetLogica item = new ItemSugdetLogica();
-                    item.Item = _lsItem;
-                    item.Mesa = sMesa;
-                    item.Consec = iConsec;
-                    ItemSugdetLogica.Eliminar(item);
-                    dgwPre2.Rows.RemoveAt(iIdx);
+                    //mesa
+                    if (dgwPre2.SelectedCells.Count == 0)
+                        return;
 
+                    int iIdx = -1;
+                    if (!int.TryParse(dgwPre2.SelectedCells[0].RowIndex.ToString(), out iIdx))
+                        return;
+
+                    if (iIdx == -1)
+                        return;
+
+                    string sCodigo = dgwPre2[2, iIdx].Value.ToString();
+                    if (string.IsNullOrEmpty(sCodigo))
+                        return;
+
+                    string sMesa = dgwPre2[0, iIdx].Value.ToString();
+                    int iConsec = int.Parse(dgwPre2[6, iIdx].Value.ToString());
+                    DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (Result == DialogResult.Yes)
+                    {
+                        ItemSugdetLogica item = new ItemSugdetLogica();
+                        item.Item = _lsItem;
+                        item.Mesa = sMesa;
+                        item.Consec = iConsec;
+                        ItemSugdetLogica.Eliminar(item);
+                        dgwPre2.Rows.RemoveAt(iIdx);
+
+                    }
                 }
-            }
-            if (iTab == 3)
-            {
-                //mesa
-                if (dgwPre3.SelectedCells.Count == 0)
-                    return;
-
-                int iIdx = -1;
-                if (!int.TryParse(dgwPre3.SelectedCells[0].RowIndex.ToString(), out iIdx))
-                    return;
-
-                if (iIdx == -1)
-                    return;
-
-                string sCodigo = dgwPre3[2, iIdx].Value.ToString();
-                if (string.IsNullOrEmpty(sCodigo))
-                    return;
-
-                string sMesa = dgwPre3[0, iIdx].Value.ToString();
-                int iConsec = int.Parse(dgwPre3[1, iIdx].Value.ToString());
-                DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (Result == DialogResult.Yes)
+                if (iTab == 3)
                 {
-                    ItemSugdetLogica item = new ItemSugdetLogica();
-                    item.Item = _lsItem;
-                    item.Mesa = sMesa;
-                    item.Consec = iConsec;
-                    ItemSugdetLogica.Eliminar(item);
-                    dgwPre3.Rows.RemoveAt(iIdx);
+                    //mesa
+                    if (dgwPre3.SelectedCells.Count == 0)
+                        return;
 
+                    int iIdx = -1;
+                    if (!int.TryParse(dgwPre3.SelectedCells[0].RowIndex.ToString(), out iIdx))
+                        return;
+
+                    if (iIdx == -1)
+                        return;
+
+                    string sCodigo = dgwPre3[2, iIdx].Value.ToString();
+                    if (string.IsNullOrEmpty(sCodigo))
+                        return;
+
+                    string sMesa = dgwPre3[0, iIdx].Value.ToString();
+                    int iConsec = int.Parse(dgwPre3[6, iIdx].Value.ToString());
+                    DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (Result == DialogResult.Yes)
+                    {
+                        ItemSugdetLogica item = new ItemSugdetLogica();
+                        item.Item = _lsItem;
+                        item.Mesa = sMesa;
+                        item.Consec = iConsec;
+                        ItemSugdetLogica.Eliminar(item);
+                        dgwPre3.Rows.RemoveAt(iIdx);
+
+                    }
                 }
-            }
-            if (iTab == 4)
-            {
-                //mesa
-                if (dgwPre4.SelectedCells.Count == 0)
-                    return;
-
-                int iIdx = -1;
-                if (!int.TryParse(dgwPre4.SelectedCells[0].RowIndex.ToString(), out iIdx))
-                    return;
-
-                if (iIdx == -1)
-                    return;
-
-                string sCodigo = dgwPre4[2, iIdx].Value.ToString();
-                if (string.IsNullOrEmpty(sCodigo))
-                    return;
-
-                string sMesa = dgwPre4[0, iIdx].Value.ToString();
-                int iConsec = int.Parse(dgwPre4[1, iIdx].Value.ToString());
-                DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (Result == DialogResult.Yes)
+                if (iTab == 4)
                 {
-                    ItemSugdetLogica item = new ItemSugdetLogica();
-                    item.Item = _lsItem;
-                    item.Mesa = sMesa;
-                    item.Consec = iConsec;
-                    ItemSugdetLogica.Eliminar(item);
-                    dgwPre4.Rows.RemoveAt(iIdx);
+                    //mesa
+                    if (dgwPre4.SelectedCells.Count == 0)
+                        return;
 
+                    int iIdx = -1;
+                    if (!int.TryParse(dgwPre4.SelectedCells[0].RowIndex.ToString(), out iIdx))
+                        return;
+
+                    if (iIdx == -1)
+                        return;
+
+                    string sCodigo = dgwPre4[2, iIdx].Value.ToString();
+                    if (string.IsNullOrEmpty(sCodigo))
+                        return;
+
+                    string sMesa = dgwPre4[0, iIdx].Value.ToString();
+                    int iConsec = int.Parse(dgwPre4[6, iIdx].Value.ToString());
+                    DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (Result == DialogResult.Yes)
+                    {
+                        ItemSugdetLogica item = new ItemSugdetLogica();
+                        item.Item = _lsItem;
+                        item.Mesa = sMesa;
+                        item.Consec = iConsec;
+                        ItemSugdetLogica.Eliminar(item);
+                        dgwPre4.Rows.RemoveAt(iIdx);
+
+                    }
                 }
-            }
-            if (iTab == 5)
-            {
-                //mesa
-                if (dgwPre5.SelectedCells.Count == 0)
-                    return;
-
-                int iIdx = -1;
-                if (!int.TryParse(dgwPre5.SelectedCells[0].RowIndex.ToString(), out iIdx))
-                    return;
-
-                if (iIdx == -1)
-                    return;
-
-                string sCodigo = dgwPre5[2, iIdx].Value.ToString();
-                if (string.IsNullOrEmpty(sCodigo))
-                    return;
-
-                int iConsec = int.Parse(dgwPre5[1, iIdx].Value.ToString());
-                string sMesa = dgwPre5[0, iIdx].Value.ToString();
-                DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (Result == DialogResult.Yes)
+                if (iTab == 5)
                 {
-                    ItemSugdetLogica item = new ItemSugdetLogica();
-                    item.Item = _lsItem;
-                    item.Mesa = sMesa;
-                    item.Consec = iConsec;
-                    ItemSugdetLogica.Eliminar(item);
-                    dgwPre5.Rows.RemoveAt(iIdx);
+                    //mesa
+                    if (dgwPre5.SelectedCells.Count == 0)
+                        return;
 
+                    int iIdx = -1;
+                    if (!int.TryParse(dgwPre5.SelectedCells[0].RowIndex.ToString(), out iIdx))
+                        return;
+
+                    if (iIdx == -1)
+                        return;
+
+                    string sCodigo = dgwPre5[2, iIdx].Value.ToString();
+                    if (string.IsNullOrEmpty(sCodigo))
+                        return;
+
+                    int iConsec = int.Parse(dgwPre5[6, iIdx].Value.ToString());
+                    string sMesa = dgwPre5[0, iIdx].Value.ToString();
+                    DialogResult Result = MessageBox.Show("Desea eliminar el componente " + sCodigo + "?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (Result == DialogResult.Yes)
+                    {
+                        ItemSugdetLogica item = new ItemSugdetLogica();
+                        item.Item = _lsItem;
+                        item.Mesa = sMesa;
+                        item.Consec = iConsec;
+                        ItemSugdetLogica.Eliminar(item);
+                        dgwPre5.Rows.RemoveAt(iIdx);
+
+                    }
                 }
+
+                CargarColumnasSP();
             }
         }
-
-
         #endregion
-
-         
     }
 }

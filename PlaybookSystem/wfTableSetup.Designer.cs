@@ -66,6 +66,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.btReport = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -431,6 +432,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.btReport);
             this.panel2.Controls.Add(this.btTable7);
             this.panel2.Controls.Add(this.btTable6);
             this.panel2.Controls.Add(this.btTable2);
@@ -489,6 +491,23 @@
             this.label3.Size = new System.Drawing.Size(67, 24);
             this.label3.TabIndex = 0;
             this.label3.Text = "MESAS";
+            // 
+            // btReport
+            // 
+            this.btReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btReport.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.btReport.FlatAppearance.BorderSize = 2;
+            this.btReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btReport.ForeColor = System.Drawing.Color.Crimson;
+            this.btReport.Location = new System.Drawing.Point(35, 559);
+            this.btReport.Name = "btReport";
+            this.btReport.Size = new System.Drawing.Size(117, 37);
+            this.btReport.TabIndex = 9;
+            this.btReport.Text = "Reporte";
+            this.btReport.UseVisualStyleBackColor = false;
+            this.btReport.Visible = false;
+            this.btReport.Click += new System.EventHandler(this.btReport_Click);
             // 
             // wfTableSetup
             // 
@@ -565,5 +584,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btReport;
     }
 }

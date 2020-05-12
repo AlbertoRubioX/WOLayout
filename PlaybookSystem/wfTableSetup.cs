@@ -39,7 +39,7 @@ namespace PlaybookSystem
             Globals._gsCompany = "686";
 
             Inicio();
-            tssHrVersion.Text = "1.0.0.3";
+            tssHrVersion.Text = "1.0.0.5";
             
         }
         private void wfTableSetup_Activated(object sender, EventArgs e)
@@ -159,12 +159,14 @@ namespace PlaybookSystem
                 dtNew.Columns.Add("DESCRIPCION", typeof(string));
                 dtNew.Columns.Add("CANT", typeof(decimal));
                 dtNew.Columns.Add("UM", typeof(string));
+                dtNew.Columns.Add("consec", typeof(decimal));
                 dgwSuge.DataSource = dtNew;
             }
 
             dgwSuge.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgwSuge.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             dgwSuge.Columns[0].Visible = false;
+            dgwSuge.Columns[7].Visible = false;
 
             dgwSuge.Columns[1].Width = ColumnWith(dgwSuge, 10);
             dgwSuge.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -250,7 +252,21 @@ namespace PlaybookSystem
 
                     if(dtS.Rows.Count > 0)
                     {
-                        for(int x = 1; x <= 7; x++)
+                        string sMesaAnt = "";
+                        int iOrden = 0;
+                        foreach(DataGridViewRow row in dgwSuge.Rows)
+                        {
+                            string sMesa = dgwSuge[1, row.Index].Value.ToString();
+                            if (sMesa != sMesaAnt)
+                                iOrden = 1;
+                            else
+                                iOrden++;
+
+                            dgwSuge[2, row.Index].Value = iOrden;
+                            sMesaAnt = sMesa;
+                        }
+
+                        for (int x = 1; x <= 7; x++)
                         {
                             itemd.Mesa = x.ToString();
                             DataTable dt = ItemSugdetLogica.ConsultarVistaMesa(itemd);
@@ -314,10 +330,11 @@ namespace PlaybookSystem
                 dgwComp.DataSource = dtAS;
                 CargarColumnas();
                 
+
                 tssDYN.Text = txtItem.Text.ToString();
                 tssTotal.Text = dtAS.Rows.Count.ToString();
                 lblLayout2.Text = dtAS.Rows[0]["PACKDRAW_REV"].ToString();
-                if(string.IsNullOrEmpty(txtLayout.Text))
+                if(!string.IsNullOrEmpty(txtItem.Text) && string.IsNullOrEmpty(txtLayout.Text))
                 {
                     txtLayout.Text = dtAS.Rows[0]["PACKDRAW_REV"].ToString();
                     Guardar();
@@ -548,11 +565,7 @@ namespace PlaybookSystem
             Inicio();
         }
 
-        private void btnScaled_Click(object sender, EventArgs e)
-        {
-            wfLineDown ScaleDown = new wfLineDown();
-            ScaleDown.ShowDialog();
-        }
+        
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -668,6 +681,23 @@ namespace PlaybookSystem
             DataTable dtS = ItemSugdetLogica.ConsultarVista(itemd);
             dgwSuge.DataSource = dtS;
             CargarColumnasSug();
+            if(dtS.Rows.Count > 0)
+            {
+                string sMesaAnt = "";
+                int iOrden = 0;
+                foreach (DataGridViewRow row in dgwSuge.Rows)
+                {
+                    string sMesa = dgwSuge[1, row.Index].Value.ToString();
+                    if (sMesa != sMesaAnt)
+                        iOrden = 1;
+                    else
+                        iOrden++;
+
+                    dgwSuge[2, row.Index].Value = iOrden;
+                    sMesaAnt = sMesa;
+                }
+            }
+            
 
             itemd.Mesa = _asMesa;
             DataTable dt = ItemSugdetLogica.ConsultarVistaMesa(itemd);
@@ -853,7 +883,7 @@ namespace PlaybookSystem
 
         private void txtLayout_TextChanged(object sender, EventArgs e)
         {
-            if (txtLayout.Text.ToString() != _lsLayout)
+            if (!string.IsNullOrEmpty(_lsLayout) && txtLayout.Text.ToString() != _lsLayout)
             {
                 _lsLayout = txtLayout.Text.ToString();
                 _lbCambio = true;
@@ -877,6 +907,9 @@ namespace PlaybookSystem
 
         }
 
-       
+        private void btReport_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
