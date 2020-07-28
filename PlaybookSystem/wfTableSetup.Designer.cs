@@ -62,11 +62,11 @@
             this.tssHrVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btReport = new System.Windows.Forms.Button();
             this.btTable7 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btReport = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -227,6 +227,7 @@
             this.txtItem.Size = new System.Drawing.Size(171, 30);
             this.txtItem.TabIndex = 0;
             this.txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItem_KeyDown);
+            this.txtItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtItem_KeyPress);
             // 
             // label2
             // 
@@ -445,6 +446,23 @@
             this.panel2.Size = new System.Drawing.Size(197, 620);
             this.panel2.TabIndex = 6;
             // 
+            // btReport
+            // 
+            this.btReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btReport.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.btReport.FlatAppearance.BorderSize = 2;
+            this.btReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btReport.ForeColor = System.Drawing.Color.Crimson;
+            this.btReport.Location = new System.Drawing.Point(35, 559);
+            this.btReport.Name = "btReport";
+            this.btReport.Size = new System.Drawing.Size(117, 37);
+            this.btReport.TabIndex = 9;
+            this.btReport.Text = "Reporte";
+            this.btReport.UseVisualStyleBackColor = false;
+            this.btReport.Visible = false;
+            this.btReport.Click += new System.EventHandler(this.btReport_Click);
+            // 
             // btTable7
             // 
             this.btTable7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -491,23 +509,6 @@
             this.label3.Size = new System.Drawing.Size(67, 24);
             this.label3.TabIndex = 0;
             this.label3.Text = "MESAS";
-            // 
-            // btReport
-            // 
-            this.btReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btReport.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.btReport.FlatAppearance.BorderSize = 2;
-            this.btReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btReport.ForeColor = System.Drawing.Color.Crimson;
-            this.btReport.Location = new System.Drawing.Point(35, 559);
-            this.btReport.Name = "btReport";
-            this.btReport.Size = new System.Drawing.Size(117, 37);
-            this.btReport.TabIndex = 9;
-            this.btReport.Text = "Reporte";
-            this.btReport.UseVisualStyleBackColor = false;
-            this.btReport.Visible = false;
-            this.btReport.Click += new System.EventHandler(this.btReport_Click);
             // 
             // wfTableSetup
             // 

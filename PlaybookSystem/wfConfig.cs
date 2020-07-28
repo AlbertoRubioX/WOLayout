@@ -19,7 +19,7 @@ namespace PlaybookSystem
         private string _lsKitCaja;
         public string _lsLen;
         Globals _gs = new Globals();
-
+        DataTable _dtLeng = new DataTable();
         public wfConfig()
         {
             InitializeComponent();
@@ -31,6 +31,11 @@ namespace PlaybookSystem
         #region regInicio
         private void wfConfig_Load(object sender, EventArgs e)
         {
+
+            ConfigLogica con = new ConfigLogica();
+            con.Form = this.Name;
+            _dtLeng = ConfigLogica.GetLanguage(con);
+
             Dictionary<string, string> List = new Dictionary<string, string>();
             List.Add("SP", "Spanish");
             List.Add("EN", "English");
@@ -180,12 +185,12 @@ namespace PlaybookSystem
                 lin.CN = Globals._gsCompany;
                 dgwLine.DataSource = LineaRampeoLogica.Vista(lin);
                 CargarColumnas();
-                _gs.ControlGridText(this.Name, dgwLine);
 
-                Globals gs = new Globals();
-                gs.ControlText(this.Name, tabPage1);
-                gs.ControlText(this.Name, tabPage2);
-                gs.ControlText(this.Name, tabPage3);
+                ControlGridText(dgwLine);
+                
+                ControlText(tabPage1);
+                ControlText(tabPage2);
+                ControlText(tabPage3);
 
                 cbbClave.DataSource = LineaConfigLogica.Consultar();
                 cbbClave.ValueMember = "clave";
@@ -216,7 +221,83 @@ namespace PlaybookSystem
                 MessageBox.Show("Error " + ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
+        private void ControlGridText(DataGridView _control)
+        {
+            string sControl = _control.Name;
+            foreach (DataGridViewColumn c in _control.Columns)
+            {
+                if (c.Visible)
+                {
+                    string sSubControl = c.Name;
+                    string sValue = GetLengText(sControl, sSubControl);
+                    if (!string.IsNullOrEmpty(sValue))
+                        c.HeaderText = sValue;
+                }
+            }
+        }
 
+        public void ControlText(Control _control)
+        {
+
+            int iControls = _control.Controls.Count;
+            for (int i = 0; i < iControls; i++)
+            {
+                string sControl = _control.Controls[i].Name.ToString();
+                string sValue = GetLengText(sControl, null);
+                if (!string.IsNullOrEmpty(sValue))
+                    _control.Controls[i].Text = sValue;
+            }
+            foreach (Control c in _control.Controls)
+            {
+                if (c is GroupBox || c is Button || c is Label)
+                {
+                    string sValue = GetLengText(c.Name, null);
+                    if (!string.IsNullOrEmpty(sValue))
+                        c.Text = sValue;
+                }
+
+                foreach (Control cs in c.Controls)
+                {
+                    if (cs is Label || cs is GroupBox || cs is CheckBox)
+                    {
+                        string sValue = GetLengText(cs.Name, null);
+                        if (!string.IsNullOrEmpty(sValue))
+                            cs.Text = sValue;
+                    }
+                }
+            }
+        }
+        private string GetLengText(string _asName, string _asName2)
+        {
+            string sText = string.Empty;
+            int i = 2;
+            if (Globals._gsLang == "EN")
+                i = 3;
+
+            for (int x = 0; x < _dtLeng.Rows.Count; x++)
+            {
+                string sControl = _dtLeng.Rows[x][1].ToString();
+                if (sControl == _asName)
+                {
+                    if (string.IsNullOrEmpty(_asName2))
+                    {
+                        sText = _dtLeng.Rows[x][i].ToString();
+                        break;
+                    }
+                    else
+                    {//gridviews
+                        sControl = _dtLeng.Rows[x][4].ToString().ToUpper();
+                        if (sControl == _asName2.ToUpper())
+                        {
+                            sText = _dtLeng.Rows[x][i].ToString();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return sText;
+        }
         private void CargarColumnas()
         {
             if (dgwLine.Rows.Count == 0)
@@ -651,8 +732,8 @@ namespace PlaybookSystem
             _lsLen = cbxLang.SelectedValue.ToString();
 
             Globals gs = new Globals();
-            gs.ControlText(this.Name, tabPage1);
-            gs.ControlText(this.Name, tabPage2);
+            ControlText(tabPage1);
+            ControlText(tabPage2);
         }
 
         private void btSave_Click(object sender, EventArgs e)

@@ -66,7 +66,7 @@ namespace PlaybookSystem
         private int _iWidthAnt;
         private int _iHeightAnt;
         DataTable _dtConf = new DataTable();
-
+        DataTable _dtLeng = new DataTable();
         Globals _gs = new Globals();
 
         public wfLayout()
@@ -90,11 +90,11 @@ namespace PlaybookSystem
                 _lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
 
                 Globals._gsUser = _lsUser;
-               
+
                 WindowState = FormWindowState.Maximized;
 
                 tssUserName.Text = _lsUser;
-                tssVersion.Text = "1.0.1.0";
+                tssVersion.Text = "1.0.1.1";
 
                 lblLine.Visible = false;
                 tsslRampeo.Visible = false;
@@ -195,6 +195,11 @@ namespace PlaybookSystem
             ConfigLogica conf = new ConfigLogica();
             conf.CN = Globals._gsCompany;
 
+            ConfigLogica con = new ConfigLogica();
+            con.Form = this.Name;
+            _dtLeng = ConfigLogica.GetLanguage(con);
+
+
             #region regParameters
 
             _dtConf = ConfigLogica.Consultar(conf);
@@ -283,9 +288,9 @@ namespace PlaybookSystem
 
             txtWO.Focus();
 
-            CargarColumnas();
+            //CargarColumnas();
             LimpiarLayout();
-            ChangeLen();
+            //ChangeLen();
             Globals._gsLine = _sLine;
         }
 
@@ -304,22 +309,28 @@ namespace PlaybookSystem
                 return;
 
 
+            ControlText(this);
+            ControlText(this.panel8);
+            ControlText(Panel3);
+            ControlItems(statusStrip1);
+
+            ControlGridText(dgwWO);
+            ControlGridText(dgwItem);
+            ControlGridText(dgwTables);
+            ControlGridRows2(dgwTables);
+            ControlGridRows3(dgwItem);
+            /*
             _gs.ControlText(this.Name,this);
             _gs.ControlText(this.Name,this.panel8);
             _gs.ControlText(this.Name, Panel3);
+            
             _gs.ControlItems(this.Name, statusStrip1);
             _gs.ControlGridText(this.Name, dgwWO);
             _gs.ControlGridText(this.Name, dgwItem);
             _gs.ControlGridText(this.Name, dgwTables);
             _gs.ControlGridRows2(this.Name, dgwTables);
             _gs.ControlGridRows3(this.Name, dgwItem); //change values
-            //ControlText(this);
-            //ControlText(this.panel8);
-            //ControlGridText(dgwWO);
-            //ControlGridText(dgwItem);
-            //ControlGridText(dgwTables);
-            //ControlGridRows2(dgwItem);
-            //ControlGridRows2(dgwTables);
+            */
 
             if (Globals._gsLang == "EN")
             {
@@ -327,9 +338,7 @@ namespace PlaybookSystem
 
                 if (_bModoManual)
                     dgwTables[1, _iPosAssyTexto].Value = _sAssyTextoI;
-
             }
-                
             else
             {
                 btnLanguage.Image = Properties.Resources.united_states;
@@ -337,46 +346,25 @@ namespace PlaybookSystem
                 if (_bModoManual)
                     dgwTables[1, _iPosAssyTexto].Value = _sAssyTextoE;
             }
-                
-
         }
-        private void ControlText(Control _control)
-        {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = Globals._gsLang;
-            con.Form = this.Name;
-
-            foreach (Control c in _control.Controls)
-            {
-                foreach (Control cs in c.Controls)
-                {
-                    if (cs is Label)
-                    {
-                        con.Control = cs.Name;
-                        string sValue = ConfigLogica.ChangeLanguageCont(con);
-                        if (!string.IsNullOrEmpty(sValue))
-                            cs.Text = sValue;
-                    }
-                }
-            }
-        }
+         
         private void ControlGridText(DataGridView _control)
         {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = Globals._gsLang;
-            con.Form = this.Name;
-            con.Control = _control.Name;
+            
+            string sControl = _control.Name;
             foreach (DataGridViewColumn c in _control.Columns)
             {
                 if (c.Visible)
                 {
-                    con.SubControl = c.Name;
-                    string sValue = ConfigLogica.ChangeLanguageGrid(con);
+                    string sSubControl = c.Name;
+                    string sValue = GetLengText(sControl,sSubControl);
                     if (!string.IsNullOrEmpty(sValue))
                         c.HeaderText = sValue;
                 }
 
             }
+
+          
         }
         private string ControlGridRows(Control _control, string _asRow)
         {
@@ -393,20 +381,17 @@ namespace PlaybookSystem
         }
         private void ControlGridRows2(DataGridView _control)
         {
-            ConfigLogica con = new ConfigLogica();
-            con.Language = Globals._gsLang;
-            con.Form = this.Name;
-            con.Control = _control.Name;
+            string sControl = _control.Name;
             foreach (DataGridViewRow row in _control.Rows)
             {
-                con.SubControl = row.Cells["code"].Value.ToString();
-                if (string.IsNullOrEmpty(con.SubControl))
+                string sSubControl = row.Cells["code"].Value.ToString();
+                if (string.IsNullOrEmpty(sSubControl))
                     continue;
 
                 for (int i = 0; i < 2; i++)
                 {
-                    con.Columna = i;
-                    string sValue = ConfigLogica.ChangeLanguageGridRow(con);
+                    int iColumna = i;
+                    string sValue = GetLengGrid(sControl, sSubControl, iColumna.ToString());
                     if (!string.IsNullOrEmpty(sValue))
                         row.Cells[i].Value = sValue;
                 }
@@ -680,7 +665,8 @@ namespace PlaybookSystem
 
                             decimal cM = Math.Ceiling((decimal)iSub / _iMaxTable);
                             iMesas = (int)cM;
-                            iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub);
+                            //corregir formula
+                            //iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub); formula no necesaria
                             iOper = iMesas * _iEstSub;
                             string sCol1 = _gs.ControlGridRows(this.Name,dgwTables, "sub");
                             string sCol2 = _gs.ControlGridRows(this.Name,dgwTables, "sub_desc");
@@ -699,6 +685,7 @@ namespace PlaybookSystem
                             dtN.Rows.Add(sCol1, sCol2, iMain, iMesas, iOper,"assy");
                             _iMain = iMain;
                             iTotalMes += iMesas;
+
                             iTotalOps += iOper;
 
                             int assym = iMesas;
@@ -706,6 +693,7 @@ namespace PlaybookSystem
 
                             double dMax = (double)_iMaxTable;
                             double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
+                            double dWR = Math.Round(dWrapTime / (dMax * _dAssyTime));
                             iMesas = (int)dW;
                             if (sWCodeM == "1" || sWCodeM == "8")
                                 iOper = iMesas;
@@ -803,10 +791,12 @@ namespace PlaybookSystem
                             
 
                             llenarwrap(wrap1m, wrap1o);
-                            _iOWrap1 = wrap1o / wrap1m;
-
+                            if (wrap1m > 0)
+                                _iOWrap1 = wrap1o / wrap1m;
+                            else
+                                _iOWrap1 = 0;
                             //llenarmesaWS(iWrapSm, iWrapSo, wrap1m); // sub-assembly wrapping tables
-                            
+
 
                             if (subassym + assym > 9 || assym > 5)
                             {
@@ -821,7 +811,9 @@ namespace PlaybookSystem
 
                         }
 
+                        
                         ChangeLen();
+                        
                         dgwItem.ClearSelection();
                         txtWO.SelectAll();
 
@@ -1079,6 +1071,324 @@ namespace PlaybookSystem
         #endregion
 
         #region regBottons
+        private void FillPlaybookFile3(string _asFile, string _asFormat)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                Excel.Application xlApp = new Excel.Application();
+                xlApp.AskToUpdateLinks = false;
+                Excel.Workbooks xlWorkbookS = xlApp.Workbooks;
+                Excel.Workbook xlWorkbook = xlWorkbookS.Open(_asFile);
+
+                Excel.Worksheet xlWorksheet = new Excel.Worksheet();
+
+                string sValue = string.Empty;
+
+                int iSheets = xlWorkbook.Sheets.Count;
+                int iSheet = 1;
+
+                xlWorksheet = xlWorkbook.Sheets[iSheet];
+
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowLoad = 0;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                tssLoading.Visible = true;
+                for (int x = 1; x <= rowCount; x++)
+                {
+
+                    tssLoading.Text = "| Rows: " + x.ToString() + " of " + rowCount.ToString();
+
+                    if (xlRange.Cells[x, 1].Value2 == null)
+                        continue;
+
+                    if (xlRange.Cells[x, 1].Value2 != null)
+                        sValue = Convert.ToString(xlRange.Cells[x, 1].Value2.ToString());
+
+                    if (string.IsNullOrEmpty(sValue))
+                        continue;
+
+                    int iValue = 0;
+                    if (!int.TryParse(sValue, out iValue))
+                        continue;
+
+                    if (sValue.Length < 7)
+                        sValue = sValue.PadLeft(7, '0');
+
+                    string sHC = Convert.ToString(xlRange.Cells[x, 2].Value2.ToString());
+
+                    AS4Logica AS4 = new AS4Logica();
+
+                    string sItem = string.Empty;
+                    string sKits = string.Empty;
+                    string sQty = string.Empty;
+                    string sTime = string.Empty;
+                    int iMaxComp = _iMaxTable * _iMesaEns;
+
+                    AS4.WO = sValue;
+                    AS4.CN = "686";
+                    AS4.Takt = _dTackTime;
+                    DataTable dt = AS4Logica.WorkOrder(AS4);
+                    if (dt.Rows.Count > 0)
+                    {
+                        rowLoad++;
+
+                        sItem = dt.Rows[0][0].ToString();
+                        string sName = dt.Rows[0][1].ToString();
+                        sQty = dt.Rows[0][2].ToString();
+                        sKits = dt.Rows[0][3].ToString();
+
+                        AS4.Item = sItem;
+                        AS4.MaxComp = iMaxComp;
+
+                        DataTable dt2 = AS4Logica.ComponentsLayer(AS4);
+                        if (dt2.Rows.Count > 1)
+                        {
+
+                            string sPre = dt2.Rows[0][1].ToString();
+                            int iComp = int.Parse(dt2.Rows[0][2].ToString());
+
+                            string sLevel1 = dt2.Rows[1][1].ToString();
+                            string sWrap1 = dt2.Rows[1][2].ToString();
+                            string sDuraW1 = string.Empty;
+                            string sDuraW2 = string.Empty;
+                            string sWrap2 = string.Empty;
+                            string sLevel2 = string.Empty;
+
+                            if (dt2.Rows.Count > 2)
+                            {
+                                sLevel2 = dt2.Rows[2][1].ToString();
+                                sWrap2 = dt2.Rows[2][2].ToString();
+                            }
+                            string sLevelM = string.Empty;
+                            string sLevelS = string.Empty;
+                            string sWrapMain = string.Empty;
+                            string sWrapSub = string.Empty;
+                            string sWCodeM = string.Empty;
+                            string sWCodeS = string.Empty;
+                            double dWrapTime = 0;
+                            double dWrapTime2 = 0;
+
+                            if (sLevel1 == "W")
+                            {
+                                sWrapMain = getWrapDesc(sWrap1);
+                                dWrapTime = getWrapTime(sWrap1);
+                                sLevelM = sLevel1;
+                                if (!string.IsNullOrEmpty(sLevel2))
+                                {
+                                    sWrapSub = getWrapDesc(sWrap2);
+                                    dWrapTime2 = getWrapTime(sWrap2);
+                                    sLevelS = sLevel2;
+                                }
+                                sWCodeM = sWrap1;
+                                sWCodeS = sWrap2;
+                            }
+                            else
+                            {
+                                sWrapMain = getWrapDesc(sWrap2);
+                                dWrapTime = getWrapTime(sWrap2);
+                                sLevelM = sLevel2;
+                                sWrapSub = getWrapDesc(sWrap1);
+                                dWrapTime2 = getWrapTime(sWrap1);
+
+                            }
+
+                            //manual
+                            _sDuraW1 = dWrapTime;
+                            _sDuraW2 = dWrapTime2;
+
+
+                            /*dt4*/
+                            int iTotalOps = 0;
+                            int iTotalMes = 0;
+
+                            DataTable dt4 = AS4Logica.LineLayout(AS4);
+                            if (dt4.Rows.Count > 0)
+                            {
+                                int iBasin = 0;
+                                int iPiggy = 0;
+                                int iOut = 0;
+                                int iSub = 0;
+                                int iMain = 0;
+                                int iWrap = 0;
+
+                                int iO = _iSurtidor + _iInspeccion + _iInspSell + _iSellador;
+                              
+
+                                for (int i = 0; i < dt4.Rows.Count; i++)
+                                {
+                                    string sLevel = dt4.Rows[i][0].ToString();
+                                    int iCompx = Convert.ToInt16(dt4.Rows[i][1].ToString());
+
+                                    if (sLevel == "S") iSub += iCompx;
+                                    if (sLevel == "B") iBasin += iCompx;
+                                    if (sLevel == "F") iOut += iCompx;
+                                    if (sLevel == "M" || sLevel == "L") iMain += iCompx;
+                                    if (sLevel == "Y") iPiggy += iCompx;
+                                    if (sLevel == "W") iWrap += iCompx;
+
+                                }
+
+
+                                int iOper = 0;
+                                int iMesas = 0;
+
+                                iOut += iBasin + iPiggy;
+                                iMesas = (int)Math.Ceiling((decimal)iOut / _iMaxTable);
+                                int iOutOper = 1;
+
+                                if (iOut > 0)
+                                {
+                                    //Outfolder config
+                                    AS4.Layer = "F";
+                                    DataTable dtO = AS4Logica.ComponentsLayerDetail(AS4);
+                                    if (dtO.Rows.Count > 0)
+                                    {
+                                        int iFold = 0;
+                                        int iLevel = 0;
+                                        string sLevelAnt = string.Empty;
+                                        for (int i = 0; i < dtO.Rows.Count; i++)
+                                        {
+                                            string sLevel = dtO.Rows[i][1].ToString();
+                                            string sFold = dtO.Rows[i][2].ToString();
+                                            if (!string.IsNullOrEmpty(sFold) && sFold != "0" && sFold != "7")
+                                                iFold++;
+
+                                            if (sLevel != sLevelAnt)
+                                                iLevel++;
+
+                                            sLevelAnt = sLevel;
+                                        }
+                                        if (iFold > 0)
+                                            iOutOper = 2;
+                                    }
+                                }
+
+                                iOper = iMesas * iOutOper;
+
+                                iTotalMes += iMesas;
+                                iTotalOps += iOper;
+
+                                _iOut = iOut;
+                                int outfolderm = iMesas;
+                                _iOutO = iOper;
+                                int outfoldero = iOper;
+
+                                decimal cM = Math.Ceiling((decimal)iSub / _iMaxTable);
+                                iMesas = (int)cM;
+
+                                iOper = iMesas * _iEstSub;
+                                string sCol1 = _gs.ControlGridRows(this.Name, dgwTables, "sub");
+                                string sCol2 = _gs.ControlGridRows(this.Name, dgwTables, "sub_desc");
+                                 
+                                _iSub = iSub;
+                                iTotalMes += iMesas;
+                                iTotalOps += iOper;
+
+                                int subassym = iMesas;
+                                int subassyo = iOper;
+
+                                iMesas = (int)Math.Ceiling((decimal)iMain / _iMaxTable);
+                                iOper = iMesas;
+                                sCol1 = _gs.ControlGridRows(this.Name, dgwTables, "assy");
+                                sCol2 = _gs.ControlGridRows(this.Name, dgwTables, "assy_desc");
+                                
+                                _iMain = iMain;
+                                iTotalMes += iMesas;
+
+                                iTotalOps += iOper;
+
+                                int assym = iMesas;
+                                int assyo = iOper;
+
+                                double dMax = (double)_iMaxTable;
+                                double dW = Math.Ceiling(dWrapTime / (dMax * _dAssyTime));
+                                double dWR = Math.Round(dWrapTime / (dMax * _dAssyTime));
+                                iMesas = (int)dW;
+                                if (sWCodeM == "1" || sWCodeM == "8")
+                                    iOper = iMesas;
+                                else
+                                    iOper = (iMesas * 2);
+                                
+                                iTotalMes += iMesas;
+                                iTotalOps += iOper;
+
+                                int wrap1m = iMesas;
+                                int wrap1o = iOper;
+
+                                iMesas = 0;
+                                iOper = 0;
+                                int iWrapSm = 0;
+                                int iWrapSo = 0;
+                                //if (sLevelS == "W")
+                                if (sLevelS == "S")
+                                {
+                                    dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
+                                    iMesas = (int)dW;
+                                    if (sWCodeS == "1" || sWCodeS == "8")
+                                        iOper = iMesas;
+                                    else
+                                        iOper = (iMesas * 2);
+
+                                     
+                                    iTotalOps += iOper;
+
+                                    iWrapSm = iMesas;
+                                    iWrapSo = iOper;
+
+                                }
+
+                                if (wrap1m > 0)
+                                    _iOWrap1 = wrap1o / wrap1m;
+                                else
+                                    _iOWrap1 = 0;
+                                
+                                iTotalOps += iO;
+                            }
+                            /********/
+                            string sTotal = dt.Rows[0][4].ToString();
+                            double dTime = 0;
+                            if (!double.TryParse(dt.Rows[0][5].ToString(), out dTime))
+                                dTime = 0;
+
+                            int iHC = int.Parse(sHC);
+                            if (iTotalOps != iHC)
+                                dTime = DuracionWO(iHC, int.Parse(sTotal));
+
+                            xlRange.Cells[x, 3].Value2 = sQty;
+                            xlRange.Cells[x, 4].Value2 = sTotal;
+                            xlRange.Cells[x, 5].Value2 = dTime;
+                        }
+                    }
+                }
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlRange);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorksheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook.Sheets[iSheet]);
+                xlApp.DisplayAlerts = false;
+                xlWorkbook.Save();
+                xlWorkbook.Close(true);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbookS);
+                xlApp.DisplayAlerts = true;
+                xlApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+
+                Cursor = Cursors.Default;
+                tssLoading.Visible = false;
+
+                MessageBox.Show("Excel file loading finished with " + rowLoad + " of " + rowCount + " WO's found", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+                ex.ToString();
+                MessageBox.Show(ex.ToString());
+            }
+        }
+    
         private void FillPlaybookFile2(string _asFile, string _asFormat)
         {
             try
@@ -1589,11 +1899,15 @@ namespace PlaybookSystem
             if (!File.Exists(sArchivo))
                 return;
 
-            if (sOption == "W")
-                FillPlaybookFile2(sArchivo, sOption);
+            if(sOption =="T")
+                FillPlaybookFile3(sArchivo, sOption);
             else
-                FillPlaybookFile(sArchivo, sOption);
-
+            {
+                if (sOption == "W")
+                    FillPlaybookFile2(sArchivo, sOption);
+                else
+                    FillPlaybookFile(sArchivo, sOption);
+            }
         }
 
         private void btnLenguage_Click(object sender, EventArgs e)
@@ -1602,8 +1916,159 @@ namespace PlaybookSystem
                 Globals._gsLang = "EN";
             else
                 Globals._gsLang = "SP";
-              
+            
             ChangeLen();
+        }
+        public void ControlGridRows3(DataGridView _control)
+        {
+            string sControl = _control.Name;
+            foreach (DataGridViewRow row in _control.Rows)
+            {
+                foreach (DataGridViewColumn col in _control.Columns)
+                {
+                    string sValor = row.Cells[col.Index].Value.ToString();
+                    int iV = 0;
+                    if (int.TryParse(sValor, out iV))
+                        continue;
+
+                    string sValue = GetLengGridValue(sControl, sValor);
+                    if (!string.IsNullOrEmpty(sValue))
+                        row.Cells[col.Index].Value = sValue;
+                }
+            }
+        }
+        private string GetLengText(string _asName,string _asName2)
+        {
+            string sText = string.Empty;
+            int i = 2;
+            if (Globals._gsLang == "EN")
+                i = 3;
+
+            for (int x = 0; x < _dtLeng.Rows.Count; x++)
+            {
+                string sControl = _dtLeng.Rows[x][1].ToString();
+                if(sControl == _asName)
+                {
+                    if(string.IsNullOrEmpty(_asName2))
+                    {
+                        sText = _dtLeng.Rows[x][i].ToString();
+                        break;
+                    }
+                    else
+                    {//gridviews
+                        sControl = _dtLeng.Rows[x][4].ToString().ToUpper();
+                        if (sControl == _asName2.ToUpper())
+                        {
+                            sText = _dtLeng.Rows[x][i].ToString();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return sText;
+        }
+        private string GetLengGrid(string _asName, string _asName2,string _asRow)
+        {
+            string sText = string.Empty;
+            int i = 2;
+            if (Globals._gsLang == "EN")
+                i = 3;
+
+            for (int x = 0; x < _dtLeng.Rows.Count; x++)
+            {
+                string sControl = _dtLeng.Rows[x][1].ToString();
+                if (sControl == _asName)
+                {
+                    sControl = _dtLeng.Rows[x][4].ToString().ToUpper();
+                    if (sControl == _asName2.ToUpper())
+                    {
+                        string sCol = _dtLeng.Rows[x][5].ToString();
+                        if(sCol == _asRow)
+                        {
+                            sText = _dtLeng.Rows[x][i].ToString();
+                            break;
+                        }
+                    }
+                    
+                }
+            }
+
+            return sText;
+        }
+
+        private string GetLengGridValue(string _asName, string _asName2)
+        {
+            string sText = string.Empty;
+            int i = 2;
+            int i2 = 3;
+            if (Globals._gsLang == "EN")
+            {
+                i++;
+                i2--;
+            }
+                
+            for (int x = 0; x < _dtLeng.Rows.Count; x++)
+            {
+                string sControl = _dtLeng.Rows[x][1].ToString();
+                if (sControl == _asName)
+                {
+                    string sValue = _dtLeng.Rows[x][i2].ToString();
+                    if (sValue == _asName2)
+                    {
+                        sText = _dtLeng.Rows[x][i].ToString();
+                        break;
+                    }
+                }
+            }
+
+            return sText;
+        }
+        public void ControlItems(StatusStrip _control)
+        {
+            int iControls = _control.Items.Count;
+            if (iControls == 0)
+                return;
+
+            for (int i = 0; i < iControls; i++)
+            {
+                string sControl = _control.Items[i].Name.ToString();
+                string sValue = GetLengText(sControl,null);
+                if (!string.IsNullOrEmpty(sValue))
+                    _control.Items[i].Text = sValue;
+            }
+        }
+
+        public void ControlText(Control _control)
+        {
+            
+            int iControls = _control.Controls.Count;
+            for (int i = 0; i < iControls; i++)
+            {
+                string sControl = _control.Controls[i].Name.ToString();
+                string sValue = GetLengText(sControl, null);
+                if (!string.IsNullOrEmpty(sValue))
+                    _control.Controls[i].Text = sValue;
+            }
+            foreach (Control c in _control.Controls)
+            {
+                if (c is GroupBox || c is Button || c is Label)
+                {
+                    string sValue = GetLengText(c.Name,null);
+                    if (!string.IsNullOrEmpty(sValue))
+                        c.Text = sValue;
+                }
+
+                foreach (Control cs in c.Controls)
+                {
+                    if (cs is Label || cs is GroupBox || cs is CheckBox)
+                    {
+                        string sValue = GetLengText(cs.Name,null);
+                        if (!string.IsNullOrEmpty(sValue))
+                            cs.Text = sValue;
+                    }
+                }
+            }
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -1652,8 +2117,9 @@ namespace PlaybookSystem
                 ResizeControl(panel9, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(panel1, 3, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(panel2, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
+                ResizeControl(Panel3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 //ResizeControl(pnlLayout, 2, ref _iWidthAnt, ref _iHeightAnt, 0);
-                
+
                 ResizeControl(groupBox3, 1, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(groupBox4, 2, ref _iWidthAnt, ref _iHeightAnt, 0);
                 ResizeControl(dgwTables, 1, ref _iWidthAnt, ref _iHeightAnt, 1);
@@ -1677,7 +2143,7 @@ namespace PlaybookSystem
                 iW = Panel3.Width / 2;
                 iX = groupBox4.Width / 2;
                 iX -= iW + 10;
-                Panel3.Location = new Point((int)iX, Panel3.Location.Y);
+                //Panel3.Location = new Point((int)iX, Panel3.Location.Y);
             }
         }
 
@@ -1979,14 +2445,76 @@ namespace PlaybookSystem
 
         #endregion
 
+        #region regWODuration
+        public double DuracionWO(int aiHC,int aiQty)
+        {
+            double[,] ite = new double[40, 9];
+            double dFactor = 0;
+            dFactor = Math.Ceiling((_iSub + _iMain + _iOut) * _dAssyTime / (double)_iMaxTable);
+            ite[0, 0] = dFactor;
+            ite[0, 1] = aiHC - ite[0, 0] - (_iOperNA + _iOutO);
+            ite[0, 2] = (_dAssyTime * (double)_iMaxTable);
+            ite[0, 3] = Double.IsInfinity((_sDuraW1 + _sDuraW2) / (ite[0, 1] / (_iOWrap1))) ? 0 : (_sDuraW1 + _sDuraW2) / (ite[0, 1] / (_iOWrap1)); 
+            ite[0, 4] = Math.Abs(ite[0, 2] - ite[0, 3]);
+            ite[0, 5] = (ite[0, 4] < 20) ? 1 : 0;
+            ite[0, 6] = ite[0, 4] * ite[0, 5];
+            ite[0, 7] = (ite[0, 2] >= ite[0, 3]) ? ite[0, 2] : ite[0, 3];
+            ite[0, 8] = (ite[0, 6] == 0) ? 0 : ite[0, 6];
+
+            for (int i = 1; i <= 39; i++)
+            {
+                ite[i, 0] = (ite[i - 1, 0] - (_iOWrap1 / 2));
+                ite[i, 1] = aiHC - ite[i, 0] - (_iOperNA + _iOutO);
+                ite[i, 2] = ((_iSub + _iMain) * _dAssyTime / ite[i, 0]);
+                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / (_iOWrap1))); 
+                ite[i, 4] = Math.Abs(ite[i, 2] - ite[i, 3]);
+                ite[i, 5] = (ite[i, 4] < 20) ? 1 : 0;
+                ite[i, 6] = ite[i, 4] * ite[i, 5];
+                ite[i, 7] = (ite[i, 2] >= ite[i, 3]) ? ite[i, 2] : ite[i, 3];
+                ite[i, 8] = (ite[i, 6] == 0) ? 0 : ite[i, 6];
+            }
+
+
+            // Imprimir matriz en consola
+            for (int i = 0; i < 40; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    Console.Write(ite[i, j] + ", ");
+                }
+                Console.WriteLine();
+            }
+
+            double dDeltaMenor = 1000;
+            int iAssyO = 0; //Operadores en Ensamble total
+            int iWrapO = 0;  //Operadores en Wrap total
+            double iCycleTimeLine = 0;
+
+            for (int i = 1; i < 40; i++)
+            {
+                if (ite[i, 8] > 0 && ite[i, 8] < dDeltaMenor && ite[i, 0] > 0 && ite[i, 1] > 0)
+                {
+                    dDeltaMenor = ite[i, 8];
+                    iAssyO = (int)Math.Ceiling(ite[i, 0]);
+                    iWrapO = (int)Math.Ceiling(ite[i, 1]);
+                    iCycleTimeLine = ite[i, 7];
+                }
+            }
+            double dWODuracion = Math.Round((iCycleTimeLine * aiQty) / 60) / 60;
+            return dWODuracion;
+        }
+        #endregion
+
         #region LogicaModoManual
         public void ModoManual(int ipODisponibles)
         {
             _bModoManual = true;
             //Balance permitido = 20 (Estatico)
             double[,] ite = new double[40, 9];
-
-            ite[0, 0] = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / (double)_iMaxTable);
+            double dFactor = 0; //cambiar dAssyTime / iMazTable reemplazar por Cantidad de componentes
+            dFactor = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / (double)_iMaxTable);
+            //dFactor = Math.Ceiling((_iSub + _iMain + _iOut) / 20);
+            ite[0, 0] = dFactor;
             ite[0, 1] = ipODisponibles - ite[0, 0] - (_iOperNA+_iOutO);
             ite[0, 2] =(_dAssyTime * (double)_iMaxTable);
             ite[0, 3] = Double.IsInfinity((_sDuraW1 + _sDuraW2 ) / (ite[0, 1] / (_iOWrap1))) ? 0: (_sDuraW1 + _sDuraW2) / (ite[0, 1] / (_iOWrap1)); //mas duracion wrab sub,  mas operadores por mesa
@@ -2044,10 +2572,11 @@ namespace PlaybookSystem
             panel9.BackgroundImage = Properties.Resources.Yellow_Background_down1;
             panel2.BackgroundImage = Properties.Resources.Yellow_Background_down1;
 
+            int iVal = int.Parse(dgwWO[4, 0].Value.ToString());
+            double sWODuracionNueva = Math.Round((iCycleTimeLine * iVal) / 60)/60;
 
-         //   decimal sWODuracionVieja = (decimal)dgwWO[5, 0].Value;
-            double sWODuracionNueva = Math.Round((iCycleTimeLine * int.Parse(dgwWO[4, 0].Value.ToString())) / 60)/60;
             dgwWO[5, 0].Value = sWODuracionNueva;
+
             int iOperadoresTotal = 0, iMesasTotal = 0;
             int iSubAssyOp = 0;
             //Actualizar tabla dgwTables
@@ -2254,10 +2783,13 @@ namespace PlaybookSystem
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            AlertaHoraxHora();
+            if(!string.IsNullOrEmpty(Globals._gsLineHr))
+                AlertaHoraxHora();
+
         }
         private void AlertaHoraxHora()
         {
+            
             LineaHoraLogica lin = new LineaHoraLogica();
             lin.Linea = Globals._gsLineHr;
             if (!LineaHoraLogica.AlertaCapturaHora(lin))
@@ -2321,5 +2853,4 @@ namespace PlaybookSystem
     }
     #endregion
 
-  
 }

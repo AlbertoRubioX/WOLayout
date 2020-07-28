@@ -44,7 +44,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT item,mesa as MESA,0 as #,code as [NO. PARTE],descrip as DESCRIPCION,cant as CANT,um as UM,consec FROM t_itemsugd WHERE item = '" + Item.Item + "' ORDER BY tipo,mesa,consec");
+                datos = AccesoDatos.Consultar("SELECT mesa as MESA,0 as #,code as [NO. PARTE],descrip as DESCRIPCION,cant as CANT,um as UM,consec FROM t_itemsugd WHERE item = '" + Item.Item + "' ORDER BY tipo,mesa,consec");
             }
             catch (Exception ex)
             {

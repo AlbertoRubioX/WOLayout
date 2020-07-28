@@ -41,7 +41,7 @@ namespace Logica
             int iRes = 0;
             try
             {
-                iRes = AccesoDatos.Borrar("UPDATE t_itemsug set f_id = getdate(),u_id = '"+item.Usuario+"' WHERE item = '" + item.Item + "" );
+                iRes = AccesoDatos.Borrar("UPDATE t_itemsug set f_id = getdate(),u_id = '"+item.Usuario+"' WHERE item = '" + item.Item + "'" );
             }
             catch (Exception ex)
             {

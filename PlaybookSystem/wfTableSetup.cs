@@ -132,7 +132,7 @@ namespace PlaybookSystem
                 string sValue = dgwComp[1, row.Index].Value.ToString();
                 foreach (DataGridViewRow row2 in dgwSuge.Rows)
                 {
-                    string sComp = dgwSuge[3, row2.Index].Value.ToString();
+                    string sComp = dgwSuge[2, row2.Index].Value.ToString();
                     if (sComp == sValue)
                     {
                         bExist = true;
@@ -152,7 +152,7 @@ namespace PlaybookSystem
             if (iRows == 0)
             {
                 DataTable dtNew = new DataTable("Suge");
-                dtNew.Columns.Add("item", typeof(string));
+                //dtNew.Columns.Add("item", typeof(string));
                 dtNew.Columns.Add("MESA", typeof(string));
                 dtNew.Columns.Add("#", typeof(decimal));
                 dtNew.Columns.Add("NO. PARTE", typeof(string));
@@ -165,37 +165,38 @@ namespace PlaybookSystem
 
             dgwSuge.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgwSuge.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            dgwSuge.Columns[0].Visible = false;
-            dgwSuge.Columns[7].Visible = false;
 
-            dgwSuge.Columns[1].Width = ColumnWith(dgwSuge, 10);
+            //dgwSuge.Columns[0].Visible = false;
+            //dgwSuge.Columns[0].Visible = false;
+            dgwSuge.Columns[6].Visible = false;
+
+            dgwSuge.Columns[0].Width = ColumnWith(dgwSuge, 10);
+            dgwSuge.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwSuge.Columns[0].ReadOnly = true;
+
+            dgwSuge.Columns[1].Width = ColumnWith(dgwSuge, 5);
             dgwSuge.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[1].ReadOnly = true;
 
-            dgwSuge.Columns[2].Width = ColumnWith(dgwSuge, 5);
+            dgwSuge.Columns[2].Width = ColumnWith(dgwSuge, 20);
             dgwSuge.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[2].ReadOnly = true;
 
-            dgwSuge.Columns[3].Width = ColumnWith(dgwSuge, 20);
+            dgwSuge.Columns[3].Width = ColumnWith(dgwSuge, 50);
             dgwSuge.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[3].ReadOnly = true;
         
-            dgwSuge.Columns[4].Width = ColumnWith(dgwSuge, 50);
+            dgwSuge.Columns[4].Width = ColumnWith(dgwSuge, 6);
             dgwSuge.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[4].ReadOnly = true;
 
-            dgwSuge.Columns[5].Width = ColumnWith(dgwSuge, 6);//qty
+            dgwSuge.Columns[5].Width = ColumnWith(dgwSuge, 8);
             dgwSuge.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwSuge.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgwSuge.Columns[5].DefaultCellStyle.Format = "0";
             dgwSuge.Columns[5].ReadOnly = true;
 
-            dgwSuge.Columns[6].Width = ColumnWith(dgwSuge, 8);//um
-            dgwSuge.Columns[6].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwSuge.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwSuge.Columns[6].ReadOnly = true;
-
-
+           
         }
 
         private int ColumnWith(DataGridView _dtGrid, double _dColWith)
@@ -219,14 +220,22 @@ namespace PlaybookSystem
                 if (e.KeyCode == Keys.Escape)
                     Close();
 
-
-                if (e.KeyCode != Keys.Enter)
-                    return;
-
                 if (string.IsNullOrEmpty(txtItem.Text))
                     return;
 
                 string sValue = txtItem.Text.ToString().ToUpper().Trim();
+
+                if (e.KeyCode == Keys.F1)
+                {
+                    wfSugeComp Suge = new wfSugeComp();
+                    Suge._lsItem = sValue;
+                    Suge._lsDesc = lblDescrip.Text.ToString().Trim();
+                    Suge.ShowDialog();
+                }
+
+
+                if (e.KeyCode != Keys.Enter)
+                    return;
 
                 Inicio();
                 txtItem.Text = sValue;
@@ -256,13 +265,13 @@ namespace PlaybookSystem
                         int iOrden = 0;
                         foreach(DataGridViewRow row in dgwSuge.Rows)
                         {
-                            string sMesa = dgwSuge[1, row.Index].Value.ToString();
+                            string sMesa = dgwSuge[0, row.Index].Value.ToString();
                             if (sMesa != sMesaAnt)
                                 iOrden = 1;
                             else
                                 iOrden++;
 
-                            dgwSuge[2, row.Index].Value = iOrden;
+                            dgwSuge[1, row.Index].Value = iOrden;
                             sMesaAnt = sMesa;
                         }
 
@@ -687,13 +696,13 @@ namespace PlaybookSystem
                 int iOrden = 0;
                 foreach (DataGridViewRow row in dgwSuge.Rows)
                 {
-                    string sMesa = dgwSuge[1, row.Index].Value.ToString();
+                    string sMesa = dgwSuge[0, row.Index].Value.ToString();
                     if (sMesa != sMesaAnt)
                         iOrden = 1;
                     else
                         iOrden++;
 
-                    dgwSuge[2, row.Index].Value = iOrden;
+                    dgwSuge[1, row.Index].Value = iOrden;
                     sMesaAnt = sMesa;
                 }
             }
@@ -796,12 +805,10 @@ namespace PlaybookSystem
             sValue = dgwComp[1, e.RowIndex].Value.ToString();
             foreach(DataGridViewRow row in dgwSuge.Rows)
             {
-                string sComp = dgwSuge[3, row.Index].Value.ToString();
+                string sComp = dgwSuge[2, row.Index].Value.ToString();
                 if(sComp == sValue)
-                {
                     e.CellStyle.BackColor = Color.Orange;
-                    //e.CellStyle.ForeColor = Color.MediumBlue;
-                }
+                
             }
         }
 
@@ -910,6 +917,12 @@ namespace PlaybookSystem
         private void btReport_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtItem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+             
         }
     }
 }

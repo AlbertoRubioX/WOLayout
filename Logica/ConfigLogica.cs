@@ -83,6 +83,20 @@ namespace Logica
             return datos;
         }
 
+        public static DataTable GetLanguage(ConfigLogica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = AccesoDatos.Consultar("SELECT * FROM t_sysleng WHERE form = '" + con.Form + "' ");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
+
         public static DataTable ChangeLanguage(ConfigLogica con)
         {
             DataTable datos = new DataTable();

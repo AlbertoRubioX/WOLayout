@@ -230,28 +230,28 @@ namespace PlaybookSystem
             dgwTable.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwTable.Columns[5].ReadOnly = true;
 
-            int iCons = 1;
-            foreach(DataGridViewRow row in dgwTable.Rows)
-            {
-                int iConsec = int.Parse(dgwTable[1, row.Index].Value.ToString());
-                if(iConsec - iCons > 0)
-                {
-                    for (int i = iCons; i < iConsec; i++)
-                    {
-                        DataTable dtA = dgwTable.DataSource as DataTable;
-                        dtA.Rows.Add(_lsMesa, i, null, null, null, null,i);
-                    }
-                    iCons = iConsec;
-                }
+            //int iCons = 1;
+            //foreach(DataGridViewRow row in dgwTable.Rows)
+            //{
+            //    int iConsec = int.Parse(dgwTable[1, row.Index].Value.ToString());
+            //    if(iConsec - iCons > 0)
+            //    {
+            //        for (int i = iCons; i < iConsec; i++)
+            //        {
+            //            DataTable dtA = dgwTable.DataSource as DataTable;
+            //            dtA.Rows.Add(_lsMesa, i, null, null, null, null,0);
+            //        }
+            //        iCons = iConsec;
+            //    }
 
-                iCons++;
-            }
+            //    iCons++;
+            //}
 
             int iR = dgwTable.Rows.Count + 1;
             DataTable dt = dgwTable.DataSource as DataTable;
             for (int i = iR; i <= _liCom; i++)
             {
-                dt.Rows.Add(_lsMesa, i, null, null, null, null,i);
+                dt.Rows.Add(_lsMesa, i, null, null, null, null,0);
             }
 
             dgwTable.Sort(dgwTable.Columns[1], ListSortDirection.Ascending);
@@ -1026,7 +1026,7 @@ namespace PlaybookSystem
                     int iRow = dgwPre.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),0);
                         
                 }
                 if (iTab == 2)
@@ -1034,28 +1034,28 @@ namespace PlaybookSystem
                     int iRow = dgwPre2.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre2.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),0);
                 }
                 if (iTab == 3)
                 {
                     int iRow = dgwPre3.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre3.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),0);
                 }
                 if (iTab == 4)
                 {
                     int iRow = dgwPre4.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre4.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),0);
                 }
                 if (iTab == 5)
                 {
                     int iRow = dgwPre5.Rows.Count;
                     iRow++;
                     DataTable dt = dgwPre5.DataSource as DataTable;
-                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),iRow);
+                    dt.Rows.Add(sPS, iRow, sCodigo, array[1].ToString(), array[2].ToString(), array[3].ToString(),0);
                 }
 
                 int iT = int.Parse(tssTotal.Text.ToString());

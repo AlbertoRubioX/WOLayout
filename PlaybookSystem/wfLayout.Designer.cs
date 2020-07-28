@@ -58,8 +58,8 @@
             this.btnConfig = new System.Windows.Forms.ToolStripButton();
             this.btnTimer = new System.Windows.Forms.ToolStripButton();
             this.btnTimerWO = new System.Windows.Forms.ToolStripButton();
-            this.btnExportFile = new System.Windows.Forms.ToolStripButton();
             this.btSug = new System.Windows.Forms.ToolStripButton();
+            this.btnExportFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.btnLanguage = new System.Windows.Forms.ToolStripButton();
@@ -179,7 +179,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblCycleTime = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.dgwWO = new System.Windows.Forms.DataGridView();
             this.txtWO = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -310,7 +309,7 @@
             this.tsslRampeo,
             this.tssRampeo,
             this.tssLoading});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 937);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 933);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip1.Size = new System.Drawing.Size(1540, 25);
@@ -480,6 +479,16 @@
             this.btnTimerWO.Text = "Timer";
             this.btnTimerWO.Click += new System.EventHandler(this.btnTimerWO_Click);
             // 
+            // btSug
+            // 
+            this.btSug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btSug.Image = global::PlaybookSystem.Properties.Resources.table_setup;
+            this.btSug.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btSug.Name = "btSug";
+            this.btSug.Size = new System.Drawing.Size(24, 24);
+            this.btSug.Text = "Sugerencia";
+            this.btSug.Click += new System.EventHandler(this.btSug_Click);
+            // 
             // btnExportFile
             // 
             this.btnExportFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -490,16 +499,6 @@
             this.btnExportFile.Text = "Export to File";
             this.btnExportFile.Visible = false;
             this.btnExportFile.Click += new System.EventHandler(this.btnExportFile_Click);
-            // 
-            // btSug
-            // 
-            this.btSug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btSug.Image = global::PlaybookSystem.Properties.Resources.table_setup;
-            this.btSug.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btSug.Name = "btSug";
-            this.btSug.Size = new System.Drawing.Size(24, 24);
-            this.btSug.Text = "Sugerencia";
-            this.btSug.Click += new System.EventHandler(this.btSug_Click);
             // 
             // toolStripLabel1
             // 
@@ -628,7 +627,8 @@
             // 
             // Panel3
             // 
-            this.Panel3.BackColor = System.Drawing.Color.White;
+            this.Panel3.AutoScroll = true;
+            this.Panel3.BackColor = System.Drawing.Color.Transparent;
             this.Panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Panel3.Controls.Add(this.lblSpeed);
             this.Panel3.Controls.Add(this.panel10);
@@ -717,10 +717,10 @@
             this.Panel3.Controls.Add(this.E1);
             this.Panel3.Controls.Add(this.E5);
             this.Panel3.Controls.Add(this.pictureBox1);
-            this.Panel3.Location = new System.Drawing.Point(108, 12);
+            this.Panel3.Location = new System.Drawing.Point(30, 10);
             this.Panel3.Margin = new System.Windows.Forms.Padding(4);
             this.Panel3.Name = "Panel3";
-            this.Panel3.Size = new System.Drawing.Size(498, 833);
+            this.Panel3.Size = new System.Drawing.Size(586, 833);
             this.Panel3.TabIndex = 0;
             // 
             // lblSpeed
@@ -1546,11 +1546,12 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::PlaybookSystem.Properties.Resources.linea;
-            this.pictureBox1.Location = new System.Drawing.Point(24, 23);
+            this.pictureBox1.Location = new System.Drawing.Point(24, 22);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(213, 795);
+            this.pictureBox1.Size = new System.Drawing.Size(214, 795);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -1751,7 +1752,6 @@
             // 
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.lblCycleTime);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dgwWO);
             this.groupBox1.Controls.Add(this.txtWO);
             this.groupBox1.Controls.Add(this.label1);
@@ -1784,13 +1784,6 @@
             this.lblCycleTime.Size = new System.Drawing.Size(100, 35);
             this.lblCycleTime.TabIndex = 0;
             this.lblCycleTime.Text = "0";
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 23);
-            this.label2.TabIndex = 1;
             // 
             // dgwWO
             // 
@@ -1945,7 +1938,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1540, 962);
+            this.ClientSize = new System.Drawing.Size(1540, 958);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
@@ -2207,7 +2200,6 @@
         private System.Windows.Forms.ToolStripButton btnExportFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lblCycleTime;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripButton btnTimer;
         private System.Windows.Forms.Timer timer1;

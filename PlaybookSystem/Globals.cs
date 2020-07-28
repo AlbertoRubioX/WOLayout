@@ -77,6 +77,8 @@ namespace PlaybookSystem
                 }
             }
         }
+
+       
         public void ControlGridText(string _asFormName,DataGridView _control)
         {
             ConfigLogica con = new ConfigLogica();
