@@ -42,6 +42,8 @@ namespace PlaybookSystem
         private string _sTimer;
         private string _sLine;
         private decimal _dRampeo;
+        private string _lsIndBand;
+        private string _lsWrapMode;
         //Manual
         private bool _bModoManual=false;
         private int _iSub=0;
@@ -84,12 +86,11 @@ namespace PlaybookSystem
             try
             {
                 _lsProceso = "PRO010";
-                //Globals._gsCompany = "686";
                 Globals._gsLang = "SP";
-                _lsUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                _lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
+                //_lsUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                //_lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
 
-                Globals._gsUser = _lsUser;
+                _lsUser = Globals._gsUser;
 
                 WindowState = FormWindowState.Maximized;
 
@@ -105,8 +106,8 @@ namespace PlaybookSystem
                     btnExportFile.Visible = true;
                     btSugSet.Visible = true;
                 }
-                    
 
+                
                 Inicio();
                 
                 if (!string.IsNullOrEmpty(_dtConf.Rows[0]["lenguage"].ToString()) && _dtConf.Rows[0]["lenguage"].ToString() != Globals._gsLang)
@@ -150,6 +151,9 @@ namespace PlaybookSystem
             lblOper.Text = "0";
             _dRampeo = 0;
 
+            _lsIndBand = "0"; //show or hide band timer
+            _lsWrapMode = "0"; // ask for wrap type
+
             //GET CN & line from pc station
             LineaRampeoLogica line = new LineaRampeoLogica();
             line.Estacion = Globals._gsStation;         
@@ -162,34 +166,36 @@ namespace PlaybookSystem
                 _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
             }
             else
-            { //if company is null and activecompany > 0 --> ask for company number
-                _dtConf = ConfigLogica.ActiveCompany();
-                if (string.IsNullOrEmpty(Globals._gsCompany) && _dtConf.Rows.Count > 1)
-                {
-                    wfCN Company = new wfCN();
-                    Company.ShowDialog();
-                    Globals._gsCompany = Company._lsCode;
-                    if(!string.IsNullOrEmpty(Globals._gsCompany))
-                    {
-                        line.CN = Globals._gsCompany;
-                        line.Linea = string.Empty;
-                        line.Factor = 0;
-                        line.Usuario = Globals._gsUser;
-                        LineaRampeoLogica.GuardarSP(line);
-                    }
-                }
-                else
-                {
-                    if (_dtConf.Rows.Count > 0)
-                        Globals._gsCompany = _dtConf.Rows[0]["clave"].ToString();
-                }
+            {
+               
+                ////if company is null and activecompany > 0 --> ask for company number
+                //_dtConf = ConfigLogica.ActiveCompany();
+                //if (string.IsNullOrEmpty(Globals._gsCompany) && _dtConf.Rows.Count > 1)
+                //{
+                //    wfCN Company = new wfCN();
+                //    Company.ShowDialog();
+                //    Globals._gsCompany = Company._lsCode;
+                //    if(!string.IsNullOrEmpty(Globals._gsCompany))
+                //    {
+                //        line.CN = Globals._gsCompany;
+                //        line.Linea = string.Empty;
+                //        line.Factor = 0;
+                //        line.Usuario = Globals._gsUser;
+                //        LineaRampeoLogica.GuardarSP(line);
+                //    }
+                //}
+                //else
+                //{
+                //    if (_dtConf.Rows.Count > 0)
+                //        Globals._gsCompany = _dtConf.Rows[0]["clave"].ToString();
+                //}
             }
 
-            if (string.IsNullOrEmpty(Globals._gsCompany))
-            {
-                wfConfig Conf = new wfConfig();
-                Conf.ShowDialog();
-            }
+            //if (string.IsNullOrEmpty(Globals._gsCompany))
+            //{
+            //    wfConfig Conf = new wfConfig();
+            //    Conf.ShowDialog();
+            //}
 
             tssCN.Text = Globals._gsCompany;
             ConfigLogica conf = new ConfigLogica();
@@ -265,12 +271,30 @@ namespace PlaybookSystem
                 if (!string.IsNullOrEmpty(_dtConf.Rows[0]["out_addtime"].ToString()))
                     _dOutAdd = decimal.Parse(_dtConf.Rows[0]["out_addtime"].ToString());
                 _sTimer = _dtConf.Rows[0]["cycle_timer"].ToString();
+
+                if (_dtConf.Rows[0]["band_speed"].ToString() == "1")
+                    _lsIndBand = "1";
+
+                if (_dtConf.Rows[0]["wrap_setup"].ToString() == "1")
+                    _lsWrapMode = "1";
             }
             #endregion
+            //band speed
+            if (_lsIndBand == "0")
+            {
+                lblSpeed.Visible = false;
+                panel10.Visible = false;
+            }
+            else
+            {
+                lblSpeed.Visible = true;
+                panel10.Visible = true;
+            }
 
             //rampeo
             if (!string.IsNullOrEmpty(_sLine) && _sLine != "0")
             {
+                btnTimer.Visible = true;
                 lblLine.Text = "L - " + _sLine;
                 lblLine.Visible = true;
                 tsslRampeo.Visible = true;
@@ -281,6 +305,7 @@ namespace PlaybookSystem
             }
             else
             {
+                btnTimer.Visible = false;
                 lblLine.Visible = false;
                 tsslRampeo.Visible = false;
                 tssRampeo.Visible = false;
@@ -472,11 +497,12 @@ namespace PlaybookSystem
                 set.Takt = _dTackTime;
 
                 DataTable dt = AS4Logica.WorkOrder(AS4); 
-                if (dt.Rows.Count == 0)
-                    dt = SetupLogica.ConsultarWO(set);
+                //if (dt.Rows.Count == 0)
+                //    dt = SetupLogica.ConsultarWO(set); // setup data base server changed
 
                 if (dt.Rows.Count > 0)
                 {
+                   
                     lblProduct.Text = string.Empty;
                     dgwWO.DataSource = dt;
                     dgwWO.CurrentCell = null;
@@ -520,7 +546,6 @@ namespace PlaybookSystem
                     DataTable dt2 = AS4Logica.ComponentsLayer(AS4);                
                     if (dt2.Rows.Count > 1)
                     {
-
                         string sPre = dt2.Rows[0][1].ToString();
                         int iComp = int.Parse(dt2.Rows[0][2].ToString());
 
@@ -571,6 +596,15 @@ namespace PlaybookSystem
                             sWCodeS = sWrap1;
                         }
 
+                        if (_lsWrapMode == "1")
+                        {
+                            wfWrapSetup Wrap = new wfWrapSetup();
+                            Wrap._lsWrap = sWCodeM;
+                            Wrap.ShowDialog();
+                            double dTime = Wrap._ldTime;
+                            if(dTime > 0)
+                                dWrapTime = dTime;
+                        }
                         //manual
                         _sDuraW1 = dWrapTime;
                         _sDuraW2 = dWrapTime2;
@@ -822,7 +856,6 @@ namespace PlaybookSystem
                         //string sEncabezadoManual = (Globals._gsLang == "SP") ? "Modo Manual" : "Manual Mode";
 
                         //var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox(sMensajeManual, sEncabezadoManual, lblOper.Text);
-                       
 
                         wfHC HeadCount = new wfHC();
                         HeadCount._lsOper = lblOper.Text.ToString();
@@ -836,9 +869,9 @@ namespace PlaybookSystem
                             if (Int32.Parse(sODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(sODisponibles, out n))
                                 ModoManual(Int32.Parse(sODisponibles));
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
-                            
+                            MessageBox.Show(ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
 
                         //Rampeo
@@ -1359,7 +1392,8 @@ namespace PlaybookSystem
 
                             xlRange.Cells[x, 3].Value2 = sQty;
                             xlRange.Cells[x, 4].Value2 = sTotal;
-                            xlRange.Cells[x, 5].Value2 = dTime;
+                            xlRange.Cells[x, 5].Value2 = iComp.ToString();
+                            xlRange.Cells[x, 6].Value2 = dTime;
                         }
                     }
                 }
@@ -2642,7 +2676,16 @@ namespace PlaybookSystem
                 {
                     //ComponentesWrapSub = dgwTables[2, i].Value.ToString();
                     // dgwTables.Rows.Remove(dgwTables.Rows[i]);
-                    iWrapSubM = (Int32.Parse(dgwTables[4, i].Value.ToString()) / Int32.Parse(dgwTables[3, i].Value.ToString()) == 2) ? (int)Math.Ceiling(iWrapSubO / 2.0) : iWrapSubO;
+                    int iV = 0;
+                    int iV2 = 0;
+                    if (!int.TryParse(dgwTables[4, i].Value.ToString(), out iV))
+                        iV = 0;
+                    if (!int.TryParse(dgwTables[3, i].Value.ToString(), out iV2))
+                        iV2 = 0;
+                    if (iV2 == 0)
+                        continue;
+
+                    iWrapSubM = (iV / iV2 == 2) ? (int)Math.Ceiling(iWrapSubO / 2.0) : iWrapSubO;
                     dgwTables[3, i].Value = iWrapSubM;
                     dgwTables[4, i].Value = iWrapSubO;
                 }

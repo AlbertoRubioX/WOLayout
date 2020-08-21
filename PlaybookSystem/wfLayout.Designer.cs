@@ -467,6 +467,7 @@
             this.btnTimer.Name = "btnTimer";
             this.btnTimer.Size = new System.Drawing.Size(24, 24);
             this.btnTimer.Text = "Hora x Hora";
+            this.btnTimer.Visible = false;
             this.btnTimer.Click += new System.EventHandler(this.btnTimer_Click);
             // 
             // btnTimerWO
@@ -534,7 +535,7 @@
             this.btSugSet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btSugSet.Name = "btSugSet";
             this.btSugSet.Size = new System.Drawing.Size(24, 24);
-            this.btSugSet.Text = "toolStripButton1";
+            this.btSugSet.Text = "Sugrencia";
             this.btSugSet.Visible = false;
             this.btSugSet.Click += new System.EventHandler(this.btSugSet_Click);
             // 
@@ -753,7 +754,7 @@
             this.label5.ForeColor = System.Drawing.Color.Lime;
             this.label5.Location = new System.Drawing.Point(114, 10);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 27);
+            this.label5.Size = new System.Drawing.Size(77, 25);
             this.label5.TabIndex = 189;
             this.label5.Text = "HERTZ";
             // 
@@ -765,7 +766,7 @@
             this.lblConveyorSpeed.ForeColor = System.Drawing.Color.Lime;
             this.lblConveyorSpeed.Location = new System.Drawing.Point(7, 2);
             this.lblConveyorSpeed.Name = "lblConveyorSpeed";
-            this.lblConveyorSpeed.Size = new System.Drawing.Size(110, 41);
+            this.lblConveyorSpeed.Size = new System.Drawing.Size(104, 40);
             this.lblConveyorSpeed.TabIndex = 188;
             this.lblConveyorSpeed.Text = "00.00";
             // 
@@ -1588,7 +1589,7 @@
             this.lblLine.Location = new System.Drawing.Point(97, 469);
             this.lblLine.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLine.Name = "lblLine";
-            this.lblLine.Size = new System.Drawing.Size(77, 52);
+            this.lblLine.Size = new System.Drawing.Size(71, 48);
             this.lblLine.TabIndex = 11;
             this.lblLine.Text = "L -";
             this.lblLine.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1638,7 +1639,7 @@
             this.lblOper.Location = new System.Drawing.Point(10, 2);
             this.lblOper.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOper.Name = "lblOper";
-            this.lblOper.Size = new System.Drawing.Size(32, 36);
+            this.lblOper.Size = new System.Drawing.Size(31, 33);
             this.lblOper.TabIndex = 7;
             this.lblOper.Text = "0";
             // 
@@ -1674,7 +1675,7 @@
             this.lblMesas.Location = new System.Drawing.Point(10, 1);
             this.lblMesas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMesas.Name = "lblMesas";
-            this.lblMesas.Size = new System.Drawing.Size(32, 36);
+            this.lblMesas.Size = new System.Drawing.Size(31, 33);
             this.lblMesas.TabIndex = 6;
             this.lblMesas.Text = "0";
             // 
@@ -1839,7 +1840,7 @@
             this.txtWO.Margin = new System.Windows.Forms.Padding(4);
             this.txtWO.MaxLength = 20;
             this.txtWO.Name = "txtWO";
-            this.txtWO.Size = new System.Drawing.Size(115, 31);
+            this.txtWO.Size = new System.Drawing.Size(115, 29);
             this.txtWO.TabIndex = 1;
             this.txtWO.Text = "0000000";
             this.txtWO.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1880,7 +1881,7 @@
             this.lblProduct.Location = new System.Drawing.Point(19, 23);
             this.lblProduct.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProduct.Name = "lblProduct";
-            this.lblProduct.Size = new System.Drawing.Size(75, 31);
+            this.lblProduct.Size = new System.Drawing.Size(70, 30);
             this.lblProduct.TabIndex = 4;
             this.lblProduct.Text = "DYN";
             this.lblProduct.TextAlign = System.Drawing.ContentAlignment.BottomCenter;

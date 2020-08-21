@@ -101,5 +101,22 @@ namespace Logica
             }
             return false;
         }
+
+        public static string GetCompany(UsuarioLogica user)
+        {
+            string sPlanta = string.Empty;
+            try
+            {
+                DataTable datos = new DataTable();
+                datos = AccesoDatos.Consultar("SELECT * FROM t_usuario where usuario = '" + user.Usuario + "'");
+                if (datos.Rows.Count > 0)
+                    sPlanta = datos.Rows[0]["planta"].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return sPlanta;
+        }
     }
 }

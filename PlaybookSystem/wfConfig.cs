@@ -67,6 +67,28 @@ namespace PlaybookSystem
             else
                 tabControl1.SelectedTab = tabControl1.TabPages[3];
 
+            Dictionary<string, string> ListW = new Dictionary<string, string>();
+            ListW.Add("3", "Horizontal");
+            ListW.Add("2", "Vertical");
+            ListW.Add("1", "Envelope");
+            cbbWrap.DataSource = new BindingSource(ListW, null);
+            cbbWrap.DisplayMember = "Value";
+            cbbWrap.ValueMember = "Key";
+            cbbWrap.SelectedIndex = -1;
+
+            Dictionary<string, string> ListS = new Dictionary<string, string>();
+            ListS.Add("L", "Large");
+            ListS.Add("M", "Medium");
+            ListS.Add("S", "Small");
+            ListS.Add("N", "N/A");
+            cbbSize.DataSource = new BindingSource(ListS, null);
+            cbbSize.DisplayMember = "Value";
+            cbbSize.ValueMember = "Key";
+            cbbSize.SelectedIndex = -1;
+
+            dgwWrap.DataSource = null;
+            
+
             Inicio();
         }
         private void Inicio()
@@ -74,9 +96,7 @@ namespace PlaybookSystem
             //load data
             try
             {
-
-                _lsUsuario = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                _lsUsuario = _lsUsuario.Substring(_lsUsuario.IndexOf("\\") + 1).ToUpper();
+                _lsUsuario = Globals._gsUser;
 
                 cbxLang.SelectedIndex = 0;
                 txtJornada.Clear();
@@ -107,6 +127,11 @@ namespace PlaybookSystem
                 txtMaxHC.Clear();
                 txtMinHC.Clear();
                 txtOutAdd.Clear();
+
+                chbSpeed.Checked = false;
+                chbWrapSetup.Checked = false;
+                cbbWrap.SelectedIndex = -1;
+                cbbSize.SelectedIndex = -1;
 
                 chbBoxHr.Checked = false;
                 chbCycleTimer.Checked = false;
@@ -179,7 +204,15 @@ namespace PlaybookSystem
 
                     if (data.Rows[0]["active"].ToString() == "1")
                         chbActive.Checked = true;
+
+                    if (data.Rows[0]["band_speed"].ToString() == "1")
+                        chbSpeed.Checked = true;
+
+                    if (data.Rows[0]["wrap_setup"].ToString() == "1")
+                        chbWrapSetup.Checked = true;
                 }
+
+                groupBox11.Enabled = chbWrapSetup.Checked;
 
                 LineaRampeoLogica lin = new LineaRampeoLogica();
                 lin.CN = Globals._gsCompany;
@@ -213,6 +246,7 @@ namespace PlaybookSystem
 
                 dgwHrs.DataSource = null;
                 dgwLineas.DataSource = null;
+                dgwWrap.DataSource = null;
 
                 txtJornada.Focus();
             }
@@ -312,6 +346,23 @@ namespace PlaybookSystem
             //dgwLine.Columns[0].Width = ColumnWith(dgwLine, 20);
             dgwLine.Columns[2].DefaultCellStyle.Format = "N2";
             dgwLine.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+        }
+
+        private void CargarColumnasW()
+        {
+            if (dgwWrap.Rows.Count == 0)
+            {
+                DataTable dtNew = new DataTable("Line");
+                dtNew.Columns.Add("Fold Type", typeof(string));
+                dtNew.Columns.Add("Duration", typeof(decimal));
+                dgwWrap.DataSource = dtNew;
+            }
+
+            dgwWrap.Columns[0].Width = ColumnWith(dgwWrap, 50);
+            dgwWrap.Columns[1].Width = ColumnWith(dgwWrap, 50);
+            dgwWrap.Columns[1].DefaultCellStyle.Format = "N2";
+            dgwWrap.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
         }
 
@@ -483,9 +534,14 @@ namespace PlaybookSystem
                 string sActive = "0";
                 if (chbActive.Checked)
                     sActive = "1";
+                string sSpeed = "0";
+                if (chbSpeed.Checked)
+                    sSpeed = "1";
+
                 decimal dOutAdd = 0;
                 if (!decimal.TryParse(txtOutAdd.Text.ToString(), out dOutAdd))
                     dOutAdd = 0;
+
 
                 ConfigLogica conf = new ConfigLogica();
                 conf.Jornada = dJornada;
@@ -520,6 +576,7 @@ namespace PlaybookSystem
                     conf.CycleTimer = "1";
                 else
                     conf.CycleTimer = "0";
+                conf.Speed = sSpeed;
                 conf.OutAddTime = dOutAdd;
                 conf.Usuario = _lsUsuario;
                 conf.CN = Globals._gsCompany;
@@ -1197,6 +1254,144 @@ namespace PlaybookSystem
         private void dgwLineas_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgwLineas.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbbWrap_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbbSize.SelectedIndex > -1)
+                cbbSize.SelectedIndex = -1;
+
+            dgwWrap.DataSource = null;
+            CargarColumnasW();
+        }
+
+        private void cbbSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbbSize.SelectedIndex > -1 && cbbWrap.SelectedIndex > -1)
+            {
+                //load data
+                WrapSetup(cbbWrap.SelectedValue.ToString(),cbbSize.SelectedValue.ToString());
+            }
+        }
+
+        private void WrapSetup(string _asWrap,string _asSize)
+        {
+            string sWrap = cbbWrap.SelectedValue.ToString();
+            string sSize = cbbSize.SelectedValue.ToString();
+
+            ConfigWrapLogica conf = new ConfigWrapLogica();
+            conf.CN = Globals._gsCompany;
+            conf.Wrap = _asWrap;
+            conf.Size = _asSize;
+
+            dgwWrap.DataSource = ConfigWrapLogica.VistaWrap(conf);
+            
+            CargarColumnasW();
+        }
+
+        private void dgwWrap_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            int iRow = e.RowIndex;
+            if ((iRow % 2) == 0)
+                e.CellStyle.BackColor = Color.LightSkyBlue;
+            else
+                e.CellStyle.BackColor = Color.White;
+        }
+
+        private void btSavew_Click(object sender, EventArgs e)
+        {
+            if (cbbWrap.SelectedIndex == -1 )
+                return;
+
+            if(cbbSize.SelectedIndex == -1)
+            {
+                MessageBox.Show(string.Format(_gs.ControlGridRows(this.Name, dgwWrap, "err1")), this.Name, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            try
+            {
+                ConfigWrapLogica data = new ConfigWrapLogica();
+                data.CN = Globals._gsCompany;
+                data.Wrap = cbbWrap.SelectedValue.ToString();
+                data.Size = cbbSize.SelectedValue.ToString();
+                int iRows = dgwWrap.Rows.Count - 1;
+
+                for (int x=0; x < iRows; x++)
+                {
+                    string sFold = string.Empty;
+                    if (string.IsNullOrEmpty(dgwWrap[0, x].Value.ToString()))
+                        sFold = "N/A";
+                    else
+                        sFold = dgwWrap[0, x].Value.ToString();
+
+                    if (string.IsNullOrEmpty(dgwWrap[1, x].Value.ToString()))
+                        continue;
+
+                    decimal dDuration = 0;
+                    if (!decimal.TryParse(dgwWrap[1,x].Value.ToString(),out dDuration))
+                        dDuration = 0;
+
+                    if (dDuration == 0)
+                        continue;
+
+                    data.Fold = sFold;
+                    data.Duration = dDuration;
+                    data.User = Globals._gsUser;
+
+                    ConfigWrapLogica.GuardarSP(data);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+        }
+
+        private void chbWrapSetup_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox11.Enabled = chbWrapSetup.Checked;
+        }
+
+        private void btRemovew_Click(object sender, EventArgs e)
+        {
+            if (dgwWrap.Rows.Count <= 1)
+                return;
+
+            if (dgwWrap.CurrentCell == null)
+                return;
+            else
+            {
+                int iRow = dgwWrap.CurrentRow.Index;
+                if (string.IsNullOrEmpty(dgwWrap[0, iRow].Value.ToString()))
+                    return;
+                
+                string sFold = dgwWrap[0,iRow].Value.ToString();
+                
+                if (MessageBox.Show(string.Format(_gs.ControlGridRows(this.Name, dgwWrap, "rest01") + " {0} ?", sFold), "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    dgwWrap.Rows.RemoveAt(iRow);
+                    ConfigWrapLogica data = new ConfigWrapLogica();
+                    data.CN = Globals._gsCompany;
+                    data.Wrap = cbbWrap.SelectedValue.ToString();
+                    data.Size = cbbSize.SelectedValue.ToString();
+                    data.Fold = sFold;
+                    ConfigWrapLogica.Eliminar(data);
+
+                }
+            }
         }
     }
 }

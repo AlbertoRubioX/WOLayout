@@ -62,6 +62,7 @@
     <Compile Include="ItemSugdetLogica.cs" />
     <Compile Include="LineHoraDetLogica.cs" />
     <Compile Include="LineDownLogica.cs" />
+    <Compile Include="ConfigWrapLogica.cs" />
     <Compile Include="LineHoraLogica.cs" />
     <Compile Include="LineRampeoLogica.cs" />
     <Compile Include="UsuarioLogica.cs" />

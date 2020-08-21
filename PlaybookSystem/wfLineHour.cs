@@ -56,7 +56,7 @@ namespace PlaybookSystem
                 //1.1 Load data from folio
                 //1.2 Cursor on next hour row
                 lblFecha.Text = DateTime.Today.ToShortDateString();
-
+                string sIndBoxing = "0";
                 if(!string.IsNullOrEmpty(Globals._gsStation))
                 {
                     LineaRampeoLogica lineR = new LineaRampeoLogica();
@@ -66,11 +66,19 @@ namespace PlaybookSystem
                     {
                         Globals._gsCompany = dtLR.Rows[0]["company"].ToString();
                         Globals._gsLineHr = dtLR.Rows[0]["linehr"].ToString();
+                        sIndBoxing = dtLR.Rows[0]["ind_hourly"].ToString();
                     }
                 }
 
                 lblLine.Text = Globals._gsLineHr;
                 tssLine.Text = Globals._gsLineHr;
+
+                if(sIndBoxing == "1")
+                {
+                    MessageBox.Show("La captura manual del Hora por Hora se ha desactivado para esta linea.", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Close();
+                    return;
+                }
 
                 LineaHoraLogica line = new LineaHoraLogica();
                 line.Linea = Globals._gsLineHr;
@@ -101,7 +109,6 @@ namespace PlaybookSystem
                         pnlActual.BackColor = Color.Green;
                         lblActual.ForeColor = Color.DarkBlue;
                     }
-
                 }
                 else
                 {

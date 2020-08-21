@@ -89,12 +89,29 @@ namespace Logica
             return iRes;
         }
 
+        public static string GetCompany(LineaRampeoLogica line)
+        {
+            string sPlanta = string.Empty;
+            try
+            {
+                string sQuery = "SELECT * FROM t_lineramp where station = '"+line.Estacion+"'";
+                DataTable datos = AccesoDatos.Consultar(sQuery);
+                if (datos.Rows.Count > 0)
+                    sPlanta = datos.Rows[0]["company"].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return sPlanta;
+        }
         public static bool VerificaCapturaHora(LineaRampeoLogica line)
         {
             try
             {
                 string sQuery = "SELECT c.line FROM t_lineconfd c inner join t_lineramp r on c.line = r.linehr " +
-                "WHERE R.station = '"+line.Estacion+ "' AND(c.clave = 'LMBA01' OR c.clave = 'LMBA02')  group by c.line HAVING COUNT(c.line)	 > 0";
+                "WHERE R.station = '" + line.Estacion + "' AND(c.clave = 'LMBA01' OR c.clave = 'LMBA02')  group by c.line HAVING COUNT(c.line)	 > 0";
                 DataTable datos = AccesoDatos.Consultar(sQuery);
                 if (datos.Rows.Count != 0)
                     return true;
@@ -106,6 +123,5 @@ namespace Logica
                 return false;
             }
         }
-
     }
 }
