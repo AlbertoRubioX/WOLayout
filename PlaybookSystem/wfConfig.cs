@@ -216,6 +216,7 @@ namespace PlaybookSystem
 
                 LineaRampeoLogica lin = new LineaRampeoLogica();
                 lin.CN = Globals._gsCompany;
+                
                 dgwLine.DataSource = LineaRampeoLogica.Vista(lin);
                 CargarColumnas();
 
@@ -578,6 +579,10 @@ namespace PlaybookSystem
                     conf.CycleTimer = "0";
                 conf.Speed = sSpeed;
                 conf.OutAddTime = dOutAdd;
+                if (chbWrapSetup.Checked)
+                    conf.WrapSetup = "1";
+                else
+                    conf.WrapSetup = "0";
                 conf.Usuario = _lsUsuario;
                 conf.CN = Globals._gsCompany;
                 conf.ActiveCN = sActive;

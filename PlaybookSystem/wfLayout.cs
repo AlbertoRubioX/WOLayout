@@ -95,7 +95,7 @@ namespace PlaybookSystem
                 WindowState = FormWindowState.Maximized;
 
                 tssUserName.Text = _lsUser;
-                tssVersion.Text = "1.0.1.1";
+                tssVersion.Text = "1.0.1.30";
 
                 lblLine.Visible = false;
                 tsslRampeo.Visible = false;
@@ -1104,6 +1104,126 @@ namespace PlaybookSystem
         #endregion
 
         #region regBottons
+        private void FillPlaybookFile4(string _asFile, string _asFormat)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                Excel.Application xlApp = new Excel.Application();
+                xlApp.AskToUpdateLinks = false;
+                Excel.Workbooks xlWorkbookS = xlApp.Workbooks;
+                Excel.Workbook xlWorkbook = xlWorkbookS.Open(_asFile);
+
+                Excel.Worksheet xlWorksheet = new Excel.Worksheet();
+
+                string sValue = string.Empty;
+
+                int iSheets = xlWorkbook.Sheets.Count;
+                int iSheet = 1;
+
+                xlWorksheet = xlWorkbook.Sheets[iSheet];
+
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowLoad = 0;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                tssLoading.Visible = true;
+                for (int x = 1; x <= rowCount; x++)
+                {
+
+                    tssLoading.Text = "| Rows: " + x.ToString() + " of " + rowCount.ToString();
+
+                    if (xlRange.Cells[x, 2].Value2 == null)
+                        continue;
+
+                    if (xlRange.Cells[x, 2].Value2 != null)
+                        sValue = Convert.ToString(xlRange.Cells[x, 2].Value2.ToString());
+
+                    if (string.IsNullOrEmpty(sValue))
+                        continue;
+
+                    int iValue = 0;
+                    if (!int.TryParse(sValue, out iValue))
+                        continue;
+
+                    if (sValue.Length < 7)
+                        sValue = sValue.PadLeft(7, '0');
+                    
+                    AS4Logica AS4 = new AS4Logica();
+
+                    AS4.WO = sValue;
+                    AS4.CN = "686";
+                    AS4.Takt = _dTackTime;
+                    DataTable dt = AS4Logica.PartKitsCont(AS4);
+                    if (dt.Rows.Count > 0)
+                    {
+                        rowLoad++;
+
+                        string sItem = dt.Rows[0][0].ToString();
+                        xlRange.Cells[x, 4].Value2 = sItem;
+
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            
+                            string sQty = dt.Rows[i][1].ToString();
+                            string sCol = dt.Rows[i][2].ToString();
+
+                            int iQ = int.Parse(sCol);
+                            iQ = iQ + 5;
+                            
+                            xlRange.Cells[x, iQ].Value2 = sQty;
+                        }
+                    }
+                    else
+                    {
+                        DataTable dtOld = AS4Logica.PartKitsContOld(AS4);
+                        if (dtOld.Rows.Count > 0)
+                        {
+                            rowLoad++;
+
+                            string sItem = dtOld.Rows[0][0].ToString();
+                            xlRange.Cells[x, 4].Value2 = sItem;
+
+                            for (int i = 0; i < dtOld.Rows.Count; i++)
+                            {
+
+                                string sQty = dtOld.Rows[i][1].ToString();
+                                string sCol = dtOld.Rows[i][2].ToString();
+
+                                int iQ = int.Parse(sCol);
+                                iQ = iQ + 5;
+
+                                xlRange.Cells[x, iQ].Value2 = sQty;
+                            }
+                        }
+                    }
+                }
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlRange);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorksheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook.Sheets[iSheet]);
+                xlApp.DisplayAlerts = false;
+                xlWorkbook.Save();
+                xlWorkbook.Close(true);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbookS);
+                xlApp.DisplayAlerts = true;
+                xlApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+
+                Cursor = Cursors.Default;
+                tssLoading.Visible = false;
+
+                MessageBox.Show("Excel file loading finished with " + rowLoad + " of " + rowCount + " WO's found", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+                ex.ToString();
+                MessageBox.Show(ex.ToString());
+            }
+        }
         private void FillPlaybookFile3(string _asFile, string _asFormat)
         {
             try
@@ -1934,7 +2054,7 @@ namespace PlaybookSystem
                 return;
 
             if(sOption =="T")
-                FillPlaybookFile3(sArchivo, sOption);
+                FillPlaybookFile4(sArchivo, sOption); //3
             else
             {
                 if (sOption == "W")
@@ -2125,7 +2245,8 @@ namespace PlaybookSystem
                 string sLen = Globals._gsLang; ;
                 if (sLen != Globals._gsLang)
                     btnLenguage_Click(sender, e);
-                
+
+                tssCN.Text = Globals._gsCompany;
             }
             else
                 MessageBox.Show(ControlGridRows(txtWO, "rest01"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -48,12 +48,13 @@ namespace Logica
         public int Columna { get; set; }
         public string ActiveCN { get; set; }
         public string Speed { get; set; }
+        public string WrapSetup { get; set; }
         public string Usuario { get; set; }
 
         public static int GuardarSP(ConfigLogica config)
         {
-            string[] parametros = { "@Company", "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA", "@Detroit", "@Language", "@MaxHC", "@MinHC", "@BoxHr", "@OutAddTime", "@CycleTimer","@Active","@BandSpeed" };
-            return AccesoDatos.Actualizar("sp_mant_config", parametros, config.CN, config.Jornada, config.HorasDisp, config.SegDisp, config.Cajas, config.Kits, config.KitLinea, config.Tak, config.Tak80, config.Assy, config.MaxComp, config.Mesas, config.MesaWrap, config.MesaSub, config.OperNA, config.Surtidor, config.InspSella, config.Selladora, config.Inspeccion, config.Usuario, config.Horizontal, config.Vertical, config.Sobre, config.Tape, config.WrapNA, config.Detroit, config.Language, config.MaxHC, config.MinHC, config.BoxHr, config.OutAddTime, config.CycleTimer,config.ActiveCN,config.Speed);
+            string[] parametros = { "@Company", "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA", "@Detroit", "@Language", "@MaxHC", "@MinHC", "@BoxHr", "@OutAddTime", "@CycleTimer","@Active","@BandSpeed","@WrapSetup" };
+            return AccesoDatos.Actualizar("sp_mant_config", parametros, config.CN, config.Jornada, config.HorasDisp, config.SegDisp, config.Cajas, config.Kits, config.KitLinea, config.Tak, config.Tak80, config.Assy, config.MaxComp, config.Mesas, config.MesaWrap, config.MesaSub, config.OperNA, config.Surtidor, config.InspSella, config.Selladora, config.Inspeccion, config.Usuario, config.Horizontal, config.Vertical, config.Sobre, config.Tape, config.WrapNA, config.Detroit, config.Language, config.MaxHC, config.MinHC, config.BoxHr, config.OutAddTime, config.CycleTimer,config.ActiveCN,config.Speed,config.WrapSetup);
         }
 
         public static DataTable Consultar(ConfigLogica config)
