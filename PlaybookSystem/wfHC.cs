@@ -14,6 +14,7 @@ namespace PlaybookSystem
     public partial class wfHC : Form
     {
         public string _lsOper;
+        private int _liDef;
         private int _liMax;
         private int _liMin;
         private DataTable dt = new DataTable();
@@ -31,13 +32,20 @@ namespace PlaybookSystem
                 con.CN = Globals._gsCompany;
                 dt = ConfigLogica.Consultar(con);
 
+                string sDef = dt.Rows[0]["def_hc"].ToString();
                 string sMax = dt.Rows[0]["max_hc"].ToString();
                 string sMin = dt.Rows[0]["min_hc"].ToString();
 
+                if (!int.TryParse(dt.Rows[0]["def_hc"].ToString(), out _liDef))
+                    _liDef = 0;
                 if (!int.TryParse(dt.Rows[0]["max_hc"].ToString(), out _liMax))
                     _liMax = 0;
                 if (!int.TryParse(dt.Rows[0]["min_hc"].ToString(), out _liMin))
                     _liMin = 0;
+
+                //head count defult v31
+                if (_liDef > 0)
+                    _lsOper = sDef;
 
                 _gs.ControlText(this.Name, this);
                 _gs.ControlText(this.Name, this.panel1);

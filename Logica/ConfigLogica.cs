@@ -36,6 +36,7 @@ namespace Logica
         public decimal WrapNA { get; set; }
         public decimal Detroit { get; set; }
         public string Language { get; set; }
+        public int DefHC { get; set; }
         public int MaxHC { get; set; }
         public int MinHC { get; set; }
         public string BoxHr { get; set; }
@@ -53,8 +54,8 @@ namespace Logica
 
         public static int GuardarSP(ConfigLogica config)
         {
-            string[] parametros = { "@Company", "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA", "@Detroit", "@Language", "@MaxHC", "@MinHC", "@BoxHr", "@OutAddTime", "@CycleTimer","@Active","@BandSpeed","@WrapSetup" };
-            return AccesoDatos.Actualizar("sp_mant_config", parametros, config.CN, config.Jornada, config.HorasDisp, config.SegDisp, config.Cajas, config.Kits, config.KitLinea, config.Tak, config.Tak80, config.Assy, config.MaxComp, config.Mesas, config.MesaWrap, config.MesaSub, config.OperNA, config.Surtidor, config.InspSella, config.Selladora, config.Inspeccion, config.Usuario, config.Horizontal, config.Vertical, config.Sobre, config.Tape, config.WrapNA, config.Detroit, config.Language, config.MaxHC, config.MinHC, config.BoxHr, config.OutAddTime, config.CycleTimer,config.ActiveCN,config.Speed,config.WrapSetup);
+            string[] parametros = { "@Company", "@Jornada", "@HrsDisp", "@SegDisp", "@CajasLinea", "@KitsCaja", "@KitsLinea", "@TakTime", "@Tak80", "@AssyTime", "@MaxComp", "@MesaEns", "@MesaWrap", "@MesaSub", "@OperNA", "@Surtidor", "@InspSella", "@Sellador", "@Inspeccion", "@Usuario", "@Horiz", "@Vertical", "@Sobre", "@TuckTape", "@WrapNA", "@Detroit", "@Language", "@DefHC", "@MaxHC", "@MinHC", "@BoxHr", "@OutAddTime", "@CycleTimer","@Active","@BandSpeed","@WrapSetup" };
+            return AccesoDatos.Actualizar("sp_mant_config", parametros, config.CN, config.Jornada, config.HorasDisp, config.SegDisp, config.Cajas, config.Kits, config.KitLinea, config.Tak, config.Tak80, config.Assy, config.MaxComp, config.Mesas, config.MesaWrap, config.MesaSub, config.OperNA, config.Surtidor, config.InspSella, config.Selladora, config.Inspeccion, config.Usuario, config.Horizontal, config.Vertical, config.Sobre, config.Tape, config.WrapNA, config.Detroit, config.Language, config.DefHC, config.MaxHC, config.MinHC, config.BoxHr, config.OutAddTime, config.CycleTimer,config.ActiveCN,config.Speed,config.WrapSetup);
         }
 
         public static DataTable Consultar(ConfigLogica config)

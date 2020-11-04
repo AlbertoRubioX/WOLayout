@@ -135,7 +135,7 @@ namespace PlaybookSystem
             panel2.BackgroundImage = Properties.Resources.Blue_Background_down;
             
             lblCycleTime.Text = "0";
-            lblCycleTime.Text = _dTackTime.ToString();
+            lblCycleTime.Text = "0";// _dTackTime.ToString();
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
             _bModoManual = false;
@@ -165,37 +165,6 @@ namespace PlaybookSystem
                 Globals._gsLineHr = dtLR.Rows[0]["linehr"].ToString();
                 _dRampeo = decimal.Parse(dtLR.Rows[0]["factor"].ToString());
             }
-            else
-            {
-               
-                ////if company is null and activecompany > 0 --> ask for company number
-                //_dtConf = ConfigLogica.ActiveCompany();
-                //if (string.IsNullOrEmpty(Globals._gsCompany) && _dtConf.Rows.Count > 1)
-                //{
-                //    wfCN Company = new wfCN();
-                //    Company.ShowDialog();
-                //    Globals._gsCompany = Company._lsCode;
-                //    if(!string.IsNullOrEmpty(Globals._gsCompany))
-                //    {
-                //        line.CN = Globals._gsCompany;
-                //        line.Linea = string.Empty;
-                //        line.Factor = 0;
-                //        line.Usuario = Globals._gsUser;
-                //        LineaRampeoLogica.GuardarSP(line);
-                //    }
-                //}
-                //else
-                //{
-                //    if (_dtConf.Rows.Count > 0)
-                //        Globals._gsCompany = _dtConf.Rows[0]["clave"].ToString();
-                //}
-            }
-
-            //if (string.IsNullOrEmpty(Globals._gsCompany))
-            //{
-            //    wfConfig Conf = new wfConfig();
-            //    Conf.ShowDialog();
-            //}
 
             tssCN.Text = Globals._gsCompany;
             ConfigLogica conf = new ConfigLogica();
@@ -519,6 +488,9 @@ namespace PlaybookSystem
 
                     }
 
+                    dgwWO["duration", 0].Value = 0.00;
+                    dgwWO["boxhr", 0].Value = 0;
+
                     CargarColumnas();
 
                     string sItem = dt.Rows[0][0].ToString();
@@ -640,10 +612,8 @@ namespace PlaybookSystem
                                 if (sLevel == "M" || sLevel == "L") iMain += iCompx;
                                 if (sLevel == "Y") iPiggy += iCompx;
                                 if (sLevel == "W") iWrap += iCompx;
-
                             }
                             
-
                             int iOper = 0;
                             int iMesas = 0;
                             DataTable dtN = dgwTables.DataSource as DataTable;
@@ -769,26 +739,7 @@ namespace PlaybookSystem
                             }
 
                             int wrap2m = 0;
-                            //if (sLevelS == "W")
-                            //{
-                            //    dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
-                            //    iMesas = (int)dW;
-                            //    if (sWCodeS == "1" || sWCodeS == "8")
-                            //        iOper = iMesas;
-                            //    else
-                            //        iOper = (iMesas * 2);
-
-                            //    sCol2 = ControlGridRows(dgwTables, "wrap2_desc");
-                            //    dtN.Rows.Add("Wrap Sub", sCol2, iWrap, iMesas, iOper, "wrap2");
-
-                            //    iTotalMes += iMesas;
-                            //    iTotalOps += iOper;
-
-                            //    iWrapSm = iMesas;
-                            //    iWwrapSo = iOper;
-                            //    int wrap2m = iMesas;
-                            //    int wrap2o = iOper;
-                            //}
+                           
 
                             sCol1 = _gs.ControlGridRows(this.Name, dgwTables, "other");
                             sCol2 = _gs.ControlGridRows(this.Name, dgwTables, "deliver");
@@ -822,8 +773,7 @@ namespace PlaybookSystem
                                 wrap2m = 6 - wrap1m;
                                 MessageBox.Show(_gs.ControlGridRows(this.Name, txtWO, "err2"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            
-
+                             
                             llenarwrap(wrap1m, wrap1o);
                             if (wrap1m > 0)
                                 _iOWrap1 = wrap1o / wrap1m;
@@ -841,8 +791,6 @@ namespace PlaybookSystem
                                 llenarOFWS(outfolderm, outfoldero, iWrapSm, iWrapSo);
                                 llenarensamble(assym, assyo, subassym, subassyo, false);
                             }
-
-
                         }
 
                         
@@ -862,12 +810,13 @@ namespace PlaybookSystem
                         HeadCount.ShowDialog();
 
                         var sODisponibles = HeadCount._lsOper;
-                        int n;
-                        //  
+                       
+                        //..v31..\\
+                        //Cargar modo manual para todas las corridas  
                         try
                         {
-                            if (Int32.Parse(sODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(sODisponibles, out n))
-                                ModoManual(Int32.Parse(sODisponibles));
+                            //if (Int32.Parse(sODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(sODisponibles, out n))
+                            ModoManual(Int32.Parse(sODisponibles));
                         }
                         catch (Exception ex)
                         {
@@ -2606,7 +2555,7 @@ namespace PlaybookSystem
             double[,] ite = new double[40, 9];
             double dFactor = 0;
             dFactor = Math.Ceiling((_iSub + _iMain + _iOut) * _dAssyTime / (double)_iMaxTable);
-            ite[0, 0] = dFactor;
+            ite[0, 0] = aiHC;
             ite[0, 1] = aiHC - ite[0, 0] - (_iOperNA + _iOutO);
             ite[0, 2] = (_dAssyTime * (double)_iMaxTable);
             ite[0, 3] = Double.IsInfinity((_sDuraW1 + _sDuraW2) / (ite[0, 1] / (_iOWrap1))) ? 0 : (_sDuraW1 + _sDuraW2) / (ite[0, 1] / (_iOWrap1)); 
@@ -2618,7 +2567,8 @@ namespace PlaybookSystem
 
             for (int i = 1; i <= 39; i++)
             {
-                ite[i, 0] = (ite[i - 1, 0] - (_iOWrap1 / 2));
+                double dFac = ite[i - 1, 0] - (double)_iOWrap1 / 2;
+                ite[i, 0] = dFac;
                 ite[i, 1] = aiHC - ite[i, 0] - (_iOperNA + _iOutO);
                 ite[i, 2] = ((_iSub + _iMain) * _dAssyTime / ite[i, 0]);
                 ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / (_iOWrap1))); 
@@ -2666,10 +2616,17 @@ namespace PlaybookSystem
             _bModoManual = true;
             //Balance permitido = 20 (Estatico)
             double[,] ite = new double[40, 9];
+
+            /* 11-04-20
+             * dFactor es reemplazado por ipODisponibles para version 1.30
+             * 
             double dFactor = 0; //cambiar dAssyTime / iMazTable reemplazar por Cantidad de componentes
+            //dFactor = Math.Ceiling((_iSub + _iMain + _iOut) / (double)20);
             dFactor = Math.Ceiling((_iSub + _iMain + _iOut) *_dAssyTime / (double)_iMaxTable);
-            //dFactor = Math.Ceiling((_iSub + _iMain + _iOut) / 20);
-            ite[0, 0] = dFactor;
+            * algonzalez
+            */
+
+            ite[0, 0] = ipODisponibles;//dFactor
             ite[0, 1] = ipODisponibles - ite[0, 0] - (_iOperNA+_iOutO);
             ite[0, 2] =(_dAssyTime * (double)_iMaxTable);
             ite[0, 3] = Double.IsInfinity((_sDuraW1 + _sDuraW2 ) / (ite[0, 1] / (_iOWrap1))) ? 0: (_sDuraW1 + _sDuraW2) / (ite[0, 1] / (_iOWrap1)); //mas duracion wrab sub,  mas operadores por mesa
@@ -2678,24 +2635,23 @@ namespace PlaybookSystem
             ite[0, 6] = ite[0, 4] * ite[0, 5];
             ite[0, 7] = (ite[0, 2] >= ite[0, 3]) ? ite[0, 2] : ite[0, 3];
             ite[0, 8] = (ite[0, 6] == 0) ? 0 : ite[0, 6];
-           // ite[0, 9] = (ite[0, 0] < 0 || ite[0, 1] < 0) ? 0 : Math.Ceiling(ite[0, 8]);
-
+           
             for (int i = 1; i <= 39; i++)
             {
-                ite[i, 0] = (ite[i - 1, 0] - (_iOWrap1 / 2));
+                double dFac = ite[i - 1, 0] - (double)_iOWrap1 / 2;
+                ite[i, 0] = dFac;
                 ite[i, 1] = ipODisponibles - ite[i, 0] - (_iOperNA + _iOutO);
-                ite[i, 2] = ((_iSub + _iMain ) * _dAssyTime / ite[i, 0]);
-                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / (_iOWrap1)  ));  //mas duracion wrab sub,  mas operadores por mesa
+                ite[i, 2] = ((_iSub + _iMain + _iOut ) * _dAssyTime / ite[i, 0]);
+                ite[i, 3] = ((_sDuraW1 + _sDuraW2) / (ite[i, 1] / (_iOWrap1)  ));
                 ite[i, 4] = Math.Abs(ite[i, 2] - ite[i, 3]);
                 ite[i, 5] = (ite[i, 4] < 20) ? 1 : 0;
                 ite[i, 6] = ite[i, 4] * ite[i, 5];
                 ite[i, 7] = (ite[i, 2] >= ite[i, 3]) ? ite[i, 2] : ite[i, 3];
                 ite[i, 8] = (ite[i, 6] == 0) ? 0 : ite[i, 6];
-             //   ite[i, 9] = (ite[i, 0] < 0 || ite[i, 1] < 0) ? 0 : Math.Ceiling(ite[i, 8]);
             }
-
-            
+ 
             // Imprimir matriz en consola
+            /*
             for (int i = 0; i < 40; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -2704,7 +2660,8 @@ namespace PlaybookSystem
                 }
                 Console.WriteLine();
             }
-            
+            */
+
             double dDeltaMenor = 1000;
             int iAssyO=0; //Operadores en Ensamble total
             int iWrapO=0;  //Operadores en Wrap total
@@ -2720,8 +2677,6 @@ namespace PlaybookSystem
                     iCycleTimeLine = ite[i, 7];
                 }
             }
-
-           //  MessageBox.Show("Ensamble: "+iAssyO + " Wrap: " + iWrapO + " Cycle Time: " + iCycleTimeLine);
             
             LimpiarLayout();
             panel9.BackgroundImage = Properties.Resources.Yellow_Background_down1;
@@ -2816,22 +2771,6 @@ namespace PlaybookSystem
             {
                 iOperadoresTotal = iOperadoresTotal + Int32.Parse(dgwTables[4, i].Value.ToString());
                 iMesasTotal = iMesasTotal + Int32.Parse(dgwTables[3, i].Value.ToString());
-
-                /*
-                if (dgwTables[0, i].Value.ToString() == "Wrap")
-                {
-                    //sumando los componentes de sub previamente optenidos
-                  //  dgwTables[2, i].Value = Int32.Parse(dgwTables[2, i].Value.ToString()) + Int32.Parse(ComponentesWrapSub);
-                    //si se pasa el numero de wrap total dentro de wrap llenar las mesas de wrap y poner los sobrantes en wrapsub
-                    if (Int32.Parse(dgwTables[3, i].Value.ToString()) > 6)
-                    {
-                        llenarwrap(6, 12);
-                        iWrapSubM = Int32.Parse(dgwTables[3, i].Value.ToString()) - 6;
-                        iWrapSubO = iWrapO - 12;
-                    }
-                    else
-                        llenarwrap(Int32.Parse(dgwTables[3, i].Value.ToString()), iWrapMainO);
-                }*/
             }
 
 
@@ -2848,17 +2787,15 @@ namespace PlaybookSystem
             {
                 decimal dKits = decimal.Parse(dgwWO["kits",0].Value.ToString());
                 decimal dBox = (decimal)iCycleTimeLine * dKits;
-                dBox = Math.Round( 3600 / dBox, 2);
+                if(dBox > 0)
+                    dBox = Math.Round( 3600 / dBox, 2);
+
                 dgwWO["boxhr", 0].Value = dBox.ToString();
             }
             if (iCycleTimeLine > (int)_dTackTime)
                 lblCycleTime.ForeColor = System.Drawing.Color.Red;
             else
                 lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
-
-           //wfLayoutManual nform = new wfLayoutManual(Globals._gsLang, txtWO.Text, dgwWO.DataSource, dgwItem.DataSource, dgwTables.DataSource, iAssyO, iWrapO, iCycleTimeLine);
-           //nform.Show();
-           
 
         }
         private void ShowTimer()

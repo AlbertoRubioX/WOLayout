@@ -31,7 +31,6 @@ namespace PlaybookSystem
         #region regInicio
         private void wfConfig_Load(object sender, EventArgs e)
         {
-
             ConfigLogica con = new ConfigLogica();
             con.Form = this.Name;
             _dtLeng = ConfigLogica.GetLanguage(con);
@@ -126,6 +125,7 @@ namespace PlaybookSystem
                 txtDetroit.Clear();
                 txtMaxHC.Clear();
                 txtMinHC.Clear();
+                txtDefHC.Clear();
                 txtOutAdd.Clear();
 
                 chbSpeed.Checked = false;
@@ -192,6 +192,7 @@ namespace PlaybookSystem
                     if (!string.IsNullOrEmpty(data.Rows[0]["detroit"].ToString()))
                         txtDetroit.Text = data.Rows[0]["detroit"].ToString();
                     cbxLang.SelectedValue = data.Rows[0]["lenguage"].ToString();
+                    txtDefHC.Text = data.Rows[0]["def_hc"].ToString();
                     txtMaxHC.Text = data.Rows[0]["max_hc"].ToString();
                     txtMinHC.Text = data.Rows[0]["min_hc"].ToString();
                     txtOutAdd.Text = data.Rows[0]["out_addtime"].ToString();
@@ -523,6 +524,9 @@ namespace PlaybookSystem
                 decimal dWrapDet = 0;
                 if (!decimal.TryParse(txtDetroit.Text.ToString(), out dWrapDet))
                     dWrapDet = 0;
+                decimal dDefHC = 0;
+                if (!decimal.TryParse(txtDefHC.Text.ToString(), out dDefHC))
+                    dDefHC = 0;
                 decimal dMaxHC = 0;
                 if (!decimal.TryParse(txtMaxHC.Text.ToString(), out dMaxHC))
                     dMaxHC = 0;
@@ -570,6 +574,7 @@ namespace PlaybookSystem
                 conf.WrapNA = dWrapNA;
                 conf.Detroit = dWrapDet;
                 conf.Language = cbxLang.SelectedValue.ToString();
+                conf.DefHC = (int)dDefHC;
                 conf.MaxHC = (int)dMaxHC;
                 conf.MinHC = (int)dMinHC;
                 conf.BoxHr = sBoxHr;
