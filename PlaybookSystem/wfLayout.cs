@@ -95,7 +95,7 @@ namespace PlaybookSystem
                 WindowState = FormWindowState.Maximized;
 
                 tssUserName.Text = _lsUser;
-                tssVersion.Text = "1.0.1.30";
+                tssVersion.Text = "1.0.1.3";
 
                 lblLine.Visible = false;
                 tsslRampeo.Visible = false;
