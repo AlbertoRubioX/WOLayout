@@ -842,6 +842,15 @@ namespace PlaybookSystem
                             Suge.Show();
                         }
 
+
+                        //. MUESTREO DE WO PARA QA  .\\ qa alert para muestreo 
+                        /* cancelado
+                        string sQAlert = dt.Rows[0]["qa_alert"].ToString();
+                        if (sQAlert == "0")
+                        {
+                            double dDura = double.Parse(dgwWO["duration", 0].Value.ToString());
+                        }
+                        */
                         if (_sTimer == "1")
                             ShowTimer();
 
@@ -857,8 +866,7 @@ namespace PlaybookSystem
                 {
                     MessageBox.Show(_gs.ControlGridRows(this.Name, txtWO, "err0"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Inicio();
-                }
-                    
+                }       
             }
             catch (Exception ex)
             {

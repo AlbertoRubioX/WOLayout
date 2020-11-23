@@ -30,10 +30,11 @@ namespace Logica
                 "S.WOQTY * K.IMSTCK AS total_kits," +
                 "ROUND(("+con.Takt+"*(S.WOQTY  * K.IMSTCK)/60),2)/60 AS duration,"+
                 "'' as boxhr, " +
-                "ROUND(" + con.Takt + "*(S.WOQTY  * K.IMSTCK)/60,2)/60 AS duration_min " +
-                "FROM KBM400MFG.FMWOSUM S "+
+                "ROUND(" + con.Takt + "*(S.WOQTY  * K.IMSTCK)/60,2)/60 AS duration_min, " +
+                "'0' as qa_alert " +
+                "FROM KBM400MFG.FMWOSUM S " +
                 "INNER JOIN KBM400MFG.FKITMSTR K ON S.WOPN = K.IMPN AND S.WOCO = K.IMCO " +
-                "WHERE S.WOCO = '"+con.CN+"' AND S.WOWONO = '"+con.WO+"'";
+                "WHERE S.WOCO = '" +con.CN+"' AND S.WOWONO = '"+con.WO+"'";
                 datos = AccesoDatos.ConsultarAS4(sSql);
             }
             catch (Exception ex)

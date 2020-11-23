@@ -36,6 +36,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtDefHC = new System.Windows.Forms.TextBox();
+            this.lblDefHC = new System.Windows.Forms.Label();
             this.txtMinHC = new System.Windows.Forms.TextBox();
             this.lblMinHC = new System.Windows.Forms.Label();
             this.txtMaxHC = new System.Windows.Forms.TextBox();
@@ -157,8 +159,12 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtDefHC = new System.Windows.Forms.TextBox();
-            this.lblDefHC = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -187,6 +193,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgwHrs)).BeginInit();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -235,8 +243,9 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Location = new System.Drawing.Point(8, 5);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(884, 497);
@@ -252,9 +261,9 @@
             this.tabPage1.Controls.Add(this.gbxGoal);
             this.tabPage1.Controls.Add(this.gbxLabor);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(876, 468);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TAK Data";
@@ -269,18 +278,39 @@
             this.groupBox2.Controls.Add(this.txtMaxHC);
             this.groupBox2.Controls.Add(this.lblMaxHC);
             this.groupBox2.Location = new System.Drawing.Point(23, 199);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(823, 57);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Head Count";
             // 
+            // txtDefHC
+            // 
+            this.txtDefHC.Location = new System.Drawing.Point(236, 20);
+            this.txtDefHC.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDefHC.MaxLength = 3;
+            this.txtDefHC.Name = "txtDefHC";
+            this.txtDefHC.Size = new System.Drawing.Size(46, 22);
+            this.txtDefHC.TabIndex = 0;
+            this.txtDefHC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblDefHC
+            // 
+            this.lblDefHC.AutoSize = true;
+            this.lblDefHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDefHC.Location = new System.Drawing.Point(122, 23);
+            this.lblDefHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDefHC.Name = "lblDefHC";
+            this.lblDefHC.Size = new System.Drawing.Size(106, 17);
+            this.lblDefHC.TabIndex = 4;
+            this.lblDefHC.Text = "H.C. Default :";
+            // 
             // txtMinHC
             // 
             this.txtMinHC.Location = new System.Drawing.Point(652, 20);
-            this.txtMinHC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMinHC.Margin = new System.Windows.Forms.Padding(4);
             this.txtMinHC.MaxLength = 6;
             this.txtMinHC.Name = "txtMinHC";
             this.txtMinHC.Size = new System.Drawing.Size(46, 22);
@@ -301,7 +331,7 @@
             // txtMaxHC
             // 
             this.txtMaxHC.Location = new System.Drawing.Point(445, 20);
-            this.txtMaxHC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaxHC.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaxHC.MaxLength = 3;
             this.txtMaxHC.Name = "txtMaxHC";
             this.txtMaxHC.Size = new System.Drawing.Size(46, 22);
@@ -336,9 +366,9 @@
             this.groupBox5.Controls.Add(this.label33);
             this.groupBox5.Controls.Add(this.lblAssyTime);
             this.groupBox5.Location = new System.Drawing.Point(23, 258);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox5.Size = new System.Drawing.Size(375, 190);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
@@ -346,7 +376,7 @@
             // txtMesaSub
             // 
             this.txtMesaSub.Location = new System.Drawing.Point(276, 159);
-            this.txtMesaSub.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMesaSub.Margin = new System.Windows.Forms.Padding(4);
             this.txtMesaSub.MaxLength = 4;
             this.txtMesaSub.Name = "txtMesaSub";
             this.txtMesaSub.Size = new System.Drawing.Size(73, 22);
@@ -368,7 +398,7 @@
             // txtMesaWrap
             // 
             this.txtMesaWrap.Location = new System.Drawing.Point(209, 119);
-            this.txtMesaWrap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMesaWrap.Margin = new System.Windows.Forms.Padding(4);
             this.txtMesaWrap.MaxLength = 4;
             this.txtMesaWrap.Name = "txtMesaWrap";
             this.txtMesaWrap.Size = new System.Drawing.Size(73, 22);
@@ -401,7 +431,7 @@
             // txtMesas
             // 
             this.txtMesas.Location = new System.Drawing.Point(209, 87);
-            this.txtMesas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMesas.Margin = new System.Windows.Forms.Padding(4);
             this.txtMesas.MaxLength = 4;
             this.txtMesas.Name = "txtMesas";
             this.txtMesas.Size = new System.Drawing.Size(73, 22);
@@ -434,7 +464,7 @@
             // txtMaxComp
             // 
             this.txtMaxComp.Location = new System.Drawing.Point(209, 55);
-            this.txtMaxComp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaxComp.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaxComp.MaxLength = 4;
             this.txtMaxComp.Name = "txtMaxComp";
             this.txtMaxComp.Size = new System.Drawing.Size(73, 22);
@@ -467,7 +497,7 @@
             // txtAssyTime
             // 
             this.txtAssyTime.Location = new System.Drawing.Point(241, 23);
-            this.txtAssyTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAssyTime.Margin = new System.Windows.Forms.Padding(4);
             this.txtAssyTime.MaxLength = 6;
             this.txtAssyTime.Name = "txtAssyTime";
             this.txtAssyTime.Size = new System.Drawing.Size(41, 22);
@@ -510,9 +540,9 @@
             this.groupBox4.Controls.Add(this.txtOperNA);
             this.groupBox4.Controls.Add(this.lblOperNo);
             this.groupBox4.Location = new System.Drawing.Point(423, 258);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(423, 190);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
@@ -520,7 +550,7 @@
             // txtInspec
             // 
             this.txtInspec.Location = new System.Drawing.Point(225, 146);
-            this.txtInspec.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtInspec.Margin = new System.Windows.Forms.Padding(4);
             this.txtInspec.MaxLength = 4;
             this.txtInspec.Name = "txtInspec";
             this.txtInspec.Size = new System.Drawing.Size(73, 22);
@@ -542,7 +572,7 @@
             // txtSellador
             // 
             this.txtSellador.Location = new System.Drawing.Point(225, 114);
-            this.txtSellador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSellador.Margin = new System.Windows.Forms.Padding(4);
             this.txtSellador.MaxLength = 4;
             this.txtSellador.Name = "txtSellador";
             this.txtSellador.Size = new System.Drawing.Size(73, 22);
@@ -564,7 +594,7 @@
             // txtInspSella
             // 
             this.txtInspSella.Location = new System.Drawing.Point(225, 82);
-            this.txtInspSella.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtInspSella.Margin = new System.Windows.Forms.Padding(4);
             this.txtInspSella.MaxLength = 4;
             this.txtInspSella.Name = "txtInspSella";
             this.txtInspSella.Size = new System.Drawing.Size(73, 22);
@@ -586,7 +616,7 @@
             // txtSurtidor
             // 
             this.txtSurtidor.Location = new System.Drawing.Point(225, 50);
-            this.txtSurtidor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSurtidor.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurtidor.MaxLength = 4;
             this.txtSurtidor.Name = "txtSurtidor";
             this.txtSurtidor.Size = new System.Drawing.Size(73, 22);
@@ -608,7 +638,7 @@
             // txtOperNA
             // 
             this.txtOperNA.Location = new System.Drawing.Point(225, 20);
-            this.txtOperNA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOperNA.Margin = new System.Windows.Forms.Padding(4);
             this.txtOperNA.MaxLength = 4;
             this.txtOperNA.Name = "txtOperNA";
             this.txtOperNA.Size = new System.Drawing.Size(73, 22);
@@ -636,9 +666,9 @@
             this.gbxEstation.Controls.Add(this.label17);
             this.gbxEstation.Controls.Add(this.lblTak);
             this.gbxEstation.Location = new System.Drawing.Point(23, 142);
-            this.gbxEstation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxEstation.Margin = new System.Windows.Forms.Padding(4);
             this.gbxEstation.Name = "gbxEstation";
-            this.gbxEstation.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxEstation.Padding = new System.Windows.Forms.Padding(4);
             this.gbxEstation.Size = new System.Drawing.Size(823, 57);
             this.gbxEstation.TabIndex = 2;
             this.gbxEstation.TabStop = false;
@@ -647,7 +677,7 @@
             // txtTack80
             // 
             this.txtTack80.Location = new System.Drawing.Point(625, 20);
-            this.txtTack80.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTack80.Margin = new System.Windows.Forms.Padding(4);
             this.txtTack80.MaxLength = 6;
             this.txtTack80.Name = "txtTack80";
             this.txtTack80.Size = new System.Drawing.Size(73, 22);
@@ -680,7 +710,7 @@
             // txtTack
             // 
             this.txtTack.Location = new System.Drawing.Point(209, 20);
-            this.txtTack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTack.Margin = new System.Windows.Forms.Padding(4);
             this.txtTack.MaxLength = 6;
             this.txtTack.Name = "txtTack";
             this.txtTack.Size = new System.Drawing.Size(73, 22);
@@ -723,9 +753,9 @@
             this.gbxGoal.Controls.Add(this.lblBox);
             this.gbxGoal.Controls.Add(this.lblLineBox);
             this.gbxGoal.Location = new System.Drawing.Point(423, 7);
-            this.gbxGoal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxGoal.Margin = new System.Windows.Forms.Padding(4);
             this.gbxGoal.Name = "gbxGoal";
-            this.gbxGoal.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxGoal.Padding = new System.Windows.Forms.Padding(4);
             this.gbxGoal.Size = new System.Drawing.Size(423, 132);
             this.gbxGoal.TabIndex = 1;
             this.gbxGoal.TabStop = false;
@@ -734,7 +764,7 @@
             // txtKits
             // 
             this.txtKits.Location = new System.Drawing.Point(225, 91);
-            this.txtKits.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtKits.Margin = new System.Windows.Forms.Padding(4);
             this.txtKits.MaxLength = 6;
             this.txtKits.Name = "txtKits";
             this.txtKits.Size = new System.Drawing.Size(73, 22);
@@ -767,7 +797,7 @@
             // txtKitCaja
             // 
             this.txtKitCaja.Location = new System.Drawing.Point(225, 55);
-            this.txtKitCaja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtKitCaja.Margin = new System.Windows.Forms.Padding(4);
             this.txtKitCaja.MaxLength = 6;
             this.txtKitCaja.Name = "txtKitCaja";
             this.txtKitCaja.Size = new System.Drawing.Size(73, 22);
@@ -801,7 +831,7 @@
             // txtCajas
             // 
             this.txtCajas.Location = new System.Drawing.Point(225, 23);
-            this.txtCajas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCajas.Margin = new System.Windows.Forms.Padding(4);
             this.txtCajas.MaxLength = 6;
             this.txtCajas.Name = "txtCajas";
             this.txtCajas.Size = new System.Drawing.Size(73, 22);
@@ -844,9 +874,9 @@
             this.gbxLabor.Controls.Add(this.label2);
             this.gbxLabor.Controls.Add(this.lblLabor);
             this.gbxLabor.Location = new System.Drawing.Point(23, 7);
-            this.gbxLabor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxLabor.Margin = new System.Windows.Forms.Padding(4);
             this.gbxLabor.Name = "gbxLabor";
-            this.gbxLabor.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxLabor.Padding = new System.Windows.Forms.Padding(4);
             this.gbxLabor.Size = new System.Drawing.Size(375, 132);
             this.gbxLabor.TabIndex = 0;
             this.gbxLabor.TabStop = false;
@@ -855,7 +885,7 @@
             // txtSegDisp
             // 
             this.txtSegDisp.Location = new System.Drawing.Point(209, 91);
-            this.txtSegDisp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSegDisp.Margin = new System.Windows.Forms.Padding(4);
             this.txtSegDisp.MaxLength = 12;
             this.txtSegDisp.Name = "txtSegDisp";
             this.txtSegDisp.Size = new System.Drawing.Size(73, 22);
@@ -888,7 +918,7 @@
             // txtHrDisp
             // 
             this.txtHrDisp.Location = new System.Drawing.Point(209, 55);
-            this.txtHrDisp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtHrDisp.Margin = new System.Windows.Forms.Padding(4);
             this.txtHrDisp.MaxLength = 6;
             this.txtHrDisp.Name = "txtHrDisp";
             this.txtHrDisp.Size = new System.Drawing.Size(73, 22);
@@ -922,7 +952,7 @@
             // txtJornada
             // 
             this.txtJornada.Location = new System.Drawing.Point(209, 23);
-            this.txtJornada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtJornada.Margin = new System.Windows.Forms.Padding(4);
             this.txtJornada.MaxLength = 6;
             this.txtJornada.Name = "txtJornada";
             this.txtJornada.Size = new System.Drawing.Size(73, 22);
@@ -958,9 +988,9 @@
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage2.Size = new System.Drawing.Size(876, 468);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Wrapping Time";
@@ -1054,9 +1084,9 @@
             this.groupBox6.Controls.Add(this.txtHori);
             this.groupBox6.Controls.Add(this.label13);
             this.groupBox6.Location = new System.Drawing.Point(23, 7);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox6.Size = new System.Drawing.Size(828, 210);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
@@ -1064,7 +1094,7 @@
             // txtOutAdd
             // 
             this.txtOutAdd.Location = new System.Drawing.Point(591, 171);
-            this.txtOutAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOutAdd.Margin = new System.Windows.Forms.Padding(4);
             this.txtOutAdd.MaxLength = 6;
             this.txtOutAdd.Name = "txtOutAdd";
             this.txtOutAdd.Size = new System.Drawing.Size(73, 22);
@@ -1085,7 +1115,7 @@
             // txtNA
             // 
             this.txtNA.Location = new System.Drawing.Point(591, 126);
-            this.txtNA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNA.Margin = new System.Windows.Forms.Padding(4);
             this.txtNA.MaxLength = 6;
             this.txtNA.Name = "txtNA";
             this.txtNA.Size = new System.Drawing.Size(73, 22);
@@ -1106,7 +1136,7 @@
             // txtDetroit
             // 
             this.txtDetroit.Location = new System.Drawing.Point(191, 128);
-            this.txtDetroit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDetroit.Margin = new System.Windows.Forms.Padding(4);
             this.txtDetroit.MaxLength = 6;
             this.txtDetroit.Name = "txtDetroit";
             this.txtDetroit.Size = new System.Drawing.Size(73, 22);
@@ -1128,7 +1158,7 @@
             // txtTape
             // 
             this.txtTape.Location = new System.Drawing.Point(591, 79);
-            this.txtTape.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTape.Margin = new System.Windows.Forms.Padding(4);
             this.txtTape.MaxLength = 6;
             this.txtTape.Name = "txtTape";
             this.txtTape.Size = new System.Drawing.Size(73, 22);
@@ -1150,7 +1180,7 @@
             // txtSobre
             // 
             this.txtSobre.Location = new System.Drawing.Point(191, 79);
-            this.txtSobre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSobre.Margin = new System.Windows.Forms.Padding(4);
             this.txtSobre.MaxLength = 6;
             this.txtSobre.Name = "txtSobre";
             this.txtSobre.Size = new System.Drawing.Size(73, 22);
@@ -1172,7 +1202,7 @@
             // txtVertical
             // 
             this.txtVertical.Location = new System.Drawing.Point(591, 33);
-            this.txtVertical.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtVertical.Margin = new System.Windows.Forms.Padding(4);
             this.txtVertical.MaxLength = 6;
             this.txtVertical.Name = "txtVertical";
             this.txtVertical.Size = new System.Drawing.Size(73, 22);
@@ -1194,7 +1224,7 @@
             // txtHori
             // 
             this.txtHori.Location = new System.Drawing.Point(191, 30);
-            this.txtHori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtHori.Margin = new System.Windows.Forms.Padding(4);
             this.txtHori.MaxLength = 6;
             this.txtHori.Name = "txtHori";
             this.txtHori.Size = new System.Drawing.Size(73, 22);
@@ -1711,7 +1741,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Location = new System.Drawing.Point(16, 37);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(905, 513);
             this.panel1.TabIndex = 4;
@@ -1755,26 +1785,71 @@
             this.tssVersion.Size = new System.Drawing.Size(177, 20);
             this.tssVersion.Text = "Configuration Parameters";
             // 
-            // txtDefHC
+            // tabPage7
             // 
-            this.txtDefHC.Location = new System.Drawing.Point(236, 20);
-            this.txtDefHC.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDefHC.MaxLength = 3;
-            this.txtDefHC.Name = "txtDefHC";
-            this.txtDefHC.Size = new System.Drawing.Size(46, 22);
-            this.txtDefHC.TabIndex = 0;
-            this.txtDefHC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tabPage7.Controls.Add(this.groupBox12);
+            this.tabPage7.Location = new System.Drawing.Point(4, 25);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(876, 468);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Quality";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // lblDefHC
+            // groupBox12
             // 
-            this.lblDefHC.AutoSize = true;
-            this.lblDefHC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDefHC.Location = new System.Drawing.Point(122, 23);
-            this.lblDefHC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblDefHC.Name = "lblDefHC";
-            this.lblDefHC.Size = new System.Drawing.Size(106, 17);
-            this.lblDefHC.TabIndex = 4;
-            this.lblDefHC.Text = "H.C. Default :";
+            this.groupBox12.Controls.Add(this.textBox2);
+            this.groupBox12.Controls.Add(this.label11);
+            this.groupBox12.Controls.Add(this.textBox1);
+            this.groupBox12.Controls.Add(this.label10);
+            this.groupBox12.Location = new System.Drawing.Point(17, 19);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(839, 433);
+            this.groupBox12.TabIndex = 0;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Muestreo de WO";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(224, 41);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.MaxLength = 6;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(73, 22);
+            this.textBox1.TabIndex = 5;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(43, 44);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(173, 17);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Nivel de Inspección 1 :";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(224, 79);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.MaxLength = 6;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(73, 22);
+            this.textBox2.TabIndex = 7;
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(43, 82);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(173, 17);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "Nivel de Inspección 3 :";
             // 
             // wfConfig
             // 
@@ -1785,7 +1860,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "wfConfig";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1835,6 +1910,9 @@
             this.panel1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1971,5 +2049,11 @@
         private System.Windows.Forms.CheckBox chbWrapSetup;
         private System.Windows.Forms.TextBox txtDefHC;
         private System.Windows.Forms.Label lblDefHC;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label10;
     }
 }
