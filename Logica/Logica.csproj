@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="AS4Logica.cs" />
     <Compile Include="ComunicaLogica.cs" />
+    <Compile Include="DhTracdetLogica.cs" />
+    <Compile Include="DhTrackerLogica.cs" />
     <Compile Include="ItemSugLogica.cs" />
     <Compile Include="LineConfigHrLogica.cs" />
     <Compile Include="LineConfigLnLogica.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="ConfigWrapLogica.cs" />
     <Compile Include="LineHoraLogica.cs" />
     <Compile Include="LineRampeoLogica.cs" />
+    <Compile Include="TressLogica.cs" />
     <Compile Include="UsuarioLogica.cs" />
     <Compile Include="SetupLogica.cs" />
     <Compile Include="ConfigLogica.cs" />

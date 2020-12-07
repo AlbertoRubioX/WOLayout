@@ -31,7 +31,8 @@ namespace Logica
                 "ROUND(("+con.Takt+"*(S.WOQTY  * K.IMSTCK)/60),2)/60 AS duration,"+
                 "'' as boxhr, " +
                 "ROUND(" + con.Takt + "*(S.WOQTY  * K.IMSTCK)/60,2)/60 AS duration_min, " +
-                "'0' as qa_alert " +
+                "'0' as qa_alert, " +
+                "K.IMCONV ,S.WOLOT " +
                 "FROM KBM400MFG.FMWOSUM S " +
                 "INNER JOIN KBM400MFG.FKITMSTR K ON S.WOPN = K.IMPN AND S.WOCO = K.IMCO " +
                 "WHERE S.WOCO = '" +con.CN+"' AND S.WOWONO = '"+con.WO+"'";

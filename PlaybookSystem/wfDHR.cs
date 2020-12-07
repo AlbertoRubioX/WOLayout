@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using Logica;
 using Datos;
 
@@ -15,16 +16,14 @@ namespace PlaybookSystem
     public partial class wfDHR : Form
     {
         private long _llFolio;
-        private decimal _ldMeta;
-        private decimal _ldMetaHr;
-        private decimal _ldMetaAc;
-        private decimal _ldActual;
-        private decimal _ldActualAc;
-        private decimal _ldDefectos;
-        private decimal _ldDefectosAc;
         public string _lsOrden;
-        public string _lsProceso;
-        
+        public string _lsProceso = "QA010";
+        public string _lsEmployee;
+        private int _liStep;
+        private int _liStepNew;
+        private int _liDetenido = 0;
+        private string _lsLote;
+
         Globals _gs = new Globals();
 
         public wfDHR()
@@ -34,29 +33,60 @@ namespace PlaybookSystem
         }
         private void wfDHR_Activated(object sender, EventArgs e)
         {
-            
+            txtOrden.Focus();
         }
         #region regInicio
         private void wfDHR_Load(object sender, EventArgs e)
         {
-            Inicio();
-            tssHrVersion.Text = "DHR Tracker v. 1.0.0.1";
-            
+            wfCN wfENum = new wfCN();
+            wfENum._lsCode = _lsProceso;
+            wfENum.ShowDialog();
+
+            string sNombre = wfENum._lsReturn;
+            if (string.IsNullOrEmpty(sNombre))
+                Close();
+            else
+            {
+                Inicio();
+                tssHrVersion.Text = "DHR Tracker v. 1.0.0.1";
+                tssName.Text = sNombre;
+                _lsEmployee = wfENum._lsCode;
+            }
+
+            LoadPending();
         }
         private void Inicio()
         {
-            //load data
             try
             {
-                _lsProceso = "QA010";
-                dgwLine.DataSource = null;
-                CargarColumnas();
 
-                //1. find last folio from date
-                //1.1 Load data from folio
-                //1.2 Cursor on next hour row
-                lblFecha.Text = DateTime.Today.ToShortDateString();
-                string sIndBoxing = "0";
+                txtOrden.Text = "0000000";
+                
+                lblJob.Text = "__ |";
+                lblDivision.Text = "_|";
+                _lsLote = string.Empty;
+
+                lblEstatus.Text = "";
+                lblTimeActual.Text = "00:00:00";
+                lblTimeActual.ForeColor = Color.Blue;
+                _liStep = 0;
+                _liStepNew = 0;
+                _liDetenido = 0;
+                _llFolio = 0;
+                lblTimer1.Visible = false;
+                lblTimer2.Visible = false;
+                lblTimer3.Visible = false;
+                lblTimerFinal.Visible = false;
+                lblTimeActual.Visible = false;
+
+                bt1.BackgroundImage = Properties.Resources.circle_o;
+                bt2.BackgroundImage = Properties.Resources.circle_o;
+                bt3.BackgroundImage = Properties.Resources.circle_o;
+                bt4.BackgroundImage = Properties.Resources.circle_o;
+
+                dgwLine.DataSource = null;
+                CargarColumnas(); 
+                
                 if(!string.IsNullOrEmpty(Globals._gsStation))
                 {
                     LineaRampeoLogica lineR = new LineaRampeoLogica();
@@ -66,73 +96,37 @@ namespace PlaybookSystem
                     {
                         Globals._gsCompany = dtLR.Rows[0]["company"].ToString();
                         Globals._gsLineHr = dtLR.Rows[0]["linehr"].ToString();
-                        sIndBoxing = dtLR.Rows[0]["ind_hourly"].ToString();
+                        
                     }
                 }
+
+                cbbFallas.DataSource = DhTrackerLogica.DhrFallas();
+                cbbFallas.ValueMember = "falla";
+                cbbFallas.DisplayMember = "descrip";
+                cbbFallas.SelectedIndex = -1;
+
+                txtNotaFalla.Clear();
 
                 lblLine.Text = Globals._gsLineHr;
                 tssLine.Text = Globals._gsLineHr;
 
-                if(sIndBoxing == "1")
-                {
-                    MessageBox.Show("La captura manual del Hora por Hora se ha desactivado para esta linea.", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Close();
-                    return;
-                }
-
-                LineaHoraLogica line = new LineaHoraLogica();
-                line.Linea = Globals._gsLineHr;
-                DataTable data = LineaHoraLogica.ConsultarActual(line);
-                if (data.Rows.Count > 0)
-                {
-                    _llFolio = long.Parse(data.Rows[0]["folio"].ToString());
-                   
-                    //horario
-                    LineaHoraDetLogica lined = new LineaHoraDetLogica();
-                    lined.Folio = _llFolio;
-                    DataTable dtH = LineaHoraDetLogica.VistaHorario(lined);
-                    dgwLine.DataSource = dtH;
-
-                    
-                }
-                else
-                {
-                    LineaConfigLogica con = new LineaConfigLogica();
-                    con.Linea = Globals._gsLineHr;
-                    //2. Load line data
-                    //2.1 Load line setup
-                    DataTable confL = LineaConfigLogica.ConsultarConfLinea(con);
-                    if (confL.Rows.Count > 0)
-                    {
-                        
-                    }
-                 
-                }
-
-                if(dgwLine.Rows.Count > 0)
-                {
-                    foreach (DataGridViewRow row in dgwLine.Rows)
-                    {
-                         
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("La linea no se encuentra configurada en los parámetros del sistema.", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Close();
-                    return;
-                }
-
-                if (!string.IsNullOrEmpty(_lsOrden))
-                {
-                    lblOrden.Text = _lsOrden;
-                    CargaWO();
-                }
-
+                ChangeStatus(0);
+                txtOrden.SelectAll();
+                txtOrden.Focus();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error " + ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+        private void LoadPending()
+        {
+            DataTable dt = DhTrackerLogica.ConsultarPending();
+            if (dt.Rows.Count > 0)
+            {
+                wfDhPending wfPending = new wfDhPending();
+                wfPending._lsFiltro = "D";
+                wfPending.ShowDialog();
             }
         }
         private void CargarColumnas()
@@ -142,61 +136,33 @@ namespace PlaybookSystem
             {
                 DataTable dtNew = new DataTable("Linea");
                 dtNew.Columns.Add("consec", typeof(int));
-                dtNew.Columns.Add("Hora", typeof(string));
-                dtNew.Columns.Add("Meta", typeof(decimal));
-                dtNew.Columns.Add("Acum", typeof(decimal));
-                dtNew.Columns.Add("Actual", typeof(decimal));
-                dtNew.Columns.Add("Actual Acum", typeof(decimal));
-                dtNew.Columns.Add("Defectos", typeof(decimal));
-                dtNew.Columns.Add("Work Order", typeof(string));
+                dtNew.Columns.Add("falla", typeof(int));
+                dtNew.Columns.Add("Correcciones", typeof(string));
                 dtNew.Columns.Add("Comentarios", typeof(string));
-                dtNew.Columns.Add("cumple_meta", typeof(string));
+                dtNew.Columns.Add("Corregido", typeof(bool));
+                dtNew.Columns.Add("estatus", typeof(int));
                 dgwLine.DataSource = dtNew;
             }
-
+            
             dgwLine.Columns[0].Visible = false;
-            dgwLine.Columns[9].Visible = false;
+            dgwLine.Columns[1].Visible = false;
+            dgwLine.Columns[5].Visible = false;
 
             dgwLine.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgwLine.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 
-            dgwLine.Columns[1].Width = ColumnWith(dgwLine, 15);//hora
-            dgwLine.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[1].ReadOnly = true;
-
-            dgwLine.Columns[2].Width = ColumnWith(dgwLine, 7);//meta
+            dgwLine.Columns[2].Width = ColumnWith(dgwLine, 50);//Descrip
             dgwLine.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[2].ReadOnly = true;
 
-            dgwLine.Columns[3].Width = ColumnWith(dgwLine, 7);//meta acu
+            dgwLine.Columns[3].Width = ColumnWith(dgwLine, 35);//coment
             dgwLine.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[3].ReadOnly = true;
 
-            dgwLine.Columns[4].Width = ColumnWith(dgwLine, 7);//actual
+            dgwLine.Columns[4].Width = ColumnWith(dgwLine, 10);//corregido box
             dgwLine.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            
-
-            dgwLine.Columns[5].Width = ColumnWith(dgwLine, 7);//actual acu
-            dgwLine.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[5].ReadOnly = true;
-
-            dgwLine.Columns[6].Width = ColumnWith(dgwLine, 10);//defectos
-            dgwLine.Columns[6].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgwLine.Columns[7].Width = ColumnWith(dgwLine, 21);//work order
-            dgwLine.Columns[7].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            
-            dgwLine.Columns[8].Width = ColumnWith(dgwLine, 27);//comentarios
-            dgwLine.Columns[8].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            
+            dgwLine.Columns[4].ReadOnly =false;
         }
       
         private int ColumnWith(DataGridView _dtGrid, double _dColWith)
@@ -225,91 +191,30 @@ namespace PlaybookSystem
             if (string.IsNullOrEmpty(lblLine.Text) || string.IsNullOrWhiteSpace(lblLine.Text) || lblLine.Text == "0")
                 return false;
 
-          
-            if (dgwLine.Rows.Count == 0)
+            if (string.IsNullOrEmpty(txtOrden.Text) || string.IsNullOrWhiteSpace(txtOrden.Text) || txtOrden.Text == "000000")
                 return false;
 
-            
-             
-
-            return bValida;
-        }
-        private void CargaWO()
-        {
-            
-            int iHora = DateTime.Now.Hour;
-            int iHr = 0;
-            string sValAnt = string.Empty;
-
-            foreach (DataGridViewRow row in dgwLine.Rows)
+            if(_liStep == 0)
             {
-                //string sActual = dgwLine[4, row.Index].Value.ToString();
-                //int iActual = 0;
-                //if (!int.TryParse(sActual, out iActual))
-                //    iActual = 0;
-               
-                string sWO = dgwLine[7, row.Index].Value.ToString();
-                string sHorario = dgwLine[1, row.Index].Value.ToString();
-                sHorario = sHorario.Substring(0, 2);
-                iHr = int.Parse(sHorario);
-
-                if (iHora > iHr && (string.IsNullOrEmpty(sWO)))
-                    dgwLine[7, row.Index].Value = _lsOrden;
-                
-            }
-        }
-        private bool ValidaHoraCaptura()
-        {
-            bool bValida = true;
-            int iHora = DateTime.Now.Hour;
-            int iHr = 0;
-            string sValAnt = string.Empty;
-
-            foreach (DataGridViewRow row in dgwLine.Rows)
-            {
-                string sHorario = dgwLine[1, row.Index].Value.ToString();
-                sHorario = sHorario.Substring(0, 2);
-                iHr = int.Parse(sHorario);
-                string sActual = dgwLine[4, row.Index].Value.ToString();
-
-                //if (row.Index > 0 && iHr < iHora && (string.IsNullOrEmpty(sActual) || sActual == "0"))
-                //{ 
-                //    MessageBox.Show("Favor de capturar en las Horas faltantes", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //    dgwLine.CurrentCell = dgwLine[4, row.Index];
-                //    dgwLine.Focus();
-                //    bValida = false;
-                //    break;
-                //}
-
-                //adelantar captura de hora
-                int iActual = 0;
-                if (!int.TryParse(sActual, out iActual))
-                    iActual = 0;
-                if (row.Index > 0 && iHr >= iHora && iActual > 0)
+                if (_liStepNew == 0)
+                    return false;
+                else
                 {
-                    MessageBox.Show("No se permite adelantar la captura del Hora por Hora (" + sHorario + ")", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    dgwLine.CurrentCell = dgwLine[4, row.Index];
-                    dgwLine.Focus();
-                    bValida = false;
-                    break;
+                    if (_liStepNew > 1)
+                    {
+                        MessageBox.Show("No puede omitir pasos en el proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
                 }
-
-                //entre horas
-                //if (row.Index > 0 && !string.IsNullOrEmpty(sActual) && sActual != "0")
-                //{
-                //    string sHora = dgwLine[1, row.Index - 1].Value.ToString();
-                //    if (string.IsNullOrEmpty(sValAnt) || sValAnt == "0")
-                //    {
-                //        bValida = false;
-                //        MessageBox.Show("No se ha capturado la cantidad de la hora " + sHora, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //        dgwLine.CurrentCell = dgwLine[4, row.Index - 1];
-                //        dgwLine.Focus();
-                //        break;
-                //    }
-                //}
-
-                sValAnt = sActual;
-
+            }
+            else
+            {
+                int iDif = _liStepNew - _liStep;
+                if (iDif > 1)
+                {
+                    MessageBox.Show("No puede omitir pasos en el proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
             }
 
             return bValida;
@@ -322,58 +227,79 @@ namespace PlaybookSystem
                 if (!Valida())
                     return;
 
-                if (!ValidaHoraCaptura())
-                    return;
+                _liStep = _liStepNew;
 
-                LineaHoraLogica line = new LineaHoraLogica();
+                if (_liStep == 3)
+                {
+                    int iCheck = 0;
+                    
+                    foreach (DataGridViewRow row in dgwLine.Rows)
+                    {
+                        string sEstatus = dgwLine[5, row.Index].Value.ToString();
+                        if(sEstatus == "0")
+                        {
+                            iCheck++;
+                        }
+                    }
+                    if (iCheck == 0)
+                        _liDetenido = 0;
+                    else
+                    {
+                        if(_liDetenido == 0)
+                        {
+                            if (MessageBox.Show("Deseas detener la Revisión hasta la Corrección?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                _liDetenido = 1;
+                        }
+                    }
+                }
+                DhTrackerLogica dhr = new DhTrackerLogica();
 
                 if (_llFolio > 0)
-                    line.Folio = _llFolio;
+                    dhr.Folio = _llFolio;
                 else
-                    line.Folio = AccesoDatos.Consec(_lsProceso);
+                    dhr.Folio = AccesoDatos.Consec(_lsProceso);
+                dhr.Orden = txtOrden.Text.ToString();
+                dhr.Linea = lblLine.Text.ToString();
+                dhr.Fecha = DateTime.Now;
 
-                line.Linea = lblLine.Text.ToString();
-                line.Fecha = DateTime.Parse(lblFecha.Text.ToString());  
-                
-                line.Usuario = Globals._gsStation;
+                int iPos = lblJob.Text.ToString().IndexOf(" - ");
+                string sParte = lblJob.Text.ToString().Substring(0, iPos);
+                string sDescrip = lblJob.Text.ToString().Substring(iPos + 3);
 
-                if(LineaHoraLogica.GuardarSP(line) > 0)
+                dhr.Parte = sParte.TrimEnd();
+                dhr.Descrip = sDescrip;
+                dhr.Division = lblDivision.Text.ToString();
+                                
+                dhr.Inspector = _lsEmployee;
+                dhr.Nombre = tssName.Text.ToString();
+                dhr.Estatus = _liStep;
+                dhr.Detenido = _liDetenido;
+                dhr.Lote = _lsLote.TrimEnd();
+                dhr.Usuario = _lsEmployee;
+
+                if (DhTrackerLogica.GuardarSP(dhr) > 0)
                 {
-                    LineaHoraDetLogica det = new LineaHoraDetLogica();
-                    det.Folio = line.Folio;
+                    DhTracdetLogica det = new DhTracdetLogica();
+                    det.Folio = dhr.Folio;
                     foreach(DataGridViewRow row in dgwLine.Rows)
                     {
                         int iCons = 0;
                         if (!string.IsNullOrEmpty(row.Cells[0].Value.ToString()))
                             iCons = int.Parse(row.Cells[0].Value.ToString());
-                        string sHora = row.Cells[1].Value.ToString();
-                        int iMeta = int.Parse(row.Cells[2].Value.ToString());
-                        int iMetaAc = int.Parse(row.Cells[3].Value.ToString());
-                        int iActual = int.Parse(row.Cells[4].Value.ToString());
-                        int iActualAc = int.Parse(row.Cells[5].Value.ToString());
-                        string sCumple = row.Cells[9].Value.ToString();
-                        int iDefectos = 0;
-                        if(!int.TryParse(row.Cells[6].Value.ToString(),out iDefectos))
-                            iDefectos = 0;
-                        string sOrden = row.Cells[7].Value.ToString();
-                        string sNota = row.Cells[8].Value.ToString();
+
+                        det.Falla = int.Parse(row.Cells[1].Value.ToString());
+                        det.Nota = row.Cells[3].Value.ToString();
+                        det.Estatus = int.Parse(row.Cells[5].Value.ToString());
 
                         det.Consec = iCons;
-                        det.Hora = sHora;
-                        det.Meta = iMeta;
-                        det.MetaAc = iMetaAc;
-                        det.Actual = iActual;
-                        det.ActualAc = iActualAc;
-                        det.Defectos = iDefectos;
-                        det.Orden = sOrden;
-                        det.Nota = sNota;
-                        det.Cumple = sCumple;
-
-                        LineaHoraDetLogica.GuardarSP(det);
-
+                        
+                        DhTracdetLogica.GuardarSP(det);
                     }
+                    if(_liStep == 1)
+                        MessageBox.Show("DH Tracker se ha registrado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("DH Tracker se ha actualizado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    MessageBox.Show("Hora por Hora se ha registrado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
             }
@@ -390,60 +316,12 @@ namespace PlaybookSystem
         private void dgwLine_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             int iRow = e.RowIndex;
-            string sVal = dgwLine[9, e.RowIndex].Value.ToString();
             if ((iRow % 2) == 0)
                 e.CellStyle.BackColor = Color.LightSkyBlue;
             else
                 e.CellStyle.BackColor = Color.White;
-               
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
-                e.CellStyle.ForeColor = Color.DarkSlateGray;
-
-            if(sVal == "0" && (  e.ColumnIndex == 5))
-                e.CellStyle.BackColor = Color.Red;
-
-            if (sVal == "2" )
-                e.CellStyle.BackColor = Color.LightGreen;
 
         }
-        private void dgwLine_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 7)
-            {
-                string sValor = dgwLine[e.ColumnIndex, e.RowIndex].Value.ToString();
-                if (!string.IsNullOrEmpty(sValor) && !string.IsNullOrWhiteSpace(sValor))
-                    lblOrden.Text = sValor;
-            }
-
-            if (e.ColumnIndex == 4 || e.ColumnIndex == 6)
-            {
-              
-                try
-                {
-                    string sValor = dgwLine[e.ColumnIndex, e.RowIndex].Value.ToString();
-                    if (!string.IsNullOrEmpty(sValor) && !string.IsNullOrWhiteSpace(sValor))
-                    {
-                        
-                        int iCant = 0;
-                        if (!int.TryParse(sValor, out iCant))
-                        {
-                            MessageBox.Show("El valor capturado no es válido", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            dgwLine[e.ColumnIndex, e.RowIndex].Value = 0;
-                            return;
-                        }
-                        
-                    }
-                   
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Favor de Notificar al Administrador" + Environment.NewLine + "dgwLine_CellValueChanged(6)" + Environment.NewLine + ex.ToString(), "Error en " + Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-            }
-        }
-        
        
         #endregion
 
@@ -453,52 +331,26 @@ namespace PlaybookSystem
             Inicio();
         }
 
-        
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (dgwLine.Rows.Count == 0)
+            if (txtOrden.Text == "0000000" || string.IsNullOrEmpty(txtOrden.Text))
                 return;
+
+            if (cbbFallas.SelectedIndex == -1)
+                return;
+
+            string sFalla = cbbFallas.SelectedValue.ToString();
+            string sDescrip = cbbFallas.Text.ToString();
+            string sNota = txtNotaFalla.Text.ToString();
 
             int iRow = dgwLine.RowCount - 1;
-            string sActual = dgwLine[4, iRow].Value.ToString();
-            if (sActual == "0")
-            {
-                MessageBox.Show("Debes capturar la hora faltante antes de agregar un horario de Tiempo Extra.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                dgwLine.Rows[iRow].Cells[4].Selected = true;
-                return;
-            }
 
-            string sWO = dgwLine[7, iRow].Value.ToString();
-            int iHora = DateTime.Now.Hour;
-            int iRowAnt = iRow;
-            int iMetaAc = int.Parse(dgwLine[3, iRow].Value.ToString());
-            if (dgwLine[4, iRow].Value.ToString() != "O")
-            {
-                for(int x  = 0; x < 3; x++)
-                {
-                    string sHora = dgwLine[1, iRow].Value.ToString();
-                    sHora = sHora.Substring(0, 2);
-                    int iHr = int.Parse(sHora);
-                    int ixRow =  0;
-                    if (x == 2)
-                        ixRow = iRowAnt;
-                    else
-                        ixRow = x;
+            DataTable dt = dgwLine.DataSource as DataTable;
+            dt.Rows.Add(0, int.Parse(sFalla), sDescrip, sNota,false,0);
 
-                   
-                    string sHoraSig = string.Empty;
+            cbbFallas.SelectedIndex = -1;
+            txtNotaFalla.Clear();
 
-                    int iHrS1 = iHr + 1;
-                    int iHrS2 = iHr + 2;
-                    sHoraSig = iHrS1.ToString().PadLeft(2, '0') + ":00 - " + iHrS2.ToString().PadLeft(2, '0') + ":00";
-
-                    
-                }
-                 
-                dgwLine.CurrentCell = dgwLine[4, iRow];
-                dgwLine.Focus();
-            }
         }
 
         private void lblTextra_Click(object sender, EventArgs e)
@@ -567,13 +419,410 @@ namespace PlaybookSystem
                 dgwLine.Focus();
             }
         }
+
+        private void bt1_Click(object sender, EventArgs e)
+        {
+            ChangeStatus(1);
+            groupBox1.Enabled = false;
+        }
+
+        private void bt2_Click(object sender, EventArgs e)
+        {
+            ChangeStatus(2);
+            groupBox1.Enabled = false;
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
+        {
+            ChangeStatus(3);
+            groupBox1.Enabled = true;
+        }
+
+        private void bt4_Click(object sender, EventArgs e)
+        {
+            ChangeStatus(4);
+        }
+
+        private void btNext_Click(object sender, EventArgs e)
+        {
+            if (_liStep < 4)
+                ChangeStatus(_liStep + 1);
+
+
+        }
+
+        private void btBack_Click(object sender, EventArgs e)
+        {
+            if (_liStep > 1)
+                ChangeStatus(_liStep - 1);
+        }
         #endregion
 
-       
-
+        #region Captura
         private void dgwLine_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgwLine.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+        private bool ValidaStep(int _aiEstatus)
+        {
+            if (_liStep == 0)
+            {
+                if (_aiEstatus == 0)
+                    return false;
+                else
+                {
+                    if (_aiEstatus > 1)
+                    {
+                        MessageBox.Show("No puede omitir pasos en el proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                int iDif = _aiEstatus - _liStep;
+                if (iDif > 1)
+                {
+                    MessageBox.Show("No puede omitir pasos en el proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                if (_liStep == 3 && _aiEstatus == 4)
+                {
+                    if(_liDetenido == 1)
+                    {
+                        MessageBox.Show("Favor resolver las correcciones pendientes en el paso 3", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                    else
+                    {
+                        string sDirectorio = "\\\\Mxcprdqafs1\\QA Images";
+                        string sFolder = "\\DHR SCAN STERILE";
+                        string sDiv = "\\SPT";
+                        if (lblDivision.Text == "DYN")
+                            sDiv = "\\DYNACOR";
+                        string sAxo = "\\" + DateTime.Today.Year.ToString();
+                        int iPos = lblJob.Text.ToString().IndexOf(" - ");
+                        string sJob = lblJob.Text.ToString().Substring(0, iPos);
+                        string sDHR = _lsLote + "," + sJob + "," + txtOrden.Text.ToString() + ".pdf";
+                        string sFile = sDirectorio + sFolder + sDiv + sAxo + "\\" + sDHR;
+                        if (File.Exists(sFile))
+                        {
+                            MessageBox.Show("Documento " + sDHR + " ha sido encontrado", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return true;
+                        }
+                        else
+                        {
+                            sFolder = "\\DHR SCAN NO STERILE";
+                            sFile = sDirectorio + sFolder + sDiv + sAxo + "\\" + sDHR;
+                            if (!File.Exists(sFile))
+                            {
+                                MessageBox.Show("El documento " + sDHR + " no fue encontrado", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return false;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Documento " + sDHR + " ha sido encontrado", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        private void ChangeStatus(int _aiEstatus)
+        {
+            if (!ValidaStep(_aiEstatus))
+                return;
+
+            bt1.BackgroundImage = Properties.Resources.circle_gray;
+            bt2.BackgroundImage = Properties.Resources.circle_gray;
+            bt3.BackgroundImage = Properties.Resources.circle_gray;
+            bt4.BackgroundImage = Properties.Resources.circle_gray;
+
+            lblCR.Font = new Font(Label.DefaultFont, FontStyle.Regular);
+            lblBoxing.Font = new Font(Label.DefaultFont, FontStyle.Regular);
+            lblDHR.Font = new Font(Label.DefaultFont, FontStyle.Regular);
+            lblEscaneo.Font = new Font(Label.DefaultFont, FontStyle.Regular);
+
+            switch (_aiEstatus)
+            {
+                case 1:
+                    bt1.BackgroundImage = Properties.Resources.circle_blue;
+                    lblEstatus.Text = "CLEAN ROOM";
+                    lblCR.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+                    break;
+                case 2:
+                    bt1.BackgroundImage = Properties.Resources.circle_blue;
+                    bt2.BackgroundImage = Properties.Resources.circle_blue;
+                    lblEstatus.Text = "BOXING";
+                    lblBoxing.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+                    if (_aiEstatus != _liStep)
+                    {
+                        lblTimer1.Text = lblTimeActual.Text.ToString().Substring(0,5);
+                        lblTimeActual.Text = "00:00:00";
+                    }
+                    lblTimer1.Visible = true;
+                    break;
+                case 3:
+                    bt1.BackgroundImage = Properties.Resources.circle_blue;
+                    bt2.BackgroundImage = Properties.Resources.circle_blue;
+                    lblDHR.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+                    if (_liDetenido == 1)
+                        bt3.BackgroundImage = Properties.Resources.circle_red;
+                    else
+                        bt3.BackgroundImage = Properties.Resources.circle_blue;
+                    if (_aiEstatus != _liStep) //edit
+                    {
+                        lblTimer2.Text = lblTimeActual.Text.ToString().Substring(0, 5);
+                        lblTimeActual.Text = "00:00:00";
+                    }
+                    lblEstatus.Text = "DHR";
+                    lblTimer1.Visible = true;
+                    lblTimer2.Visible = true;
+                    groupBox1.Enabled = true;
+                    break;
+                case 4:
+                    bt1.BackgroundImage = Properties.Resources.circle_blue;
+                    bt2.BackgroundImage = Properties.Resources.circle_blue;
+                    bt3.BackgroundImage = Properties.Resources.circle_blue;
+                    lblEscaneo.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+                    bt4.BackgroundImage = Properties.Resources.circle_blue;
+                    lblEstatus.Text = "ESCANEO";
+                    if (_aiEstatus != _liStep) //edit
+                    {
+                        lblTimer3.Text = lblTimeActual.Text.ToString().Substring(0, 5);
+                        lblTimeActual.Visible = false;
+                    }
+                    else
+                        lblTimeActual.Visible = true;
+
+                    lblTimer1.Visible = true;
+                    lblTimer2.Visible = true;
+                    lblTimer3.Visible = true;
+                    groupBox1.Enabled = false;
+                    break;
+                default:
+                    lblEstatus.Text = "";
+                    lblTimer1.Visible = false;
+                    lblTimer2.Visible = false;
+                    break;
+            } 
+
+            int iX = lblEstatus.Location.X;
+            int iW = lblEstatus.Size.Width;
+            iW = iW / 2;
+
+            int iWp = panel4.Size.Width;
+            iWp = iWp / 2;
+
+            iX = iWp - iW;
+            lblEstatus.Location = new Point(iX,lblEstatus.Location.Y);
+
+            _liStepNew = _aiEstatus;
+
+            if(_aiEstatus < 4)
+                timer1.Start();
+        }
+        private string GetCurrentDuration(DateTime _adtFecha)
+        {
+
+            TimeSpan time = DateTime.Now - _adtFecha;
+            double dHrs = time.Hours;
+            double dMin = time.Minutes;
+            string sDuracion = dHrs.ToString().PadLeft(2,'0') + ":" + dMin.ToString().PadLeft(2,'0')+":00";
+
+            return sDuracion;
+        }
+        private string GetDuration(DateTime _adtFechaIni, DateTime _adtFechaFin)
+        {
+
+            TimeSpan time = _adtFechaFin - _adtFechaIni;
+            double dHrs = time.Hours;
+            double dMin = time.Minutes;
+            string sDuracion = dHrs.ToString().PadLeft(2, '0') + ":" + dMin.ToString().PadLeft(2, '0');
+
+            return sDuracion;
+        }
+        private void txtOrden_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Escape)
+                    Close();
+
+                if (e.KeyCode != Keys.Enter)
+                    return;
+
+                string sValue = txtOrden.Text.ToString().ToUpper();
+
+                if (sValue.Substring(0, 3) == "686")
+                    sValue = sValue.Substring(3);
+
+                if (sValue.Length < 7)
+                {
+                    sValue = sValue.PadLeft(7, '0');
+                    txtOrden.Text = sValue;
+                }
+
+                Inicio();
+                txtOrden.Text = sValue;
+                lblTimeActual.Visible = true;
+
+                DhTrackerLogica dhr = new DhTrackerLogica();
+                dhr.Orden = sValue;
+                DataTable dt = DhTrackerLogica.ConsultarOrden(dhr);
+                if (dt.Rows.Count > 0)
+                {
+                    _llFolio = long.Parse(dt.Rows[0][0].ToString());                    
+                    string sItem = dt.Rows[0][4].ToString().Trim();
+                    string sDesc = dt.Rows[0][5].ToString().Trim();
+                    string sEstatus = dt.Rows[0][6].ToString();
+                    string sDivision = dt.Rows[0]["division"].ToString();
+                    _liDetenido = int.Parse(dt.Rows[0]["detenido"].ToString());
+                    _lsLote = dt.Rows[0]["lote"].ToString();
+
+                    _liStep = int.Parse(sEstatus);
+                    switch (_liStep)
+                    {
+                        case 1:
+                            lblTimeActual.Text = GetCurrentDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()));
+                            break;
+                        case 2:
+                            lblTimer1.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()), DateTime.Parse(dt.Rows[0]["f_boxing"].ToString()));
+                            lblTimeActual.Text = GetCurrentDuration(DateTime.Parse(dt.Rows[0]["f_boxing"].ToString()));
+                            break;
+                        case 3:
+                            lblTimer1.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()), DateTime.Parse(dt.Rows[0]["f_boxing"].ToString()));
+                            lblTimer2.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_boxing"].ToString()), DateTime.Parse(dt.Rows[0]["f_dhr"].ToString()));
+                            lblTimeActual.Text = GetCurrentDuration(DateTime.Parse(dt.Rows[0]["f_dhr"].ToString()));
+                            groupBox1.Enabled = true;
+                            break;
+                        case 4:
+                            lblTimer1.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()), DateTime.Parse(dt.Rows[0]["f_boxing"].ToString()));
+                            lblTimer2.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_boxing"].ToString()), DateTime.Parse(dt.Rows[0]["f_dhr"].ToString()));
+                            lblTimer3.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_dhr"].ToString()), DateTime.Parse(dt.Rows[0]["f_escaneo"].ToString()));
+                            lblTimeActual.Text = "Total: " +  GetDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()), DateTime.Parse(dt.Rows[0]["f_escaneo"].ToString()));
+                            lblTimeActual.ForeColor = Color.Black;
+                            timer1.Stop();
+                            break;
+                    }
+
+                    lblJob.Text = sItem + " - " + sDesc;
+                    //iEstatus++;
+                    ChangeStatus(_liStep);
+
+                    if (sDivision == "22")
+                        sDivision = "SPT";
+                    if (sDivision == "51")
+                        sDivision = "DYN";
+                    lblDivision.Text = sDivision;
+
+                    _llFolio = long.Parse(dt.Rows[0][0].ToString());
+                    dhr.Folio = _llFolio;
+
+                    //dwLine.DataSource = DhTrackerLogica.ConsultarFallasView(dhr);
+                    DataTable dtS = dgwLine.DataSource as DataTable;
+                    DataTable det = DhTrackerLogica.ConsultarFallasView(dhr);
+                    for (int i = 0; i < det.Rows.Count; i++)
+                    {
+                        int iEstatus = int.Parse(det.Rows[i][5].ToString());
+                        bool bCheck = false;
+                        if (iEstatus == 1)
+                            bCheck = true;
+
+                        dtS.Rows.Add(det.Rows[i][0].ToString(), int.Parse(det.Rows[i][1].ToString()), det.Rows[i][2].ToString(), det.Rows[i][3].ToString(), bCheck, iEstatus);
+                    }
+
+                    CargarColumnas();
+                }
+                else
+                {
+                    AS4Logica AS4 = new AS4Logica();
+                    AS4.CN = Globals._gsCompany;
+                    AS4.WO = sValue;
+
+                    dt = AS4Logica.WorkOrder(AS4);
+                    if (dt.Rows.Count > 0)
+                    {
+                        string sItem = dt.Rows[0][0].ToString().Trim();
+                        string sDesc = dt.Rows[0][1].ToString().Trim();
+                        string sDivision = dt.Rows[0]["IMCONV"].ToString();
+                        _lsLote = dt.Rows[0]["WOLOT"].ToString(); 
+
+                        if (sDivision == "22")
+                            sDivision = "SPT";
+                        if (sDivision == "51")
+                            sDivision = "DYN";
+
+                        lblJob.Text = sItem + " - " + sDesc;
+                        lblDivision.Text = sDivision;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Work Order not Found!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtOrden.Clear();
+                        txtOrden.Focus();
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void txtOrden_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            string sTimeH = lblTimeActual.Text.Substring(0, 2);
+            string sTimeM = lblTimeActual.Text.Substring(3, 2);
+            string sTimeS = lblTimeActual.Text.Substring(6, 2);
+            
+            int iContM = int.Parse(sTimeM);
+            int iContH = int.Parse(sTimeH);
+            int iContS = int.Parse(sTimeS);
+
+            if (iContS == 59)
+            {
+                iContS = 0;
+                if (iContM == 59)
+                {
+                    iContM = 0;
+                    iContH++;
+                }
+                else
+                    iContM++;
+            }
+            else
+                iContS++;
+            
+            lblTimeActual.Text = iContH.ToString().PadLeft(2,'0') + ":" + iContM.ToString().PadLeft(2, '0') + ":" + iContS.ToString().PadLeft(2, '0');
+        }
+        #endregion
+
+        private void dgwLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 4)
+                return;
+
+            bool bCheck = bool.Parse(dgwLine[4, e.RowIndex].Value.ToString());
+            int iEstatus = int.Parse(dgwLine[5, e.RowIndex].Value.ToString());
+            if(bCheck)
+                dgwLine[5, e.RowIndex].Value = 1;
+            else
+                dgwLine[5, e.RowIndex].Value = 0;
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            wfDhPending wfPending = new wfDhPending();
+            wfPending.Show();
         }
     }
 }

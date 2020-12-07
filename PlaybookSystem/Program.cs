@@ -33,7 +33,15 @@ namespace PlaybookSystem
             line.Estacion = Globals._gsStation;
 
             //obtener planta del usuario de windows
-            string sPlanta = UsuarioLogica.GetCompany(user);
+            string sPlanta=string.Empty;
+            string sRol=string.Empty;
+            DataTable dtU = UsuarioLogica.ConsultarUser(user);
+            if(dtU.Rows.Count > 0)
+            {
+                sPlanta = dtU.Rows[0]["planta"].ToString();
+                sRol = dtU.Rows[0]["puesto"].ToString();
+            }
+            //string sPlanta = UsuarioLogica.GetCompany(user);
             if (string.IsNullOrEmpty(sPlanta))
                 sPlanta = LineaRampeoLogica.GetCompany(line);
 
@@ -64,7 +72,12 @@ namespace PlaybookSystem
                         if (LineaRampeoLogica.VerificaCapturaHora(line))
                             Application.Run(new wfLineHour());
                         else
-                            Application.Run(new wfLayout());
+                        {
+                            if (sRol == "QA")
+                                Application.Run(new wfDHR());
+                            else
+                                Application.Run(new wfLayout());
+                        }
                     }
                 }
             }

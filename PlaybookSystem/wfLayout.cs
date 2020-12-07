@@ -2959,6 +2959,12 @@ namespace PlaybookSystem
             wfTableSetup Sug = new wfTableSetup();
             Sug.ShowDialog();
         }
+
+        private void btnDHR_Click(object sender, EventArgs e)
+        {
+            wfDHR DHR = new wfDHR();
+            DHR.ShowDialog();
+        }
     }
     #endregion
 

@@ -61,6 +61,20 @@ namespace Logica
             }
             return datos;
         }
+
+        public static DataTable ListarDrop()
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = AccesoDatos.Consultar("SELECT * FROM t_lineramp where linehr is not null order by linehr");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
         public static DataTable Vista(LineaRampeoLogica lin)
         {
             DataTable datos = new DataTable();

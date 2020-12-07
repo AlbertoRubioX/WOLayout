@@ -185,6 +185,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
+            this.btnDHR = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -432,7 +433,8 @@
             this.toolStripLabel1,
             this.btnExit,
             this.btnLanguage,
-            this.btSugSet});
+            this.btSugSet,
+            this.btnDHR});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1540, 27);
@@ -1933,6 +1935,16 @@
             this.dgwItem.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwItem_CellFormatting);
             this.dgwItem.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwItem_ColumnAdded);
             // 
+            // btnDHR
+            // 
+            this.btnDHR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDHR.Image = global::PlaybookSystem.Properties.Resources.operador;
+            this.btnDHR.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDHR.Name = "btnDHR";
+            this.btnDHR.Size = new System.Drawing.Size(24, 24);
+            this.btnDHR.Text = "DHR Tracker";
+            this.btnDHR.Click += new System.EventHandler(this.btnDHR_Click);
+            // 
             // wfLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2220,6 +2232,7 @@
         private System.Windows.Forms.ToolStripStatusLabel tssLoading;
         private System.Windows.Forms.ToolStripButton btSug;
         private System.Windows.Forms.ToolStripButton btSugSet;
+        private System.Windows.Forms.ToolStripButton btnDHR;
     }
 }
 

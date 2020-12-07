@@ -102,6 +102,12 @@
     <Compile Include="wfDHR.Designer.cs">
       <DependentUpon>wfDHR.cs</DependentUpon>
     </Compile>
+    <Compile Include="wfDhPending.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfDhPending.Designer.cs">
+      <DependentUpon>wfDhPending.cs</DependentUpon>
+    </Compile>
     <Compile Include="wfWrapSetup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     <EmbeddedResource Include="wfDHR.resx">
       <DependentUpon>wfDHR.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="wfDhPending.resx">
+      <DependentUpon>wfDhPending.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="wfWrapSetup.resx">
       <DependentUpon>wfWrapSetup.cs</DependentUpon>
     </EmbeddedResource>
@@ -274,6 +283,14 @@
     <Content Include="Imgs\bt_exit.png" />
     <Content Include="Imgs\bt_save.png" />
     <Content Include="levels.ico" />
+    <None Include="Resources\Sync.png" />
+    <None Include="Resources\circle-gray.png" />
+    <None Include="Resources\circle-blue.png" />
+    <None Include="Resources\plus-black.png" />
+    <None Include="Resources\circle-red.png" />
+    <None Include="Resources\circle-o.png" />
+    <None Include="Resources\arrow-circle-left.png" />
+    <None Include="Resources\arrow-circle-right.png" />
     <None Include="Resources\components.png" />
     <None Include="Resources\go-down.png" />
     <None Include="Resources\table_setup.png" />
