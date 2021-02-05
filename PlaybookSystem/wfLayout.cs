@@ -87,8 +87,6 @@ namespace PlaybookSystem
             {
                 _lsProceso = "PRO010";
                 Globals._gsLang = "SP";
-                //_lsUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                //_lsUser = _lsUser.Substring(_lsUser.IndexOf("\\") + 1).ToUpper();
 
                 _lsUser = Globals._gsUser;
 
@@ -135,7 +133,7 @@ namespace PlaybookSystem
             panel2.BackgroundImage = Properties.Resources.Blue_Background_down;
             
             lblCycleTime.Text = "0";
-            lblCycleTime.Text = "0";// _dTackTime.ToString();
+            lblCycleTime.Text = "0";
             lblCycleTime.ForeColor = System.Drawing.Color.ForestGreen;
 
             _bModoManual = false;
@@ -443,7 +441,6 @@ namespace PlaybookSystem
                 if (e.KeyCode == Keys.Escape)
                     Close();
                 
-
                 if (e.KeyCode != Keys.Enter)
                     return;
 
@@ -466,9 +463,6 @@ namespace PlaybookSystem
                 set.Takt = _dTackTime;
 
                 DataTable dt = AS4Logica.WorkOrder(AS4); 
-                //if (dt.Rows.Count == 0)
-                //    dt = SetupLogica.ConsultarWO(set); // setup data base server changed
-
                 if (dt.Rows.Count > 0)
                 {
                    
@@ -494,14 +488,6 @@ namespace PlaybookSystem
                     CargarColumnas();
 
                     string sItem = dt.Rows[0][0].ToString();
-
-                    //if (sItem.IndexOf("DYN") == -1)
-                    //{
-                    //    MessageBox.Show(_gs.ControlGridRows(this.Name,txtWO, "err1"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //    Inicio();
-                    //    return;
-                    //}
-
                     string sName = dt.Rows[0][1].ToString();
                     AS4.Item = sItem;
                     int iMaxComp = _iMaxTable * _iMesaEns;
@@ -651,9 +637,6 @@ namespace PlaybookSystem
                                                       
                                     if (iFold > 0)
                                         iOutOper = 2;
-
-                                    //if (AS4Logica.ComponentsLayerFold(AS4))
-                                    //    iOutOper = 2;
                                 }
                             }
 
@@ -669,8 +652,7 @@ namespace PlaybookSystem
 
                             decimal cM = Math.Ceiling((decimal)iSub / _iMaxTable);
                             iMesas = (int)cM;
-                            //corregir formula
-                            //iMesas = (int)Math.Ceiling((decimal)iMesas / (decimal)_iEstSub); formula no necesaria
+                            
                             iOper = iMesas * _iEstSub;
                             string sCol1 = _gs.ControlGridRows(this.Name,dgwTables, "sub");
                             string sCol2 = _gs.ControlGridRows(this.Name,dgwTables, "sub_desc");
@@ -716,7 +698,7 @@ namespace PlaybookSystem
                             iOper = 0;
                             int iWrapSm = 0;
                             int iWrapSo = 0;
-                            //if (sLevelS == "W")
+                            
                             if (sLevelS == "S")
                             {
                                 dW = Math.Ceiling(dWrapTime2 / (dMax * _dAssyTime));
@@ -779,9 +761,7 @@ namespace PlaybookSystem
                                 _iOWrap1 = wrap1o / wrap1m;
                             else
                                 _iOWrap1 = 0;
-                            //llenarmesaWS(iWrapSm, iWrapSo, wrap1m); // sub-assembly wrapping tables
-
-
+                            
                             if (subassym + assym > 9 || assym > 5)
                             {
                                 MessageBox.Show(ControlGridRows(txtWO, "err3"), "System Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -799,12 +779,6 @@ namespace PlaybookSystem
                         dgwItem.ClearSelection();
                         txtWO.SelectAll();
 
-                        //MODO MANUAL
-                        //string sMensajeManual = (Globals._gsLang == "SP") ? "Operadores requeridos: " + lblOper.Text + "\n \nOperadores disponibles: " : "Required operators: " + lblOper.Text + "\n \nAvailable operators: ";
-                        //string sEncabezadoManual = (Globals._gsLang == "SP") ? "Modo Manual" : "Manual Mode";
-
-                        //var iODisponibles = Microsoft.VisualBasic.Interaction.InputBox(sMensajeManual, sEncabezadoManual, lblOper.Text);
-
                         wfHC HeadCount = new wfHC();
                         HeadCount._lsOper = lblOper.Text.ToString();
                         HeadCount.ShowDialog();
@@ -815,7 +789,6 @@ namespace PlaybookSystem
                         //Cargar modo manual para todas las corridas  
                         try
                         {
-                            //if (Int32.Parse(sODisponibles) != Int32.Parse(lblOper.Text) && int.TryParse(sODisponibles, out n))
                             ModoManual(Int32.Parse(sODisponibles));
                         }
                         catch (Exception ex)
@@ -841,16 +814,7 @@ namespace PlaybookSystem
                             Suge._lsDesc = _lsItemDesc;
                             Suge.Show();
                         }
-
-
-                        //. MUESTREO DE WO PARA QA  .\\ qa alert para muestreo 
-                        /* cancelado
-                        string sQAlert = dt.Rows[0]["qa_alert"].ToString();
-                        if (sQAlert == "0")
-                        {
-                            double dDura = double.Parse(dgwWO["duration", 0].Value.ToString());
-                        }
-                        */
+                        
                         if (_sTimer == "1")
                             ShowTimer();
 

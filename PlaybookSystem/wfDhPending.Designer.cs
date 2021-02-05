@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btExport = new System.Windows.Forms.Button();
             this.btLoad = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgwData = new System.Windows.Forms.DataGridView();
@@ -56,7 +57,6 @@
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
-            this.btExport = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).BeginInit();
@@ -81,6 +81,17 @@
             this.panel1.Size = new System.Drawing.Size(1161, 624);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btExport
+            // 
+            this.btExport.BackgroundImage = global::PlaybookSystem.Properties.Resources.excel_down;
+            this.btExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btExport.Location = new System.Drawing.Point(914, 75);
+            this.btExport.Name = "btExport";
+            this.btExport.Size = new System.Drawing.Size(64, 56);
+            this.btExport.TabIndex = 4;
+            this.btExport.UseVisualStyleBackColor = true;
+            this.btExport.Click += new System.EventHandler(this.btExport_Click);
             // 
             // btLoad
             // 
@@ -267,8 +278,8 @@
             this.tssTable.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.tssTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.tssTable.Name = "tssTable";
-            this.tssTable.Size = new System.Drawing.Size(156, 20);
-            this.tssTable.Text = "Medline DHR Tracker";
+            this.tssTable.Size = new System.Drawing.Size(133, 20);
+            this.tssTable.Text = "Medline Playbook";
             // 
             // toolStripStatusLabel2
             // 
@@ -282,8 +293,8 @@
             // 
             this.tssJob.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.tssJob.Name = "tssJob";
-            this.tssJob.Size = new System.Drawing.Size(48, 20);
-            this.tssJob.Text = "DYNJ";
+            this.tssJob.Size = new System.Drawing.Size(96, 20);
+            this.tssJob.Text = "DHR Tracker";
             // 
             // toolStripStatusLabel4
             // 
@@ -356,17 +367,6 @@
             this.btnExit.Size = new System.Drawing.Size(23, 23);
             this.btnExit.Text = "Salir";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btExport
-            // 
-            this.btExport.BackgroundImage = global::PlaybookSystem.Properties.Resources.excel_down;
-            this.btExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btExport.Location = new System.Drawing.Point(914, 75);
-            this.btExport.Name = "btExport";
-            this.btExport.Size = new System.Drawing.Size(64, 56);
-            this.btExport.TabIndex = 4;
-            this.btExport.UseVisualStyleBackColor = true;
-            this.btExport.Click += new System.EventHandler(this.btExport_Click);
             // 
             // wfDhPending
             // 
