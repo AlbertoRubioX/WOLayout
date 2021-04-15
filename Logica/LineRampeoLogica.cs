@@ -35,6 +35,20 @@ namespace Logica
             }
             return datos;
         }
+
+        public static DataTable LineasHr()
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = AccesoDatos.Consultar("select distinct linehr as lineahr from t_lineramp where linehr is not null order by 1 ");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
         public static DataTable ConsultarEstacion(LineaRampeoLogica line)
         {
             DataTable datos = new DataTable();

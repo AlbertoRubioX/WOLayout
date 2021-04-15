@@ -64,6 +64,8 @@
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.btnLanguage = new System.Windows.Forms.ToolStripButton();
             this.btSugSet = new System.Windows.Forms.ToolStripButton();
+            this.btnDHR = new System.Windows.Forms.ToolStripButton();
+            this.btnPicking = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
@@ -185,7 +187,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProduct = new System.Windows.Forms.Label();
             this.dgwItem = new System.Windows.Forms.DataGridView();
-            this.btnDHR = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -434,7 +435,8 @@
             this.btnExit,
             this.btnLanguage,
             this.btSugSet,
-            this.btnDHR});
+            this.btnDHR,
+            this.btnPicking});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1540, 27);
@@ -540,6 +542,27 @@
             this.btSugSet.Text = "Sugrencia";
             this.btSugSet.Visible = false;
             this.btSugSet.Click += new System.EventHandler(this.btSugSet_Click);
+            // 
+            // btnDHR
+            // 
+            this.btnDHR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDHR.Image = global::PlaybookSystem.Properties.Resources.operador;
+            this.btnDHR.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDHR.Name = "btnDHR";
+            this.btnDHR.Size = new System.Drawing.Size(24, 24);
+            this.btnDHR.Text = "DHR Tracker";
+            this.btnDHR.Visible = false;
+            this.btnDHR.Click += new System.EventHandler(this.btnDHR_Click);
+            // 
+            // btnPicking
+            // 
+            this.btnPicking.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPicking.Image = global::PlaybookSystem.Properties.Resources.addfrom;
+            this.btnPicking.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPicking.Name = "btnPicking";
+            this.btnPicking.Size = new System.Drawing.Size(24, 24);
+            this.btnPicking.Visible = false;
+            this.btnPicking.Click += new System.EventHandler(this.btnPicking_Click);
             // 
             // openFileDialog1
             // 
@@ -1935,16 +1958,6 @@
             this.dgwItem.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwItem_CellFormatting);
             this.dgwItem.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwItem_ColumnAdded);
             // 
-            // btnDHR
-            // 
-            this.btnDHR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDHR.Image = global::PlaybookSystem.Properties.Resources.operador;
-            this.btnDHR.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDHR.Name = "btnDHR";
-            this.btnDHR.Size = new System.Drawing.Size(24, 24);
-            this.btnDHR.Text = "DHR Tracker";
-            this.btnDHR.Click += new System.EventHandler(this.btnDHR_Click);
-            // 
             // wfLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2233,6 +2246,7 @@
         private System.Windows.Forms.ToolStripButton btSug;
         private System.Windows.Forms.ToolStripButton btSugSet;
         private System.Windows.Forms.ToolStripButton btnDHR;
+        private System.Windows.Forms.ToolStripButton btnPicking;
     }
 }
 

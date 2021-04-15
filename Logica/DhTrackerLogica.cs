@@ -73,7 +73,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT linea as Linea, orden as [Work Order],parte + ' ' + descrip as Descripción, "+
+                string sSql = "SELECT orden as [Work Order],linea as Linea, parte + ' ' + descrip as Descripción, " +
                 "case estatus when 1 then 'Clean Room' when 2 then 'Boxing' when 3 then 'DHR' when 4 then 'Escaneo' else '' end as Estatus," +
                 "f_dhr as [En DHR Desde],DATEDIFF(hour, f_dhr, getdate()) as [Duracion HRs]," +
                 "inspector as Inspector ,detenido as Detenido FROM t_dhtracker " +
@@ -92,7 +92,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT linea as Linea, orden as [Work Order],parte + ' ' + descrip as Descripción, " +
+                string sSql = "SELECT  orden as [Work Order],linea as Linea,parte + ' ' + descrip as Descripción, " +
                 "case estatus when 1 then 'Clean Room' when 2 then 'Boxing' when 3 then 'DHR' when 4 then 'Escaneo' else '' end as Estatus," +
                 "f_clean as [Fecha C.R.],f_escaneo as [Fecha Escaneo],DATEDIFF(hour, f_clean, f_escaneo) as [Duracion HRs]," +
                 "inspector as Inspector,detenido as Detenido  FROM t_dhtracker " +

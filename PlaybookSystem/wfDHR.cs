@@ -29,7 +29,7 @@ namespace PlaybookSystem
         public wfDHR()
         {
             InitializeComponent();
-            
+
         }
         private void wfDHR_Activated(object sender, EventArgs e)
         {
@@ -51,9 +51,15 @@ namespace PlaybookSystem
                 tssHrVersion.Text = "DHR Tracker v. 1.0.0.1";
                 tssName.Text = sNombre;
                 _lsEmployee = wfENum._lsCode;
-            }
 
-            LoadPending();
+                if(!string.IsNullOrEmpty(_lsOrden))
+                {
+                    txtOrden.Text = _lsOrden;
+                    ChangeWO();
+                }
+                else
+                    LoadPending();
+            }
         }
         private void Inicio()
         {
@@ -61,7 +67,7 @@ namespace PlaybookSystem
             {
 
                 txtOrden.Text = "0000000";
-                
+
                 lblJob.Text = "__ |";
                 lblDivision.Text = "_|";
                 _lsLote = string.Empty;
@@ -85,9 +91,9 @@ namespace PlaybookSystem
                 bt4.BackgroundImage = Properties.Resources.circle_o;
 
                 dgwLine.DataSource = null;
-                CargarColumnas(); 
-                
-                if(!string.IsNullOrEmpty(Globals._gsStation))
+                CargarColumnas();
+
+                if (!string.IsNullOrEmpty(Globals._gsStation))
                 {
                     LineaRampeoLogica lineR = new LineaRampeoLogica();
                     lineR.Estacion = Globals._gsStation;
@@ -95,8 +101,8 @@ namespace PlaybookSystem
                     if (dtLR.Rows.Count > 0)
                     {
                         Globals._gsCompany = dtLR.Rows[0]["company"].ToString();
-                        Globals._gsLineHr = dtLR.Rows[0]["linehr"].ToString();
-                        
+                        Globals._gsLine = dtLR.Rows[0]["line"].ToString();
+
                     }
                 }
 
@@ -107,8 +113,11 @@ namespace PlaybookSystem
 
                 txtNotaFalla.Clear();
 
-                lblLine.Text = Globals._gsLineHr;
-                tssLine.Text = Globals._gsLineHr;
+                int iLine = 0;
+                if (int.TryParse(Globals._gsLine, out iLine))
+                    lblLine.Text = Globals._gsLine;
+
+                tssLine.Text = Globals._gsLine;
 
                 ChangeStatus(0);
                 txtOrden.SelectAll();
@@ -143,7 +152,7 @@ namespace PlaybookSystem
                 dtNew.Columns.Add("estatus", typeof(int));
                 dgwLine.DataSource = dtNew;
             }
-            
+
             dgwLine.Columns[0].Visible = false;
             dgwLine.Columns[1].Visible = false;
             dgwLine.Columns[5].Visible = false;
@@ -162,9 +171,9 @@ namespace PlaybookSystem
             dgwLine.Columns[4].Width = ColumnWith(dgwLine, 10);//corregido box
             dgwLine.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[4].ReadOnly =false;
+            dgwLine.Columns[4].ReadOnly = false;
         }
-      
+
         private int ColumnWith(DataGridView _dtGrid, double _dColWith)
         {
 
@@ -194,7 +203,7 @@ namespace PlaybookSystem
             if (string.IsNullOrEmpty(txtOrden.Text) || string.IsNullOrWhiteSpace(txtOrden.Text) || txtOrden.Text == "000000")
                 return false;
 
-            if(_liStep == 0)
+            if (_liStep == 0)
             {
                 if (_liStepNew == 0)
                     return false;
@@ -219,7 +228,7 @@ namespace PlaybookSystem
 
             return bValida;
         }
-        
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -232,11 +241,11 @@ namespace PlaybookSystem
                 if (_liStep == 3)
                 {
                     int iCheck = 0;
-                    
+
                     foreach (DataGridViewRow row in dgwLine.Rows)
                     {
                         string sEstatus = dgwLine[5, row.Index].Value.ToString();
-                        if(sEstatus == "0")
+                        if (sEstatus == "0")
                         {
                             iCheck++;
                         }
@@ -245,7 +254,7 @@ namespace PlaybookSystem
                         _liDetenido = 0;
                     else
                     {
-                        if(_liDetenido == 0)
+                        if (_liDetenido == 0)
                         {
                             if (MessageBox.Show("Deseas detener la Revisión hasta la Corrección?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                                 _liDetenido = 1;
@@ -269,7 +278,7 @@ namespace PlaybookSystem
                 dhr.Parte = sParte.TrimEnd();
                 dhr.Descrip = sDescrip;
                 dhr.Division = lblDivision.Text.ToString();
-                                
+
                 dhr.Inspector = _lsEmployee;
                 dhr.Nombre = tssName.Text.ToString();
                 dhr.Estatus = _liStep;
@@ -281,7 +290,7 @@ namespace PlaybookSystem
                 {
                     DhTracdetLogica det = new DhTracdetLogica();
                     det.Folio = dhr.Folio;
-                    foreach(DataGridViewRow row in dgwLine.Rows)
+                    foreach (DataGridViewRow row in dgwLine.Rows)
                     {
                         int iCons = 0;
                         if (!string.IsNullOrEmpty(row.Cells[0].Value.ToString()))
@@ -289,13 +298,16 @@ namespace PlaybookSystem
 
                         det.Falla = int.Parse(row.Cells[1].Value.ToString());
                         det.Nota = row.Cells[3].Value.ToString();
-                        det.Estatus = int.Parse(row.Cells[5].Value.ToString());
+                        if (bool.Parse(row.Cells[4].Value.ToString()))
+                            det.Estatus = 1;// int.Parse(row.Cells[5].Value.ToString());
+                        else
+                            det.Estatus = 0;
 
                         det.Consec = iCons;
-                        
+
                         DhTracdetLogica.GuardarSP(det);
                     }
-                    if(_liStep == 1)
+                    if (_liStep == 1)
                         MessageBox.Show("DH Tracker se ha registrado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else
                         MessageBox.Show("DH Tracker se ha actualizado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -307,7 +319,7 @@ namespace PlaybookSystem
             {
                 MessageBox.Show("Error " + ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            
+
         }
 
         #endregion
@@ -322,7 +334,30 @@ namespace PlaybookSystem
                 e.CellStyle.BackColor = Color.White;
 
         }
-       
+        private void dgwLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            if (e.ColumnIndex == dgwLine.Columns[4].Index)
+            {
+                if (bool.Parse(dgwLine[4, e.RowIndex].Value.ToString()))
+                    dgwLine[5, e.RowIndex].Value = 1;
+                else
+                    dgwLine[5, e.RowIndex].Value = 0;
+            }
+            //bool bCheck = bool.Parse(dgwLine[4, e.RowIndex].Value.ToString());
+            //int iEstatus = int.Parse(dgwLine[5, e.RowIndex].Value.ToString());
+            //if(bCheck)
+            //    dgwLine[5, e.RowIndex].Value = 1;
+            //else
+            //    dgwLine[5, e.RowIndex].Value = 0;
+        }
+        private void dgwLine_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == dgwLine.Columns[4].Index)
+            {
+                dgwLine.EndEdit();
+            }
+        }
         #endregion
 
         #region regBotones
@@ -346,7 +381,7 @@ namespace PlaybookSystem
             int iRow = dgwLine.RowCount - 1;
 
             DataTable dt = dgwLine.DataSource as DataTable;
-            dt.Rows.Add(0, int.Parse(sFalla), sDescrip, sNota,false,0);
+            dt.Rows.Add(0, int.Parse(sFalla), sDescrip, sNota, false, 0);
 
             cbbFallas.SelectedIndex = -1;
             txtNotaFalla.Clear();
@@ -414,7 +449,7 @@ namespace PlaybookSystem
                     dt.Rows.Add(0, sHoraSig, iMeta, iMetaAc, 0, 0, 0, sWO, "T. Extra", "2");
                     iRow++;
                 }
-                 
+
                 dgwLine.CurrentCell = dgwLine[4, iRow];
                 dgwLine.Focus();
             }
@@ -488,7 +523,7 @@ namespace PlaybookSystem
                 }
                 if (_liStep == 3 && _aiEstatus == 4)
                 {
-                    if(_liDetenido == 1)
+                    if (_liDetenido == 1)
                     {
                         MessageBox.Show("Favor resolver las correcciones pendientes en el paso 3", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
@@ -559,7 +594,7 @@ namespace PlaybookSystem
                     lblBoxing.Font = new Font(Label.DefaultFont, FontStyle.Bold);
                     if (_aiEstatus != _liStep)
                     {
-                        lblTimer1.Text = lblTimeActual.Text.ToString().Substring(0,5);
+                        lblTimer1.Text = lblTimeActual.Text.ToString().Substring(0, 5);
                         lblTimeActual.Text = "00:00:00";
                     }
                     lblTimer1.Visible = true;
@@ -607,7 +642,7 @@ namespace PlaybookSystem
                     lblTimer1.Visible = false;
                     lblTimer2.Visible = false;
                     break;
-            } 
+            }
 
             int iX = lblEstatus.Location.X;
             int iW = lblEstatus.Size.Width;
@@ -617,11 +652,11 @@ namespace PlaybookSystem
             iWp = iWp / 2;
 
             iX = iWp - iW;
-            lblEstatus.Location = new Point(iX,lblEstatus.Location.Y);
+            lblEstatus.Location = new Point(iX, lblEstatus.Location.Y);
 
             _liStepNew = _aiEstatus;
 
-            if(_aiEstatus < 4)
+            if (_aiEstatus < 4)
                 timer1.Start();
         }
         private string GetCurrentDuration(DateTime _adtFecha)
@@ -630,7 +665,7 @@ namespace PlaybookSystem
             TimeSpan time = DateTime.Now - _adtFecha;
             double dHrs = time.Hours;
             double dMin = time.Minutes;
-            string sDuracion = dHrs.ToString().PadLeft(2,'0') + ":" + dMin.ToString().PadLeft(2,'0')+":00";
+            string sDuracion = dHrs.ToString().PadLeft(2, '0') + ":" + dMin.ToString().PadLeft(2, '0') + ":00";
 
             return sDuracion;
         }
@@ -646,41 +681,50 @@ namespace PlaybookSystem
         }
         private void txtOrden_KeyDown(object sender, KeyEventArgs e)
         {
+            
+            if (e.KeyCode == Keys.Escape)
+                Close();
+
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            string sValue = txtOrden.Text.ToString().ToUpper();
+
+            if (sValue.Substring(0, 3) == "686")
+                sValue = sValue.Substring(3);
+
+            if (sValue.Length < 7)
+            {
+                sValue = sValue.PadLeft(7, '0');
+                txtOrden.Text = sValue;
+            }
+
+            Inicio();
+            txtOrden.Text = sValue;
+            lblTimeActual.Visible = true;
+
+            ChangeWO();
+            
+        }
+        private void ChangeWO()
+        {
             try
             {
-                if (e.KeyCode == Keys.Escape)
-                    Close();
-
-                if (e.KeyCode != Keys.Enter)
-                    return;
-
                 string sValue = txtOrden.Text.ToString().ToUpper();
-
-                if (sValue.Substring(0, 3) == "686")
-                    sValue = sValue.Substring(3);
-
-                if (sValue.Length < 7)
-                {
-                    sValue = sValue.PadLeft(7, '0');
-                    txtOrden.Text = sValue;
-                }
-
-                Inicio();
-                txtOrden.Text = sValue;
-                lblTimeActual.Visible = true;
 
                 DhTrackerLogica dhr = new DhTrackerLogica();
                 dhr.Orden = sValue;
                 DataTable dt = DhTrackerLogica.ConsultarOrden(dhr);
                 if (dt.Rows.Count > 0)
                 {
-                    _llFolio = long.Parse(dt.Rows[0][0].ToString());                    
+                    _llFolio = long.Parse(dt.Rows[0][0].ToString());
                     string sItem = dt.Rows[0][4].ToString().Trim();
                     string sDesc = dt.Rows[0][5].ToString().Trim();
                     string sEstatus = dt.Rows[0][6].ToString();
                     string sDivision = dt.Rows[0]["division"].ToString();
                     _liDetenido = int.Parse(dt.Rows[0]["detenido"].ToString());
                     _lsLote = dt.Rows[0]["lote"].ToString();
+                    lblLine.Text = dt.Rows[0]["linea"].ToString();
 
                     _liStep = int.Parse(sEstatus);
                     switch (_liStep)
@@ -702,7 +746,7 @@ namespace PlaybookSystem
                             lblTimer1.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()), DateTime.Parse(dt.Rows[0]["f_boxing"].ToString()));
                             lblTimer2.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_boxing"].ToString()), DateTime.Parse(dt.Rows[0]["f_dhr"].ToString()));
                             lblTimer3.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_dhr"].ToString()), DateTime.Parse(dt.Rows[0]["f_escaneo"].ToString()));
-                            lblTimeActual.Text = "Total: " +  GetDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()), DateTime.Parse(dt.Rows[0]["f_escaneo"].ToString()));
+                            lblTimeActual.Text = "Total: " + GetDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()), DateTime.Parse(dt.Rows[0]["f_escaneo"].ToString()));
                             lblTimeActual.ForeColor = Color.Black;
                             timer1.Stop();
                             break;
@@ -711,11 +755,7 @@ namespace PlaybookSystem
                     lblJob.Text = sItem + " - " + sDesc;
                     //iEstatus++;
                     ChangeStatus(_liStep);
-
-                    if (sDivision == "22")
-                        sDivision = "SPT";
-                    if (sDivision == "51")
-                        sDivision = "DYN";
+                    
                     lblDivision.Text = sDivision;
 
                     _llFolio = long.Parse(dt.Rows[0][0].ToString());
@@ -747,12 +787,11 @@ namespace PlaybookSystem
                     {
                         string sItem = dt.Rows[0][0].ToString().Trim();
                         string sDesc = dt.Rows[0][1].ToString().Trim();
-                        string sDivision = dt.Rows[0]["IMCONV"].ToString();
-                        _lsLote = dt.Rows[0]["WOLOT"].ToString(); 
+                        string sDiv = dt.Rows[0]["IMCONV"].ToString();
+                        _lsLote = dt.Rows[0]["WOLOT"].ToString();
 
-                        if (sDivision == "22")
-                            sDivision = "SPT";
-                        if (sDivision == "51")
+                        string sDivision = "SPT";    
+                        if (sDiv == "20")
                             sDivision = "DYN";
 
                         lblJob.Text = sItem + " - " + sDesc;
@@ -772,7 +811,6 @@ namespace PlaybookSystem
                 throw ex;
             }
         }
-
         private void txtOrden_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
@@ -783,7 +821,7 @@ namespace PlaybookSystem
             string sTimeH = lblTimeActual.Text.Substring(0, 2);
             string sTimeM = lblTimeActual.Text.Substring(3, 2);
             string sTimeS = lblTimeActual.Text.Substring(6, 2);
-            
+
             int iContM = int.Parse(sTimeM);
             int iContH = int.Parse(sTimeH);
             int iContS = int.Parse(sTimeS);
@@ -801,28 +839,18 @@ namespace PlaybookSystem
             }
             else
                 iContS++;
-            
-            lblTimeActual.Text = iContH.ToString().PadLeft(2,'0') + ":" + iContM.ToString().PadLeft(2, '0') + ":" + iContS.ToString().PadLeft(2, '0');
+
+            lblTimeActual.Text = iContH.ToString().PadLeft(2, '0') + ":" + iContM.ToString().PadLeft(2, '0') + ":" + iContS.ToString().PadLeft(2, '0');
         }
         #endregion
 
-        private void dgwLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex != 4)
-                return;
-
-            bool bCheck = bool.Parse(dgwLine[4, e.RowIndex].Value.ToString());
-            int iEstatus = int.Parse(dgwLine[5, e.RowIndex].Value.ToString());
-            if(bCheck)
-                dgwLine[5, e.RowIndex].Value = 1;
-            else
-                dgwLine[5, e.RowIndex].Value = 0;
-        }
+      
 
         private void btnReport_Click(object sender, EventArgs e)
         {
             wfDhPending wfPending = new wfDhPending();
             wfPending.Show();
         }
+ 
     }
 }

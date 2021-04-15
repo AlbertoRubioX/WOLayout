@@ -206,5 +206,19 @@ namespace Logica
             }
             return sValue;
         }
+
+        public static DataTable ConsultarDest(string _asProceso)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = AccesoDatos.Consultar("SELECT * FROM t_mail_dest WHERE proceso = '" + _asProceso + "' and planta = '686'");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
     }
 }

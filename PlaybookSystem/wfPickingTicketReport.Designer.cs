@@ -1,6 +1,6 @@
 ﻿namespace PlaybookSystem
 {
-    partial class wfDhPending
+    partial class wfPickingTicketReport
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbEstatus = new System.Windows.Forms.ComboBox();
-            this.chEstatus = new System.Windows.Forms.CheckBox();
-            this.cbLinea = new System.Windows.Forms.ComboBox();
-            this.chLinea = new System.Windows.Forms.CheckBox();
             this.btExport = new System.Windows.Forms.Button();
             this.btLoad = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -57,7 +52,6 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -69,7 +63,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.btExport);
             this.panel1.Controls.Add(this.btLoad);
             this.panel1.Controls.Add(this.groupBox3);
@@ -81,63 +74,13 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.cbEstatus);
-            this.groupBox2.Controls.Add(this.chEstatus);
-            this.groupBox2.Controls.Add(this.cbLinea);
-            this.groupBox2.Controls.Add(this.chLinea);
-            this.groupBox2.Location = new System.Drawing.Point(436, 51);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(411, 89);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            // 
-            // cbEstatus
-            // 
-            this.cbEstatus.FormattingEnabled = true;
-            this.cbEstatus.Location = new System.Drawing.Point(210, 47);
-            this.cbEstatus.Name = "cbEstatus";
-            this.cbEstatus.Size = new System.Drawing.Size(168, 24);
-            this.cbEstatus.TabIndex = 3;
-            // 
-            // chEstatus
-            // 
-            this.chEstatus.AutoSize = true;
-            this.chEstatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.139131F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chEstatus.Location = new System.Drawing.Point(210, 21);
-            this.chEstatus.Name = "chEstatus";
-            this.chEstatus.Size = new System.Drawing.Size(81, 21);
-            this.chEstatus.TabIndex = 2;
-            this.chEstatus.Text = "Estatus";
-            this.chEstatus.UseVisualStyleBackColor = true;
-            // 
-            // cbLinea
-            // 
-            this.cbLinea.FormattingEnabled = true;
-            this.cbLinea.Location = new System.Drawing.Point(55, 47);
-            this.cbLinea.Name = "cbLinea";
-            this.cbLinea.Size = new System.Drawing.Size(94, 24);
-            this.cbLinea.TabIndex = 1;
-            // 
-            // chLinea
-            // 
-            this.chLinea.AutoSize = true;
-            this.chLinea.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.139131F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chLinea.Location = new System.Drawing.Point(55, 21);
-            this.chLinea.Name = "chLinea";
-            this.chLinea.Size = new System.Drawing.Size(67, 21);
-            this.chLinea.TabIndex = 0;
-            this.chLinea.Text = "Linea";
-            this.chLinea.UseVisualStyleBackColor = true;
-            // 
             // btExport
             // 
             this.btExport.BackgroundImage = global::PlaybookSystem.Properties.Resources.excel_down;
             this.btExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btExport.Location = new System.Drawing.Point(980, 66);
+            this.btExport.Location = new System.Drawing.Point(494, 69);
             this.btExport.Name = "btExport";
-            this.btExport.Size = new System.Drawing.Size(64, 56);
+            this.btExport.Size = new System.Drawing.Size(47, 42);
             this.btExport.TabIndex = 4;
             this.btExport.UseVisualStyleBackColor = true;
             this.btExport.Click += new System.EventHandler(this.btExport_Click);
@@ -146,9 +89,9 @@
             // 
             this.btLoad.BackgroundImage = global::PlaybookSystem.Properties.Resources.Sync;
             this.btLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btLoad.Location = new System.Drawing.Point(899, 66);
+            this.btLoad.Location = new System.Drawing.Point(439, 69);
             this.btLoad.Name = "btLoad";
-            this.btLoad.Size = new System.Drawing.Size(64, 56);
+            this.btLoad.Size = new System.Drawing.Size(49, 42);
             this.btLoad.TabIndex = 3;
             this.btLoad.UseVisualStyleBackColor = true;
             this.btLoad.Click += new System.EventHandler(this.btLoad_Click);
@@ -156,9 +99,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dgwData);
-            this.groupBox3.Location = new System.Drawing.Point(19, 156);
+            this.groupBox3.Location = new System.Drawing.Point(19, 128);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1122, 451);
+            this.groupBox3.Size = new System.Drawing.Size(1122, 479);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
@@ -166,6 +109,7 @@
             // 
             this.dgwData.AllowUserToAddRows = false;
             this.dgwData.AllowUserToDeleteRows = false;
+            this.dgwData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgwData.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgwData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwData.Location = new System.Drawing.Point(6, 11);
@@ -173,14 +117,15 @@
             this.dgwData.ReadOnly = true;
             this.dgwData.RowHeadersVisible = false;
             this.dgwData.RowTemplate.Height = 24;
-            this.dgwData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgwData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwData.ShowCellErrors = false;
             this.dgwData.ShowCellToolTips = false;
             this.dgwData.ShowEditingIcon = false;
             this.dgwData.ShowRowErrors = false;
-            this.dgwData.Size = new System.Drawing.Size(1110, 434);
+            this.dgwData.Size = new System.Drawing.Size(1110, 462);
             this.dgwData.TabIndex = 0;
             this.dgwData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwData_CellDoubleClick);
+            this.dgwData.DoubleClick += new System.EventHandler(this.dgwData_DoubleClick);
             // 
             // groupBox1
             // 
@@ -188,16 +133,16 @@
             this.groupBox1.Controls.Add(this.dtFechaIni);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(19, 51);
+            this.groupBox1.Location = new System.Drawing.Point(19, 53);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(402, 89);
+            this.groupBox1.Size = new System.Drawing.Size(402, 69);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
             // dtFechaFin
             // 
             this.dtFechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFechaFin.Location = new System.Drawing.Point(220, 49);
+            this.dtFechaFin.Location = new System.Drawing.Point(220, 36);
             this.dtFechaFin.Name = "dtFechaFin";
             this.dtFechaFin.Size = new System.Drawing.Size(114, 22);
             this.dtFechaFin.TabIndex = 3;
@@ -205,7 +150,7 @@
             // dtFechaIni
             // 
             this.dtFechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFechaIni.Location = new System.Drawing.Point(57, 49);
+            this.dtFechaIni.Location = new System.Drawing.Point(57, 36);
             this.dtFechaIni.Name = "dtFechaIni";
             this.dtFechaIni.Size = new System.Drawing.Size(114, 22);
             this.dtFechaIni.TabIndex = 2;
@@ -214,7 +159,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.139131F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(217, 29);
+            this.label2.Location = new System.Drawing.Point(217, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 17);
             this.label2.TabIndex = 1;
@@ -224,7 +169,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.139131F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(54, 29);
+            this.label1.Location = new System.Drawing.Point(54, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 17);
             this.label1.TabIndex = 0;
@@ -237,9 +182,9 @@
             this.lbl01.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(56)))), ((int)(((byte)(166)))));
             this.lbl01.Location = new System.Drawing.Point(390, 14);
             this.lbl01.Name = "lbl01";
-            this.lbl01.Size = new System.Drawing.Size(167, 25);
+            this.lbl01.Size = new System.Drawing.Size(269, 25);
             this.lbl01.TabIndex = 0;
-            this.lbl01.Text = "Reporte de DHR";
+            this.lbl01.Text = "Reporte de Picking Tickets";
             // 
             // statusStrip1
             // 
@@ -252,7 +197,7 @@
             this.toolStripStatusLabel5,
             this.tssTotal,
             this.toolStripStatusLabel7});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 693);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 669);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1174, 25);
             this.statusStrip1.TabIndex = 4;
@@ -278,8 +223,8 @@
             // 
             this.tssJob.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.tssJob.Name = "tssJob";
-            this.tssJob.Size = new System.Drawing.Size(96, 20);
-            this.tssJob.Text = "DHR Tracker";
+            this.tssJob.Size = new System.Drawing.Size(112, 20);
+            this.tssJob.Text = "Picking Tickets";
             // 
             // toolStripStatusLabel4
             // 
@@ -353,27 +298,26 @@
             this.btnExit.Text = "Salir";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // wfDhPending
+            // wfPickingTicketReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::PlaybookSystem.Properties.Resources.Blue_Background;
-            this.ClientSize = new System.Drawing.Size(1174, 718);
+            this.ClientSize = new System.Drawing.Size(1174, 694);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
-            this.Name = "wfDhPending";
+            this.Name = "wfPickingTicketReport";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DHR Tracker Report";
-            this.Activated += new System.EventHandler(this.wfDhPending_Activated);
-            this.Load += new System.EventHandler(this.wfDhPending_Load);
-            this.Resize += new System.EventHandler(this.wfDhPending_Resize);
+            this.Text = "Picking Tickets Report";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.wfPickingTicketReport_Activated);
+            this.Load += new System.EventHandler(this.wfPickingTicketReport_Load);
+            this.Resize += new System.EventHandler(this.wfPickingTicketReport_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -412,10 +356,5 @@
         private System.Windows.Forms.ToolStripButton btnExit;
         private System.Windows.Forms.Button btLoad;
         private System.Windows.Forms.Button btExport;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox cbEstatus;
-        private System.Windows.Forms.CheckBox chEstatus;
-        private System.Windows.Forms.ComboBox cbLinea;
-        private System.Windows.Forms.CheckBox chLinea;
     }
 }

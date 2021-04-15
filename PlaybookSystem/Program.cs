@@ -76,7 +76,17 @@ namespace PlaybookSystem
                             if (sRol == "QA")
                                 Application.Run(new wfDHR());
                             else
-                                Application.Run(new wfLayout());
+                            {
+                                if (sRol == "EX" || sRol =="EL")
+                                {
+                                    if (sRol == "EX")
+                                        Application.Run(new wfPickingProblem());
+                                    else
+                                        Application.Run(new wfPickingTicketReport());
+                                }
+                                else
+                                    Application.Run(new wfLayout());
+                            }
                         }
                     }
                 }

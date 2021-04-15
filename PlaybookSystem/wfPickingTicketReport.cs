@@ -14,43 +14,22 @@ using Datos;
 
 namespace PlaybookSystem
 {
-    public partial class wfDhPending : Form
+    public partial class wfPickingTicketReport : Form
     {
         public string _lsProceso;
         public string _lsFiltro;
         Globals _gs = new Globals();
-        public wfDhPending()
+        public wfPickingTicketReport()
         {
             InitializeComponent();
         }
 
-        private void wfDhPending_Load(object sender, EventArgs e)
+        private void wfPickingTicketReport_Load(object sender, EventArgs e)
         {
-            _lsProceso = "QA020";
+            _lsProceso = "PRO060";
              
             Inicio();
-            lbl01.Text = "Reporte de DHR";
-            if (_lsFiltro == "D")
-            {
-                lbl01.Text = "Reporte de DHR Detenidos";
-                groupBox1.Enabled = false;
-                groupBox2.Enabled = false;
-
-                DhTrackerLogica dh = new DhTrackerLogica();
-                if(chLinea.Checked)
-                {
-                    dh.TipoLinea = "U";
-                    dh.Linea = cbLinea.SelectedValue.ToString();
-                }
-                else
-                    dh.TipoLinea = "A";
-                
-                //dh.Estatus = cbEstatus.SelectedValue.ToString();
-                chEstatus.Checked = true;
-                cbEstatus.SelectedIndex = 4;
-                dgwData.DataSource = DhTrackerLogica.VistaReporteDet(dh);
-                CargarColumnasDet();
-            }
+            
             
         }
         private void Inicio()
@@ -63,29 +42,16 @@ namespace PlaybookSystem
                 dtFechaIni.Value = DateTime.Today.AddDays(-7);
                 dtFechaFin.ResetText();
 
-                chLinea.Checked = false;
-                cbLinea.Enabled = false;
-                cbLinea.DataSource = LineaRampeoLogica.ListarDrop();
-                cbLinea.ValueMember = "linehr";
-                cbLinea.DisplayMember = "linehr";
-                cbLinea.SelectedIndex = -1;
+                PickingLogica pk = new PickingLogica();
+                pk.TipoFecha = "1";
+                pk.FechaIni = dtFechaIni.Value;
+                pk.FechaFin = dtFechaFin.Value;
 
-                chEstatus.Checked = false;
-                cbEstatus.Enabled = false;
-                Dictionary<string, string> List = new Dictionary<string, string>();
-                List.Add("1", "Clean Room");
-                List.Add("2", "Boxing");
-                List.Add("3", "DHR");
-                List.Add("4", "Escaneo");
-                List.Add("0", "Detenidos");
-                cbEstatus.DataSource = new BindingSource(List, null);
-                cbEstatus.DisplayMember = "Value";
-                cbEstatus.ValueMember = "Key";
-                cbEstatus.SelectedIndex = -1;
+                dgwData.DataSource = PickingLogica.VistaReporte(pk);
+                tssTotal.Text = dgwData.Rows.Count.ToString();
 
-                CargarColumnas();
-
-                tssTotal.Text = "0";
+                //CargarColumnas();
+                
 
             }
             catch (Exception ex)
@@ -95,7 +61,7 @@ namespace PlaybookSystem
 
         }
     
-        private void wfDhPending_Activated(object sender, EventArgs e)
+        private void wfPickingTicketReport_Activated(object sender, EventArgs e)
         {
             groupBox1.Focus();
             
@@ -262,7 +228,7 @@ namespace PlaybookSystem
             //}
         }
 
-        private void wfDhPending_Resize(object sender, EventArgs e)
+        private void wfPickingTicketReport_Resize(object sender, EventArgs e)
         {
 
             panel1.Height = this.Height - 130;
@@ -274,7 +240,7 @@ namespace PlaybookSystem
             dgwData.Height = this.Height - 320;
             dgwData.Width = this.Width - 80;
 
-            CargarColumnas();
+            //CargarColumnas();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -286,19 +252,8 @@ namespace PlaybookSystem
         {
             Close();
         }
-
-
-
-        private void chLinea_CheckedChanged(object sender, EventArgs e)
-        {
-            cbLinea.Enabled = chLinea.Checked;
-        }
-
-        private void chEstatus_CheckedChanged(object sender, EventArgs e)
-        {
-            cbEstatus.Enabled = chEstatus.Checked;
-        }
-
+         
+        
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -306,40 +261,17 @@ namespace PlaybookSystem
 
         private void btLoad_Click(object sender, EventArgs e)
         {
-            DhTrackerLogica dh = new DhTrackerLogica();
+            PickingLogica pk = new PickingLogica();
             
-            if(_lsFiltro=="D")
-            {
-                dgwData.DataSource = DhTrackerLogica.VistaReporteDet(dh);
-                CargarColumnasDet();
-            }
-            else
-            {
-                dh.TipoFecha = "1";
-                dh.FechaIni = dtFechaIni.Value;
-                dh.FechaFin = dtFechaFin.Value;
+            pk.TipoFecha = "1";
+            pk.FechaIni = dtFechaIni.Value;
+            pk.FechaFin = dtFechaFin.Value;
                 
-                if (chLinea.Checked)
-                {
-                    dh.TipoLinea = "1";
-                    dh.Linea = cbLinea.SelectedValue.ToString();
-                }
-                else
-                    dh.TipoLinea = "0";
-
-                if (chEstatus.Checked)
-                {
-                    dh.TipoEstatus = "1";
-                    dh.Estatus = int.Parse(cbEstatus.SelectedValue.ToString());
-                }
-                else
-                    dh.TipoEstatus = "0";
-
-                dgwData.DataSource = DhTrackerLogica.VistaReporte(dh);
-                tssTotal.Text = dgwData.Rows.Count.ToString();
-                CargarColumnas();
-            }
-
+                
+            dgwData.DataSource = PickingLogica.VistaReporte(pk);
+            tssTotal.Text = dgwData.Rows.Count.ToString();
+            //CargarColumnas();
+           
             tssTotal.Text = dgwData.Rows.Count.ToString();
         }
 
@@ -375,6 +307,15 @@ namespace PlaybookSystem
             
         }
 
-        
+        private void dgwData_DoubleClick(object sender, EventArgs e)
+        {
+            string sTicket = dgwData.CurrentRow.Cells[1].Value.ToString();
+            if(!string.IsNullOrEmpty(sTicket))
+            {
+                wfPickingProblem wfPicking = new wfPickingProblem();
+                wfPicking._lsTicket = sTicket;
+                wfPicking.ShowDialog();
+            }
+        }
     }
 }

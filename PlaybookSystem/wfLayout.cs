@@ -104,8 +104,23 @@ namespace PlaybookSystem
                     btnExportFile.Visible = true;
                     btSugSet.Visible = true;
                 }
+                if (ValidaAcceso("PRO040"))
+                    btnDHR.Visible = true;
 
-                
+                UsuarioLogica user = new UsuarioLogica();
+                user.Usuario = _lsUser;
+                DataTable dt = UsuarioLogica.ConsultarUser(user);
+                if(dt.Rows.Count > 0)
+                {
+                    if(dt.Rows[0]["puesto"].ToString() == "IT")
+                    {
+                        btnPicking.Visible = true;
+                        btnDHR.Visible = true;
+                        btnExportFile.Visible = true;
+                        btSugSet.Visible = true;
+                    }
+                }
+
                 Inicio();
                 
                 if (!string.IsNullOrEmpty(_dtConf.Rows[0]["lenguage"].ToString()) && _dtConf.Rows[0]["lenguage"].ToString() != Globals._gsLang)
@@ -1025,6 +1040,146 @@ namespace PlaybookSystem
         #endregion
 
         #region regBottons
+
+        private void FillPlaybookFilePD(string _asFile, string _asFormat)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                Excel.Application xlApp = new Excel.Application();
+                xlApp.AskToUpdateLinks = false;
+                Excel.Workbooks xlWorkbookS = xlApp.Workbooks;
+                Excel.Workbook xlWorkbook = xlWorkbookS.Open(_asFile);
+
+                Excel.Worksheet xlWorksheet = new Excel.Worksheet();
+                Excel.Worksheet xlWorksheet2 = new Excel.Worksheet();
+                Excel.Worksheet xlWorksheet3 = new Excel.Worksheet();
+
+                int iSheets = xlWorkbook.Sheets.Count;
+                int iSheet = 1;
+
+                xlWorksheet = xlWorkbook.Sheets[iSheet];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+
+                xlWorksheet2 = xlWorkbook.Sheets[2];
+                Excel.Range xlRange2 = xlWorksheet2.UsedRange;
+
+                xlWorksheet3 = xlWorkbook.Sheets[3];
+                Excel.Range xlRange3 = xlWorksheet3.UsedRange;
+
+                string sValue = string.Empty;
+                int iRow = 0;
+                int rowLoad = 0;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                tssLoading.Visible = true;
+                for (int x = 2; x <= rowCount; x++)//rowCount
+                {
+
+                    tssLoading.Text = "| Rows: " + x.ToString() + " of " + rowCount.ToString();
+
+                    if (xlRange.Cells[x, 2].Value2 == null)
+                        continue;
+
+                    if (xlRange.Cells[x, 2].Value2 != null)
+                        sValue = Convert.ToString(xlRange.Cells[x, 2].Value2.ToString());
+
+                    if (string.IsNullOrEmpty(sValue))
+                        continue;
+
+                    AS4Logica AS4 = new AS4Logica();
+                    string sType = Convert.ToString(xlRange.Cells[x, 1].Value2.ToString());
+                    string sItem = string.Empty;
+                    string sNota = string.Empty;
+
+                    rowLoad++;
+
+                    AS4.Item = sValue;
+                    AS4.CN = "686";
+                    //1- SpecialNotes
+                    int iCol = 2;
+                    DataTable dt = AS4Logica.SpecialNotes(AS4);
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        sNota = dt.Rows[i][0].ToString();
+                        iCol++;
+                        xlRange.Cells[x, iCol].Value2 = sNota;
+
+                    }
+
+                    xlRange3.Cells[x, 1].Value2 = sType;
+                    xlRange3.Cells[x, 2].Value2 = sValue;
+
+                    //2- Node list
+                    iCol = 2;
+                    DataTable dtN = AS4Logica.PackLookup(AS4);
+                    for (int c = 0; c < dtN.Rows.Count; c++)
+                    {
+                        
+                        string sQty = dtN.Rows[c][0].ToString();
+                        string sUM = dtN.Rows[c][1].ToString();
+                        string sDesc = dtN.Rows[c][2].ToString();
+                        string sNode = dtN.Rows[c][3].ToString();
+                        string sIMV = dtN.Rows[c][4].ToString();
+                        string sCH = dtN.Rows[c][5].ToString();
+                        string sChDesc = dtN.Rows[c][6].ToString();
+
+                        string sDP = sNode.Substring(0, 2);
+                        if (sDP =="DP")
+                        {
+                            //3- DP codes
+                            iCol++;
+                            xlRange3.Cells[x, iCol].Value2 = sNode;
+                        }
+
+                        xlRange2.Cells[x + iRow, 1].Value2 = sType;
+                        xlRange2.Cells[x + iRow, 2].Value2 = sValue;
+                        xlRange2.Cells[x + iRow, 3].Value2 = sQty;
+                        xlRange2.Cells[x + iRow, 4].Value2 = sUM;
+                        xlRange2.Cells[x + iRow, 5].Value2 = sDesc;
+                        xlRange2.Cells[x + iRow, 6].Value2 = sNode;
+                        xlRange2.Cells[x + iRow, 7].Value2 = sIMV;
+                        xlRange2.Cells[x + iRow, 8].Value2 = sCH;
+                        xlRange2.Cells[x + iRow, 9].Value2 = sChDesc;
+                        iRow++;
+                    }
+                }
+
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlRange);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorksheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook.Sheets[iSheet]);
+
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlRange2);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorksheet2);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook.Sheets[2]);
+
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlRange3);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorksheet3);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook.Sheets[3]);
+
+                xlApp.DisplayAlerts = false;
+                xlWorkbook.Save();
+                xlWorkbook.Close(true);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbookS);
+                xlApp.DisplayAlerts = true;
+                xlApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+
+                Cursor = Cursors.Default;
+                tssLoading.Visible = false;
+
+                MessageBox.Show("Excel file loading finished with " + rowLoad + " of " + rowCount + " WO's found", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+                ex.ToString();
+                MessageBox.Show(ex.ToString());
+            }
+        }
         private void FillPlaybookFile4(string _asFile, string _asFormat)
         {
             try
@@ -1199,6 +1354,7 @@ namespace PlaybookSystem
                     string sKits = string.Empty;
                     string sQty = string.Empty;
                     string sTime = string.Empty;
+                    
                     int iMaxComp = _iMaxTable * _iMesaEns;
 
                     AS4.WO = sValue;
@@ -1213,6 +1369,7 @@ namespace PlaybookSystem
                         string sName = dt.Rows[0][1].ToString();
                         sQty = dt.Rows[0][2].ToString();
                         sKits = dt.Rows[0][3].ToString();
+                        
 
                         AS4.Item = sItem;
                         AS4.MaxComp = iMaxComp;
@@ -1435,6 +1592,7 @@ namespace PlaybookSystem
                             xlRange.Cells[x, 4].Value2 = sTotal;
                             xlRange.Cells[x, 5].Value2 = iComp.ToString();
                             xlRange.Cells[x, 6].Value2 = dTime;
+                            
                         }
                     }
                 }
@@ -1974,14 +2132,19 @@ namespace PlaybookSystem
             if (!File.Exists(sArchivo))
                 return;
 
-            if(sOption =="T")
-                FillPlaybookFile4(sArchivo, sOption); //3
+            if (sOption =="T")
+                FillPlaybookFile3(sArchivo, sOption); //4
             else
             {
                 if (sOption == "W")
                     FillPlaybookFile2(sArchivo, sOption);
                 else
-                    FillPlaybookFile(sArchivo, sOption);
+                {
+                    if (sOption == "P")
+                        FillPlaybookFilePD(sArchivo, sOption); //Pallet position
+                    else
+                        FillPlaybookFile(sArchivo, sOption);
+                }
             }
         }
 
@@ -2928,6 +3091,12 @@ namespace PlaybookSystem
         {
             wfDHR DHR = new wfDHR();
             DHR.ShowDialog();
+        }
+
+        private void btnPicking_Click(object sender, EventArgs e)
+        {
+            wfPickingProblem wfPiking = new wfPickingProblem();
+            wfPiking.Show();
         }
     }
     #endregion

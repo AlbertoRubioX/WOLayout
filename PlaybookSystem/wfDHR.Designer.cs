@@ -35,6 +35,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -89,7 +90,6 @@
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssName = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnReport = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -139,6 +139,16 @@
             this.btnSave.Size = new System.Drawing.Size(24, 24);
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnReport
+            // 
+            this.btnReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnReport.Image = global::PlaybookSystem.Properties.Resources.excel_down;
+            this.btnReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(24, 24);
+            this.btnReport.Text = "Reporte";
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // toolStripSeparator1
             // 
@@ -590,6 +600,7 @@
             this.dgwLine.TabIndex = 0;
             this.dgwLine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwLine_CellEndEdit);
             this.dgwLine.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwLine_CellFormatting);
+            this.dgwLine.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgwLine_CellMouseUp);
             this.dgwLine.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwLine_ColumnAdded);
             // 
             // panel8
@@ -786,16 +797,6 @@
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnReport
-            // 
-            this.btnReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnReport.Image = global::PlaybookSystem.Properties.Resources.excel_down;
-            this.btnReport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(24, 24);
-            this.btnReport.Text = "Reporte";
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // wfDHR
             // 
