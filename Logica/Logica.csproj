@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AS4Logica.cs" />
     <Compile Include="ComunicaLogica.cs" />
+    <Compile Include="DhTracinsLogica.cs" />
     <Compile Include="DhTracdetLogica.cs" />
     <Compile Include="DhTrackerLogica.cs" />
     <Compile Include="ItemSugLogica.cs" />

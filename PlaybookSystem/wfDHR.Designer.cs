@@ -64,6 +64,9 @@
             this.btBack = new System.Windows.Forms.Button();
             this.lblEstatus = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgwInsp = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chbInspector = new System.Windows.Forms.CheckBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtNotaFalla = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -97,6 +100,7 @@
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwInsp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwLine)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -268,7 +272,7 @@
             this.panel4.Location = new System.Drawing.Point(15, 99);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(961, 597);
-            this.panel4.TabIndex = 16;
+            this.panel4.TabIndex = 0;
             // 
             // lblTimeActual
             // 
@@ -493,6 +497,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.dgwInsp);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.chbInspector);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.txtNotaFalla);
             this.groupBox1.Controls.Add(this.label7);
@@ -503,8 +510,45 @@
             this.groupBox1.Location = new System.Drawing.Point(18, 299);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(928, 286);
-            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // dgwInsp
+            // 
+            this.dgwInsp.AllowUserToAddRows = false;
+            this.dgwInsp.AllowUserToDeleteRows = false;
+            this.dgwInsp.AllowUserToResizeColumns = false;
+            this.dgwInsp.AllowUserToResizeRows = false;
+            this.dgwInsp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwInsp.Location = new System.Drawing.Point(280, 82);
+            this.dgwInsp.Name = "dgwInsp";
+            this.dgwInsp.RowTemplate.Height = 24;
+            this.dgwInsp.Size = new System.Drawing.Size(332, 131);
+            this.dgwInsp.TabIndex = 23;
+            this.dgwInsp.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(742, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 16);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Involucrado";
+            // 
+            // chbInspector
+            // 
+            this.chbInspector.AutoSize = true;
+            this.chbInspector.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chbInspector.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.139131F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbInspector.Location = new System.Drawing.Point(741, 24);
+            this.chbInspector.Name = "chbInspector";
+            this.chbInspector.Size = new System.Drawing.Size(94, 21);
+            this.chbInspector.TabIndex = 2;
+            this.chbInspector.Text = "Inspector";
+            this.chbInspector.UseVisualStyleBackColor = true;
+            this.chbInspector.CheckedChanged += new System.EventHandler(this.chbInspector_CheckedChanged);
             // 
             // btnAdd
             // 
@@ -516,7 +560,7 @@
             this.btnAdd.Location = new System.Drawing.Point(882, 32);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(37, 32);
-            this.btnAdd.TabIndex = 1;
+            this.btnAdd.TabIndex = 3;
             this.btnAdd.Tag = "Agregar Tiempo Extra";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -524,16 +568,16 @@
             // txtNotaFalla
             // 
             this.txtNotaFalla.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNotaFalla.Location = new System.Drawing.Point(323, 33);
+            this.txtNotaFalla.Location = new System.Drawing.Point(310, 35);
             this.txtNotaFalla.Name = "txtNotaFalla";
-            this.txtNotaFalla.Size = new System.Drawing.Size(550, 26);
-            this.txtNotaFalla.TabIndex = 20;
+            this.txtNotaFalla.Size = new System.Drawing.Size(411, 26);
+            this.txtNotaFalla.TabIndex = 1;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(320, 14);
+            this.label7.Location = new System.Drawing.Point(307, 16);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 16);
             this.label7.TabIndex = 19;
@@ -556,7 +600,7 @@
             this.cbbFallas.Location = new System.Drawing.Point(6, 33);
             this.cbbFallas.Name = "cbbFallas";
             this.cbbFallas.Size = new System.Drawing.Size(291, 28);
-            this.cbbFallas.TabIndex = 2;
+            this.cbbFallas.TabIndex = 0;
             // 
             // dgwLine
             // 
@@ -597,11 +641,12 @@
             this.dgwLine.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgwLine.RowTemplate.Height = 24;
             this.dgwLine.Size = new System.Drawing.Size(916, 205);
-            this.dgwLine.TabIndex = 0;
+            this.dgwLine.TabIndex = 4;
             this.dgwLine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwLine_CellEndEdit);
             this.dgwLine.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwLine_CellFormatting);
             this.dgwLine.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgwLine_CellMouseUp);
             this.dgwLine.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgwLine_ColumnAdded);
+            this.dgwLine.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgwLine_KeyDown);
             // 
             // panel8
             // 
@@ -622,7 +667,7 @@
             this.txtOrden.MaxLength = 10;
             this.txtOrden.Name = "txtOrden";
             this.txtOrden.Size = new System.Drawing.Size(119, 29);
-            this.txtOrden.TabIndex = 17;
+            this.txtOrden.TabIndex = 0;
             this.txtOrden.Text = "0000000";
             this.txtOrden.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtOrden.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtOrden_KeyDown);
@@ -827,6 +872,7 @@
             this.panel6.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwInsp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwLine)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
@@ -901,5 +947,8 @@
         private System.Windows.Forms.Label lblTimeActual;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripButton btnReport;
+        private System.Windows.Forms.CheckBox chbInspector;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgwInsp;
     }
 }

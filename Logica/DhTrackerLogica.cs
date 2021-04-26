@@ -108,6 +108,21 @@ namespace Logica
             return datos;
         }
 
+        public static DataTable VistaInspectores(DhTrackerLogica dh)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "SELECT  orden ,empleado as Inspector, nombre as Nombre  FROM t_dhtrackins WHERE = order = '"+dh.Orden+"' ORDER BY nombre ";
+                datos = AccesoDatos.Consultar(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
+
 
         public static int Update(DhTrackerLogica dhr)
         {
@@ -152,7 +167,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT d.consec,d.falla,f.descrip as Defecto,d.notas as Comentarios,'0' as Corregido,d.estatus FROM t_dhtracdet d inner join t_dhfallas f on d.falla = f.falla where d.folio="+dhr.Folio+" order by f.descrip");
+                datos = AccesoDatos.Consultar("SELECT d.consec,d.falla,f.descrip as Defecto,d.notas as Comentarios,'0' as Inspector,'0' as Corregido,d.estatus,d.ind_inspector FROM t_dhtracdet d inner join t_dhfallas f on d.falla = f.falla where d.folio="+dhr.Folio+" order by f.descrip");
             }
             catch (Exception ex)
             {

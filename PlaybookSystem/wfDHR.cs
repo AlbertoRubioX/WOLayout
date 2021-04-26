@@ -23,7 +23,7 @@ namespace PlaybookSystem
         private int _liStepNew;
         private int _liDetenido = 0;
         private string _lsLote;
-
+        
         Globals _gs = new Globals();
 
         public wfDHR()
@@ -148,14 +148,17 @@ namespace PlaybookSystem
                 dtNew.Columns.Add("falla", typeof(int));
                 dtNew.Columns.Add("Correcciones", typeof(string));
                 dtNew.Columns.Add("Comentarios", typeof(string));
+                dtNew.Columns.Add("Inspector", typeof(bool));
                 dtNew.Columns.Add("Corregido", typeof(bool));
                 dtNew.Columns.Add("estatus", typeof(int));
+                dtNew.Columns.Add("ind_inspector", typeof(int));
                 dgwLine.DataSource = dtNew;
             }
 
             dgwLine.Columns[0].Visible = false;
             dgwLine.Columns[1].Visible = false;
-            dgwLine.Columns[5].Visible = false;
+            dgwLine.Columns[6].Visible = false;
+            dgwLine.Columns[7].Visible = false;
 
             dgwLine.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgwLine.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
@@ -164,14 +167,30 @@ namespace PlaybookSystem
             dgwLine.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[2].ReadOnly = true;
 
-            dgwLine.Columns[3].Width = ColumnWith(dgwLine, 35);//coment
+            dgwLine.Columns[3].Width = ColumnWith(dgwLine, 25);//coment
             dgwLine.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[3].ReadOnly = true;
 
-            dgwLine.Columns[4].Width = ColumnWith(dgwLine, 10);//corregido box
+            dgwLine.Columns[4].Width = ColumnWith(dgwLine, 10);//Inspector
             dgwLine.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[4].ReadOnly = false;
+
+            dgwLine.Columns[5].Width = ColumnWith(dgwLine, 10);//corregido box
+            dgwLine.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwLine.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwLine.Columns[5].ReadOnly = false;
+
+            iRows = dgwInsp.Rows.Count;
+            if (iRows == 0)
+            {
+                DataTable dtNew2 = new DataTable("Falla");
+                dtNew2.Columns.Add("folio", typeof(int));
+                dtNew2.Columns.Add("consec", typeof(int));
+                dtNew2.Columns.Add("Inspector", typeof(int));
+                dtNew2.Columns.Add("Nombre", typeof(string));
+                dgwInsp.DataSource = dtNew2;
+            }
         }
 
         private int ColumnWith(DataGridView _dtGrid, double _dColWith)
@@ -244,7 +263,7 @@ namespace PlaybookSystem
 
                     foreach (DataGridViewRow row in dgwLine.Rows)
                     {
-                        string sEstatus = dgwLine[5, row.Index].Value.ToString();
+                        string sEstatus = dgwLine[6, row.Index].Value.ToString();
                         if (sEstatus == "0")
                         {
                             iCheck++;
@@ -299,20 +318,43 @@ namespace PlaybookSystem
                         det.Falla = int.Parse(row.Cells[1].Value.ToString());
                         det.Nota = row.Cells[3].Value.ToString();
                         if (bool.Parse(row.Cells[4].Value.ToString()))
+                            det.Inspector = "1";// int.Parse(row.Cells[5].Value.ToString());
+                        else
+                            det.Inspector = "0";
+
+                        if (bool.Parse(row.Cells[5].Value.ToString()))
                             det.Estatus = 1;// int.Parse(row.Cells[5].Value.ToString());
                         else
                             det.Estatus = 0;
 
                         det.Consec = iCons;
+                        det.Usuario = _lsEmployee;
 
                         DhTracdetLogica.GuardarSP(det);
+                        
+                        foreach(DataGridViewRow irow in dgwInsp.Rows)
+                        {
+                            int iCode = int.Parse(irow.Cells[1].Value.ToString());
+                            if (iCode != det.Consec)
+                                continue;
+
+                            int iInspector = int.Parse(irow.Cells[2].Value.ToString());
+                            string sNombre = irow.Cells[3].Value.ToString();
+
+                            DhTracinsLogica ins = new DhTracinsLogica();
+                            ins.Folio = dhr.Folio;
+                            ins.Falla = det.Consec;
+                            ins.Inspector = iInspector;
+                            ins.Nombre = sNombre;
+                            ins.Usuario = _lsEmployee;
+                            DhTracinsLogica.GuardarSP(ins);
+                        }
                     }
                     if (_liStep == 1)
                         MessageBox.Show("DH Tracker se ha registrado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else
                         MessageBox.Show("DH Tracker se ha actualizado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    Close();
+                    
                 }
             }
             catch (Exception ex)
@@ -378,13 +420,50 @@ namespace PlaybookSystem
             string sDescrip = cbbFallas.Text.ToString();
             string sNota = txtNotaFalla.Text.ToString();
 
-            int iRow = dgwLine.RowCount - 1;
+
+            int iRow = dgwLine.RowCount;
+            int iCons = 0;
+            if(iRow > 0)
+            {
+                iRow--;
+                string sCons = dgwLine[0, iRow].Value.ToString();
+                if (!int.TryParse(sCons, out iCons))
+                    iCons = 0;
+            }
+            iCons++;
+            bool bInsp = false;
+            
+
+            if(chbInspector.Checked)
+            {
+                wfInspectores wfInsp = new wfInspectores();
+                wfInsp._liFolio = int.Parse(txtOrden.Text.ToString());
+                wfInsp._liCode = iCons;
+                wfInsp.ShowDialog();
+
+                DataTable dtIns = wfInsp._dt;
+                if(dtIns.Rows.Count > 0)
+                {
+                    bInsp = true;
+                    DataTable dt2 = dgwInsp.DataSource as DataTable;
+                    for(int i = 0; i < dtIns.Rows.Count; i++)
+                    {
+                        int iFolio = int.Parse(dtIns.Rows[i][0].ToString());
+                        int iCode = int.Parse(dtIns.Rows[i][1].ToString());
+                        int iNumber = int.Parse(dtIns.Rows[i][2].ToString());
+                        string sNombre = dtIns.Rows[i][3].ToString();
+                        
+                        dt2.Rows.Add(iFolio, iCode, iNumber, sNombre);
+                    }
+                }
+            }
 
             DataTable dt = dgwLine.DataSource as DataTable;
-            dt.Rows.Add(0, int.Parse(sFalla), sDescrip, sNota, false, 0);
+            dt.Rows.Add(iCons, int.Parse(sFalla), sDescrip, sNota,bInsp, false, 0);
 
             cbbFallas.SelectedIndex = -1;
             txtNotaFalla.Clear();
+            chbInspector.Checked = false;
 
         }
 
@@ -766,13 +845,23 @@ namespace PlaybookSystem
                     DataTable det = DhTrackerLogica.ConsultarFallasView(dhr);
                     for (int i = 0; i < det.Rows.Count; i++)
                     {
-                        int iEstatus = int.Parse(det.Rows[i][5].ToString());
+                        int iEstatus = int.Parse(det.Rows[i][6].ToString());
                         bool bCheck = false;
                         if (iEstatus == 1)
                             bCheck = true;
 
-                        dtS.Rows.Add(det.Rows[i][0].ToString(), int.Parse(det.Rows[i][1].ToString()), det.Rows[i][2].ToString(), det.Rows[i][3].ToString(), bCheck, iEstatus);
+                        int iInsp = int.Parse(det.Rows[i][7].ToString());
+                        bool bCheckI = false;
+                        if (iInsp == 1)
+                            bCheckI = true;
+
+                        dtS.Rows.Add(det.Rows[i][0].ToString(), int.Parse(det.Rows[i][1].ToString()), det.Rows[i][2].ToString(), det.Rows[i][3].ToString(),bCheckI, bCheck, iEstatus,iInsp);
                     }
+
+                    DhTracinsLogica ins = new DhTracinsLogica();
+                    ins.Folio = _llFolio;
+                    DataTable dtI = DhTracinsLogica.ConsultarOrden(ins);
+                    dgwInsp.DataSource = dtI;
 
                     CargarColumnas();
                 }
@@ -851,6 +940,52 @@ namespace PlaybookSystem
             wfDhPending wfPending = new wfDhPending();
             wfPending.Show();
         }
- 
+
+        private void btnInspector_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chbInspector_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+         
+        private void dgwLine_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                if (dgwLine.Rows.Count <= 0) return;
+
+                DialogResult Result = MessageBox.Show("Desea eliminar la Corrección seleccionada?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (Result == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dgwLine.SelectedRows)
+                    {
+                        if (_llFolio > 0)
+                        {
+                            int iCons = int.Parse(dgwLine[0, row.Index].Value.ToString());
+                            string sInsp = dgwLine[7, row.Index].Value.ToString();
+                            if (sInsp == "1")
+                            {
+                                DhTracinsLogica ins = new DhTracinsLogica();
+                                ins.Folio = _llFolio;
+                                ins.Falla = iCons;
+                                DhTracinsLogica.Eliminar(ins);
+                            }
+
+                            DhTracdetLogica det = new DhTracdetLogica();
+                            det.Folio = _llFolio;
+                            det.Consec = iCons;
+                            DhTracdetLogica.Eliminar(det);
+
+                        }
+
+                        dgwLine.Rows.Remove(row);
+
+                    }
+                }
+            }
+        }
     }
 }

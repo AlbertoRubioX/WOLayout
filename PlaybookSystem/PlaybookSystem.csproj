@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Globals.cs" />
+    <Compile Include="wfInspectores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfInspectores.Designer.cs">
+      <DependentUpon>wfInspectores.cs</DependentUpon>
+    </Compile>
     <Compile Include="wfPickingTicketReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     <Compile Include="wfTimer.Designer.cs">
       <DependentUpon>wfTimer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="wfInspectores.resx">
+      <DependentUpon>wfInspectores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="wfPickingTicketReport.resx">
       <DependentUpon>wfPickingTicketReport.cs</DependentUpon>
     </EmbeddedResource>
