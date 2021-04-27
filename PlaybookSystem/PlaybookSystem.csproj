@@ -102,6 +102,12 @@
     <Compile Include="wfInspectores.Designer.cs">
       <DependentUpon>wfInspectores.cs</DependentUpon>
     </Compile>
+    <Compile Include="wfOptionRep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wfOptionRep.Designer.cs">
+      <DependentUpon>wfOptionRep.cs</DependentUpon>
+    </Compile>
     <Compile Include="wfPickingTicketReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +220,9 @@
     </Compile>
     <EmbeddedResource Include="wfInspectores.resx">
       <DependentUpon>wfInspectores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wfOptionRep.resx">
+      <DependentUpon>wfOptionRep.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="wfPickingTicketReport.resx">
       <DependentUpon>wfPickingTicketReport.cs</DependentUpon>

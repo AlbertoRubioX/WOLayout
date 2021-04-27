@@ -31,7 +31,8 @@ namespace Logica
         public DateTime FechaFin { get; set; }
         public string TipoLinea { get; set; }
         public string TipoEstatus { get; set; }
-
+        public string TipoDivision { get; set; }
+        public string TipoDetenido { get; set; }
         public string Usuario { get; set; }
 
         public static int GuardarSP(DhTrackerLogica dhr)
@@ -98,7 +99,8 @@ namespace Logica
                 "inspector as Inspector,detenido as Detenido  FROM t_dhtracker " +
                 "WHERE " +
                 "('"+dh.TipoFecha+ "' = '0' or ( '" + dh.TipoFecha + "' = '1' and cast(f_clean as date) between cast('" + dh.FechaIni + "' as date) and cast('" + dh.FechaFin + "' as date) ) ) " +
-                "and ('" + dh.TipoLinea + "' = '0' or('" + dh.TipoLinea + "' = '1' and linea = '" + dh.Linea + "')) and ('" + dh.TipoEstatus + "' = '0' or('" + dh.TipoEstatus + "' = '1' and estatus = " + dh.Estatus + "))";
+                "and ('" + dh.TipoLinea + "' = '0' or('" + dh.TipoLinea + "' = '1' and linea = '" + dh.Linea + "')) and ('" + dh.TipoEstatus + "' = '0' or('" + dh.TipoEstatus + "' = '1' and estatus = " + dh.Estatus + ")) "+
+                "and ('" + dh.TipoDivision + "' = '0' or ('" + dh.TipoDivision + "' = '1' and division = '"+dh.Division+"')) and ('" + dh.TipoDetenido+"' = '0' or ('"+dh.TipoDetenido+"' = '1' and detenido = "+dh.Detenido+")) ";
                 datos = AccesoDatos.Consultar(sSql);
             }
             catch (Exception ex)
@@ -122,7 +124,6 @@ namespace Logica
             }
             return datos;
         }
-
 
         public static int Update(DhTrackerLogica dhr)
         {

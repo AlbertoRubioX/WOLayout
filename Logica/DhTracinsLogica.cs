@@ -15,6 +15,9 @@ namespace Logica
         public int Inspector { get; set; }
         public string Nombre { get; set; }
         public string Usuario { get; set; }
+        public DateTime FechaIni { get; set; }
+        public DateTime FechaFin { get; set; }
+        public string TipoInspector { get; set; }
 
         public static int GuardarSP(DhTracinsLogica dhr)
         {
@@ -58,6 +61,36 @@ namespace Logica
             try
             {
                 datos = AccesoDatos.Consultar("SELECT folio,falla,empleado as Inspector,nombre as Nombre FROM t_dhtracinsp where folio="+dhr.Folio+" and falla = "+dhr.Falla+" order by nombre");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
+
+        public static DataTable ListaInspectores()
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "select distinct empleado,nombre from t_dhtracinsp ORDER BY nombre ";
+                datos = AccesoDatos.Consultar(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
+
+        public static DataTable VistaReporteGDP(DhTracinsLogica ins)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string[] parametros = { "@FechaIni", "@FechaFin", "@IndInspector", "@Inspector" };
+                datos = AccesoDatos.ConsultaSP("sp_rep_dhtrackerGDP", parametros, ins.FechaIni, ins.FechaFin, ins.TipoInspector,ins.Inspector);
             }
             catch (Exception ex)
             {

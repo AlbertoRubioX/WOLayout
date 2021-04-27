@@ -937,8 +937,13 @@ namespace PlaybookSystem
 
         private void btnReport_Click(object sender, EventArgs e)
         {
+            wfOptionRep Rep = new wfOptionRep();
+            Rep.ShowDialog();
+            string sVal = Rep._lsOption;
             wfDhPending wfPending = new wfDhPending();
+            wfPending._lsFiltro = sVal;
             wfPending.Show();
+            
         }
 
         private void btnInspector_Click(object sender, EventArgs e)
