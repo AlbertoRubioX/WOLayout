@@ -443,9 +443,52 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                string sSql = "SELECT  DISTINCT(MSG)   FROM KBM400SQL.PACKDETAIL P INNER JOIN KBM400MFG.FKITMSTR K ON P.DMRID = K.IMPN "+
-                "WHERE DMRID = '"+con.Item+ "' AND PACKDRAW_REV = (SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER WHERE DMRID = '" + con.Item + "') " +
-                "AND(P.MSG IS NOT NULL AND P.MSG > '')";
+                string sSql = "SELECT  DISTINCT(MSG),SF.TF9270 ,SF.MD9270 FROM KBM400SQL.PACKDETAIL P INNER JOIN KBM400MFG.FKITMSTR K ON P.DMRID = K.IMPN LEFT OUTER JOIN MRC400MFG.SF09270 SF ON SF.IMPN = P.DMRID " +
+                "WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = (SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER WHERE DMRID = '" + con.Item + "') ";
+                //"AND(P.MSG IS NOT NULL AND P.MSG > '')";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
+        public static DataTable CDS(AS4Logica con,DataTable dt)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                //string sSql = "SELECT * FROM KBM400SQL.PACKDETAIL P WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = (SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER WHERE DMRID = '" + con.Item + "') AND SUBSTRING(NODE,1, 3)= 'CMP'";
+                string sSql = "SELECT NODE FROM KBM400SQL.PACKDETAIL WHERE DMRID = '" + con.Item + "' AND PACKDRAW_REV = (SELECT  MAX(PACKDRAW_REV) FROM KBM400SQL.PACKMASTER " +
+                    "WHERE DMRID = '" + con.Item + "') " +
+                    "AND NODE IN (";
+                for (int x = 0;x < dt.Rows.Count; x++)
+                {
+                    if (x > 0)
+                        sSql += ",";
+
+                    sSql += "'"+dt.Rows[x][0].ToString()+"'";
+                }
+
+                sSql += ")";
+                datos = AccesoDatos.ConsultarAS4(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
+        
+        public static DataTable TrayDiv(AS4Logica con)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "SELECT '' as nota,  SF.TF9270 ,SF.MD9270 FROM MRC400MFG.SF09270 SF WHERE IMPN = '" + con.Item + "'";
                 datos = AccesoDatos.ConsultarAS4(sSql);
             }
             catch (Exception ex)

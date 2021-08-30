@@ -57,24 +57,33 @@ namespace PlaybookSystem
                     txtInput.Clear();
                     return;
                 }
-
-                TressLogica tress = new TressLogica();
-                tress.Empleado = iNumber;
-                DataTable dt = TressLogica.ConsultarEmpleado(tress);
-                if(dt.Rows.Count > 0)
+                if(Globals._gsCompany == "686")
                 {
-                    string sNombre = dt.Rows[0]["PRETTYNAME"].ToString();
-                    _lsCode = sValue;
-                    _lsReturn = sNombre;
-                    Close();
+                    TressLogica tress = new TressLogica();
+                    tress.Empleado = iNumber;
+                    DataTable dt = TressLogica.ConsultarEmpleado(tress);
+                    if (dt.Rows.Count > 0)
+                    {
+                        string sNombre = dt.Rows[0]["PRETTYNAME"].ToString();
+                        _lsCode = sValue;
+                        _lsReturn = sNombre;
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Numero de Empleado no encontrado", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtInput.Clear();
+                        _lsReturn = string.Empty;
+                        return;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Numero de Empleado no encontrado", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtInput.Clear();
-                    _lsReturn = string.Empty;
-                    return;
+                    _lsCode = sValue;
+                    _lsReturn = "Quality Inspector";
+                    Close();
                 }
+                
             }
             else
             {

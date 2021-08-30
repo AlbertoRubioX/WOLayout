@@ -93,7 +93,7 @@ namespace PlaybookSystem
                 WindowState = FormWindowState.Maximized;
 
                 tssUserName.Text = _lsUser;
-                tssVersion.Text = "1.0.1.3";
+                tssVersion.Text = "1.0.1.8";
 
                 lblLine.Visible = false;
                 tsslRampeo.Visible = false;
@@ -1060,7 +1060,7 @@ namespace PlaybookSystem
                 int iSheet = 1;
 
                 xlWorksheet = xlWorkbook.Sheets[iSheet];
-                Excel.Range xlRange = xlWorksheet.UsedRange;
+                Excel.Range xlRange = xlWorksheet.UsedRange; //Special Notes
 
                 xlWorksheet2 = xlWorkbook.Sheets[2];
                 Excel.Range xlRange2 = xlWorksheet2.UsedRange;
@@ -1089,31 +1089,43 @@ namespace PlaybookSystem
                         continue;
 
                     AS4Logica AS4 = new AS4Logica();
-                    string sType = Convert.ToString(xlRange.Cells[x, 1].Value2.ToString());
+                    string sType = string.Empty; //Convert.ToString(xlRange.Cells[x, 1].Value2.ToString());
                     string sItem = string.Empty;
                     string sNota = string.Empty;
+                    string sDiv = string.Empty;
 
                     rowLoad++;
 
-                    AS4.Item = sValue;
+                    AS4.Item = sValue.Trim();
                     AS4.CN = "686";
                     //1- SpecialNotes
-                    int iCol = 2;
-                    DataTable dt = AS4Logica.SpecialNotes(AS4);
+                    int iCol = 3;
+                    DataTable dt = AS4Logica.SpecialNotes(AS4); // add try family and DIV
+                    if(dt.Rows.Count == 0)
+                    {
+                        dt = AS4Logica.TrayDiv(AS4); // add try family and DIV
+                    }
+                    
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         sNota = dt.Rows[i][0].ToString();
+                        sDiv = dt.Rows[i][2].ToString();
+                        if (string.IsNullOrEmpty(sType))
+                        {
+                            sType = dt.Rows[i][1].ToString();
+                            xlRange.Cells[x, 1].Value2 = sType;
+                        }
+                        xlRange.Cells[x, 3].Value2 = sDiv;
                         iCol++;
-                        xlRange.Cells[x, iCol].Value2 = sNota;
-
+                        xlRange.Cells[x, iCol].Value2 = sNota;                        
                     }
 
                     xlRange3.Cells[x, 1].Value2 = sType;
                     xlRange3.Cells[x, 2].Value2 = sValue;
-
+                    
                     //2- Node list
                     iCol = 2;
-                    DataTable dtN = AS4Logica.PackLookup(AS4);
+                    DataTable dtN = AS4Logica.PackLookup(AS4); 
                     for (int c = 0; c < dtN.Rows.Count; c++)
                     {
                         
@@ -1132,7 +1144,7 @@ namespace PlaybookSystem
                             iCol++;
                             xlRange3.Cells[x, iCol].Value2 = sNode;
                         }
-
+                        
                         xlRange2.Cells[x + iRow, 1].Value2 = sType;
                         xlRange2.Cells[x + iRow, 2].Value2 = sValue;
                         xlRange2.Cells[x + iRow, 3].Value2 = sQty;
@@ -1142,6 +1154,7 @@ namespace PlaybookSystem
                         xlRange2.Cells[x + iRow, 7].Value2 = sIMV;
                         xlRange2.Cells[x + iRow, 8].Value2 = sCH;
                         xlRange2.Cells[x + iRow, 9].Value2 = sChDesc;
+
                         iRow++;
                     }
                 }
@@ -1369,9 +1382,9 @@ namespace PlaybookSystem
                         string sName = dt.Rows[0][1].ToString();
                         sQty = dt.Rows[0][2].ToString();
                         sKits = dt.Rows[0][3].ToString();
-                        
 
-                        AS4.Item = sItem;
+
+                        AS4.Item = sItem.TrimEnd();
                         AS4.MaxComp = iMaxComp;
 
                         DataTable dt2 = AS4Logica.ComponentsLayer(AS4);
@@ -1591,8 +1604,7 @@ namespace PlaybookSystem
                             xlRange.Cells[x, 3].Value2 = sQty;
                             xlRange.Cells[x, 4].Value2 = sTotal;
                             xlRange.Cells[x, 5].Value2 = iComp.ToString();
-                            xlRange.Cells[x, 6].Value2 = dTime;
-                            
+                            xlRange.Cells[x, 6].Value2 = dTime;  
                         }
                     }
                 }
@@ -1732,8 +1744,7 @@ namespace PlaybookSystem
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        private void FillPlaybookFile(string _asFile,string _asFormat)
+        private void FillPlaybookFile(string _asFile, string _asFormat)
         {
             try
             {
@@ -1759,7 +1770,7 @@ namespace PlaybookSystem
 
                 if (iSheets < iSheet)
                 {
-                    MessageBox.Show(_gs.MessageText(this.Name,btnExportFile.Name, "err5"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(_gs.MessageText(this.Name, btnExportFile.Name, "err5"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Cursor = Cursors.Default;
                     return;
                 }
@@ -1829,7 +1840,7 @@ namespace PlaybookSystem
                             }
                         }
                     }
-                    
+
 
                     int iTotalOps = 0;
                     int iTotalMes = 0;
@@ -1843,7 +1854,7 @@ namespace PlaybookSystem
                     string sQty = string.Empty;
                     decimal dQty = 0;
 
-                    if(_asFormat == "W")
+                    if (_asFormat == "W")
                     {
                         AS4.WO = sValue;
                         AS4.Takt = _dTackTime;
@@ -1881,15 +1892,15 @@ namespace PlaybookSystem
                                 sQty = dt.Rows[0][1].ToString();
                                 if (!decimal.TryParse(sQty, out dQty))
                                     dQty = 0;
-                                    
+
                                 xlRange.Cells[i, 4].Value2 = sKits;
-                                xlRange.Cells[i, 6].Value2 = dQty > 0 ? "Y":"N";
+                                xlRange.Cells[i, 6].Value2 = dQty > 0 ? "Y" : "N";
                                 continue;
                             }
                         }
                         else
                         {
-                            
+
                             DataTable dt = AS4Logica.PartKits(AS4);
                             if (dt.Rows.Count > 0)
                             {
@@ -2084,7 +2095,7 @@ namespace PlaybookSystem
                     }
                 }
 
-                
+
 
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(xlRange);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorksheet);
@@ -2100,6 +2111,122 @@ namespace PlaybookSystem
 
 
                 Cursor = Cursors.Default;
+
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+                ex.ToString();
+                MessageBox.Show(ex.ToString());
+
+            }
+        }
+        private void FillPlaybookFileCDS(string _asFile )
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                DataTable dtS = SetupLogica.ConsultarEDL();
+                if (dtS.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron EDL's registrados. Favor de notificar al Administrador", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Cursor = Cursors.Default;
+                    return;
+                }
+
+                Excel.Application xlApp = new Excel.Application();
+                xlApp.AskToUpdateLinks = false;
+                Excel.Workbooks xlWorkbookS = xlApp.Workbooks;
+                Excel.Workbook xlWorkbook = xlWorkbookS.Open(_asFile);
+
+                Excel.Worksheet xlWorksheet = new Excel.Worksheet();
+
+                string sValue = string.Empty;
+
+                int iSheets = xlWorkbook.Sheets.Count;
+                int iSheet = 15;
+
+                if (iSheets < iSheet)
+                {
+                    MessageBox.Show(_gs.MessageText(this.Name,btnExportFile.Name, "err5"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Cursor = Cursors.Default;
+                    return;
+                }
+                xlWorksheet = xlWorkbook.Sheets[iSheet];
+
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+
+                for (int i = 1; i <= rowCount; i++)
+                {
+
+                    tssVersion.Text = i.ToString() + " of " + rowCount.ToString();
+
+                    if (xlRange.Cells[i, 8].Value2 == null)
+                        continue;
+
+                    if (xlRange.Cells[i, 8].Value2 != null)
+                        sValue = Convert.ToString(xlRange.Cells[i, 8].Value2.ToString());
+
+                    if (string.IsNullOrEmpty(sValue))
+                        continue;
+                    
+                    decimal dWO = 0;
+                    if (!decimal.TryParse(sValue, out dWO))
+                    {
+                        sValue = string.Empty;
+                        continue;
+                    }
+
+                    if (sValue.Length < 7)
+                        sValue = sValue.PadLeft(7, '0');
+
+                    if (xlRange.Cells[i, 9].Value2 == null)
+                        continue;
+
+                    string sPart = Convert.ToString(xlRange.Cells[i, 9].Value2.ToString());
+
+                    SetupLogica set = new SetupLogica();
+                    set.Part = sPart.TrimEnd();
+                    if (SetupLogica.getEDL(set))
+                        xlRange.Cells[i, 15].Value2 = "EDL";
+                    else
+                        xlRange.Cells[i, 15].Value2 = "";
+
+                    
+                    /*
+                    AS4Logica AS4 = new AS4Logica();
+
+                    AS4.CN = Globals._gsCompany;
+                    AS4.Item = sPart.TrimEnd();
+                    DataTable dt = AS4Logica.CDS(AS4, dtS);
+
+                    if (dt.Rows.Count > 0)
+                        xlRange.Cells[i, 15].Value2 = "EDL";
+                    else
+                        xlRange.Cells[i, 15].Value2 = "";
+                    */
+                }
+                
+
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlRange);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorksheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook.Sheets[iSheet]);
+                xlApp.DisplayAlerts = false;
+                xlWorkbook.Save();
+                xlWorkbook.Close(true);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkbookS);
+                xlApp.DisplayAlerts = true;
+                xlApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+
+                Cursor = Cursors.Default;
+
+                MessageBox.Show("Process finished", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -2134,18 +2261,16 @@ namespace PlaybookSystem
 
             if (sOption =="T")
                 FillPlaybookFile3(sArchivo, sOption); //4
-            else
-            {
-                if (sOption == "W")
-                    FillPlaybookFile2(sArchivo, sOption);
-                else
-                {
-                    if (sOption == "P")
-                        FillPlaybookFilePD(sArchivo, sOption); //Pallet position
-                    else
-                        FillPlaybookFile(sArchivo, sOption);
-                }
-            }
+            if (sOption == "W")
+                FillPlaybookFile2(sArchivo, sOption);
+                
+            if (sOption == "P")
+                FillPlaybookFilePD(sArchivo, sOption); //Pallet position
+            if (sOption == "D")
+                FillPlaybookFile(sArchivo, sOption);
+            if (sOption == "C")
+                FillPlaybookFileCDS(sArchivo);
+
         }
 
         private void btnLenguage_Click(object sender, EventArgs e)

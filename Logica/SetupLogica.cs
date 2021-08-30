@@ -11,6 +11,7 @@ namespace Logica
     public class SetupLogica
     {
         public string WorkOrder { get; set; }
+        public string Part { get; set; }
         public decimal Takt { get; set; }
         public static int EjecutaSP(SetupLogica config)
         {
@@ -34,6 +35,42 @@ namespace Logica
                 throw ex;
             }
             return datos;
+        }
+
+        public static DataTable ConsultarEDL()
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                string sSql = "SELECT componente FROM t_setup_edl"; 
+                datos = AccesoDatos.Consultar(sSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return datos;
+        }
+
+        public static bool getEDL(SetupLogica sp)
+        {
+            bool bReturn = false;
+            try
+            {
+                string sSql = "SELECT * FROM t_setup_edl where componente = '"+sp.Part+"'";
+                DataTable datos = AccesoDatos.Consultar(sSql);
+                if (datos.Rows.Count > 0)
+                {
+                    bReturn = true;
+                }
+                else
+                    bReturn = false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return bReturn;
         }
     }
 }

@@ -15,13 +15,13 @@ namespace Logica
         public int Estatus { get; set; }
         public int Falla { get; set; }
         public string Nota { get; set; }
-        public string Inspector { get; set; }
+        public string IndInspector { get; set; }
         public string Usuario { get; set; }
 
         public static int GuardarSP(DhTracdetLogica dhr)
         {
-            string[] parametros = {"@Folio","@Consec", "@Falla", "@Notas", "@Estatus","@Inspector", "@Usuario" };
-            return AccesoDatos.Actualizar("sp_mant_dhtracdet", parametros, dhr.Folio, dhr.Consec, dhr.Falla, dhr.Nota, dhr.Estatus, dhr.Inspector, dhr.Usuario);
+            string[] parametros = {"@Folio","@Consec", "@Falla", "@Notas", "@Estatus","@IndInspector", "@Usuario" };
+            return AccesoDatos.Actualizar("sp_mant_dhtracdet", parametros, dhr.Folio, dhr.Consec, dhr.Falla, dhr.Nota, dhr.Estatus, dhr.IndInspector, dhr.Usuario);
 
         }
 
@@ -101,6 +101,19 @@ namespace Logica
             try
             {
                 return AccesoDatos.Borrar("DELETE FROM t_dhtracdet where folio = " + det.Folio+" and consec = "+det.Consec+" ");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                return 0;
+            }
+        }
+
+        public static int Correccion(DhTracdetLogica det)
+        {
+            try
+            {
+                return AccesoDatos.Borrar("UPDATE t_dhtracdet set estatus = '1' where folio = " + det.Folio + " and consec = " + det.Consec + " ");
             }
             catch (Exception ex)
             {

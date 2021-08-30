@@ -229,6 +229,7 @@ namespace PlaybookSystem
                                 "LOCACION A PICKEAR: " + pick.Locacion + Environment.NewLine +
                                 "CONCEPTO: " + pick.Concepto + Environment.NewLine +
                                 "COMENTARIOS: " + pick.Comentario + Environment.NewLine +
+                                "LOTE: " + pick.Lote + Environment.NewLine +
                                 "---------" + Environment.NewLine;
 
                             AS4Logica as4 = new AS4Logica();

@@ -81,7 +81,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT distinct linehr FROM t_lineramp where linehr is not null order by linehr");
+                datos = AccesoDatos.Consultar("SELECT distinct line FROM t_lineramp where line is not null AND u_id = 'MXCQC' order by line");
             }
             catch (Exception ex)
             {

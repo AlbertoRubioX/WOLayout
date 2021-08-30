@@ -23,7 +23,9 @@ namespace PlaybookSystem
         private int _liStepNew;
         private int _liDetenido = 0;
         private string _lsLote;
-        
+        private bool _lbLine;
+        private string _lsIndNC = "0";
+
         Globals _gs = new Globals();
 
         public wfDHR()
@@ -48,7 +50,8 @@ namespace PlaybookSystem
             else
             {
                 Inicio();
-                tssHrVersion.Text = "DHR Tracker v. 1.0.0.1";
+                tssHrVersion.Text = "DHR Tracker v. 1.0.1.1";
+                
                 tssName.Text = sNombre;
                 _lsEmployee = wfENum._lsCode;
 
@@ -90,6 +93,8 @@ namespace PlaybookSystem
                 bt3.BackgroundImage = Properties.Resources.circle_o;
                 bt4.BackgroundImage = Properties.Resources.circle_o;
 
+                dgwAccion.DataSource = null;
+                CargarColumnas1();
                 dgwLine.DataSource = null;
                 CargarColumnas();
 
@@ -113,11 +118,25 @@ namespace PlaybookSystem
 
                 txtNotaFalla.Clear();
 
+                cbbAccion.DataSource = DhTrackerLogica.DhrAccion();
+                cbbAccion.ValueMember = "falla";
+                cbbAccion.DisplayMember = "descrip";
+                cbbAccion.SelectedIndex = -1;
+                
+                txtAccionDesc.Clear();
+
                 int iLine = 0;
-                if (int.TryParse(Globals._gsLine, out iLine))
-                    lblLine.Text = Globals._gsLine;
+                _lbLine = false;
+                if (int.TryParse(Globals._gsLine.Substring(0,1), out iLine))
+                    _lbLine = true;
+
+                lblLine.Text = Globals._gsLine;
 
                 tssLine.Text = Globals._gsLine;
+
+                gbxAccion.Visible = true;
+                gbxAccion.Enabled = false;
+                groupBox1.Visible = false;
 
                 ChangeStatus(0);
                 txtOrden.SelectAll();
@@ -174,12 +193,12 @@ namespace PlaybookSystem
             dgwLine.Columns[4].Width = ColumnWith(dgwLine, 10);//Inspector
             dgwLine.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[4].ReadOnly = false;
+            dgwLine.Columns[4].ReadOnly = true;
 
             dgwLine.Columns[5].Width = ColumnWith(dgwLine, 10);//corregido box
             dgwLine.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwLine.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgwLine.Columns[5].ReadOnly = false;
+            dgwLine.Columns[5].ReadOnly = true;
 
             iRows = dgwInsp.Rows.Count;
             if (iRows == 0)
@@ -192,6 +211,42 @@ namespace PlaybookSystem
                 dgwInsp.DataSource = dtNew2;
             }
         }
+
+        private void CargarColumnas1()
+        {
+            int iRows = dgwAccion.Rows.Count;
+            if (iRows == 0)
+            {
+                DataTable dtNew = new DataTable("Accion");
+                dtNew.Columns.Add("consec", typeof(int));
+                dtNew.Columns.Add("accion", typeof(int));
+                dtNew.Columns.Add("Acción Inmediata", typeof(string));
+                dtNew.Columns.Add("Descripción", typeof(string));
+                dtNew.Columns.Add("Inspector", typeof(string));
+                dgwAccion.DataSource = dtNew;
+            }
+
+            dgwAccion.Columns[0].Visible = false;
+            dgwAccion.Columns[1].Visible = false;
+
+            dgwAccion.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgwAccion.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+
+            dgwAccion.Columns[2].Width = ColumnWith(dgwAccion, 25);//accion inemdiata
+            dgwAccion.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwAccion.Columns[2].ReadOnly = true;
+
+            dgwAccion.Columns[3].Width = ColumnWith(dgwAccion, 60);//descrip
+            dgwAccion.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwAccion.Columns[3].ReadOnly = true;
+
+            dgwAccion.Columns[4].Width = ColumnWith(dgwAccion, 10);//Inspector
+            dgwAccion.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwAccion.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwAccion.Columns[4].ReadOnly = true;
+
+        }
+
 
         private int ColumnWith(DataGridView _dtGrid, double _dColWith)
         {
@@ -256,6 +311,29 @@ namespace PlaybookSystem
                     return;
 
                 _liStep = _liStepNew;
+                
+                if (_liStep == 1)
+                {
+                    _lsIndNC = "0";
+                    foreach (DataGridViewRow row in dgwAccion.Rows)
+                    {
+                        int iCons = int.Parse(row.Cells[0].Value.ToString());
+                        string sValue = row.Cells[1].Value.ToString();
+                        foreach (DataGridViewRow row2 in dgwAccion.Rows)
+                        {
+                            int iCons2 = int.Parse(row2.Cells[0].Value.ToString());
+                            string sValue2 = row2.Cells[1].Value.ToString();
+                            if (sValue2 == sValue && iCons != iCons2)
+                            {
+                                _lsIndNC = "1";
+                                break;
+                            }   
+                        }
+                        if (_lsIndNC == "1")
+                            break;
+                    }
+                }
+                
 
                 if (_liStep == 3)
                 {
@@ -280,6 +358,7 @@ namespace PlaybookSystem
                         }
                     }
                 }
+
                 DhTrackerLogica dhr = new DhTrackerLogica();
 
                 if (_llFolio > 0)
@@ -300,13 +379,33 @@ namespace PlaybookSystem
 
                 dhr.Inspector = _lsEmployee;
                 dhr.Nombre = tssName.Text.ToString();
-                dhr.Estatus = _liStep;
+                dhr.Estatus = _liStep;                                  
                 dhr.Detenido = _liDetenido;
                 dhr.Lote = _lsLote.TrimEnd();
+                dhr.IndNC = _lsIndNC;
                 dhr.Usuario = _lsEmployee;
 
                 if (DhTrackerLogica.GuardarSP(dhr) > 0)
                 {
+                    DhTracdetaLogica deta = new DhTracdetaLogica();
+                    deta.Folio = dhr.Folio;
+
+                    //ACciones
+                    foreach (DataGridViewRow row in dgwAccion.Rows)
+                    {
+                        int iCons = 0;
+                        if (!string.IsNullOrEmpty(row.Cells[0].Value.ToString()))
+                            iCons = int.Parse(row.Cells[0].Value.ToString());
+
+                        deta.Accion = int.Parse(row.Cells[1].Value.ToString());
+                        deta.Nota = row.Cells[3].Value.ToString();
+                        deta.Inspector = row.Cells[4].Value.ToString();
+                        deta.Consec = iCons;
+                        deta.Usuario = _lsEmployee;
+
+                        DhTracdetaLogica.GuardarSP(deta);
+                    }
+                    //Correcciones
                     DhTracdetLogica det = new DhTracdetLogica();
                     det.Folio = dhr.Folio;
                     foreach (DataGridViewRow row in dgwLine.Rows)
@@ -318,9 +417,9 @@ namespace PlaybookSystem
                         det.Falla = int.Parse(row.Cells[1].Value.ToString());
                         det.Nota = row.Cells[3].Value.ToString();
                         if (bool.Parse(row.Cells[4].Value.ToString()))
-                            det.Inspector = "1";// int.Parse(row.Cells[5].Value.ToString());
+                            det.IndInspector = "1";// int.Parse(row.Cells[5].Value.ToString());
                         else
-                            det.Inspector = "0";
+                            det.IndInspector = "0";
 
                         if (bool.Parse(row.Cells[5].Value.ToString()))
                             det.Estatus = 1;// int.Parse(row.Cells[5].Value.ToString());
@@ -349,12 +448,23 @@ namespace PlaybookSystem
                             ins.Usuario = _lsEmployee;
                             DhTracinsLogica.GuardarSP(ins);
                         }
+
                     }
+
+                    _llFolio = dhr.Folio;
+
                     if (_liStep == 1)
-                        MessageBox.Show("DH Tracker se ha registrado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("DHR Tracker se ha registrado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else
-                        MessageBox.Show("DH Tracker se ha actualizado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+                    {
+                        MessageBox.Show("DHR Tracker se ha actualizado exitosamente", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
+                        _lsOrden = txtOrden.Text.ToString();
+
+                        Inicio();
+                        txtOrden.Text = _lsOrden;
+                        ChangeWO();
+                    }
                 }
             }
             catch (Exception ex)
@@ -379,13 +489,14 @@ namespace PlaybookSystem
         private void dgwLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             
-            if (e.ColumnIndex == dgwLine.Columns[4].Index)
-            {
-                if (bool.Parse(dgwLine[4, e.RowIndex].Value.ToString()))
-                    dgwLine[5, e.RowIndex].Value = 1;
-                else
-                    dgwLine[5, e.RowIndex].Value = 0;
-            }
+            //if (e.ColumnIndex == dgwLine.Columns[4].Index)
+            //{
+            //    if (bool.Parse(dgwLine[4, e.RowIndex].Value.ToString()))
+            //        dgwLine[5, e.RowIndex].Value = 1;
+            //    else
+            //        dgwLine[5, e.RowIndex].Value = 0;
+            //}
+
             //bool bCheck = bool.Parse(dgwLine[4, e.RowIndex].Value.ToString());
             //int iEstatus = int.Parse(dgwLine[5, e.RowIndex].Value.ToString());
             //if(bCheck)
@@ -537,23 +648,24 @@ namespace PlaybookSystem
         private void bt1_Click(object sender, EventArgs e)
         {
             ChangeStatus(1);
-            groupBox1.Enabled = false;
+            
         }
 
         private void bt2_Click(object sender, EventArgs e)
         {
             ChangeStatus(2);
-            groupBox1.Enabled = false;
+            
         }
 
         private void bt3_Click(object sender, EventArgs e)
         {
             ChangeStatus(3);
-            groupBox1.Enabled = true;
+            
         }
 
         private void bt4_Click(object sender, EventArgs e)
         {
+            
             ChangeStatus(4);
         }
 
@@ -662,11 +774,18 @@ namespace PlaybookSystem
             switch (_aiEstatus)
             {
                 case 1:
+                    groupBox1.Visible = false;
+                    gbxAccion.Visible = true;
+                    gbxAccion.Enabled = true;
+
                     bt1.BackgroundImage = Properties.Resources.circle_blue;
                     lblEstatus.Text = "CLEAN ROOM";
                     lblCR.Font = new Font(Label.DefaultFont, FontStyle.Bold);
                     break;
                 case 2:
+                    groupBox1.Visible = false;
+                    gbxAccion.Enabled = false;
+
                     bt1.BackgroundImage = Properties.Resources.circle_blue;
                     bt2.BackgroundImage = Properties.Resources.circle_blue;
                     lblEstatus.Text = "BOXING";
@@ -679,6 +798,10 @@ namespace PlaybookSystem
                     lblTimer1.Visible = true;
                     break;
                 case 3:
+
+                    groupBox1.Visible = true;
+                    gbxAccion.Visible = false;
+
                     bt1.BackgroundImage = Properties.Resources.circle_blue;
                     bt2.BackgroundImage = Properties.Resources.circle_blue;
                     lblDHR.Font = new Font(Label.DefaultFont, FontStyle.Bold);
@@ -715,6 +838,7 @@ namespace PlaybookSystem
                     lblTimer2.Visible = true;
                     lblTimer3.Visible = true;
                     groupBox1.Enabled = false;
+                    gbxAccion.Visible = false;
                     break;
                 default:
                     lblEstatus.Text = "";
@@ -742,7 +866,12 @@ namespace PlaybookSystem
         {
 
             TimeSpan time = DateTime.Now - _adtFecha;
+            var dateDiff = DateTime.Now.Subtract(_adtFecha);
+
+            double dDay = time.Days;
             double dHrs = time.Hours;
+            if (dDay > 0)
+                dHrs = dHrs + (dDay * 24);
             double dMin = time.Minutes;
             string sDuracion = dHrs.ToString().PadLeft(2, '0') + ":" + dMin.ToString().PadLeft(2, '0') + ":00";
 
@@ -752,7 +881,11 @@ namespace PlaybookSystem
         {
 
             TimeSpan time = _adtFechaFin - _adtFechaIni;
+            double dDay = time.Days;
             double dHrs = time.Hours;
+            if (dDay > 0)
+                dHrs = dHrs + (dDay * 24);
+
             double dMin = time.Minutes;
             string sDuracion = dHrs.ToString().PadLeft(2, '0') + ":" + dMin.ToString().PadLeft(2, '0');
 
@@ -804,6 +937,7 @@ namespace PlaybookSystem
                     _liDetenido = int.Parse(dt.Rows[0]["detenido"].ToString());
                     _lsLote = dt.Rows[0]["lote"].ToString();
                     lblLine.Text = dt.Rows[0]["linea"].ToString();
+                    _lsIndNC = dt.Rows[0]["ind_nc"].ToString();
 
                     _liStep = int.Parse(sEstatus);
                     switch (_liStep)
@@ -839,6 +973,10 @@ namespace PlaybookSystem
 
                     _llFolio = long.Parse(dt.Rows[0][0].ToString());
                     dhr.Folio = _llFolio;
+                    
+                    DhTracdetaLogica dhra = new DhTracdetaLogica();
+                    dhra.Folio = _llFolio;
+                    dgwAccion.DataSource = DhTracdetaLogica.ConsultarAccionView(dhra);
 
                     //dwLine.DataSource = DhTrackerLogica.ConsultarFallasView(dhr);
                     DataTable dtS = dgwLine.DataSource as DataTable;
@@ -855,7 +993,11 @@ namespace PlaybookSystem
                         if (iInsp == 1)
                             bCheckI = true;
 
-                        dtS.Rows.Add(det.Rows[i][0].ToString(), int.Parse(det.Rows[i][1].ToString()), det.Rows[i][2].ToString(), det.Rows[i][3].ToString(),bCheckI, bCheck, iEstatus,iInsp);
+                        string sCons = det.Rows[i][0].ToString();
+                        int iFalla = int.Parse(det.Rows[i][1].ToString());
+                        string sFDesc = det.Rows[i][2].ToString();
+                        string sNota = det.Rows[i][3].ToString();
+                        dtS.Rows.Add(sCons, iFalla, sFDesc, sNota,bCheckI, bCheck, iEstatus,iInsp);
                     }
 
                     DhTracinsLogica ins = new DhTracinsLogica();
@@ -864,6 +1006,34 @@ namespace PlaybookSystem
                     dgwInsp.DataSource = dtI;
 
                     CargarColumnas();
+                    CargarColumnas1();
+
+                    if(_liStep == 1)
+                    {
+                        DateTime dtToday = DateTime.Now;
+                        if(!DateTime.TryParse(dt.Rows[0]["f_clean_out"].ToString(),out dtToday))
+                        {
+                            DialogResult Result = MessageBox.Show("Desea Registrar la Salida del DHR de Clean Room?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                            if (Result == DialogResult.Yes)
+                            {
+
+                                DhTrackerLogica dtU = new DhTrackerLogica();
+                                dtU.Folio = _llFolio;
+                                if (DhTrackerLogica.UpdateCleanOut(dtU) > 0)
+                                {
+                                    bt2.BackgroundImage = Properties.Resources.circle_green;
+                                    timer1.Stop();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            lblTimeActual.Text = GetDuration(DateTime.Parse(dt.Rows[0]["f_clean"].ToString()), DateTime.Parse(dt.Rows[0]["f_clean_out"].ToString()));
+                            bt2.BackgroundImage = Properties.Resources.circle_green;
+                            timer1.Stop();
+                        }
+                    }
+
                 }
                 else
                 {
@@ -907,9 +1077,10 @@ namespace PlaybookSystem
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            string sTimeH = lblTimeActual.Text.Substring(0, 2);
-            string sTimeM = lblTimeActual.Text.Substring(3, 2);
-            string sTimeS = lblTimeActual.Text.Substring(6, 2);
+            int ipos = lblTimeActual.Text.IndexOf(":");
+            string sTimeH = lblTimeActual.Text.Substring(0, ipos);
+            string sTimeM = lblTimeActual.Text.Substring(ipos+1, 2);
+            string sTimeS = lblTimeActual.Text.Substring(ipos+4, 2);
 
             int iContM = int.Parse(sTimeM);
             int iContH = int.Parse(sTimeH);
@@ -987,6 +1158,126 @@ namespace PlaybookSystem
                         }
 
                         dgwLine.Rows.Remove(row);
+
+                    }
+                }
+            }
+        }
+
+        private void btFix_Click(object sender, EventArgs e)
+        {
+            if (dgwLine.SelectedRows.Count <= 0)
+                return;
+
+            if (dgwLine[6, dgwLine.SelectedRows[0].Index].Value.ToString() == "1")
+                return;
+
+            if (MessageBox.Show("Desea marcar la corrección "+ dgwLine[2, dgwLine.SelectedRows[0].Index].Value.ToString() + " como solucionada?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                DhTracdetLogica det = new DhTracdetLogica();
+                det.Folio = _llFolio;
+                det.Consec = int.Parse(dgwLine[0, dgwLine.SelectedRows[0].Index].Value.ToString());
+                if (DhTracdetLogica.Correccion(det) > 0)
+                {
+                    MessageBox.Show("Corrección solucionada.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgwLine[5, dgwLine.SelectedRows[0].Index].Value = true;
+                    // Cambiar valor del encabezado
+                    _lsOrden = txtOrden.Text.ToString();
+
+                    Inicio();
+                    txtOrden.Text = _lsOrden;
+                    ChangeWO();
+                }
+            }
+
+        }
+
+        private void btnAdd1_Click(object sender, EventArgs e)
+        {
+            //accion inmediata
+
+            if (cbbAccion.SelectedIndex == -1)
+            {
+                MessageBox.Show("Se Requiere una acción", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            int iLcc = 0;
+            if (string.IsNullOrEmpty(txtInspector.Text))
+            {
+                MessageBox.Show("Se Requiere el # de Empleado del LCC", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                if(!int.TryParse(txtInspector.Text.ToString(),out iLcc))
+                {
+                    MessageBox.Show("El # de Empleado del LCC es invalido", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (Globals._gsCompany == "686")
+                {
+                    TressLogica tress = new TressLogica();
+                    tress.Empleado = iLcc;
+                    DataTable dt3 = TressLogica.ConsultarEmpleado(tress);
+                    if (dt3.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Numero de Empleado no encontrado", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtInspector.Clear();
+                        return;
+                    }
+                }
+            }
+
+            //add row
+            string sAccion = cbbAccion.SelectedValue.ToString();
+            string sNota = txtAccionDesc.Text.ToString().TrimEnd();
+            string sDesc = cbbAccion.Text.ToString();
+            int iCons = 0;
+            foreach (DataGridViewRow row in dgwAccion.Rows)
+            {
+                iCons = int.Parse(row.Cells[0].Value.ToString());
+                string sValue = row.Cells[1].Value.ToString();
+                if (sAccion == sValue)
+                {
+                    MessageBox.Show("Se Requiere generar NC debido a la repetición de la Accion Inmediata", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+
+            DataTable dt = dgwAccion.DataSource as DataTable;
+
+            iCons += 1;
+            dt.Rows.Add(iCons, int.Parse(sAccion), sDesc, sNota,iLcc);
+
+            cbbAccion.SelectedIndex = -1;
+            txtAccionDesc.Clear();
+            txtInspector.Clear();
+        }
+
+        private void dgwAccion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                if (dgwAccion.Rows.Count <= 0) return;
+
+                DialogResult Result = MessageBox.Show("Desea eliminar la Acción Inmediata?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (Result == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dgwAccion.SelectedRows)
+                    {
+                        if (_llFolio > 0)
+                        {
+                            int iCons = int.Parse(dgwAccion[0, row.Index].Value.ToString());
+                            
+                            DhTracdetLogica det = new DhTracdetLogica();
+                            det.Folio = _llFolio;
+                            det.Consec = iCons;
+                            DhTracdetLogica.Eliminar(det);
+
+                        }
+
+                        dgwAccion.Rows.Remove(row);
 
                     }
                 }

@@ -31,7 +31,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT * FROM t_dhtracker WHERE folio = '"+dhr.Folio+"'");
+                datos = AccesoDatos.Consultar("SELECT * FROM t_dhtracinsp WHERE folio = '" + dhr.Folio+"'");
             }
             catch (Exception ex)
             {

@@ -72,8 +72,8 @@ namespace PlaybookSystem
                 chLinea.Checked = false;
                 cbLinea.Enabled = false;
                 cbLinea.DataSource = LineaRampeoLogica.ListarDrop();
-                cbLinea.ValueMember = "linehr";
-                cbLinea.DisplayMember = "linehr";
+                cbLinea.ValueMember = "line";
+                cbLinea.DisplayMember = "line";
                 cbLinea.SelectedIndex = -1;
 
                 chEstatus.Checked = false;
@@ -143,14 +143,15 @@ namespace PlaybookSystem
                 dtNew.Columns.Add("Fecha Escaneo", typeof(DateTime));
                 dtNew.Columns.Add("Duracion Hrs", typeof(int));
                 dtNew.Columns.Add("Inspector", typeof(string));
-                dtNew.Columns.Add("Detenido", typeof(bool));
+                dtNew.Columns.Add("Detenido", typeof(string));
+                dtNew.Columns.Add("Genera NC", typeof(string));
                 dgwData.DataSource = dtNew;
             }
 
             dgwData.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgwData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 
-            dgwData.Columns[0].Width = ColumnWith(dgwData, 10);
+            dgwData.Columns[0].Width = ColumnWith(dgwData, 8);
             dgwData.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwData.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -179,9 +180,13 @@ namespace PlaybookSystem
             dgwData.Columns[7].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             
 
-            dgwData.Columns[8].Width = ColumnWith(dgwData, 10);//detenido
+            dgwData.Columns[8].Width = ColumnWith(dgwData, 6);//detenido
             dgwData.Columns[8].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgwData.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgwData.Columns[9].Width = ColumnWith(dgwData, 8);//detenido
+            dgwData.Columns[9].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgwData.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
         private void CargarColumnasDet()
         {
@@ -344,7 +349,15 @@ namespace PlaybookSystem
             dgwData.Height = this.Height - 320;
             dgwData.Width = this.Width - 80;
 
-            CargarColumnas();
+            if (_lsFiltro == "D")
+                CargarColumnasDet();
+            else
+            {
+                if (_lsFiltro == "G")
+                    CargarColumnasGDP();
+                else
+                    CargarColumnas();
+            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -389,9 +402,10 @@ namespace PlaybookSystem
                 else
                     dh.TipoLinea = "A";
 
-                chEstatus.Checked = true;
+                //chEstatus.Checked = true;
                 chDetenidos.Checked = true;
-                
+
+                dh.Detenido = 1;
                 dgwData.DataSource = DhTrackerLogica.VistaReporteDet(dh);
                 CargarColumnasDet();
             }
@@ -474,6 +488,9 @@ namespace PlaybookSystem
         private void btExport_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
+
+            ExportExcel();
+            /*
             copyAlltoClipboard();
             Excel.Application xlexcel;
             Excel.Workbook xlWorkBook;
@@ -483,13 +500,101 @@ namespace PlaybookSystem
             xlexcel.Visible = true;
             xlWorkBook = xlexcel.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
             Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
             CR.Select();
             xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
-
+            */
             Cursor = Cursors.Default;
         }
+        private void ExportExcel()
+        {
+            try
+            {
+                Excel.Application excel = new Excel.Application();
+                excel.Visible = true;
+                Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+                Excel.Worksheet sheet1 = (Excel.Worksheet)workbook.Sheets[1];
+                int StartCol = 1;
+                int StartRow = 1;
+                int j = 0, i = 0;
 
+                //Write Headers
+                DhTrackerLogica dh = new DhTrackerLogica();
+                dh.TipoFecha = "1";
+                dh.FechaIni = dtFechaIni.Value;
+                dh.FechaFin = dtFechaFin.Value;
+
+                if (_lsFiltro == "D")
+                    dh.TipoFecha = "0";
+
+                if (chLinea.Checked)
+                {
+                    dh.TipoLinea = "1";
+                    dh.Linea = cbLinea.SelectedValue.ToString();
+                }
+                else
+                    dh.TipoLinea = "0";
+
+                if (chEstatus.Checked)
+                {
+                    dh.TipoEstatus = "1";
+                    dh.Estatus = int.Parse(cbEstatus.SelectedValue.ToString());
+                }
+                else
+                    dh.TipoEstatus = "0";
+
+                if (chDivision.Checked)
+                {
+                    dh.TipoDivision = "1";
+                    dh.Division = cbDivision.SelectedValue.ToString();
+                }
+                else
+                    dh.TipoDivision = "0";
+
+                if (chDetenidos.Checked)
+                {
+                    dh.TipoDetenido = "1";
+                    dh.Detenido = 1;
+                }
+                else
+                    dh.TipoDetenido = "0";
+
+                DataTable data = DhTrackerLogica.VistaReporteExp(dh);
+
+                for (j = 0; j < data.Columns.Count; j++)
+                {
+                    Excel.Range myRange = (Excel.Range)sheet1.Cells[StartRow, StartCol + j];
+                    myRange.Value2 = data.Columns[j].ColumnName;
+                }
+
+                StartRow++;
+
+                //Write datagridview content
+                for (i = 0; i < data.Rows.Count; i++)
+                {
+                    for (j = 0; j < data.Columns.Count; j++)
+                    {
+                        string sval = data.Rows[1][1].ToString();
+                        try
+                        {
+
+                            
+                            Excel.Range myRange = (Excel.Range)sheet1.Cells[StartRow + i, StartCol + j];
+                            myRange.Value2 = data.Rows[i].ItemArray[j].ToString() == null ? "" : data.Rows[i].ItemArray[j].ToString();
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
         private void dgwData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             
