@@ -15,7 +15,7 @@ namespace Datos
         private static void Cadena()
         {
             if (string.IsNullOrEmpty(cadenaConexion))
-                cadenaConexion = "Data Source=MXCPRDLOCALDB01;Initial Catalog=LayoutSystem;User ID=mxcprd;Password=Admin10";
+                cadenaConexion = "Data Source=MXCPRDLOCALDB01;Initial Catalog=LayoutSystem_new;User ID=mxcprd;Password=Admin10";
         }
         public static string CadenaConexion()
         {

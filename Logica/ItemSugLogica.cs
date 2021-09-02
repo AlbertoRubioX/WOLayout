@@ -27,7 +27,7 @@ namespace Logica
             DataTable datos = new DataTable();
             try
             {
-                datos = AccesoDatos.Consultar("SELECT * FROM t_itemsug WHERE item = '"+item.Item+"'");
+                datos = AccesoDatos.Consultar("SELECT * FROM t_itemsugd WHERE item = '"+item.Item+"'");
             }
             catch (Exception ex)
             {

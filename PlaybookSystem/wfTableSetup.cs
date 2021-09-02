@@ -37,7 +37,7 @@ namespace PlaybookSystem
         private void wfTableSetup_Load(object sender, EventArgs e)
         {
             Inicio();
-            tssHrVersion.Text = "1.0.0.5";
+            tssHrVersion.Text = "1.0.0.6";
             
         }
         private void wfTableSetup_Activated(object sender, EventArgs e)
@@ -888,7 +888,7 @@ namespace PlaybookSystem
 
         private void txtLayout_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(_lsLayout) && txtLayout.Text.ToString() != _lsLayout)
+            if (string.IsNullOrEmpty(_lsLayout) && txtLayout.Text.ToString() != _lsLayout)
             {
                 _lsLayout = txtLayout.Text.ToString();
                 _lbCambio = true;
